@@ -47,10 +47,10 @@ public class HadesCommand extends CommandAdapter {
                                 for(Check check : t.getChecks()) totalViolations += check.getViolations().size();
                                 user.sendMessage(color + target.getName() + "'s Information:");
                                 user.sendMessage("&7- " + color + "Total Violations: &f" + totalViolations);
-                                user.sendMessage("&7- " + color + "Version: &f1.8");
                                 user.sendMessage("&7- " + color + "Brand: &fvanilla");
                                 user.sendMessage("&7- " + color + "Ping: &f" + t.getPing());
                                 user.sendMessage("&7- " + color + "Lagging: &f" + user.isLagging());
+                                user.sendMessage("&7- " + color + "Connection Delay: &f" + t.getConnectionDelay());
                             }else user.sendMessage(color + "Player is not online or does not exist!");
                         }else user.sendMessage("&7Usage: " + color + "/" + cmd + " info (player)");
                     }else if(input.args()[0].equalsIgnoreCase("reload"))

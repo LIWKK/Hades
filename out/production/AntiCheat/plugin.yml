@@ -1,0 +1,4 @@
+name: AntiCheat
+version: 1.0-SNAPSHOT
+main: me.apex.anticheat.AntiCheat
+author: Apex

@@ -40,7 +40,7 @@ public class User {
     private String address;
     @Getter
     @Setter
-    private int ping, flagDelay;
+    private int ping, flagDelay, connectionDelay;
 
     @Getter
     private LogUtils.TextFile logFile;

@@ -1,0 +1,8 @@
+no-permission: '&cNo permission.'
+max-violations: 2
+log-violations: true
+broadcast-bans: true
+broadcast-message: '&c%player% &7has been banned for &cCheating&7.'
+execute-ban-command: 'ban %player% &cCheating'
+kick-message: '&cYou have been kicked for suspicious activity.'
+ban-message: '&cYour account has been suspended from Server Network%newline%&cPlease appeal at ts.server.com%newline%%newline%&cPurchase an unban at &fstore.server.com'
