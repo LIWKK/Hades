@@ -1,0 +1,242 @@
+#License Key
+license-key: ''
+
+#Language Configuration
+lang:
+  prefix: '&8[&c&lHades&8] &7'
+  no-permission: '&cNo permission.'
+  base-message-color: '&c'
+  flag-format: '%prefix%&c%player% &7has failed &c%check% &8<&c%checktype%&8> &8[&7VL&8:&c %vl%&8]'
+  experimental-notation: ' &7[&cExp&7]'
+  broadcast-message: '%newline%%prefix%%player% &7was banned for &fCheating&7.%newline% '
+
+#System Configuration
+system:
+  base-command: 'hades'
+  base-permission: 'hades'
+  permissions:
+    bypass:
+      enabled: false
+  logging:
+    log-format: '[%time%] %player% failed %check% (%checktype%) VL:(%vl%) INFO:(%info%)'
+    file:
+      enabled: true
+      path: '\\logs'
+      file-name: 'log.txt'
+    mysql:
+      enabled: false
+      host: localhost
+      port: 3306
+      pool: 4
+      database: Hades
+      auth:
+        username: root
+        password: ''
+
+#VPN Protection
+anti-vpn:
+  enabled: true
+  punish-command: 'kick %player% &cVPNs are not allowed on this server!'
+
+#Check Configuration
+#NOTE: Experimental checks are preset to not punish players
+checks:
+  punish-command: 'ban %player% %prefix%Cheating'
+  broadcast-punishments: true
+  detections:
+    aim:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      b:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      c:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      d:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      e:
+        enabled: true
+        punishable: true
+        max-vl: 5
+      f:
+        enabled: true
+        punishable: true
+        max-vl: 5
+      g:
+        enabled: true
+        punishable: true
+        max-vl: 5
+    aura:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      b:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      c:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      d:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      e:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      f:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      g:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      h:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      i:
+        enabled: true
+        punishable: true
+        max-vl: 10
+    autoclicker:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      b:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      c:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      d:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      e:
+        enabled: true
+        punishable: true
+        max-vl: 10
+    reach:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      b:
+        enabled: true
+        punishable: true
+        max-vl: 10
+    velocity:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      b:
+        enabled: true
+        punishable: true
+        max-vl: 10
+    fly:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 20
+      b:
+        enabled: true
+        punishable: true
+        max-vl: 20
+    motion:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+    scaffold:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      b:
+        enabled: true
+        punishable: true
+        max-vl: 10
+    speed:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 20
+      b:
+        enabled: true
+        punishable: true
+        max-vl: 20
+      c:
+        enabled: true
+        punishable: true
+        max-vl: 20
+      d:
+        enabled: true
+        punishable: true
+        max-vl: 20
+    badpackets:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      b:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      c:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      d:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      e:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      f:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      g:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      h:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      i:
+        enabled: true
+        punishable: true
+        max-vl: 10
+    nofall:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+    timer:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+      b:
+        enabled: true
+        punishable: true
+        max-vl: 10

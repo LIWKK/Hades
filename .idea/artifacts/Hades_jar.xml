@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="Hades:jar">
-    <output-path>$PROJECT_DIR$/../pvp/plugins</output-path>
-    <root id="archive" name="Hades.jar">
-      <element id="module-output" name="Hades" />
-    </root>
-  </artifact>
-</component>
