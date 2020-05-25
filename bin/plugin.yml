@@ -1,5 +1,0 @@
-name: Hades
-version: 1.0
-main: me.apex.hades.Hades
-depend: [Atlas]
-author: Apex
