@@ -20,28 +20,23 @@ public class Hades extends JavaPlugin {
         //Register Instance
         instance = this;
         saveDefaultConfig();
+        
+        //Register Listeners
+        new HadesListener();
+        new VelocityListener();
 
-        //Check License
-        //if(new License(getConfig().getString("license-key"), "http://squirrelly.games/verify.php", this).setSecurityKey("qnTBqFcW8qf5P@=h?5rE6Hbs-Hdu*_8b2cMC")
-        //    .register())
-        //{
-            //Register Listeners
-            new HadesListener();
-            new VelocityListener();
+        //Register Atlas
+        Atlas.getInstance().initializeScanner(getClass(), this, getClassLoader(), true, false);
 
-            //Register Atlas
-            Atlas.getInstance().initializeScanner(getClass(), this, getClassLoader(), true, false);
+        //Register System Variables
+        baseCommand = getConfig().getString("system.base-command");
+        basePermission = getConfig().getString("system.base-permission");
 
-            //Register System Variables
-            baseCommand = getConfig().getString("system.base-command");
-            basePermission = getConfig().getString("system.base-permission");
+        //Register Commands
+        registerCommands();
 
-            //Register Commands
-            registerCommands();
-
-            //Register Menus
-            GuiManager.INSTANCE.registerGui(new HomeMenu());
-        //}
+        //Register Menus
+        GuiManager.INSTANCE.registerGui(new HomeMenu());
     }
 
     public void registerCommands() {
