@@ -9,5 +9,10 @@ Contributions from: ExslodingDogs, Vaziak
 
 TODO:
 
+[System]
 - Migrate from Atlas to Purplex's Packet Library (https://github.com/purplexdev/packetevents)
 - Integrate a form of server-side interpolation for better predictions and processing
+
+[Detection]
+- Patch Void-TP disabler
+- Patch CrackLag disabler/fake lag method
