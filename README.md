@@ -6,3 +6,8 @@ IMPORTANT: If you want to use any of the code from this plugin, please credit me
 An anticheat built with the Atlas library. If you're wondering if I skidded anything, the answer is no. While I did get ideas from people and worked with others on this project, nothing was skidded from the web.
 
 Contributions from: ExslodingDogs, Vaziak
+
+TODO:
+
+- Migrate from Atlas to Purplex's Packet Library
+- Integrate a form of server-side interpolation for better predictions and processing
