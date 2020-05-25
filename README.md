@@ -9,5 +9,5 @@ Contributions from: ExslodingDogs, Vaziak
 
 TODO:
 
-- Migrate from Atlas to Purplex's Packet Library
+- Migrate from Atlas to Purplex's Packet Library (https://github.com/purplexdev/packetevents)
 - Integrate a form of server-side interpolation for better predictions and processing
