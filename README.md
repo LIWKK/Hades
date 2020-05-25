@@ -3,7 +3,7 @@
 
 **CONTRIBUTORS**: ExslodingDogs, Vaziak
 
-[Description]
+**DESCRIPTION**:
 An advanced anticheat with many heuristic checks designed to patch various cheats/hacks. None of the code is stolen from other online sources or people without being credited. This project will always be open-sourced and free, so you can use this anticheat on your server and modify it to fit your server needs.
 
 **TODO**:
