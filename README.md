@@ -1,5 +1,5 @@
 # Hades (Source)
-NOTE: This project is abandoned and will not be updated any further.
+NOTE: I will work on this project in my spare time so don't expect this to be very active.
 
 IMPORTANT: If you want to use any of the code from this plugin, please credit me and all of the contributors when publishing anything with our code.
 
