@@ -1,5 +1,5 @@
-# Hades (Source)
-NOTE: I will work on this project in my spare time so don't expect this to be very active.
+# Hades (Anticheat)
+NOTE: I will work on this project in my spare time so don't expect this to be very active. This project will always be open-sourced.
 
 IMPORTANT: If you want to use any of the code from this plugin, please credit me and all of the contributors when publishing anything with our code.
 
