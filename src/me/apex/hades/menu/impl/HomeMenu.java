@@ -30,7 +30,7 @@ public class HomeMenu extends Gui {
     @Override
     public void onClick(Player player, ItemStack item) {
         if (item.getItemMeta().getDisplayName().equalsIgnoreCase(ChatUtils.color(Hades.getInstance().getConfig().getString("lang.base-message-color") + "Anticheat Information"))) {
-            player.sendMessage(ChatUtils.color(Hades.getInstance().getConfig().getString("lang.base-message-color") + "Our Support Discord: &7https://discord.gg/f6fMvTT"));
+            player.sendMessage(ChatUtils.color(Hades.getInstance().getConfig().getString("lang.base-message-color") + "Our Support Discord: &7Gone :("));
         }
         if (item.getItemMeta().getDisplayName().equalsIgnoreCase(ChatUtils.color(Hades.getInstance().getConfig().getString("lang.base-message-color") + "Reload Anticheat"))) {
             long start = System.currentTimeMillis();
