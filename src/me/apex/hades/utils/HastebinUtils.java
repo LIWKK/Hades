@@ -15,8 +15,8 @@ public class HastebinUtils {
 
     private static final String PASTE_URL = "https://hastebin.com/";
     private static final String PASTE_UPLOAD_URL = PASTE_URL + "documents";
-
-    public static String uploadPaste(String contents) {
+    
+    public static String uploadPaste(final String contents) {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(PASTE_UPLOAD_URL).openConnection();
             connection.setRequestMethod("POST");
@@ -36,8 +36,8 @@ public class HastebinUtils {
             return pasteUrl;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
 }

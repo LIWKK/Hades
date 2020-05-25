@@ -1,12 +1,12 @@
 package me.apex.hades.check.impl.movement.scaffold;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
-import cc.funkemunky.api.tinyprotocol.api.Packet;
-import cc.funkemunky.api.tinyprotocol.packet.in.WrappedInBlockPlacePacket;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.PacketUtils;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import me.purplex.packetevents.packet.Packet;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -16,8 +16,8 @@ public class ScaffoldA extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (e.getType().equalsIgnoreCase(Packet.Client.BLOCK_PLACE)) {
-            WrappedInBlockPlacePacket packet = new WrappedInBlockPlacePacket(e.getPacket(), e.getPlayer());
+        if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_PLACE)) {
+        	/*WrappedPacketPlayInBlockPlace packet = new WrappedPacketPlayInBlockPlace(e.getPacket());
 
             if (PacketUtils.isBlockPacket(packet.getItemStack().getType().toString()) || !user.getPlayer().getItemInHand().getType().isBlock() || user.getPlayer().getItemInHand().getType() == Material.AIR)
                 return;
@@ -33,7 +33,7 @@ public class ScaffoldA extends Check {
             double b = Math.abs(from.getBlockZ() - placed.getZ());
 
             if (from.clone().add(0, -2, 0).getBlock().getType() == Material.AIR && (x == 0 || z == 0) && y == -1 && (a == 0 && b == 0) && !user.isLagging())
-                flag(user, "offset = " + a + ", " + b);
+                flag(user, "offset = " + a + ", " + b);*/
         }
     }
 

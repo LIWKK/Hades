@@ -41,7 +41,7 @@ public class HadesCommand extends CommandAdapter {
                             if (target != null) {
                                 User t = UserManager.INSTANCE.getUser(target.getUniqueId());
                                 int totalViolations = 0;
-                                for (Check check : t.getChecks()) totalViolations += check.getViolations().size();
+                                for (Check check : t.getChecks()) totalViolations += check.violations.size();
                                 user.sendMessage("&8&m----------------------------------------");
                                 user.sendMessage(color + "&l" + target.getName() + "'s Information");
                                 user.sendMessage(" ");

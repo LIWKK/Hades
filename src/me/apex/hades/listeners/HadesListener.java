@@ -38,7 +38,7 @@ public class HadesListener implements Listener {
 
         User user = new User(e.getPlayer().getUniqueId(), address);
 
-        user.setLastJoin(System.currentTimeMillis());
+        user.setLastJoin((System.nanoTime() / 1000000));
 
         UserManager.INSTANCE.register(user);
 

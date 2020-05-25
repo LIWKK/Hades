@@ -1,11 +1,12 @@
 package me.apex.hades.check.impl.packet.timer;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.MathUtils;
 import me.apex.hades.utils.PacketUtils;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -16,8 +17,8 @@ public class TimerB extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getType())) {
-            flyingDeque.add(e.getTimeStamp());
+        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
+            flyingDeque.add(e.getTimestamp());
 
             if (flyingDeque.size() == 50) {
                 double deviation = MathUtils.getStandardDeviation(flyingDeque.stream().mapToLong(l -> l).toArray());

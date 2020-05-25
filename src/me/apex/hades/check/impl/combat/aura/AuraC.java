@@ -1,12 +1,14 @@
 package me.apex.hades.check.impl.combat.aura;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
-import cc.funkemunky.api.tinyprotocol.api.Packet;
-import cc.funkemunky.api.tinyprotocol.packet.in.WrappedInUseEntityPacket;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.MathUtils;
+import me.purplex.packetevents.enums.EntityUseAction;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import me.purplex.packetevents.packet.Packet;
+import me.purplex.packetevents.packetwrappers.in.WrappedPacketPlayInUseEntity;
+
 import org.bukkit.entity.Entity;
 
 @CheckInfo(name = "Aura", type = "C")
@@ -14,10 +16,10 @@ public class AuraC extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (e.getType().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
-            WrappedInUseEntityPacket packet = new WrappedInUseEntityPacket(e.getPacket(), e.getPlayer());
-            if (packet.getAction() == packet.getAction().ATTACK) {
-                Entity entity = packet.getEntity();
+        if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
+            WrappedPacketPlayInUseEntity packet = new WrappedPacketPlayInUseEntity(e.getPacket());
+            if (packet.action == EntityUseAction.ATTACK) {
+                Entity entity = packet.entity;
                 double rotation = Math.abs(user.getDeltaYaw());
 
                 double dir = MathUtils.getDirection(user.getLocation(), entity.getLocation());

@@ -1,11 +1,11 @@
 package me.apex.hades.check.impl.packet.badpackets;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
-import cc.funkemunky.api.tinyprotocol.api.Packet;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.PacketUtils;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import me.purplex.packetevents.packet.Packet;
 
 @CheckInfo(name = "BadPackets", type = "D")
 public class BadPacketsD extends Check {
@@ -14,7 +14,7 @@ public class BadPacketsD extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (e.getType().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
+        if (e.getPacketName().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
             int ticks = this.ticks;
             this.ticks = 0;
 
@@ -22,7 +22,7 @@ public class BadPacketsD extends Check {
                 if (vl++ > 2)
                     flag(user, "ticks = " + ticks);
             } else vl = 0;
-        } else if (PacketUtils.isFlyingPacket(e.getType())) {
+        } else if (PacketUtils.isFlyingPacket(e.getPacketName())) {
             ticks++;
         }
     }

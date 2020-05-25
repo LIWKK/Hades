@@ -1,6 +1,5 @@
 package me.apex.hades.utils;
 
-import cc.funkemunky.api.utils.BoundingBox;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -193,7 +192,7 @@ public class MathUtils {
         return new float[]{yaw, pitch > 90 ? 90 : pitch < -90 ? -90 : pitch};
     }
 
-    public static double getDistToHitbox(Entity entity1, Entity entity2, BoundingBox targetBox) {
+    /*public static double getDistToHitbox(Entity entity1, Entity entity2, BoundingBox targetBox) {
         double offset = Math.abs((targetBox.maxX - targetBox.minX) * (targetBox.maxZ - targetBox.minZ));
         double dist = Math.abs((entity1.getLocation().clone().toVector().setY(0.0D).distance(entity2.getLocation().clone().toVector().setY(0.0D))) - (offset % 3.0) - 1);
         return dist;
@@ -203,6 +202,6 @@ public class MathUtils {
         double offset = Math.abs(targetBox.maxY - targetBox.minY) / 2D;
         double dist = Math.abs((entity1.getLocation().getY() - entity2.getLocation().getY()) - (offset % 3.0) - 1);
         return dist;
-    }
+    }*/
 
 }

@@ -1,12 +1,11 @@
 package me.apex.hades.check.impl.packet.badpackets;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
-import cc.funkemunky.api.tinyprotocol.api.Packet;
-import cc.funkemunky.api.tinyprotocol.packet.in.WrappedInBlockPlacePacket;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.PacketUtils;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import me.purplex.packetevents.packet.Packet;
 
 @CheckInfo(name = "BadPackets", type = "H")
 public class BadPacketsH extends Check {
@@ -15,8 +14,8 @@ public class BadPacketsH extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (e.getType().equalsIgnoreCase(Packet.Client.BLOCK_PLACE)) {
-            WrappedInBlockPlacePacket packet = new WrappedInBlockPlacePacket(e.getPacket(), e.getPlayer());
+        if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_PLACE)) {
+        	/*WrappedPacketPlayInBlockPlace packet = new WrappedPacketPlayInBlockPlace(e.getPacket());
 
             int ticks = this.ticks;
             this.ticks = 0;
@@ -24,8 +23,8 @@ public class BadPacketsH extends Check {
             if (ticks < 2 && PacketUtils.isBlockPacket(packet.getItemStack().getType().toString()) && !user.isLagging()) {
                 if (vl++ > 4)
                     flag(user, "ticks = " + ticks);
-            } else vl = 0;
-        } else if (PacketUtils.isFlyingPacket(e.getType())) {
+            } else vl = 0;*/
+        } else if (PacketUtils.isFlyingPacket(e.getPacketName())) {
             ticks++;
         }
     }

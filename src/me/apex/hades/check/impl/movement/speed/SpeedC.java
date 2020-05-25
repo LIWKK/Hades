@@ -1,20 +1,20 @@
 package me.apex.hades.check.impl.movement.speed;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.MathUtils;
 import me.apex.hades.utils.PacketUtils;
 import me.apex.hades.utils.PlayerUtils;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 
 @CheckInfo(name = "Speed", type = "C")
 public class SpeedC extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getType())) {
-            if (e.getTimeStamp() - user.getLastServerPosition() < 1000) return;
+        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
+            if (e.getTimestamp() - user.getLastServerPosition() < 1000) return;
 
             double dist = user.getDeltaXZ();
             double lastDist = user.getLastDeltaXZ();
@@ -24,7 +24,7 @@ public class SpeedC extends Check {
             if (PlayerUtils.blockNearHead(user.getPlayer()))
                 max = 15.0D;
 
-            if (gcd > max && e.getTimeStamp() - user.getLastServerPosition() > 2000 && !user.isLagging() && !user.getPlayer().getAllowFlight())
+            if (gcd > max && e.getTimestamp() - user.getLastServerPosition() > 2000 && !user.isLagging() && !user.getPlayer().getAllowFlight())
                 flag(user, "dist = " + gcd);
         }
     }

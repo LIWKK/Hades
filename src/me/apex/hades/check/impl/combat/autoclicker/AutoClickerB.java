@@ -1,11 +1,11 @@
 package me.apex.hades.check.impl.combat.autoclicker;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
-import cc.funkemunky.api.tinyprotocol.api.Packet;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.PacketUtils;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import me.purplex.packetevents.packet.Packet;
 
 @CheckInfo(name = "AutoClicker", type = "B")
 public class AutoClickerB extends Check {
@@ -15,20 +15,20 @@ public class AutoClickerB extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (e.getType().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
+        if (e.getPacketName().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
             int ticks = this.ticks;
             this.ticks = 0;
 
             long lastSwing = -this.lastSwing;
-            this.lastSwing = e.getTimeStamp();
+            this.lastSwing = e.getTimestamp();
 
-            long diff = e.getTimeStamp() - lastSwing;
+            long diff = e.getTimestamp() - lastSwing;
 
             if (ticks < 2 && diff < 50.0D && !user.isLagging()) {
                 if (vl++ > 2)
                     flag(user, "ticks = " + ticks + ", delay = " + diff);
             } else vl = 0;
-        } else if (PacketUtils.isFlyingPacket(e.getType())) {
+        } else if (PacketUtils.isFlyingPacket(e.getPacketName())) {
             ticks++;
         }
     }

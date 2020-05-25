@@ -1,20 +1,21 @@
 package me.apex.hades.check.impl.combat.aura;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
-import cc.funkemunky.api.tinyprotocol.api.Packet;
-import cc.funkemunky.api.tinyprotocol.packet.in.WrappedInUseEntityPacket;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
+import me.purplex.packetevents.enums.EntityUseAction;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import me.purplex.packetevents.packet.Packet;
+import me.purplex.packetevents.packetwrappers.in.WrappedPacketPlayInUseEntity;
 
 @CheckInfo(name = "Aura", type = "D")
 public class AuraD extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (e.getType().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
-            WrappedInUseEntityPacket packet = new WrappedInUseEntityPacket(e.getPacket(), e.getPlayer());
-            if (packet.getAction() == packet.getAction().ATTACK) {
+        if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
+            WrappedPacketPlayInUseEntity packet = new WrappedPacketPlayInUseEntity(e.getPacket());
+            if (packet.action == EntityUseAction.ATTACK) {
                 double yawDiff = user.getDeltaYaw();
                 double lastYawDiff = user.getLastDeltaYaw();
 

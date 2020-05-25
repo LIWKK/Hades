@@ -3,24 +3,15 @@ package me.apex.hades.check.api;
 import me.apex.hades.check.impl.combat.aim.*;
 import me.apex.hades.check.impl.combat.aura.*;
 import me.apex.hades.check.impl.combat.autoclicker.*;
-import me.apex.hades.check.impl.combat.reach.ReachA;
-import me.apex.hades.check.impl.combat.reach.ReachB;
-import me.apex.hades.check.impl.combat.velocity.VelocityA;
-import me.apex.hades.check.impl.combat.velocity.VelocityB;
+import me.apex.hades.check.impl.combat.reach.*;
+import me.apex.hades.check.impl.combat.velocity.*;
 import me.apex.hades.check.impl.movement.fly.*;
-import me.apex.hades.check.impl.movement.motion.MotionA;
-import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
-import me.apex.hades.check.impl.movement.scaffold.ScaffoldB;
-import me.apex.hades.check.impl.movement.speed.SpeedA;
-import me.apex.hades.check.impl.movement.speed.SpeedB;
-import me.apex.hades.check.impl.movement.speed.SpeedC;
-import me.apex.hades.check.impl.movement.speed.SpeedD;
+import me.apex.hades.check.impl.movement.motion.*;
+import me.apex.hades.check.impl.movement.scaffold.*;
+import me.apex.hades.check.impl.movement.speed.*;
 import me.apex.hades.check.impl.packet.badpackets.*;
-import me.apex.hades.check.impl.packet.badpackets.BadPacketsG;
-import me.apex.hades.check.impl.packet.badpackets.BadPacketsH;
-import me.apex.hades.check.impl.packet.nofall.NoFallA;
-import me.apex.hades.check.impl.packet.timer.TimerA;
-import me.apex.hades.check.impl.packet.timer.TimerB;
+import me.apex.hades.check.impl.packet.nofall.*;
+import me.apex.hades.check.impl.packet.timer.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +35,6 @@ public enum CheckManager {
             AuraF.class,
             AuraG.class,
             AuraH.class,
-            AuraI.class,
             AutoClickerA.class,
             AutoClickerB.class,
             AutoClickerC.class,
@@ -71,7 +61,6 @@ public enum CheckManager {
             BadPacketsF.class,
             BadPacketsG.class,
             BadPacketsH.class,
-            BadPacketsI.class,
             NoFallA.class,
             TimerA.class,
             TimerB.class

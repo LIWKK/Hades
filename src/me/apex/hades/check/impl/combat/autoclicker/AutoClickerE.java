@@ -1,23 +1,23 @@
 package me.apex.hades.check.impl.combat.autoclicker;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
-import cc.funkemunky.api.tinyprotocol.api.Packet;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.MathUtils;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import me.purplex.packetevents.packet.Packet;
 
 @CheckInfo(name = "AutoClicker", type = "E")
 public class AutoClickerE extends Check {
 
-    public AutoClickerE() { setDev(true); }
+    public AutoClickerE() { dev = true; }
 
     private long lastSwing, lastDiff;
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (e.getType().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
-            long swing = e.getTimeStamp();
+        if (e.getPacketName().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
+            long swing = e.getTimestamp();
             long lastSwing = this.lastSwing;
             this.lastSwing = swing;
 

@@ -1,6 +1,5 @@
 package me.apex.hades.processors;
 
-import dev.brighten.db.utils.json.JSONObject;
 import me.apex.hades.Hades;
 import me.apex.hades.objects.User;
 import org.apache.commons.io.IOUtils;
@@ -31,14 +30,15 @@ public enum VPNProcessor {
     }
 
     private boolean scan(String in) throws Exception {
-        JSONObject json = new JSONObject(IOUtils.toString(new URL("https://api.iplegit.com/info?ip=" + in), StandardCharsets.UTF_8));
+        /*JSONObject json = new JSONObject(IOUtils.toString(new URL("https://api.iplegit.com/info?ip=" + in), StandardCharsets.UTF_8));
         if (Boolean.parseBoolean(json.get("bad").toString())) {
             ips.put(in, true);
             return true;
         }
 
         ips.put(in, false);
-        return false;
+        return false;*/
+    	return false;
     }
 
 }

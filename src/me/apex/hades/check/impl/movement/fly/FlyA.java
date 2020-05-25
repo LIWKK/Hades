@@ -1,12 +1,11 @@
 package me.apex.hades.check.impl.movement.fly;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
-import cc.funkemunky.api.utils.BlockUtils;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.PacketUtils;
 import me.apex.hades.utils.PlayerUtils;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 
 @CheckInfo(name = "Fly", type = "A")
 public class FlyA extends Check {
@@ -15,11 +14,11 @@ public class FlyA extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getType())) {
+        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
             if (user.onGround()) {
                 lastGround = user.getLocation().getY();
             } else {
-                if (e.getTimeStamp() - user.getLastVelocity() < 2000 || user.getPlayer().getAllowFlight() || BlockUtils.isClimbableBlock(user.getLocation().getBlock()) || PlayerUtils.isInWeb(user.getPlayer()) || PlayerUtils.isInLiquid(user.getPlayer())) {
+                if (e.getTimestamp() - user.getLastVelocity() < 2000 || user.getPlayer().getAllowFlight() || PlayerUtils.isClimbableBlock(user.getLocation().getBlock()) || PlayerUtils.isInWeb(user.getPlayer()) || PlayerUtils.isInLiquid(user.getPlayer())) {
                     vl = 0;
                     return;
                 }

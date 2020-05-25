@@ -1,11 +1,12 @@
 package me.apex.hades.check.impl.combat.aim;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.MathUtils;
 import me.apex.hades.utils.PacketUtils;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -16,7 +17,7 @@ public class AimC extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getType())) {
+        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
             double yawDiff = user.getDeltaYaw();
             double lastYawDiff = user.getLastDeltaYaw();
             double diff = Math.abs(yawDiff - lastYawDiff);

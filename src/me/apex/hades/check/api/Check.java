@@ -1,35 +1,31 @@
 package me.apex.hades.check.api;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
-import lombok.Getter;
-import lombok.Setter;
 import me.apex.hades.Hades;
 import me.apex.hades.objects.User;
 import me.apex.hades.listeners.event.HadesFlagEvent;
 import me.apex.hades.utils.ChatUtils;
 import me.apex.hades.utils.LogUtils;
 import me.apex.hades.utils.TaskUtils;
-import org.bukkit.Bukkit;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 
+import org.bukkit.Bukkit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-@Getter
-@Setter
 public abstract class Check {
 
     //Info
-    private List<Violation> violations;
+    public List<Violation> violations;
 
-    private boolean enabled, punishable, dev;
+    public boolean enabled, punishable, dev;
 
     public double vl, maxViolations;
 
-    private final Executor executor;
+    public final Executor executor;
 
-    private long lastFlag;
+    public long lastFlag;
 
     public Check() {
         violations = new ArrayList();
@@ -45,19 +41,19 @@ public abstract class Check {
         lastFlag = System.currentTimeMillis();
         violations.add(new Violation(information));
         this.executor.execute(() -> {
-            ChatUtils.informStaff(Hades.getInstance().getConfig().getString("lang.flag-format").replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (isDev() ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(getViolations().size())).replace("%info%", information), getViolations().size());
+            ChatUtils.informStaff(Hades.getInstance().getConfig().getString("lang.flag-format").replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information), violations.size());
             if (Hades.getInstance().getConfig().getBoolean("system.logging.file.enabled"))
-                LogUtils.logToFile(user.getLogFile(), Hades.getInstance().getConfig().getString("system.logging.log-format").replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (isDev() ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(getViolations().size())).replace("%info%", information));
+                LogUtils.logToFile(user.getLogFile(), Hades.getInstance().getConfig().getString("system.logging.log-format").replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information));
 
-            if (getViolations().size() >= getMaxViolations()) {
-                if (isPunishable() && !user.banned) {
+            if (violations.size() >= maxViolations) {
+                if (punishable && !user.banned) {
                     user.banned = true;
                     if (Hades.getInstance().getConfig().getBoolean("system.logging.file.enabled"))
-                        LogUtils.logToFile(user.getLogFile(), "%time% > [ACTION] " + Hades.getInstance().getConfig().getString("checks.punish-command").replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (isDev() ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")));
+                        LogUtils.logToFile(user.getLogFile(), "%time% > [ACTION] " + Hades.getInstance().getConfig().getString("checks.punish-command").replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")));
                     if (Hades.getInstance().getConfig().getBoolean("checks.broadcast-punishments"))
                         Bukkit.broadcastMessage(ChatUtils.color(Hades.getInstance().getConfig().getString("lang.broadcast-message").replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%newline%", "\n")));
                     TaskUtils.run(() -> {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Hades.getInstance().getConfig().getString("checks.punish-command").replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (isDev() ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")));
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Hades.getInstance().getConfig().getString("checks.punish-command").replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")));
                     });
                 }
             }

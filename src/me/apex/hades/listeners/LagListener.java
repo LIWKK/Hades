@@ -1,50 +1,56 @@
 package me.apex.hades.listeners;
 
-import cc.funkemunky.api.events.AtlasListener;
-import cc.funkemunky.api.events.Listen;
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
-import cc.funkemunky.api.events.impl.PacketSendEvent;
-import cc.funkemunky.api.tinyprotocol.api.Packet;
-import cc.funkemunky.api.utils.Init;
+import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
+
+import me.apex.hades.Hades;
 import me.apex.hades.objects.User;
 import me.apex.hades.objects.UserManager;
 import me.apex.hades.utils.MathUtils;
 import me.apex.hades.utils.PacketUtils;
+import me.purplex.packetevents.event.handler.PacketHandler;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import me.purplex.packetevents.event.impl.PacketSendEvent;
+import me.purplex.packetevents.event.listener.PacketListener;
+import me.purplex.packetevents.packet.Packet;
 
-@Init
-public class LagListener implements AtlasListener {
+public class LagListener implements PacketListener, Listener {
+	
+	public LagListener() {
+		Bukkit.getPluginManager().registerEvents(this, Hades.getInstance());
+	}
 
-    @Listen
-    public void onPacketReceived(PacketReceiveEvent e) {
+    @PacketHandler
+    public void onPacketReceive(PacketReceiveEvent e) {
         if (UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId()) != null) {
             User user = UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId());
-            if (PacketUtils.isFlyingPacket(e.getType())) {
-                double diff = e.getTimeStamp() - user.getLastPacket();
+            if (PacketUtils.isFlyingPacket(e.getPacketName())) {
+                double diff = e.getTimestamp() - user.getLastPacket();
                 double value = 50;
                 value -= diff;
 
                 if (value < -80) {
-                    double lastLag = e.getTimeStamp() - user.getLastLagPacket();
+                    double lastLag = e.getTimestamp() - user.getLastLagPacket();
 
                     if (lastLag < 900) {
                         user.setLagging(true);
-                        user.setLastLagSet(e.getTimeStamp());
+                        user.setLastLagSet(e.getTimestamp());
                     } else
                         user.setLagging(false);
 
-                    user.setLastLagPacket(e.getTimeStamp());
+                    user.setLastLagPacket(e.getTimestamp());
                 }
 
-                if (e.getTimeStamp() - user.getLastLagSet() > 1000)
+                if (e.getTimestamp() - user.getLastLagSet() > 1000)
                     user.setLagging(false);
 
-                user.setLastPacket(e.getTimeStamp());
+                user.setLastPacket(e.getTimestamp());
                 PacketUtils.sendTransaction(user);
-            } else if (e.getType().equalsIgnoreCase(Packet.Client.KEEP_ALIVE)) {
-                user.setLastKeepAlive(e.getTimeStamp());
-                user.setPing((int) Math.abs(e.getTimeStamp() - user.getLastServerKeepAlive()));
-            } else if (e.getType().equalsIgnoreCase(Packet.Client.TRANSACTION)) {
-                user.getTransactionQueue().add(e.getTimeStamp());
+            } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.KEEP_ALIVE)) {
+                user.setLastKeepAlive(e.getTimestamp());
+                user.setPing((int) Math.abs(e.getTimestamp() - user.getLastServerKeepAlive()));
+            } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.TRANSACTION)) {
+                user.getTransactionQueue().add(e.getTimestamp());
                 if (user.getTransactionQueue().size() == 50) {
                     double deviation = MathUtils.getStandardDeviation(user.getTransactionQueue().stream().mapToLong(l -> l).toArray());
 
@@ -57,12 +63,12 @@ public class LagListener implements AtlasListener {
         }
     }
 
-    @Listen
+    @PacketHandler
     public void onPacketSend(PacketSendEvent e) {
         if (UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId()) != null) {
             User user = UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId());
-            if (e.getType().equalsIgnoreCase(Packet.Server.KEEP_ALIVE))
-                user.setLastServerKeepAlive(e.getTimeStamp());
+            if (e.getPacketName().equalsIgnoreCase(Packet.Server.KEEP_ALIVE))
+                user.setLastServerKeepAlive(e.getTimestamp());
         }
     }
 

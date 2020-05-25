@@ -1,12 +1,12 @@
 package me.apex.hades.check.impl.combat.autoclicker;
 
-import cc.funkemunky.api.events.impl.PacketReceiveEvent;
-import cc.funkemunky.api.tinyprotocol.api.Packet;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.MathUtils;
 import me.apex.hades.utils.PacketUtils;
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import me.purplex.packetevents.packet.Packet;
 
 @CheckInfo(name = "AutoClicker", type = "D")
 public class AutoClickerD extends Check {
@@ -16,7 +16,7 @@ public class AutoClickerD extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (e.getType().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
+        if (e.getPacketName().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
             int ticks = this.ticks;
             this.ticks = 0;
 
@@ -39,7 +39,7 @@ public class AutoClickerD extends Check {
             } catch (Exception ex) {
             }
 
-        } else if (PacketUtils.isFlyingPacket(e.getType())) {
+        } else if (PacketUtils.isFlyingPacket(e.getPacketName())) {
             ticks++;
         }
     }
