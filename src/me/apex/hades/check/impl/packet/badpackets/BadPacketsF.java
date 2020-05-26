@@ -5,7 +5,7 @@ import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
-import me.purplex.packetevents.packetwrappers.in.WrappedPacketPlayInFlying;
+import me.purplex.packetevents.packetwrappers.in.flying.WrappedPacketInFlying;
 
 @CheckInfo(name = "BadPackets", type = "F")
 public class BadPacketsF extends Check {
@@ -15,7 +15,7 @@ public class BadPacketsF extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.POSITION) || e.getPacketName().equalsIgnoreCase(Packet.Client.POSITION_LOOK)) {
-            WrappedPacketPlayInFlying packet = new WrappedPacketPlayInFlying(e.getPacket());
+        	WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
 
             double curX = packet.x;
             double lastX = this.lastX;

@@ -7,7 +7,7 @@ import me.apex.hades.utils.MathUtils;
 import me.purplex.packetevents.enums.EntityUseAction;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
-import me.purplex.packetevents.packetwrappers.in.WrappedPacketPlayInUseEntity;
+import me.purplex.packetevents.packetwrappers.in.use_entity.impl.WrappedPacketInUseEntity;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -20,7 +20,7 @@ public class AuraG extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
-            WrappedPacketPlayInUseEntity packet = new WrappedPacketPlayInUseEntity(e.getPacket());
+        	WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
             if (packet.action == EntityUseAction.ATTACK) {
                 user.setLastHit(e.getTimestamp());
                 diffs.add((long) user.getDeltaYaw());

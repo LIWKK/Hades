@@ -7,8 +7,8 @@ import me.apex.hades.utils.TaskUtils;
 import me.purplex.packetevents.enums.PlayerDigType;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
-import me.purplex.packetevents.packetwrappers.in.WrappedPacketPlayInBlockDig;
-import me.purplex.packetevents.packetwrappers.in.WrappedPacketPlayInFlying;
+import me.purplex.packetevents.packetwrappers.in.blockdig.WrappedPacketInBlockDig;
+import me.purplex.packetevents.packetwrappers.in.flying.WrappedPacketInFlying;
 
 import org.bukkit.Location;
 import org.bukkit.block.BlockFace;
@@ -18,7 +18,7 @@ public enum MovementProcessor {
 
     public void processMovement(PacketReceiveEvent e, User user) {
         if (PacketUtils.isFlyingPacket(e.getPacketName())) {
-            WrappedPacketPlayInFlying packet = new WrappedPacketPlayInFlying(e.getPacket());
+            WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
             Location location = new Location(user.getPlayer().getWorld(), packet.x, packet.y, packet.z, packet.yaw, packet.pitch);
 
             if (user.getLastLocation() != null) {
@@ -85,7 +85,7 @@ public enum MovementProcessor {
             //Process Optifine
             OptifineProcessor.INSTANCE.processOptifine(user);
         } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_DIG)) {
-        	WrappedPacketPlayInBlockDig packet = new WrappedPacketPlayInBlockDig(e.getPacket());
+        	WrappedPacketInBlockDig packet = new WrappedPacketInBlockDig(e.getPacket());
             if (packet.digType == PlayerDigType.START_DESTROY_BLOCK) {
                 user.setDigging(true);
             } else if (packet.digType == PlayerDigType.STOP_DESTROY_BLOCK
