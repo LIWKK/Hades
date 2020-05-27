@@ -28,7 +28,7 @@ public class AutoClickerD extends Check {
             double lastDelay = this.lastDelay;
             this.lastDelay = delay;
 
-            try {
+            if (delay != 0 || lastDelay != 0) {
                 double lcd = MathUtils.lcd((long) delay, (long) lastDelay);
                 double fixedLcd = lcd * Math.PI;
                 double remainder = Math.IEEEremainder(lcd, lastDelay) / Math.PI;
@@ -39,10 +39,8 @@ public class AutoClickerD extends Check {
                             flag(user, "remainder = " + remainder);
                         }
                     }
-                } else vl -= vl > 0 ? 0.5 : 0;
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+                }
+            } else vl -= vl > 0 ? 0.5 : 0;
 
         } else if (PacketUtils.isFlyingPacket(e.getPacketName())) {
             ticks++;
