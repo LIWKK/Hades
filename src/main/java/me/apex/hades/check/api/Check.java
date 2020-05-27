@@ -42,7 +42,7 @@ public abstract class Check {
         this.executor.execute(() -> {
             String formatColor = Hades.getInstance().getConfig().getString("lang.flag-format").replace("&", "§");
             TextComponent message = new TextComponent(formatColor.replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information));
-            message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp "+user.getPlayer()));
+            message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp "+user.getPlayer().getName()));
             message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7* Info\n§7* §c" + information + "\n§7* Ping: §c" + user.getPing() + "\n§7\n§7(Click to teleport)").create()));
 
             ChatUtils.informStaff(message, violations.size());
