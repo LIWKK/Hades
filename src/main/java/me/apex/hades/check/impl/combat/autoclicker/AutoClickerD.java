@@ -13,6 +13,7 @@ public class AutoClickerD extends Check {
 
     private int ticks, lastTicks;
     private double lastDelay;
+    boolean digging;
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
@@ -32,16 +33,19 @@ public class AutoClickerD extends Check {
                 double fixedLcd = lcd * Math.PI;
                 double remainder = Math.IEEEremainder(lcd, lastDelay) / Math.PI;
 
-                if (Double.isNaN(remainder)) {
-                    if (vl++ > 2)
-                        flag(user, "remainder = " + remainder);
+                if (!user.isDigging()) {
+                    if (Double.isNaN(remainder)) {
+                        if (vl++ > 2) {
+                            flag(user, "remainder = " + remainder);
+                        }
+                    }
                 } else vl -= vl > 0 ? 0.5 : 0;
             } catch (Exception ex) {
+                ex.printStackTrace();
             }
 
         } else if (PacketUtils.isFlyingPacket(e.getPacketName())) {
             ticks++;
         }
     }
-
 }
