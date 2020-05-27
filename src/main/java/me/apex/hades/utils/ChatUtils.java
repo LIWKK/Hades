@@ -1,3 +1,10 @@
+package me.apex.hades.utils;
+
+import org.bukkit.ChatColor;
+
+import me.apex.hades.objects.UserManager;
+import net.md_5.bungee.api.chat.TextComponent;
+
 public class ChatUtils {
 
     public static String color(String in) {

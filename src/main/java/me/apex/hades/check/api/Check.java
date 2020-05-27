@@ -7,6 +7,10 @@ import me.apex.hades.utils.ChatUtils;
 import me.apex.hades.utils.LogUtils;
 import me.apex.hades.utils.TaskUtils;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 
 import org.bukkit.Bukkit;
 import java.util.ArrayList;
@@ -36,7 +40,11 @@ public abstract class Check {
         lastFlag = System.currentTimeMillis();
         violations.add(new Violation(information));
         TaskUtils.run(() -> {
-            ChatUtils.informStaff(Hades.getInstance().getConfig().getString("lang.flag-format").replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information), violations.size());
+        	String formatColor = Hades.getInstance().getConfig().getString("lang.flag-format").replace("&", "§");
+            TextComponent message = new TextComponent(formatColor.replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information));
+            message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp "+user.getPlayer()));
+            message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp "+user.getPlayer().getName()));
+            message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7* Info\n§7* §c" + information + "\n§7* Ping: §c" + user.getPing() + "\n§7\n§7(Click to teleport)").create()));
             if (Hades.getInstance().getConfig().getBoolean("system.logging.file.enabled"))
                 LogUtils.logToFile(user.getLogFile(), Hades.getInstance().getConfig().getString("system.logging.log-format").replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information));
 
