@@ -23,22 +23,19 @@ public abstract class Check {
 
     public double vl, maxViolations;
 
-    public final Executor executor;
-
     public long lastFlag;
 
     public Check() {
         enabled = Hades.getInstance().getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".enabled");
         punishable = Hades.getInstance().getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".punishable");
         maxViolations = Hades.getInstance().getConfig().getDouble("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".max-vl");
-        this.executor = Executors.newFixedThreadPool(5);
     }
 
     protected void flag(User user, String information) {
         if (user == null || user.getPlayer() == null) return;
         lastFlag = System.currentTimeMillis();
         violations.add(new Violation(information));
-        this.executor.execute(() -> {
+        TaskUtils.run(() -> {
             ChatUtils.informStaff(Hades.getInstance().getConfig().getString("lang.flag-format").replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information), violations.size());
             if (Hades.getInstance().getConfig().getBoolean("system.logging.file.enabled"))
                 LogUtils.logToFile(user.getLogFile(), Hades.getInstance().getConfig().getString("system.logging.log-format").replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information));
