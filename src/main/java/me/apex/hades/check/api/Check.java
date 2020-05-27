@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 public abstract class Check {
 
     //Info
-    public List<Violation> violations;
+    public List<Violation> violations = new ArrayList<>();
 
     public boolean enabled, punishable, dev;
 
@@ -28,8 +28,6 @@ public abstract class Check {
     public long lastFlag;
 
     public Check() {
-        violations = new ArrayList();
-
         enabled = Hades.getInstance().getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".enabled");
         punishable = Hades.getInstance().getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".punishable");
         maxViolations = Hades.getInstance().getConfig().getDouble("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".max-vl");
@@ -52,9 +50,7 @@ public abstract class Check {
                         LogUtils.logToFile(user.getLogFile(), "%time% > [ACTION] " + Hades.getInstance().getConfig().getString("checks.punish-command").replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")));
                     if (Hades.getInstance().getConfig().getBoolean("checks.broadcast-punishments"))
                         Bukkit.broadcastMessage(ChatUtils.color(Hades.getInstance().getConfig().getString("lang.broadcast-message").replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%newline%", "\n")));
-                    TaskUtils.run(() -> {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Hades.getInstance().getConfig().getString("checks.punish-command").replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")));
-                    });
+                    TaskUtils.run(() -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Hades.getInstance().getConfig().getString("checks.punish-command").replace("%prefix%", Hades.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : ""))));
                 }
             }
             Bukkit.getPluginManager().callEvent(new HadesFlagEvent(user.getPlayer(), this, information));

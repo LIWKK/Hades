@@ -66,7 +66,8 @@ public enum MovementProcessor {
             //Check Surroundings
             if (Hades.getInstance().isEnabled()) {
                 TaskUtils.run(() -> {
-                    if (user.getPlayer() == null || user == null) return;
+                    // User should never be null
+                    if (user.getPlayer() == null) return;
                     if (user.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")
                             || user.getPlayer().getLocation().clone().add(0, -0.5, 0).getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")) {
                         user.setLastOnIce(e.getTimestamp());

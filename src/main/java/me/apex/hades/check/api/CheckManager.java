@@ -67,7 +67,7 @@ public enum CheckManager {
     };
 
     public List<Check> loadChecks() {
-        List<Check> add = new ArrayList();
+        List<Check> add = new ArrayList<>();
         Arrays.asList(CHECKS).forEach(check -> {
             try {
                 add.add((Check) check.getConstructor().newInstance());
@@ -79,8 +79,7 @@ public enum CheckManager {
     }
 
     public CheckInfo getCheckInfo(Check check) {
-        CheckInfo checkInfo = check.getClass().getAnnotation(CheckInfo.class);
-        return checkInfo;
+        return check.getClass().getAnnotation(CheckInfo.class);
     }
 
 }

@@ -14,9 +14,9 @@ import java.util.*;
 
 public class User {
 
-    private List<Check> checks;
-    private Player player;
-    private UUID playerUUID;
+    private final List<Check> checks;
+    private final Player player;
+    private final UUID playerUUID;
     private Location location, lastLocation;
     private boolean alerts, lagging, digging;
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, lastVelX, lastVelY, lastVelZ, optifineTicks;
@@ -25,7 +25,7 @@ public class User {
     private String address;
     private int ping, flagDelay, airTicks;
     private LogUtils.TextFile logFile;
-    private Deque<Long> transactionQueue = new LinkedList();
+    private Deque<Long> transactionQueue = new LinkedList<>();
     public boolean banned;
 
     public User(UUID playerUUID, String address) {
