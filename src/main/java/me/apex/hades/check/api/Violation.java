@@ -1,13 +1,10 @@
 package me.apex.hades.check.api;
 
 public class Violation {
-
-
-    private long timeStamp;
-    private String information;
+    private final long timeStamp = System.currentTimeMillis();
+    private final String information;
 
     public Violation(String information) {
-        timeStamp = System.currentTimeMillis();
         this.information = information;
     }
 

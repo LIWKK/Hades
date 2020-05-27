@@ -5,6 +5,6 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CheckInfo {
-    public String name();
-    public String type();
+    String name();
+    String type();
 }

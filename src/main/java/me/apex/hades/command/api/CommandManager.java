@@ -7,7 +7,7 @@ import java.util.List;
 public enum CommandManager {
     INSTANCE;
 
-    private List<CommandAdapter> adapters = new ArrayList();
+    private final List<CommandAdapter> adapters = new ArrayList<>();
 
     public void register(CommandAdapter adapter) {
         adapters.add(adapter);
