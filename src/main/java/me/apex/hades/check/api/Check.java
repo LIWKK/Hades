@@ -45,6 +45,7 @@ public abstract class Check {
             message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp "+user.getPlayer()));
             message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp "+user.getPlayer().getName()));
             message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7* Info\n§7* §c" + information + "\n§7* Ping: §c" + user.getPing() + "\n§7\n§7(Click to teleport)").create()));
+            ChatUtils.informStaff(message, vl);
             if (Hades.getInstance().getConfig().getBoolean("system.logging.file.enabled"))
                 LogUtils.logToFile(user.getLogFile(), Hades.getInstance().getConfig().getString("system.logging.log-format").replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? Hades.getInstance().getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information));
 
