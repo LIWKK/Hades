@@ -1,5 +1,5 @@
 # Hades (Anticheat)
-**IMPORTANT**: I will work on this project in my spare time so don't expect this to be very active. If you want to use any of the code from this project, please credit me and all of the contributors when publishing anything with our code.
+**IMPORTANT**: I will work on this project in my spare time so don't expect this to be very active. If you want to use any of the code from this project, please credit me and all of the contributors when publishing anything with our code. You can join my discord for any help regarding this project. (https://discord.gg/fZDeTud)
 
 **CONTRIBUTORS**: ExslodingDogs, Vaziak, Purplex, Johannes
 
