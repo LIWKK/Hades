@@ -20,7 +20,7 @@ public class BadPacketsH extends Check {
             int ticks = this.ticks;
             this.ticks = 0;
 
-            if (ticks < 2 && PacketUtils.isBlockPacket(packet.getItemStack().getType().toString()) && !user.isLagging()) {
+            if (ticks < 2 && PacketUtils.isBlockPacket(packet.getItemStack().getType().toString())) {
                 if (vl++ > 4)
                     flag(user, "ticks = " + ticks);
             } else vl = 0;*/

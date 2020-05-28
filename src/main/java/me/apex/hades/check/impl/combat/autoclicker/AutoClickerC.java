@@ -17,7 +17,7 @@ public class AutoClickerC extends Check {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
             long timeDiff = Math.abs(e.getTimestamp() - lastFlying);
 
-            if (timeDiff < 5 && !user.isLagging()) {
+            if (timeDiff < 5) {
                 if (vl++ > 10)
                     flag(user, "diff = " + timeDiff);
             } else vl = 0;

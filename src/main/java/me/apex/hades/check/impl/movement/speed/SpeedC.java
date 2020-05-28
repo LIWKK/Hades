@@ -24,7 +24,7 @@ public class SpeedC extends Check {
             if (PlayerUtils.blockNearHead(user.getPlayer()))
                 max = 15.0D;
 
-            if (gcd > max && e.getTimestamp() - user.getLastServerPosition() > 2000 && !user.isLagging() && !user.getPlayer().getAllowFlight())
+            if (gcd > max && e.getTimestamp() - user.getLastServerPosition() > 2000 && !user.getPlayer().getAllowFlight())
                 flag(user, "dist = " + gcd);
         }
     }

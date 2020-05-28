@@ -19,9 +19,7 @@ public class PlayerUtils {
         double offset = 0.3;
         for (double x = -offset; x <= offset; x += offset) {
             for (double z = -offset; z <= offset; z += offset) {
-                if (player.getLocation().clone().add(x, -0.1, z).getBlock().getType() != Material.AIR
-                        || player.getLocation().clone().add(x, -0.5005, z).getBlock().getType().toString().contains("FENCE")
-                        || player.getLocation().clone().add(x, -0.5005, z).getBlock().getType().toString().contains("WALL")) {
+                if (player.getLocation().clone().add(x, 0, z).getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
                     return true;
                 }
             }
@@ -29,7 +27,7 @@ public class PlayerUtils {
         return false;
     }
 
-    //Credits to jonhan
+    //Credits to Jonhan :)
     public static boolean isNearGround(Location location) {
         double expand = 0.3;
         for (double x = -expand; x <= expand; x += expand) {

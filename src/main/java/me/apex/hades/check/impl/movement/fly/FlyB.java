@@ -1,5 +1,7 @@
 package me.apex.hades.check.impl.movement.fly;
 
+import org.bukkit.Bukkit;
+
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
@@ -20,11 +22,11 @@ public class FlyB extends Check {
 
             double dist = user.getDeltaY() - user.getLastDeltaY();
 
-            if (!user.onGround() && !user.isLagging() && !user.isNearGround()) {
+            if (!user.isNearGround()) {
                 if (dist >= 0.0D) {
-                    if (vl++ > 6)
-                        vl = 0;
-                        flag(user, "dist = " + dist);
+                	if(vl++ > 10) {
+                		flag(user, "dist = " + dist);
+                	}
                 }
             } else vl = 0;
         }

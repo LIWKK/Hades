@@ -24,7 +24,7 @@ public class AutoClickerB extends Check {
 
             long diff = e.getTimestamp() - lastSwing;
 
-            if (ticks < 2 && diff < 50.0D && !user.isLagging()) {
+            if (ticks < 2 && diff < 50.0D) {
                 if (vl++ > 2)
                     flag(user, "ticks = " + ticks + ", delay = " + diff);
             } else vl = 0;

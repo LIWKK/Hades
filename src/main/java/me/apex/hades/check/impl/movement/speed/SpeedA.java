@@ -22,7 +22,7 @@ public class SpeedA extends Check {
 
             double diff = Math.abs(dist - lastDist);
 
-            if (diff == 0.0D && !user.getPlayer().getAllowFlight() && dist > PlayerUtils.getBaseMovementSpeed(user, 0.29D, false) && !user.isLagging())
+            if (diff == 0.0D && !user.getPlayer().getAllowFlight() && dist > PlayerUtils.getBaseMovementSpeed(user, 0.29D, false))
                 flag(user, "diff = " + diff);
         }
     }
