@@ -1,16 +1,20 @@
 package me.apex.hades.objects;
 
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
 import me.apex.hades.Hades;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckManager;
 import me.apex.hades.utils.ChatUtils;
 import me.apex.hades.utils.LogUtils;
 import me.apex.hades.utils.PlayerUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
-import java.util.*;
 
 public class User {
 

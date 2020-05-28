@@ -1,7 +1,5 @@
 package me.apex.hades.check.impl.movement.fly;
 
-import org.bukkit.Bukkit;
-
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;

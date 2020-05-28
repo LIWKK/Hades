@@ -7,7 +7,7 @@ import me.apex.hades.utils.PacketUtils;
 import me.purplex.packetevents.enums.EntityUseAction;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
-import me.purplex.packetevents.packetwrappers.in.use_entity.impl.WrappedPacketInUseEntity;
+import me.purplex.packetevents.packetwrappers.in.use_entity.WrappedPacketInUseEntity;
 
 @CheckInfo(name = "BadPackets", type = "G")
 public class BadPacketsG extends Check {
@@ -18,7 +18,7 @@ public class BadPacketsG extends Check {
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
             WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
-            if (!lastWasArm && packet.action == EntityUseAction.ATTACK) {
+            if (!lastWasArm && packet.getAction() == EntityUseAction.ATTACK) {
                 if (vl++ > 1)
                     flag(user, "swung = " + lastWasArm);
             } else vl = 0;

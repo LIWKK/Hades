@@ -1,15 +1,5 @@
 package me.apex.hades.listeners;
 
-import me.apex.hades.Hades;
-import me.apex.hades.command.api.CommandManager;
-import me.apex.hades.command.api.UserInput;
-import me.apex.hades.objects.User;
-import me.apex.hades.objects.UserManager;
-import me.apex.hades.menu.api.GuiManager;
-import me.apex.hades.processors.VPNProcessor;
-
-import java.lang.reflect.Method;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,6 +9,14 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import me.apex.hades.Hades;
+import me.apex.hades.command.api.CommandManager;
+import me.apex.hades.command.api.UserInput;
+import me.apex.hades.menu.api.GuiManager;
+import me.apex.hades.objects.User;
+import me.apex.hades.objects.UserManager;
+import me.apex.hades.processors.VPNProcessor;
 
 public class HadesListener implements Listener {
 

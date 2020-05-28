@@ -1,15 +1,16 @@
 package me.apex.hades.menu.api;
 
-import me.apex.hades.utils.ChatUtils;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import me.apex.hades.utils.ChatUtils;
 
 public abstract class Gui {
 

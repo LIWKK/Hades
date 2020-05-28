@@ -14,8 +14,8 @@ public class BadPacketsA extends Check {
     public void onPacket(PacketReceiveEvent e, User user) {
         if (PacketUtils.isFlyingPacket(e.getPacketName())) {
         	WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
-            if (Math.abs(packet.pitch) > 90.0F)
-                flag(user, "pitch = " + packet.pitch);
+            if (Math.abs(packet.getPitch()) > 90.0F)
+                flag(user, "pitch = " + packet.getPitch());
         }
     }
 

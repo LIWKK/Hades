@@ -1,7 +1,8 @@
 package me.purplex.packetevents.event.impl;
 
-import me.purplex.packetevents.event.PacketEvent;
 import org.bukkit.entity.Player;
+
+import me.purplex.packetevents.event.PacketEvent;
 
 public class PacketLoginEvent extends PacketEvent {
     private final Player player;

@@ -1,6 +1,5 @@
 package me.apex.hades.utils;
 
-import me.apex.hades.objects.User;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -8,6 +7,8 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import me.apex.hades.objects.User;
 
 public class PlayerUtils {
 

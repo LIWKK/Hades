@@ -1,5 +1,7 @@
 package me.apex.hades.check.impl.combat.aura;
 
+import org.bukkit.entity.Entity;
+
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
@@ -7,9 +9,7 @@ import me.apex.hades.utils.MathUtils;
 import me.purplex.packetevents.enums.EntityUseAction;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
-import me.purplex.packetevents.packetwrappers.in.use_entity.impl.WrappedPacketInUseEntity;
-
-import org.bukkit.entity.Entity;
+import me.purplex.packetevents.packetwrappers.in.use_entity.WrappedPacketInUseEntity;
 
 @CheckInfo(name = "Aura", type = "C")
 public class AuraC extends Check {
@@ -18,8 +18,8 @@ public class AuraC extends Check {
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
         	WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
-            if (packet.action == EntityUseAction.ATTACK) {
-                Entity entity = packet.entity;
+            if (packet.getAction() == EntityUseAction.ATTACK) {
+                Entity entity = packet.getEntity();
                 double rotation = Math.abs(user.getDeltaYaw());
 
                 double dir = MathUtils.getDirection(user.getLocation(), entity.getLocation());

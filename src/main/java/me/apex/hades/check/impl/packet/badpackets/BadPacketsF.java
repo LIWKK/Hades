@@ -17,15 +17,15 @@ public class BadPacketsF extends Check {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.POSITION) || e.getPacketName().equalsIgnoreCase(Packet.Client.POSITION_LOOK)) {
         	WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
 
-            double curX = packet.x;
+            double curX = packet.getX();
             double lastX = this.lastX;
             this.lastX = curX;
 
-            double curY = packet.y;
+            double curY = packet.getY();
             double lastY = this.lastY;
             this.lastY = curY;
 
-            double curZ = packet.z;
+            double curZ = packet.getZ();
             double lastZ = this.lastZ;
             this.lastZ = curZ;
 

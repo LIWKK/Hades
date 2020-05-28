@@ -1,8 +1,9 @@
 package me.apex.hades.command.api;
 
-import me.apex.hades.objects.User;
 import java.util.ArrayList;
 import java.util.List;
+
+import me.apex.hades.objects.User;
 
 public enum CommandManager {
     INSTANCE;

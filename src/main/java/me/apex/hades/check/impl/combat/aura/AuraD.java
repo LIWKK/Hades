@@ -6,7 +6,7 @@ import me.apex.hades.objects.User;
 import me.purplex.packetevents.enums.EntityUseAction;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
-import me.purplex.packetevents.packetwrappers.in.use_entity.impl.WrappedPacketInUseEntity;
+import me.purplex.packetevents.packetwrappers.in.use_entity.WrappedPacketInUseEntity;
 
 @CheckInfo(name = "Aura", type = "D")
 public class AuraD extends Check {
@@ -15,7 +15,7 @@ public class AuraD extends Check {
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
         	WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
-            if (packet.action == EntityUseAction.ATTACK) {
+            if (packet.getAction() == EntityUseAction.ATTACK) {
                 double yawDiff = user.getDeltaYaw();
                 double lastYawDiff = user.getLastDeltaYaw();
 

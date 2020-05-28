@@ -1,8 +1,9 @@
 package me.purplex.packetevents.utils.playerprotocolversion;
 
-import org.bukkit.entity.Player;
+import java.util.HashMap;
+import java.util.UUID;
 
-import java.util.*;
+import org.bukkit.entity.Player;
 
 public class PlayerVersionManager {
     private static HashMap<UUID, Integer> protocolVersion = new HashMap<UUID, Integer>();

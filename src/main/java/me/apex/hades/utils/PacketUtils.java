@@ -1,11 +1,11 @@
 package me.apex.hades.utils;
 
-import me.apex.hades.objects.User;
-import me.purplex.packetevents.packet.Packet;
+import java.lang.reflect.Constructor;
 
 import org.bukkit.Bukkit;
 
-import java.lang.reflect.Constructor;
+import me.apex.hades.objects.User;
+import me.purplex.packetevents.packet.Packet;
 
 public class PacketUtils {
 

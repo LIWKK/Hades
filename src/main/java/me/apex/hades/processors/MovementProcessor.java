@@ -1,5 +1,8 @@
 package me.apex.hades.processors;
 
+import org.bukkit.Location;
+import org.bukkit.block.BlockFace;
+
 import me.apex.hades.Hades;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.PacketUtils;
@@ -10,16 +13,13 @@ import me.purplex.packetevents.packet.Packet;
 import me.purplex.packetevents.packetwrappers.in.blockdig.WrappedPacketInBlockDig;
 import me.purplex.packetevents.packetwrappers.in.flying.WrappedPacketInFlying;
 
-import org.bukkit.Location;
-import org.bukkit.block.BlockFace;
-
 public enum MovementProcessor {
     INSTANCE;
 
     public void processMovement(PacketReceiveEvent e, User user) {
         if (PacketUtils.isFlyingPacket(e.getPacketName())) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
-            Location location = new Location(user.getPlayer().getWorld(), packet.x, packet.y, packet.z, packet.yaw, packet.pitch);
+            Location location = new Location(user.getPlayer().getWorld(), packet.getX(), packet.getY(), packet.getZ(), packet.getYaw(), packet.getPitch());
 
             if (user.getLastLocation() != null) {
                 if (!e.getPacketName().contains("Look")) {
@@ -87,10 +87,10 @@ public enum MovementProcessor {
             OptifineProcessor.INSTANCE.processOptifine(user);
         } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_DIG)) {
         	WrappedPacketInBlockDig packet = new WrappedPacketInBlockDig(e.getPacket());
-            if (packet.digType == PlayerDigType.START_DESTROY_BLOCK) {
+            if (packet.getDigType() == PlayerDigType.START_DESTROY_BLOCK) {
                 user.setDigging(true);
-            } else if (packet.digType == PlayerDigType.STOP_DESTROY_BLOCK
-                    || packet.digType == PlayerDigType.ABORT_DESTROY_BLOCK) {
+            } else if (packet.getDigType() == PlayerDigType.STOP_DESTROY_BLOCK
+                    || packet.getDigType() == PlayerDigType.ABORT_DESTROY_BLOCK) {
                 user.setDigging(false);
             }
         }

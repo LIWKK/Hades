@@ -1,12 +1,10 @@
 package me.apex.hades.processors;
 
-import me.apex.hades.Hades;
-import me.apex.hades.objects.User;
-import org.apache.commons.io.IOUtils;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+
+import me.apex.hades.Hades;
+import me.apex.hades.objects.User;
 
 public enum VPNProcessor {
     INSTANCE;
