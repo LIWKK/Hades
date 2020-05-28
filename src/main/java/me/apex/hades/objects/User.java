@@ -350,6 +350,9 @@ public class User {
     public boolean onGround() {
         return PlayerUtils.onGround(getPlayer());
     }
+    public boolean isNearGround() {
+        return PlayerUtils.isNearGround(getPlayer().getLocation());
+    }
 
     public boolean onIce() {
         return PlayerUtils.isOnIce(getPlayer());
