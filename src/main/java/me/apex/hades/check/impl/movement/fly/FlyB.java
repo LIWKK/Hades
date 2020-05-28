@@ -20,9 +20,10 @@ public class FlyB extends Check {
 
             double dist = user.getDeltaY() - user.getLastDeltaY();
 
-            if (!user.onGround() && !user.isLagging()) {
+            if (!user.onGround() && !user.isLagging() && !user.isNearGround()) {
                 if (dist >= 0.0D) {
-                    if (vl++ > 4)
+                    if (vl++ > 6)
+                        vl = 0;
                         flag(user, "dist = " + dist);
                 }
             } else vl = 0;
