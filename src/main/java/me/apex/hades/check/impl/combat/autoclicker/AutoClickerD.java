@@ -11,6 +11,8 @@ import me.purplex.packetevents.packet.Packet;
 @CheckInfo(name = "AutoClicker", type = "D")
 public class AutoClickerD extends Check {
 
+	public AutoClickerD() { dev = true; }
+	
     private int ticks, lastTicks;
     private double lastDelay;
     boolean digging;
@@ -35,12 +37,12 @@ public class AutoClickerD extends Check {
 
                 if (!user.isDigging()) {
                     if (Double.isNaN(remainder)) {
-                        if (vl++ > 2) {
+                        if (vl++ > 5) {
                             flag(user, "remainder = " + remainder);
                         }
                     }
                 }
-            } else vl -= vl > 0 ? 0.5 : 0;
+            } else vl *= 0.75;
 
         } else if (PacketUtils.isFlyingPacket(e.getPacketName())) {
             ticks++;

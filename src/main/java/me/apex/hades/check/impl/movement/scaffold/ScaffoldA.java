@@ -32,7 +32,7 @@ public class ScaffoldA extends Check {
             double a = Math.abs(from.getBlockX() - placed.getX());
             double b = Math.abs(from.getBlockZ() - placed.getZ());
 
-            if (from.clone().add(0, -2, 0).getBlock().getType() == Material.AIR && (x == 0 || z == 0) && y == -1 && (a == 0 && b == 0) && !user.isLagging())
+            if (from.clone().add(0, -2, 0).getBlock().getType() == Material.AIR && (x == 0 || z == 0) && y == -1 && (a == 0 && b == 0))
                 flag(user, "offset = " + a + ", " + b);*/
         }
     }

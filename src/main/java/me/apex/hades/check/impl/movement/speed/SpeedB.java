@@ -25,7 +25,7 @@ public class SpeedB extends Check {
 
             double max = PlayerUtils.getBaseMovementSpeed(user, 9.9D, true);
 
-            if (scaledDist > max && !user.isLagging() && !user.getPlayer().getAllowFlight()) {
+            if (scaledDist > max && !user.getPlayer().getAllowFlight()) {
                 if (vl++ > 3)
                     flag(user, "dist = " + scaledDist);
             } else vl = 0;

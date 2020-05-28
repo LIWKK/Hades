@@ -27,7 +27,7 @@ public class AuraB extends Check {
             double max = 32.0D;
             max += MathUtils.pingFormula(user.getPing() + 2);
 
-            if (dist > max && range > 1.0 && !user.isLagging()) {
+            if (dist > max && range > 1.0) {
                 if (vl++ > 4)
                     flag(user, "angle = " + dist);
             } else vl = 0;

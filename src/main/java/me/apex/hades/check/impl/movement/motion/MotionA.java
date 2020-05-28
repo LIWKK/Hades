@@ -17,7 +17,7 @@ public class MotionA extends Check {
             double dist = user.getDeltaY();
             double lastDist = user.getLastDeltaY();
 
-            if (dist >= 1.0 && lastDist == 0.0D && user.getPlayer().getVelocity().getY() < -0.075D && !user.isLagging())
+            if (dist >= 1.0 && lastDist == 0.0D && user.getPlayer().getVelocity().getY() < -0.075D)
                 flag(user, "dist = " + dist + ", lastDist = " + lastDist);
         }
     }
