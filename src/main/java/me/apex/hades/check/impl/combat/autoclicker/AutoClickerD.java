@@ -37,10 +37,10 @@ public class AutoClickerD extends Check {
 
                 if (!user.isDigging()) {
                     if (Double.isNaN(remainder)) {
-                        if (vl++ > 5) {
+                        if (vl++ > 2.5) {
                             flag(user, "remainder = " + remainder);
                         }
-                    }
+                    } else vl -= vl > 0 ? 0.5 : 0;
                 }
             } else vl *= 0.75;
 
