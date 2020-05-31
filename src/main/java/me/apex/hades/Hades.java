@@ -25,12 +25,12 @@ public class Hades extends JavaPlugin {
         saveDefaultConfig();
         
         //Register Listeners
-        new HadesListener();
         new VelocityListener();
 
         //Register Network
         PacketEvents.setup(this, false);
         PacketEvents.getEventManager().registerListener(new LagListener());
+        PacketEvents.getEventManager().registerListener(new HadesListener());
         PacketEvents.getEventManager().registerListener(new NetworkListener());
 
         //Register System Variables
