@@ -7,9 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-
 import me.apex.hades.Hades;
 import me.apex.hades.command.api.CommandManager;
 import me.apex.hades.command.api.UserInput;
@@ -17,6 +14,8 @@ import me.apex.hades.menu.api.GuiManager;
 import me.apex.hades.objects.User;
 import me.apex.hades.objects.UserManager;
 import me.apex.hades.processors.VPNProcessor;
+import me.purplex.packetevents.event.impl.PlayerInjectEvent;
+import me.purplex.packetevents.event.impl.PlayerUninjectEvent;
 
 public class HadesListener implements Listener {
 
@@ -25,7 +24,7 @@ public class HadesListener implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
+    public void onJoin(PlayerInjectEvent e) {
         String address = "";
         try {
             Object handle = e.getPlayer().getClass().getMethod("getHandle").invoke(e.getPlayer());
@@ -51,7 +50,7 @@ public class HadesListener implements Listener {
     }
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
+    public void onQuit(PlayerUninjectEvent e) {
         User user = UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId());
         UserManager.INSTANCE.unregister(user);
     }

@@ -20,6 +20,7 @@ public class VelocityListener implements Listener {
         User user = UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId());
 
         assert user != null;
+        assert e.getPlayer() != null;
         user.setVelocityTicks(0);
         user.setLastVelX(e.getVelocity().getX());
         user.setLastVelY(e.getVelocity().getY());
