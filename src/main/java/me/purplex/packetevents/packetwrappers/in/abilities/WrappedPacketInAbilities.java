@@ -1,9 +1,9 @@
 package me.purplex.packetevents.packetwrappers.in.abilities;
 
-import java.lang.reflect.Field;
-
 import me.purplex.packetevents.packetwrappers.api.WrappedPacket;
 import me.purplex.packetevents.utils.NMSUtils;
+
+import java.lang.reflect.Field;
 
 public class WrappedPacketInAbilities extends WrappedPacket {
     private boolean isVulnerable;

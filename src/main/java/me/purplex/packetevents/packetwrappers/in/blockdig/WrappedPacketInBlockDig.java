@@ -1,15 +1,14 @@
 package me.purplex.packetevents.packetwrappers.in.blockdig;
 
 
-import java.lang.reflect.Field;
-
 import me.purplex.packetevents.enums.Direction;
 import me.purplex.packetevents.enums.PlayerDigType;
 import me.purplex.packetevents.enums.ServerVersion;
 import me.purplex.packetevents.packetwrappers.api.WrappedPacket;
 import me.purplex.packetevents.utils.BaseBlockUtils;
 import me.purplex.packetevents.utils.NMSUtils;
-import me.purplex.packetevents.utils.math.Vector3i;
+import me.purplex.packetevents.utils.math.*;
+import java.lang.reflect.Field;
 
 public class WrappedPacketInBlockDig extends WrappedPacket {
     private Vector3i blockPosition;

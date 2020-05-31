@@ -1,8 +1,7 @@
 package me.purplex.packetevents.packetwrappers.api;
 
-import org.bukkit.entity.Player;
-
 import me.purplex.packetevents.enums.ServerVersion;
+import org.bukkit.entity.Player;
 
 public class WrappedPacket {
     private final Player player;

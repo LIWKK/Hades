@@ -1,8 +1,6 @@
 package me.purplex.packetevents.injector;
 
 
-import org.bukkit.entity.Player;
-
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,6 +10,7 @@ import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.event.impl.PacketSendEvent;
 import me.purplex.packetevents.event.impl.PlayerInjectEvent;
 import me.purplex.packetevents.event.impl.PlayerUninjectEvent;
+import org.bukkit.entity.Player;
 
 class PlayerInject_1_8 {
     public static void injectPlayer(final Player player) {

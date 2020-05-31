@@ -1,7 +1,5 @@
 package me.purplex.packetevents.injector;
 
-import org.bukkit.entity.Player;
-
 import me.purplex.packetevents.PacketEvents;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.event.impl.PacketSendEvent;
@@ -11,6 +9,7 @@ import net.minecraft.util.io.netty.channel.Channel;
 import net.minecraft.util.io.netty.channel.ChannelDuplexHandler;
 import net.minecraft.util.io.netty.channel.ChannelHandlerContext;
 import net.minecraft.util.io.netty.channel.ChannelPromise;
+import org.bukkit.entity.Player;
 
 class PlayerInject_1_7_10 {
     public static void injectPlayer(final Player player) {
@@ -56,6 +55,7 @@ class PlayerInject_1_7_10 {
         PacketEvents.getEventManager().callEvent(uninjectEvent);
         channel.eventLoop().submit(runnable);
     }
+
     public static Channel getChannel(final Player player) {
         return (Channel) ChannelManager.getChannel(player);
     }

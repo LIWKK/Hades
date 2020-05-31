@@ -1,18 +1,17 @@
 package me.purplex.packetevents.packetwrappers.in.useentity;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-
-import javax.annotation.Nullable;
-
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-
 import me.purplex.packetevents.enums.EntityUseAction;
 import me.purplex.packetevents.enums.Hand;
 import me.purplex.packetevents.enums.ServerVersion;
 import me.purplex.packetevents.packetwrappers.api.WrappedPacket;
 import me.purplex.packetevents.utils.NMSUtils;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.util.BlockIterator;
+
+import javax.annotation.Nullable;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 
 public class WrappedPacketInUseEntity extends WrappedPacket {
     private int entityId;

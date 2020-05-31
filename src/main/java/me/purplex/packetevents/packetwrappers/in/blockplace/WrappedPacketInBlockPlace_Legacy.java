@@ -1,16 +1,16 @@
 package me.purplex.packetevents.packetwrappers.in.blockplace;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-import org.bukkit.inventory.ItemStack;
-
+import me.purplex.packetevents.enums.Direction;
 import me.purplex.packetevents.enums.Hand;
 import me.purplex.packetevents.enums.ServerVersion;
 import me.purplex.packetevents.packetwrappers.api.WrappedPacket;
 import me.purplex.packetevents.utils.BaseBlockUtils;
 import me.purplex.packetevents.utils.NMSUtils;
 import me.purplex.packetevents.utils.math.Vector3i;
+import org.bukkit.inventory.ItemStack;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 class WrappedPacketInBlockPlace_Legacy extends WrappedPacket {
     private Vector3i blockPosition;

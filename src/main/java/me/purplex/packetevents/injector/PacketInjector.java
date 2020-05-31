@@ -1,10 +1,9 @@
 package me.purplex.packetevents.injector;
 
 
-import org.bukkit.entity.Player;
-
 import me.purplex.packetevents.PacketEvents;
 import me.purplex.packetevents.enums.ServerVersion;
+import org.bukkit.entity.Player;
 
 
 public class PacketInjector {
@@ -17,7 +16,6 @@ public class PacketInjector {
         }
         else {
             PlayerInject_1_8.injectPlayer(player);
-           // player.sendMessage("injected");
         }
     }
 
@@ -30,5 +28,4 @@ public class PacketInjector {
         }
         ChannelManager.removeChannel(player.getUniqueId());
     }
-
 }

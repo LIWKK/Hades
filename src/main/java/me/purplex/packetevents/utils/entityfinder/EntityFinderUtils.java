@@ -1,10 +1,9 @@
 package me.purplex.packetevents.utils.entityfinder;
 
-import org.bukkit.World;
-import org.bukkit.entity.Entity;
-
 import me.purplex.packetevents.PacketEvents;
 import me.purplex.packetevents.enums.ServerVersion;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
 
 public class EntityFinderUtils {
     private static ServerVersion version = PacketEvents.getServerVersion();

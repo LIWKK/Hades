@@ -1,11 +1,10 @@
 package me.purplex.packetevents.event.manager;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import me.purplex.packetevents.event.PacketEvent;
 import me.purplex.packetevents.event.handler.PacketHandler;
 import me.purplex.packetevents.event.listener.PacketListener;
+
+import java.lang.reflect.*;
 
 public class EventManager implements PacketEventManager {
 

@@ -1,10 +1,9 @@
 package me.purplex.packetevents.utils.entityfinder;
 
+import net.minecraft.server.v1_9_R1.WorldServer;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
 import org.bukkit.entity.Entity;
-
-import net.minecraft.server.v1_9_R1.WorldServer;
 
 class EntityFinder_1_9 {
     public static Entity getEntityById(final World world, final int id) {
