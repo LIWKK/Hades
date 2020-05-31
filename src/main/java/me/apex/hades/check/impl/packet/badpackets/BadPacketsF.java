@@ -29,7 +29,7 @@ public class BadPacketsF extends Check {
             double lastZ = this.lastZ;
             this.lastZ = curZ;
 
-            if (Math.abs(curX - lastX) >= 10 || Math.abs(curY - lastY) >= 10 || Math.abs(curZ - lastZ) >= 10 && e.getTimestamp() - user.getLastServerPosition() > 2000) {
+            if (Math.abs(curX - lastX) >= 10 || Math.abs(curY - lastY) >= 10 || Math.abs(curZ - lastZ) >= 10 && user.getTeleportTicks() == 0) {
                 if (++vl > 1)
                     flag(user, "curXYZ = " + curX + ", " + curY + ", " + curZ + ", lastXYZ = " + lastX + ", " + lastY + ", " + lastZ);
             } else vl = 0;

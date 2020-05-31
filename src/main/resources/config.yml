@@ -143,6 +143,10 @@ checks:
         enabled: true
         punishable: true
         max-vl: 20
+      c:
+        enabled: true
+        punishable: true
+        max-vl: 20
     motion:
       a:
         enabled: true
@@ -171,6 +175,10 @@ checks:
         punishable: true
         max-vl: 20
       d:
+        enabled: true
+        punishable: true
+        max-vl: 20
+      e:
         enabled: true
         punishable: true
         max-vl: 20

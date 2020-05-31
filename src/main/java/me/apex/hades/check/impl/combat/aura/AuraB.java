@@ -8,7 +8,7 @@ import me.apex.hades.objects.User;
 import me.apex.hades.utils.MathUtils;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
-import me.purplex.packetevents.packetwrappers.in.use_entity.WrappedPacketInUseEntity;
+import me.purplex.packetevents.packetwrappers.in.useentity.WrappedPacketInUseEntity;
 
 @CheckInfo(name = "Aura", type = "B")
 public class AuraB extends Check {
@@ -16,7 +16,7 @@ public class AuraB extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
-            WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
+        	WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPlayer(), e.getPacket());
             Entity entity = packet.getEntity();
 
             double dir = MathUtils.getDirection(user.getLocation(), entity.getLocation());

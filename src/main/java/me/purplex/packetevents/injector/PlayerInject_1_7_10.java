@@ -42,7 +42,6 @@ class PlayerInject_1_7_10 {
         final PlayerInjectEvent injectEvent = new PlayerInjectEvent(player);
         PacketEvents.getEventManager().callEvent(injectEvent);
         getChannel(player).pipeline().addBefore("packet_handler", player.getName(), channelDuplexHandler);
-
     }
 
     public static void uninjectPlayer(final Player player) {
@@ -57,7 +56,6 @@ class PlayerInject_1_7_10 {
         PacketEvents.getEventManager().callEvent(uninjectEvent);
         channel.eventLoop().submit(runnable);
     }
-
     public static Channel getChannel(final Player player) {
         return (Channel) ChannelManager.getChannel(player);
     }

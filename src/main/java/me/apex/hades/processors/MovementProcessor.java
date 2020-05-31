@@ -70,18 +70,30 @@ public enum MovementProcessor {
                     if (user.getPlayer() == null) return;
                     if (user.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")
                             || user.getPlayer().getLocation().clone().add(0, -0.5, 0).getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")) {
-                        user.setLastOnIce(e.getTimestamp());
-                    }
+                        user.setIceTicks(user.getIceTicks() + 1);
+                    }else user.setIceTicks(0);
                     if (user.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("SLIME")) {
-                        user.setLastOnSlime(e.getTimestamp());
-                    }
+                    	user.setSlimeTicks(user.getSlimeTicks() + 1);
+                    }else user.setSlimeTicks(0);
                 });
             }
-
-            //Ground Check
-            if (!user.onGround())
-                user.setAirTicks(user.getAirTicks() + 1);
-            else user.setAirTicks(0);
+            
+            //Reset Teleport
+            user.setTeleportTicks(0);
+            
+            //Update Air/Ground Ticks
+            if(user.onGround()) {
+            	user.setGroundTicks(user.getGroundTicks() + 1);
+            	user.setAirTicks(0);
+            }else {
+            	user.setAirTicks(user.getAirTicks() + 1);
+            	user.setGroundTicks(0);
+            }
+            
+            //Update Client Ground Ticks
+            if(packet.isOnGround()) {
+            	user.setClientGroundTicks(user.getClientGroundTicks() + 1);
+            }else user.setClientGroundTicks(0);
 
             //Process Optifine
             OptifineProcessor.INSTANCE.processOptifine(user);

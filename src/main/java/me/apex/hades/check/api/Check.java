@@ -29,10 +29,18 @@ public abstract class Check {
     public long lastFlag;
 
     public Check() {
-        enabled = Hades.getInstance().getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".enabled");
-        punishable = Hades.getInstance().getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".punishable");
-        maxViolations = Hades.getInstance().getConfig().getDouble("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".max-vl");
+    	try {
+            enabled = Hades.getInstance().getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".enabled");
+            punishable = Hades.getInstance().getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".punishable");
+            maxViolations = Hades.getInstance().getConfig().getDouble("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".max-vl");
+    	}catch (Exception e) {
+    		
+    	}
+    	
+    	init();
     }
+    
+    public void init() { }
 
     protected void flag(User user, String information) {
         if (user == null || user.getPlayer() == null) return;

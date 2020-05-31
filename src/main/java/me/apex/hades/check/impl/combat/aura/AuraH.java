@@ -7,7 +7,7 @@ import me.apex.hades.utils.MathUtils;
 import me.purplex.packetevents.enums.EntityUseAction;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
-import me.purplex.packetevents.packetwrappers.in.use_entity.WrappedPacketInUseEntity;
+import me.purplex.packetevents.packetwrappers.in.useentity.WrappedPacketInUseEntity;
 
 @CheckInfo(name = "Aura", type = "H")
 public class AuraH extends Check {
@@ -18,7 +18,7 @@ public class AuraH extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
-        	WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
+        	WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPlayer(), e.getPacket());
             if (packet.getAction() == EntityUseAction.ATTACK) {
                 lastHit = e.getTimestamp();
             }

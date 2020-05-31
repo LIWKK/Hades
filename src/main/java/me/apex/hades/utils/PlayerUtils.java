@@ -16,24 +16,13 @@ public class PlayerUtils {
     Block Utils
      */
 
-    public static boolean onGround(Player player) {
-        double offset = 0.3;
-        for (double x = -offset; x <= offset; x += offset) {
-            for (double z = -offset; z <= offset; z += offset) {
-                if (player.getLocation().clone().add(x, 0, z).getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     //Credits to Jonhan :)
     public static boolean isNearGround(Location location) {
         double expand = 0.3;
         for (double x = -expand; x <= expand; x += expand) {
             for (double z = -expand; z <= expand; z += expand) {
-                if (location.clone().add(x, -0.5001, z).getBlock().getType() != Material.AIR) {
+                if (location.clone().add(x, -0.1, z).getBlock().getType().isSolid()
+                		|| location.clone().add(x, -0.5001, z).getBlock().getType().isSolid()) {
                     return true;
                 }
             }
@@ -367,17 +356,16 @@ public class PlayerUtils {
             conveinentMax *= (user.getPlayer().getFlySpeed() / 0.2D);
 
         if (blockAmplifiers) {
-            if (blockNearHead(user.getPlayer()) && ((System.nanoTime() / 1000000) - user.getLastOnIce() < 2500
-                    || (System.nanoTime() / 1000000) - user.getLastOnSlime() < 2500)) {
+            if (blockNearHead(user.getPlayer()) && (user.getIceTicks() > 0 || user.getSlimeTicks() > 0)) {
                 conveinentMax += 2D * (conveinentMax / 1.2);
             } else {
                 if (blockNearHead(user.getPlayer())) {
                     conveinentMax += 0.63D * conveinentMax;
                 }
-                if ((System.nanoTime() / 1000000) - user.getLastOnIce() < 2500) {
+                if (user.getIceTicks() > 0) {
                     conveinentMax += 0.63D * conveinentMax;
                 }
-                if ((System.nanoTime() / 1000000) - user.getLastOnSlime() < 2500) {
+                if (user.getSlimeTicks() > 0) {
                     conveinentMax += 0.63D * conveinentMax;
                 }
             }

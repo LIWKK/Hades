@@ -27,6 +27,7 @@ import me.apex.hades.check.impl.combat.reach.ReachA;
 import me.apex.hades.check.impl.combat.velocity.VelocityA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
 import me.apex.hades.check.impl.movement.fly.FlyB;
+import me.apex.hades.check.impl.movement.fly.FlyC;
 import me.apex.hades.check.impl.movement.motion.MotionA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldB;
@@ -34,6 +35,8 @@ import me.apex.hades.check.impl.movement.speed.SpeedA;
 import me.apex.hades.check.impl.movement.speed.SpeedB;
 import me.apex.hades.check.impl.movement.speed.SpeedC;
 import me.apex.hades.check.impl.movement.speed.SpeedD;
+import me.apex.hades.check.impl.movement.speed.SpeedE;
+import me.apex.hades.check.impl.movement.speed.SpeedF;
 import me.apex.hades.check.impl.packet.badpackets.BadPacketsA;
 import me.apex.hades.check.impl.packet.badpackets.BadPacketsB;
 import me.apex.hades.check.impl.packet.badpackets.BadPacketsC;
@@ -73,6 +76,7 @@ public enum CheckManager {
             VelocityA.class,
             FlyA.class,
             FlyB.class,
+            FlyC.class,
             MotionA.class,
             ScaffoldA.class,
             ScaffoldB.class,
@@ -80,6 +84,8 @@ public enum CheckManager {
             SpeedB.class,
             SpeedC.class,
             SpeedD.class,
+            SpeedE.class,
+            SpeedF.class,
             BadPacketsA.class,
             BadPacketsB.class,
             BadPacketsC.class,

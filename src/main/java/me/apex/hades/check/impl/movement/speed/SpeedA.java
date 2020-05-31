@@ -13,7 +13,7 @@ public class SpeedA extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (PacketUtils.isFlyingPacket(e.getPacketName())) {
-            if (e.getTimestamp() - user.getLastServerPosition() < 1000) return;
+            if (user.getTeleportTicks() > 0) return;
 
             double dist = user.getDeltaXZ();
             double lastDist = user.getLastDeltaXZ();

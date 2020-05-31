@@ -84,7 +84,7 @@ public class WrappedPacketInBlockDig extends WrappedPacket {
     private static Field e;
 
     static {
-        //CLASSES
+
         try {
             blockDigClass = NMSUtils.getNMSClass("PacketPlayInBlockDig");
             if (version != ServerVersion.v_1_7_10) {
@@ -94,7 +94,7 @@ public class WrappedPacketInBlockDig extends WrappedPacket {
             e.printStackTrace();
         }
 
-        //FIELDS
+
         try {
             //blockpos
             fields[0] = blockDigClass.getDeclaredField("a");
