@@ -7,6 +7,6 @@
 An advanced anticheat with many checks designed to patch various cheats/hacks. The goal of this project is to provide a free anticheat solution for servers that automatically punishes any player that uses any form of cheat. This project will always be open-sourced and free, so you can use this anticheat on your server and modify it to fit your server needs. None of the code is stolen from other online sources or people without being credited.
 
 **TODO**:
-- Check if VoidTP still works
-- Finish re-adding previous checks + fixing falses relating to combat checks
 - Integrate a form of server-side interpolation for better predictions and processing
+- Make Reach check
+- Fix false positives with block acceleration (ice, slime)
