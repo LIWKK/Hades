@@ -11,6 +11,8 @@ import org.bukkit.block.BlockFace;
 
 @CheckInfo(name = "Criticals", type = "A")
 public class CriticalsA extends Check {
+    int preVL = 0;
+
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)){
@@ -21,9 +23,11 @@ public class CriticalsA extends Check {
                 if (!user.getPlayer().isOnGround() && !user.getPlayer().isFlying()) {
                     if (user.getLocation().getY() % 1.0D == 0.0D) {
                         if (user.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().isSolid()) {
-                            flag(user, "hit criticals whilst on ground.");
+                            if (preVL++ >= 5){
+                                flag(user, "hit criticals whilst on ground.");
+                            }
                         }
-                    }
+                    }preVL = 0;
                 }
             }
         }
