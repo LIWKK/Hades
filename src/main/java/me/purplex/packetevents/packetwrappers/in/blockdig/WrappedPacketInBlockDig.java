@@ -71,11 +71,11 @@ public class WrappedPacketInBlockDig extends WrappedPacket {
 
 
     //1.8
-    private static Field[] fields = new Field[3];
+    private static final Field[] fields = new Field[3];
 
     private static Class<?> blockPositionClass;
 
-    private static Field[] blockPosXYZ = new Field[3];
+    private static final Field[] blockPosXYZ = new Field[3];
 
     //1.7
     private static Field face;

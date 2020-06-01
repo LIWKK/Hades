@@ -12,9 +12,9 @@ public class HadesFlagEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private boolean cancelled;
 
-    private Player player;
-    private Check check;
-    private String information;
+    private final Player player;
+    private final Check check;
+    private final String information;
 
     public HadesFlagEvent(Player player, Check check, String information) {
         this.player = player;

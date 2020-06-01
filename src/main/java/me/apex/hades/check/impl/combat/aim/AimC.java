@@ -13,7 +13,7 @@ import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 @CheckInfo(name = "Aim", type = "C")
 public class AimC extends Check {
 
-    private Deque<Long> diffs = new LinkedList();
+    private final Deque<Long> diffs = new LinkedList();
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {

@@ -1,8 +1,5 @@
 package me.apex.hades.check.impl.packet.timer;
 
-import java.util.Deque;
-import java.util.LinkedList;
-
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
@@ -10,10 +7,13 @@ import me.apex.hades.utils.MathUtils;
 import me.apex.hades.utils.PacketUtils;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 @CheckInfo(name = "Timer", type = "A")
 public class TimerA extends Check {
 
-    private Deque<Long> flyingDeque = new LinkedList();
+    private final Deque<Long> flyingDeque = new LinkedList();
     private double lastDeviation;
 
     @Override
@@ -25,7 +25,6 @@ public class TimerA extends Check {
                 double deviation = MathUtils.getStandardDeviation(flyingDeque.stream().mapToLong(l -> l).toArray());
                 double lastDeviation = this.lastDeviation;
                 this.lastDeviation = deviation;
-
                 if (deviation <= 710 && (Math.abs(deviation - lastDeviation) < 20)) {
                     if (vl++ > 1)
                         flag(user, "deviation = " + deviation);

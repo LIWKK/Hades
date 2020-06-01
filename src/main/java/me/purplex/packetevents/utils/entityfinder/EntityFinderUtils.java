@@ -6,7 +6,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 
 public class EntityFinderUtils {
-    private static ServerVersion version = PacketEvents.getServerVersion();
+    private static final ServerVersion version = PacketEvents.getServerVersion();
 
     public static Entity getEntityById(final World w, final int id) {
         if (w == null) return null;

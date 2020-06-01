@@ -107,6 +107,11 @@ checks:
         enabled: true
         punishable: true
         max-vl: 10
+    criticals:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 5
     autoclicker:
       a:
         enabled: true

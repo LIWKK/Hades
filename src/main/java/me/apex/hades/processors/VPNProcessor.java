@@ -9,14 +9,12 @@ import me.apex.hades.objects.User;
 public enum VPNProcessor {
     INSTANCE;
 
-    private Map<String, Boolean> ips = new HashMap();
+    private final Map<String, Boolean> ips = new HashMap();
 
     public boolean ProcessVPN(User user) {
         if (user.getPlayer().hasPermission(Hades.getInstance().basePermission + ".bypassvpn")) return false;
         if (ips.containsKey(user.getAddress())) {
-            if (ips.get(user.getAddress())) {
-                return true;
-            }
+            return ips.get(user.getAddress());
         } else {
             try {
                 if (scan(user.getAddress()))

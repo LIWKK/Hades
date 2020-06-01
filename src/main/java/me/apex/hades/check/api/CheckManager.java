@@ -1,28 +1,12 @@
 package me.apex.hades.check.api;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import me.apex.hades.check.impl.combat.aim.AimA;
-import me.apex.hades.check.impl.combat.aim.AimB;
-import me.apex.hades.check.impl.combat.aim.AimC;
-import me.apex.hades.check.impl.combat.aim.AimD;
-import me.apex.hades.check.impl.combat.aim.AimE;
-import me.apex.hades.check.impl.combat.aim.AimF;
-import me.apex.hades.check.impl.combat.aim.AimG;
-import me.apex.hades.check.impl.combat.aura.AuraA;
-import me.apex.hades.check.impl.combat.aura.AuraB;
-import me.apex.hades.check.impl.combat.aura.AuraC;
-import me.apex.hades.check.impl.combat.aura.AuraD;
-import me.apex.hades.check.impl.combat.aura.AuraE;
-import me.apex.hades.check.impl.combat.aura.AuraF;
-import me.apex.hades.check.impl.combat.aura.AuraG;
-import me.apex.hades.check.impl.combat.aura.AuraH;
+import me.apex.hades.check.impl.combat.aim.*;
+import me.apex.hades.check.impl.combat.aura.*;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerC;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerD;
+import me.apex.hades.check.impl.combat.criticals.CriticalsA;
 import me.apex.hades.check.impl.combat.reach.ReachA;
 import me.apex.hades.check.impl.combat.velocity.VelocityA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
@@ -31,28 +15,20 @@ import me.apex.hades.check.impl.movement.fly.FlyC;
 import me.apex.hades.check.impl.movement.motion.MotionA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldB;
-import me.apex.hades.check.impl.movement.speed.SpeedA;
-import me.apex.hades.check.impl.movement.speed.SpeedB;
-import me.apex.hades.check.impl.movement.speed.SpeedC;
-import me.apex.hades.check.impl.movement.speed.SpeedD;
-import me.apex.hades.check.impl.movement.speed.SpeedE;
-import me.apex.hades.check.impl.movement.speed.SpeedF;
-import me.apex.hades.check.impl.packet.badpackets.BadPacketsA;
-import me.apex.hades.check.impl.packet.badpackets.BadPacketsB;
-import me.apex.hades.check.impl.packet.badpackets.BadPacketsC;
-import me.apex.hades.check.impl.packet.badpackets.BadPacketsD;
-import me.apex.hades.check.impl.packet.badpackets.BadPacketsE;
-import me.apex.hades.check.impl.packet.badpackets.BadPacketsF;
-import me.apex.hades.check.impl.packet.badpackets.BadPacketsG;
-import me.apex.hades.check.impl.packet.badpackets.BadPacketsH;
+import me.apex.hades.check.impl.movement.speed.*;
+import me.apex.hades.check.impl.packet.badpackets.*;
 import me.apex.hades.check.impl.packet.nofall.NoFallA;
 import me.apex.hades.check.impl.packet.timer.TimerA;
 import me.apex.hades.check.impl.packet.timer.TimerB;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public enum CheckManager {
     INSTANCE;
 
-    private Class[] CHECKS = new Class[]{
+    private final Class[] CHECKS = new Class[]{
             AimA.class,
             AimB.class,
             AimC.class,
@@ -68,6 +44,7 @@ public enum CheckManager {
             AuraF.class,
             AuraG.class,
             AuraH.class,
+            CriticalsA.class,
             AutoClickerA.class,
             AutoClickerB.class,
             AutoClickerC.class,

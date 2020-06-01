@@ -103,7 +103,7 @@ public class WrappedPacketInFlying extends WrappedPacket {
 
     private static Class<?> flyingClass;
 
-    private static Field[] fields = new Field[8]; //x, y, z, yaw pitch, onGround, isPositionPacket, isLookPacket
+    private static final Field[] fields = new Field[8]; //x, y, z, yaw pitch, onGround, isPositionPacket, isLookPacket
 
     static {
 

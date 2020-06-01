@@ -15,7 +15,7 @@ import me.purplex.packetevents.packetwrappers.in.useentity.WrappedPacketInUseEnt
 @CheckInfo(name = "Aura", type = "G")
 public class AuraG extends Check {
 
-    private Deque<Long> diffs = new LinkedList();
+    private final Deque<Long> diffs = new LinkedList();
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
