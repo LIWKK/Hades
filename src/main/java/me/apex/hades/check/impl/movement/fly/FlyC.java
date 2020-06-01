@@ -20,7 +20,7 @@ public class FlyC extends Check {
 		enabled = true;
 	}
 	
-	private final Deque<Double> distList = new LinkedList();
+	private Deque<Double> distList = new LinkedList();
     private double lastDeviation;
 
 	@Override

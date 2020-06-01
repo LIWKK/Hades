@@ -1,8 +1,5 @@
 package me.apex.hades.check.impl.combat.aura;
 
-import java.util.Deque;
-import java.util.LinkedList;
-
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
@@ -12,10 +9,13 @@ import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
 import me.purplex.packetevents.packetwrappers.in.useentity.WrappedPacketInUseEntity;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 @CheckInfo(name = "Aura", type = "G")
 public class AuraG extends Check {
 
-    private final Deque<Long> diffs = new LinkedList();
+    private Deque<Long> diffs = new LinkedList();
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {

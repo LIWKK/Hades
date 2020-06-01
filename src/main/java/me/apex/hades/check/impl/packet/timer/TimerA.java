@@ -13,7 +13,7 @@ import java.util.LinkedList;
 @CheckInfo(name = "Timer", type = "A")
 public class TimerA extends Check {
 
-    private final Deque<Long> flyingDeque = new LinkedList();
+    private Deque<Long> flyingDeque = new LinkedList();
     private double lastDeviation;
 
     @Override

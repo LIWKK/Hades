@@ -13,7 +13,7 @@ import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 @CheckInfo(name = "Timer", type = "B")
 public class TimerB extends Check {
 
-    private final Deque<Long> flyingDeque = new LinkedList();
+    private Deque<Long> flyingDeque = new LinkedList();
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
