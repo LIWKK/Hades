@@ -18,7 +18,7 @@ public class SpeedE extends Check {
             double vel = Math.abs(user.getPlayer().getVelocity().getX() + user.getPlayer().getVelocity().getZ());
             
             double comp = spd - vel;
-            
+
             if(comp > 0.6) {
             	if(vl++ > 1) {
                 	flag(user, "diff = " + comp);
