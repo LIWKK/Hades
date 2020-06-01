@@ -1,5 +1,10 @@
 package me.apex.hades.command.impl;
 
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import me.apex.hades.Hades;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.command.api.CommandAdapter;
@@ -9,10 +14,6 @@ import me.apex.hades.objects.User;
 import me.apex.hades.objects.UserManager;
 import me.apex.hades.utils.HastebinUtils;
 import me.apex.hades.utils.LogUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 public class HadesCommand extends CommandAdapter {
 
@@ -20,7 +21,7 @@ public class HadesCommand extends CommandAdapter {
     public boolean onCommand(User user, UserInput input) {
         String color = Hades.getInstance().getConfig().getString("lang.base-message-color"), cmd = Hades.getInstance().baseCommand.replaceFirst(String.valueOf(Hades.getInstance().baseCommand.charAt(0)), String.valueOf(Hades.getInstance().baseCommand.charAt(0)).toUpperCase());
         if (input.label().equalsIgnoreCase("alerts")) {
-            if (user.getPlayer().hasPermission(Hades.getInstance().basePermission + ".alerts") || user.getPlayer().isOp()) {
+            if (user.getPlayer().hasPermission(Hades.getInstance().basePermission + ".alerts")) {
                 if (user.isAlerts()) {
                     user.setAlerts(false);
                     user.sendMessage(Hades.getInstance().getConfig().getString("lang.base-message-color") + "You are no longer viewing anticheat alerts.");
@@ -31,7 +32,7 @@ public class HadesCommand extends CommandAdapter {
             } else user.sendMessage(Hades.getInstance().getConfig().getString("lang.no-permission"));
             return true;
         } else if (input.label().equalsIgnoreCase(Hades.getInstance().baseCommand)) {
-            if (user.getPlayer().hasPermission(Hades.getInstance().basePermission + "." + (input.args().length > 0 ? input.args()[0].toLowerCase() : "command")) || user.getPlayer().isOp()) {
+            if (user.getPlayer().hasPermission(Hades.getInstance().basePermission + "." + (input.args().length > 0 ? input.args()[0].toLowerCase() : "command"))) {
                 if (input.args().length > 0) {
                     if (input.args()[0].equalsIgnoreCase("gui")) {
                         new HomeMenu().show(user.getPlayer());
@@ -72,7 +73,7 @@ public class HadesCommand extends CommandAdapter {
             } else user.sendMessage(Hades.getInstance().getConfig().getString("lang.no-permission"));
             return true;
         } else if (input.label().equalsIgnoreCase("logs")) {
-            if (user.getPlayer().hasPermission(Hades.getInstance().basePermission + ".logs") || user.getPlayer().isOp()) {
+            if (user.getPlayer().hasPermission(Hades.getInstance().basePermission + ".logs")) {
                 if (input.args().length > 0) {
                     user.sendMessage("&7Attempting to upload logs to Hastebin...");
                     if (Bukkit.getOfflinePlayer(input.args()[0]) == null) {

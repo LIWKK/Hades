@@ -47,8 +47,11 @@ public class PlayerUtils {
     }
 
     public static boolean isOnIce(Player p) {
-        return p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")
-                || p.getLocation().clone().add(0, -0.5, 0).getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE");
+        if (p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")
+                || p.getLocation().clone().add(0, -0.5, 0).getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")) {
+            return true;
+        }
+        return false;
     }
 
     public static boolean isInLiquid(Player player) {

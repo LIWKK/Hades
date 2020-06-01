@@ -111,7 +111,7 @@ checks:
       a:
         enabled: true
         punishable: true
-        max-vl: 5
+        max-vl: 10
     autoclicker:
       a:
         enabled: true

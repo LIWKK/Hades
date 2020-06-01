@@ -28,7 +28,7 @@ import java.util.List;
 public enum CheckManager {
     INSTANCE;
 
-    private final Class[] CHECKS = new Class[]{
+    private Class[] CHECKS = new Class[]{
             AimA.class,
             AimB.class,
             AimC.class,

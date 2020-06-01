@@ -17,10 +17,10 @@ import me.apex.hades.utils.ChatUtils;
 public class ItemBuilder {
 
     //Specifications
-    private final String title;
-    private final Material material;
-    private final List<String> lore;
-    private final Map<Enchantment, Integer> enchantments;
+    private String title;
+    private Material material;
+    private List<String> lore;
+    private Map<Enchantment, Integer> enchantments;
 
     //ItemStack
     private ItemStack itemStack;

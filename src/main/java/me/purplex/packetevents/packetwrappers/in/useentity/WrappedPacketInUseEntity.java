@@ -72,7 +72,7 @@ public class WrappedPacketInUseEntity extends WrappedPacket {
 
     private static Class<?> entityClass;
 
-    private static final Field[] fields = new Field[3];
+    private static Field[] fields = new Field[3];
 
     static {
 

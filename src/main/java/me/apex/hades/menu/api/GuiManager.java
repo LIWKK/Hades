@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public enum GuiManager {
     INSTANCE;
 
-    private final List<Gui> guis = new ArrayList();
+    private List<Gui> guis = new ArrayList();
 
     public void registerGui(Gui gui) {
         guis.add(gui);

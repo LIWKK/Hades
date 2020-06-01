@@ -30,7 +30,7 @@ public class ChannelManager {
     private static final Field networkManagerField;
 
 
-    private static final HashMap<UUID, Object> playerChannels = new HashMap<>();
+    private static HashMap<UUID, Object> playerChannels = new HashMap<>();
 
     static {
         try {

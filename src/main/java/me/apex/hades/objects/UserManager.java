@@ -7,7 +7,7 @@ import java.util.UUID;
 public enum UserManager {
     INSTANCE;
 
-    private final List<User> users = new ArrayList();
+    private List<User> users = new ArrayList();
 
     public void register(User user) {
         users.add(user);

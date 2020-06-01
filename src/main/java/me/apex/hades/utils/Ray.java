@@ -9,8 +9,7 @@ import org.bukkit.util.Vector;
 
 public class Ray {
 
-    private final Vector origin;
-    private final Vector direction;
+    private Vector origin, direction;
 
     // Create a ray at the origin pointing in a direction.
     public Ray(Vector origin, Vector direction) {

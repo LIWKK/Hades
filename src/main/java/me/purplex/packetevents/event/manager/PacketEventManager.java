@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public interface PacketEventManager {
-    ArrayList<PacketListener> packetListeners = new ArrayList<>();
-    void callEvent(PacketEvent e);
+    public ArrayList<PacketListener> packetListeners = new ArrayList<>();
+    public void callEvent(PacketEvent e);
 
-    void registerListener(PacketListener e);
-    boolean unregisterListener(PacketListener e);
+    public void registerListener(PacketListener e);
+    public boolean unregisterListener(PacketListener e);
 
-    boolean unregisterAllListeners();
+    public boolean unregisterAllListeners();
 
     //public void sendPacket(Player player, WrappedPacket packet);
 

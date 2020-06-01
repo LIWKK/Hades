@@ -25,14 +25,14 @@ public class FlyC extends Check {
 
 	@Override
 	public void onPacket(PacketReceiveEvent e, User user) {
-		if(PacketUtils.isFlyingPacket(e.getPacketName())) {
+		if(PacketUtils.isFlyingPacket(e.getPacketName()) && !PlayerUtils.isClimbableBlock(user.getLocation().getBlock())) {
 			distList.add(user.getDeltaY());
 
-            if (distList.size() == 10 && PlayerUtils.isClimbableBlock(user.getLocation().getBlock())) {
+            if (distList.size() == 10) {
                 double deviation = MathUtils.getStandardDeviation(distList.stream().mapToDouble(d -> d).toArray());
                 double lastDeviation = this.lastDeviation;
                 this.lastDeviation = deviation;
-
+                
                 if(!user.onGround()) {
                 	if(deviation == 0.0D) {
                 		flag(user, "deviation = " + deviation);

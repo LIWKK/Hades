@@ -76,11 +76,11 @@ class WrappedPacketInBlockPlace_Legacy extends WrappedPacket {
 
     private static Class<?> blockPositionClass;
 
-    private static final Field[] fields = new Field[2];
+    private static Field[] fields = new Field[2];
 
-    private static final Field[] fields_1_7 = new Field[4];
+    private static Field[] fields_1_7 = new Field[4];
 
-    private static final Field[] blockPosXYZ = new Field[3];
+    private static Field[] blockPosXYZ = new Field[3];
 
     private static Method asBukkitCopyMethod;
 

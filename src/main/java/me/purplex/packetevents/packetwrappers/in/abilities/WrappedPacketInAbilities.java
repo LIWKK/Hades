@@ -53,7 +53,7 @@ public class WrappedPacketInAbilities extends WrappedPacket {
 
     private static Class<?> abilitiesClass;
 
-    private static final Field[] fields = new Field[6];
+    private static Field[] fields = new Field[6];
 
     static {
 

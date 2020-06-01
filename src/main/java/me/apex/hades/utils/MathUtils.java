@@ -15,7 +15,7 @@ public class MathUtils {
     }
 
     public static long getGcd(long current, long previous) {
-        return (double) previous <= 16384.0D ? current : getGcd(previous, Math.abs(current - previous));
+        return (double) previous <= 16384.0D ? current : getGcd(previous, (long) Math.abs(current - previous));
     }
 
     public static long lcd(long a, long b) {
@@ -55,7 +55,7 @@ public class MathUtils {
     }
 
     public static float sqrt_float(float value) {
-        return (float) Math.sqrt(value);
+        return (float) Math.sqrt((double) value);
     }
 
     public static float sqrt_double(double value) {
@@ -157,7 +157,7 @@ public class MathUtils {
         return total;
     }
 
-    public static double getStandardDeviation(long[] numberArray) {
+    public static double getStandardDeviation(long numberArray[]) {
         double sum = 0.0, deviation = 0.0;
         int length = numberArray.length;
         for (double num : numberArray)
@@ -169,7 +169,7 @@ public class MathUtils {
         return Math.sqrt(deviation / length);
     }
 
-    public static double getStandardDeviation(double[] numberArray) {
+    public static double getStandardDeviation(double numberArray[]) {
         double sum = 0.0, deviation = 0.0;
         int length = numberArray.length;
         for (double num : numberArray)

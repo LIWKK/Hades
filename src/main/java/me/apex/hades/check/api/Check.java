@@ -1,5 +1,10 @@
 package me.apex.hades.check.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+
 import me.apex.hades.Hades;
 import me.apex.hades.listeners.event.HadesFlagEvent;
 import me.apex.hades.objects.User;
@@ -11,10 +16,6 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Check {
 

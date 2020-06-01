@@ -10,8 +10,7 @@ import org.bukkit.util.Vector;
 
 public class AABB {
 
-    private final Vector min;
-    private final Vector max; // min/max locations
+    private Vector min, max; // min/max locations
 
     // Create Bounding Box from min/max locations.
     public AABB(Vector min, Vector max) {
@@ -124,6 +123,7 @@ public class AABB {
         if (location.getZ() > max.getZ()) return false;
         if (location.getX() < min.getX()) return false;
         if (location.getY() < min.getY()) return false;
-        return !(location.getZ() < min.getZ());
+        if (location.getZ() < min.getZ()) return false;
+        return true;
     }
 }
