@@ -7,7 +7,6 @@ import me.purplex.packetevents.enums.EntityUseAction;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
 import me.purplex.packetevents.packetwrappers.in.useentity.WrappedPacketInUseEntity;
-import org.bukkit.block.BlockFace;
 
 @CheckInfo(name = "Criticals", type = "A")
 public class CriticalsA extends Check {
@@ -18,17 +17,7 @@ public class CriticalsA extends Check {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)){
             WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPlayer(), e.getPacket());
             if (packet.getAction() == EntityUseAction.ATTACK){
-                if (user.getLocation().getBlock().getRelative(BlockFace.DOWN).isLiquid() || user.getLocation().getBlock().getRelative(BlockFace.UP).isLiquid()) return;
 
-                if (!user.getPlayer().isOnGround() && !user.getPlayer().isFlying()) {
-                    if (user.getLocation().getY() % 1.0D == 0.0D) {
-                        if (user.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().isSolid()) {
-                            if (preVL++ >= 5){
-                                flag(user, "hit criticals whilst on ground.");
-                            }
-                        }
-                    }preVL = 0;
-                }
             }
         }
     }
