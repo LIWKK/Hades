@@ -26,8 +26,8 @@ public class ReachA extends Check {
                     Ray ray = Ray.from(player);
                     double dis = AABB.from(entity).collidesD(ray,0, 10);
                     if (dis != -1) {
-                        if (dis > 3.2){
-                            if (preVL++ >= 2){
+                        if (dis > 3.3){
+                            if (preVL++ >= 3){
                                 flag(user, "reach: " + dis);
                             }
                         }else preVL = 0;
