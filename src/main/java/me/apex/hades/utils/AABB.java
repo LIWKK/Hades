@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 // Credits to Tecnio
-// Just an AABB class I made with some useful methods I needed.
 
 public class AABB {
 
