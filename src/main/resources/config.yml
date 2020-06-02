@@ -1,5 +1,6 @@
-#License Key
-license-key: ''
+###############################
+#     Hades Configuration     #
+###############################
 
 #Language Configuration
 lang:
@@ -7,7 +8,7 @@ lang:
   no-permission: '&cNo permission.'
   base-message-color: '&c'
   flag-format: '%prefix%&c%player% &7has failed &c%check% &8<&c%checktype%&8> &8[&7VL&8:&c %vl%&8]'
-  experimental-notation: ' &f**'
+  experimental-notation: '&f*'
   broadcast-message: '%newline%%prefix%%player% &7was banned for &fCheating&7.%newline% '
 
 #System Configuration
@@ -106,6 +107,11 @@ checks:
         enabled: true
         punishable: true
         max-vl: 10
+    criticals:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
     autoclicker:
       a:
         enabled: true
@@ -121,29 +127,17 @@ checks:
         max-vl: 10
       d:
         enabled: true
-        punishable: true
-        max-vl: 10
-      e:
-        enabled: true
-        punishable: true
+        punishable: false
         max-vl: 10
     reach:
       a:
         enabled: true
         punishable: true
         max-vl: 10
-      b:
-        enabled: true
-        punishable: true
-        max-vl: 10
     velocity:
       a:
-        enabled: true
-        punishable: true
-        max-vl: 10
-      b:
-        enabled: true
-        punishable: true
+        enabled: false
+        punishable: false
         max-vl: 10
     fly:
       a:
@@ -151,6 +145,10 @@ checks:
         punishable: true
         max-vl: 20
       b:
+        enabled: true
+        punishable: true
+        max-vl: 20
+      c:
         enabled: true
         punishable: true
         max-vl: 20
@@ -182,6 +180,10 @@ checks:
         punishable: true
         max-vl: 20
       d:
+        enabled: true
+        punishable: true
+        max-vl: 20
+      e:
         enabled: true
         punishable: true
         max-vl: 20

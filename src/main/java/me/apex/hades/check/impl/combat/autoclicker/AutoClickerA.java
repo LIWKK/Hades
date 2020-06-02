@@ -29,7 +29,7 @@ public class AutoClickerA extends Check {
             double lastCps = this.lastCps;
             this.lastCps = cps;
 
-            if (MathUtils.isRoughlyEqual(cps, lastCps, 0.001) && cps > 2.6 && !user.isLagging()) {
+            if (MathUtils.isRoughlyEqual(cps, lastCps, 0.00025) && cps > 2.6) {
                 if (vl++ > 12)
                     flag(user, "cps = " + cps + ", lastCps = " + lastCps);
             } else vl = 0;

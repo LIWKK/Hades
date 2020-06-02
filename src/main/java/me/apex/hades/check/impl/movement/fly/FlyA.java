@@ -18,7 +18,7 @@ public class FlyA extends Check {
             if (user.onGround()) {
                 lastGround = user.getLocation().getY();
             } else {
-                if (e.getTimestamp() - user.getLastVelocity() < 2000 || user.getPlayer().getAllowFlight() || PlayerUtils.isClimbableBlock(user.getLocation().getBlock()) || PlayerUtils.isInWeb(user.getPlayer()) || PlayerUtils.isInLiquid(user.getPlayer())) {
+                if (user.getTeleportTicks() > 0 || user.getPlayer().getAllowFlight() || PlayerUtils.isClimbableBlock(user.getLocation().getBlock()) || PlayerUtils.isInWeb(user.getPlayer()) || PlayerUtils.isInLiquid(user.getPlayer())) {
                     vl = 0;
                     return;
                 }
@@ -26,7 +26,7 @@ public class FlyA extends Check {
                 double dist = user.getLocation().getY() - lastGround;
                 double velocity = user.getPlayer().getVelocity().getY();
 
-                if (dist >= 1.3 && user.getLocation().getY() >= user.getLastLocation().getY() && velocity < -0.06D && user.getPlayer().getVehicle() == null && !user.isLagging()) {
+                if (dist >= 1.3 && user.getLocation().getY() >= user.getLastLocation().getY() && velocity < -0.06D && user.getPlayer().getVehicle() == null) {
                     if (vl++ > 9)
                         flag(user, "curY = " + user.getLocation().getY() + ", lastGround = " + lastGround);
                 } else vl = 0;

@@ -17,19 +17,19 @@ public class BadPacketsF extends Check {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.POSITION) || e.getPacketName().equalsIgnoreCase(Packet.Client.POSITION_LOOK)) {
         	WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
 
-            double curX = packet.x;
+            double curX = packet.getX();
             double lastX = this.lastX;
             this.lastX = curX;
 
-            double curY = packet.y;
+            double curY = packet.getY();
             double lastY = this.lastY;
             this.lastY = curY;
 
-            double curZ = packet.z;
+            double curZ = packet.getZ();
             double lastZ = this.lastZ;
             this.lastZ = curZ;
 
-            if (Math.abs(curX - lastX) >= 10 || Math.abs(curY - lastY) >= 10 || Math.abs(curZ - lastZ) >= 10 && e.getTimestamp() - user.getLastServerPosition() > 2000) {
+            if (Math.abs(curX - lastX) >= 10 || Math.abs(curY - lastY) >= 10 || Math.abs(curZ - lastZ) >= 10 && user.getTeleportTicks() == 0) {
                 if (++vl > 1)
                     flag(user, "curXYZ = " + curX + ", " + curY + ", " + curZ + ", lastXYZ = " + lastX + ", " + lastY + ", " + lastZ);
             } else vl = 0;

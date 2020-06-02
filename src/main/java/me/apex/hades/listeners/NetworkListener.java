@@ -40,7 +40,7 @@ public class NetworkListener implements PacketListener, Listener {
         if (UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId()) != null) {
             User user = UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId());
             if (e.getPacketName().equalsIgnoreCase(Packet.Server.POSITION))
-                user.setLastServerPosition(e.getTimestamp());
+                user.setTeleportTicks(5);
         }
     }
 

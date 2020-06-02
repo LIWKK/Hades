@@ -1,10 +1,11 @@
 package me.apex.hades.listeners.event;
 
-import me.apex.hades.check.api.Check;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+
+import me.apex.hades.check.api.Check;
 
 public class HadesFlagEvent extends Event implements Cancellable {
 

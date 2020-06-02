@@ -1,12 +1,13 @@
 package me.apex.hades.menu.impl;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import me.apex.hades.Hades;
 import me.apex.hades.menu.api.Gui;
 import me.apex.hades.menu.api.ItemBuilder;
 import me.apex.hades.utils.ChatUtils;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class HomeMenu extends Gui {
 

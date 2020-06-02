@@ -1,12 +1,12 @@
 package me.apex.hades.utils;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 
 public class MathUtils {
 

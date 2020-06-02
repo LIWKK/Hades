@@ -18,7 +18,7 @@ public class BadPacketsE extends Check {
             int ticks = this.ticks;
             this.ticks = 0;
 
-            if (ticks < 1 && !user.isLagging()) {
+            if (ticks < 1) {
                 if (vl++ > 2)
                     flag(user, "ticks = " + ticks);
             } else vl = 0;

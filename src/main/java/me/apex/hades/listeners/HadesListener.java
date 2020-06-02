@@ -1,12 +1,8 @@
 package me.apex.hades.listeners;
 
-import me.apex.hades.Hades;
-import me.apex.hades.command.api.CommandManager;
-import me.apex.hades.command.api.UserInput;
-import me.apex.hades.objects.User;
-import me.apex.hades.objects.UserManager;
-import me.apex.hades.menu.api.GuiManager;
-import me.apex.hades.processors.VPNProcessor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,27 +10,27 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import me.apex.hades.Hades;
+import me.apex.hades.command.api.CommandManager;
+import me.apex.hades.command.api.UserInput;
+import me.apex.hades.menu.api.GuiManager;
+import me.apex.hades.objects.User;
+import me.apex.hades.objects.UserManager;
+import me.apex.hades.processors.VPNProcessor;
+import me.purplex.packetevents.event.handler.PacketHandler;
+import me.purplex.packetevents.event.impl.PlayerInjectEvent;
+import me.purplex.packetevents.event.impl.PlayerUninjectEvent;
+import me.purplex.packetevents.event.listener.PacketListener;
 
-public class HadesListener implements Listener {
+public class HadesListener implements Listener, PacketListener {
 
     public HadesListener() {
         Bukkit.getPluginManager().registerEvents(this, Hades.getInstance());
     }
 
-    @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
-        String address = "";
-        try {
-            Object handle = e.getPlayer().getClass().getMethod("getHandle").invoke(e.getPlayer());
-            Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
-            Object networkManager = playerConnection.getClass().getField("networkManager").get(playerConnection);
-            Object ip = e.getPlayer().getClass().getMethod("getAddress").invoke(e.getPlayer());
-            address = ip.toString().split(":")[0].replace("/", "");
-        } catch (Exception x) {
-            address = "N/A";
-        }
+    @PacketHandler
+    public void onInject(PlayerInjectEvent e) {
+        String address = e.getPlayer().getAddress().toString();
 
         User user = new User(e.getPlayer().getUniqueId(), address);
 
@@ -49,8 +45,8 @@ public class HadesListener implements Listener {
         }
     }
 
-    @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
+    @PacketHandler
+    public void onUninject(PlayerUninjectEvent e) {
         User user = UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId());
         UserManager.INSTANCE.unregister(user);
     }

@@ -1,5 +1,8 @@
 package me.apex.hades.processors;
 
+import org.bukkit.Location;
+import org.bukkit.block.BlockFace;
+
 import me.apex.hades.Hades;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.PacketUtils;
@@ -10,16 +13,13 @@ import me.purplex.packetevents.packet.Packet;
 import me.purplex.packetevents.packetwrappers.in.blockdig.WrappedPacketInBlockDig;
 import me.purplex.packetevents.packetwrappers.in.flying.WrappedPacketInFlying;
 
-import org.bukkit.Location;
-import org.bukkit.block.BlockFace;
-
 public enum MovementProcessor {
     INSTANCE;
 
     public void processMovement(PacketReceiveEvent e, User user) {
         if (PacketUtils.isFlyingPacket(e.getPacketName())) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
-            Location location = new Location(user.getPlayer().getWorld(), packet.x, packet.y, packet.z, packet.yaw, packet.pitch);
+            Location location = new Location(user.getPlayer().getWorld(), packet.getX(), packet.getY(), packet.getZ(), packet.getYaw(), packet.getPitch());
 
             if (user.getLastLocation() != null) {
                 if (!e.getPacketName().contains("Look")) {
@@ -70,27 +70,39 @@ public enum MovementProcessor {
                     if (user.getPlayer() == null) return;
                     if (user.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")
                             || user.getPlayer().getLocation().clone().add(0, -0.5, 0).getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")) {
-                        user.setLastOnIce(e.getTimestamp());
-                    }
+                        user.setIceTicks(user.getIceTicks() + 1);
+                    }else user.setIceTicks(0);
                     if (user.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("SLIME")) {
-                        user.setLastOnSlime(e.getTimestamp());
-                    }
+                    	user.setSlimeTicks(user.getSlimeTicks() + 1);
+                    }else user.setSlimeTicks(0);
                 });
             }
-
-            //Ground Check
-            if (!user.onGround())
-                user.setAirTicks(user.getAirTicks() + 1);
-            else user.setAirTicks(0);
+            
+            //Reset Teleport
+            user.setTeleportTicks(0);
+            
+            //Update Air/Ground Ticks
+            if(user.onGround()) {
+            	user.setGroundTicks(user.getGroundTicks() + 1);
+            	user.setAirTicks(0);
+            }else {
+            	user.setAirTicks(user.getAirTicks() + 1);
+            	user.setGroundTicks(0);
+            }
+            
+            //Update Client Ground Ticks
+            if(packet.isOnGround()) {
+            	user.setClientGroundTicks(user.getClientGroundTicks() + 1);
+            }else user.setClientGroundTicks(0);
 
             //Process Optifine
             OptifineProcessor.INSTANCE.processOptifine(user);
         } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_DIG)) {
         	WrappedPacketInBlockDig packet = new WrappedPacketInBlockDig(e.getPacket());
-            if (packet.digType == PlayerDigType.START_DESTROY_BLOCK) {
+            if (packet.getDigType() == PlayerDigType.START_DESTROY_BLOCK) {
                 user.setDigging(true);
-            } else if (packet.digType == PlayerDigType.STOP_DESTROY_BLOCK
-                    || packet.digType == PlayerDigType.ABORT_DESTROY_BLOCK) {
+            } else if (packet.getDigType() == PlayerDigType.STOP_DESTROY_BLOCK
+                    || packet.getDigType() == PlayerDigType.ABORT_DESTROY_BLOCK) {
                 user.setDigging(false);
             }
         }

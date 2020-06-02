@@ -13,18 +13,17 @@ public class FlyB extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (PacketUtils.isFlyingPacket(e.getPacketName())) {
-            if (e.getTimestamp() - user.getLastVelocity() < 2000 || user.getPlayer().getAllowFlight() || PlayerUtils.isClimbableBlock(user.getLocation().getBlock()) || PlayerUtils.isInWeb(user.getPlayer()) || PlayerUtils.isInLiquid(user.getPlayer())) {
-                vl = 0;
-                return;
-            }
-
             double dist = user.getDeltaY() - user.getLastDeltaY();
 
-            if (!user.onGround() && !user.isLagging() && !user.isNearGround()) {
+            if (!user.onGround()
+            		&& !user.getPlayer().getAllowFlight()
+            		&& !PlayerUtils.isClimbableBlock(user.getLocation().getBlock())
+            		&& !PlayerUtils.isInWeb(user.getPlayer())
+            		&& !PlayerUtils.isInLiquid(user.getPlayer())) {
                 if (dist >= 0.0D) {
-                    if (vl++ > 6)
-                        vl = 0;
-                        flag(user, "dist = " + dist);
+                	if(vl++ > 10) {
+                		flag(user, "dist = " + dist);
+                	}
                 }
             } else vl = 0;
         }

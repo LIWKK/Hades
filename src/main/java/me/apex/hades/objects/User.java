@@ -1,16 +1,20 @@
 package me.apex.hades.objects;
 
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
 import me.apex.hades.Hades;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckManager;
 import me.apex.hades.utils.ChatUtils;
 import me.apex.hades.utils.LogUtils;
 import me.apex.hades.utils.PlayerUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
-import java.util.*;
 
 public class User {
 
@@ -19,11 +23,11 @@ public class User {
     private final UUID playerUUID;
     private Location location, lastLocation;
     private boolean alerts, lagging, digging;
-    private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, lastVelX, lastVelY, lastVelZ, optifineTicks;
+    private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, lastVelX, lastVelY, lastVelZ, optifineTicks, iceTicks, hitTicks, slimeTicks, velocityTicks, teleportTicks, airTicks, groundTicks, clientGroundTicks;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, lastYawDiff, lastPitchDiff;
-    private long lastOnIce, lastHit, lastOnSlime, lastVelocity, lastServerPosition, lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet;
+    private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet;
     private String address;
-    private int ping, flagDelay, airTicks;
+    private int ping, flagDelay;
     private LogUtils.TextFile logFile;
     private Deque<Long> transactionQueue = new LinkedList<>();
     public boolean banned;
@@ -202,44 +206,68 @@ public class User {
     	this.lastPitchDiff = lastPitchDiff;
     }
     
-    public long getLastOnIce() {
-    	return lastOnIce;
+    public double getIceTicks() {
+    	return iceTicks;
     }
     
-    public void setLastOnIce(long lastOnIce) {
-    	this.lastOnIce = lastOnIce;
+    public void setIceTicks(double iceTicks) {
+    	this.iceTicks = iceTicks;
     }
     
-    public long getLastHit() {
-    	return lastHit;
+    public double getHitTicks() {
+    	return hitTicks;
     }
     
-    public void setLastHit(long lastHit) {
-    	this.lastHit = lastHit;
+    public void setHitTicks(double hitTicks) {
+    	this.hitTicks = hitTicks;
     }
     
-    public long getLastOnSlime() {
-    	return lastOnSlime;
+    public double getSlimeTicks() {
+    	return slimeTicks;
     }
     
-    public void setLastOnSlime(long lastOnSlime) {
-    	this.lastOnSlime = lastOnSlime;
+    public void setSlimeTicks(double slimeTicks) {
+    	this.slimeTicks = slimeTicks;
     }
     
-    public long getLastVelocity() {
-    	return lastVelocity;
+    public double getVelocityTicks() {
+    	return velocityTicks;
     }
     
-    public void setLastVelocity(long lastVelocity) {
-    	this.lastVelocity = lastVelocity;
+    public void setVelocityTicks(double velocityTicks) {
+    	this.velocityTicks = velocityTicks;
     }
     
-    public long getLastServerPosition() {
-    	return lastServerPosition;
+    public double getTeleportTicks() {
+    	return teleportTicks;
     }
     
-    public void setLastServerPosition(long lastServerPosition) {
-    	this.lastServerPosition = lastServerPosition;
+    public void setTeleportTicks(double teleportTicks) {
+    	this.teleportTicks = teleportTicks;
+    }
+    
+    public double getAirTicks() {
+    	return airTicks;
+    }
+    
+    public void setAirTicks(double airTicks) {
+    	this.airTicks = airTicks;
+    }
+    
+    public double getGroundTicks() {
+    	return groundTicks;
+    }
+    
+    public void setGroundTicks(double groundTicks) {
+    	this.groundTicks = groundTicks;
+    }
+    
+    public double getClientGroundTicks() {
+    	return clientGroundTicks;
+    }
+    
+    public void setClientGroundTicks(double clientGroundTicks) {
+    	this.clientGroundTicks = clientGroundTicks;
     }
     
     public long getLastKeepAlive() {
@@ -314,14 +342,6 @@ public class User {
     	this.flagDelay = flagDelay;
     }
     
-    public int getAirTicks() {
-    	return airTicks;
-    }
-    
-    public void setAirTicks(int airTicks) {
-    	this.airTicks = airTicks;
-    }
-    
     public LogUtils.TextFile getLogFile() {
     	return logFile;
     }
@@ -348,10 +368,7 @@ public class User {
     
     //Global
     public boolean onGround() {
-        return PlayerUtils.onGround(getPlayer());
-    }
-    public boolean isNearGround() {
-        return PlayerUtils.isNearGround(getPlayer().getLocation());
+        return PlayerUtils.isNearGround(player.getLocation());
     }
 
     public boolean onIce() {

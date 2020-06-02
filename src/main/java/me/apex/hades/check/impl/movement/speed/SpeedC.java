@@ -14,7 +14,7 @@ public class SpeedC extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (PacketUtils.isFlyingPacket(e.getPacketName())) {
-            if (e.getTimestamp() - user.getLastServerPosition() < 1000) return;
+            if (user.getTeleportTicks() > 0) return;
 
             double dist = user.getDeltaXZ();
             double lastDist = user.getLastDeltaXZ();
@@ -24,7 +24,7 @@ public class SpeedC extends Check {
             if (PlayerUtils.blockNearHead(user.getPlayer()))
                 max = 15.0D;
 
-            if (gcd > max && e.getTimestamp() - user.getLastServerPosition() > 2000 && !user.isLagging() && !user.getPlayer().getAllowFlight())
+            if (gcd > max && !user.getPlayer().getAllowFlight())
                 flag(user, "dist = " + gcd);
         }
     }
