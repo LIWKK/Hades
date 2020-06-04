@@ -1,4 +1,4 @@
-package me.purplex.packetevents.utils.entityfinder;
+package me.purplex.packetevents.utils.nms_entityfinder;
 
 import net.minecraft.server.v1_8_R1.WorldServer;
 import org.bukkit.World;

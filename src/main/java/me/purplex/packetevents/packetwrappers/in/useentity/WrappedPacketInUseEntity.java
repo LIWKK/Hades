@@ -1,13 +1,12 @@
 package me.purplex.packetevents.packetwrappers.in.useentity;
 
 import me.purplex.packetevents.enums.EntityUseAction;
-import me.purplex.packetevents.enums.Hand;
 import me.purplex.packetevents.enums.ServerVersion;
 import me.purplex.packetevents.packetwrappers.api.WrappedPacket;
 import me.purplex.packetevents.utils.NMSUtils;
+import me.purplex.packetevents.enums.Hand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.util.BlockIterator;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;

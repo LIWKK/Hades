@@ -21,7 +21,7 @@ public class User {
     private final Player player;
     private final UUID playerUUID;
     private Location location, lastLocation;
-    private boolean alerts, lagging, digging;
+    private boolean alerts, lagging, digging, flyAFix;
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, lastVelX, lastVelY, lastVelZ, optifineTicks, iceTicks, hitTicks, slimeTicks, velocityTicks, teleportTicks, airTicks, groundTicks, clientGroundTicks;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, lastYawDiff, lastPitchDiff;
     private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity;
@@ -84,7 +84,11 @@ public class User {
     public void setLagging(boolean lagging) {
     	this.lagging = lagging;
     }
-    
+
+    public void setFlyAFix(boolean flyAFix) { this.flyAFix = flyAFix; }
+
+    public boolean getFlyAFix() { return flyAFix; }
+
     public boolean isDigging() {
     	return digging;
     }

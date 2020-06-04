@@ -1,13 +1,13 @@
-package me.purplex.packetevents.utils.math;
+package me.purplex.packetevents.utils.vector;
 
-public class Vector3i {
-    public int x, y, z;
-
-    public Vector3i(final int x, final int y, final int z) {
+public class Vector3d {
+    public double x, y, z;
+    public Vector3d(final double x, final double y, final double z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
+
 
     @Override
     public String toString() {

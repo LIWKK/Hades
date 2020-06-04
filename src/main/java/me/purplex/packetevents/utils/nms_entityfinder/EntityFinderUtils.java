@@ -1,4 +1,4 @@
-package me.purplex.packetevents.utils.entityfinder;
+package me.purplex.packetevents.utils.nms_entityfinder;
 
 import me.purplex.packetevents.PacketEvents;
 import me.purplex.packetevents.enums.ServerVersion;

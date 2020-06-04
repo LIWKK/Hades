@@ -1,39 +1,29 @@
 package me.purplex.packetevents.event.manager;
 
 import me.purplex.packetevents.event.PacketEvent;
-import me.purplex.packetevents.event.handler.PacketHandler;
-import me.purplex.packetevents.event.listener.PacketListener;
+import me.purplex.packetevents.event.PacketListener;
+import me.purplex.packetevents.event.PacketHandler;
 
 import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-public class EventManager implements PacketEventManager {
+public class EventManager {
 
-    @Override
-    public void callEvent(final PacketEvent e) {
-        for (final PacketListener listener : this.packetListeners) {
-            boolean calledOnPacket = false;
+    private static HashMap<PacketListener, List<Method>> registeredMethods = new HashMap<PacketListener, List<Method>>();
+
+    public static void callEvent(final PacketEvent e) {
+        for (final PacketListener listener : registeredMethods.keySet()) {
             //Annotated methods
-            final Method[] methods = listener.getClass().getMethods();
-            for (int i = 0; i < methods.length; i++) {
-                final Method m = methods[i];
-                if (m.isAnnotationPresent(PacketHandler.class)) {
-                    if (!calledOnPacket && m.getParameterTypes()[0].equals(PacketEvent.class)) {
-                        try {
-                            m.invoke(listener, e);
-                        } catch (IllegalAccessException ex) {
-                            ex.printStackTrace();
-                        } catch (InvocationTargetException ex) {
-                            ex.printStackTrace();
-                        }
-                        calledOnPacket = true;
-                    } else if (m.getParameterTypes()[0].getSimpleName().equals(e.getClass().getSimpleName())) {
-                        try {
-                            m.invoke(listener, e);
-                        } catch (IllegalAccessException ex) {
-                            ex.printStackTrace();
-                        } catch (InvocationTargetException ex) {
-                            ex.printStackTrace();
-                        }
+            final List<Method> methods = registeredMethods.get(listener);
+            for (final Method method : methods) {
+                if (method.getParameterTypes()[0].equals(PacketEvent.class)
+                        || method.getParameterTypes()[0].getSimpleName().equals(e.getClass().getSimpleName())) {
+                    try {
+                        method.invoke(listener, e);
+                    } catch (IllegalAccessException | InvocationTargetException ex) {
+                        ex.printStackTrace();
                     }
                 }
             }
@@ -41,23 +31,22 @@ public class EventManager implements PacketEventManager {
     }
 
 
-    @Override
-    public void registerListener(final PacketListener e) {
-        this.packetListeners.add(e);
-    }
-
-    @Override
-    public boolean unregisterListener(final PacketListener e) {
-       return this.packetListeners.remove(e);
-    }
-
-    @Override
-    public boolean unregisterAllListeners() {
-        if (this.packetListeners.size() != 0) {
-            this.packetListeners.clear();
-            return true;
+    public static void registerListener(final PacketListener e) {
+        final List<Method> methods = new ArrayList<Method>();
+        for (final Method m : e.getClass().getMethods()) {
+            if (m.isAnnotationPresent(PacketHandler.class)) {
+                methods.add(m);
+            }
         }
-        return false;
+        registeredMethods.put(e, methods);
+    }
+
+    public static void unregisterListener(final PacketListener e) {
+        registeredMethods.remove(e);
+    }
+
+    public static void unregisterAllListeners() {
+        registeredMethods.clear();
     }
 
     /*@Override

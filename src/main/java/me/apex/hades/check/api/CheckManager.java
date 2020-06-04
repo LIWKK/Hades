@@ -15,6 +15,7 @@ import me.apex.hades.check.impl.movement.fly.FlyC;
 import me.apex.hades.check.impl.movement.motion.MotionA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldB;
+import me.apex.hades.check.impl.movement.smallhop.SmallHopA;
 import me.apex.hades.check.impl.movement.speed.*;
 import me.apex.hades.check.impl.packet.badpackets.*;
 import me.apex.hades.check.impl.packet.nofall.NoFallA;
@@ -63,6 +64,7 @@ public enum CheckManager {
             SpeedD.class,
             SpeedE.class,
             SpeedF.class,
+            SmallHopA.class,
             BadPacketsA.class,
             BadPacketsB.class,
             BadPacketsC.class,

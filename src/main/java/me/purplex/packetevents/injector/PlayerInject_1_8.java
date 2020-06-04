@@ -1,15 +1,15 @@
 package me.purplex.packetevents.injector;
 
 
+import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import me.purplex.packetevents.event.impl.PacketSendEvent;
+import me.purplex.packetevents.event.impl.PlayerInjectEvent;
+import me.purplex.packetevents.event.impl.PlayerUninjectEvent;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import me.purplex.packetevents.PacketEvents;
-import me.purplex.packetevents.event.impl.PacketReceiveEvent;
-import me.purplex.packetevents.event.impl.PacketSendEvent;
-import me.purplex.packetevents.event.impl.PlayerInjectEvent;
-import me.purplex.packetevents.event.impl.PlayerUninjectEvent;
 import org.bukkit.entity.Player;
 
 class PlayerInject_1_8 {

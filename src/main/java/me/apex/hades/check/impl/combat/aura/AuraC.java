@@ -28,7 +28,7 @@ public class AuraC extends Check {
                 double range = user.getLocation().clone().toVector().setY(0.0D).distance(entity.getLocation().clone().toVector().setY(0.0D));
 
                 if (dist < 0.7 && rotation > 2) {
-                    if (vl++ > 3)
+                    if (vl++ > 0)
                         flag(user, "angle = " + dist + ", rotation = " + rotation);
                 } else vl = 0;
             }

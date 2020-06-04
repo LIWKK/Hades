@@ -4,8 +4,7 @@ import me.purplex.packetevents.enums.Direction;
 import me.purplex.packetevents.enums.Hand;
 import me.purplex.packetevents.enums.ServerVersion;
 import me.purplex.packetevents.packetwrappers.api.WrappedPacket;
-import me.purplex.packetevents.utils.BlockFinder;
-import me.purplex.packetevents.utils.math.Vector3i;
+import me.purplex.packetevents.utils.vector.Vector3i;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -34,13 +33,13 @@ public class WrappedPacketInBlockPlace extends WrappedPacket {
             position = new Vector3i(block.getX(), block.getY(), block.getZ());
             hand = updatedBlockPlace.getHand();
             itemStack = new ItemStack(block.getType());
-          //  init direction
+            //  init direction
         } else {
             final WrappedPacketInBlockPlace_Legacy legacyBlockPlace = new WrappedPacketInBlockPlace_Legacy(packet);
             position = legacyBlockPlace.getBlockPosition();
             hand = legacyBlockPlace.getHand();
             itemStack = legacyBlockPlace.getItemStack();
-          //init direction
+            //init direction
         }
         this.direction = Direction.NULL;
         this.blockPosition = position;
@@ -66,11 +65,11 @@ public class WrappedPacketInBlockPlace extends WrappedPacket {
     }
 
     static {
-            if (version.isHigherThan(ServerVersion.v_1_8_8)) {
-                WrappedPacketInBlockPlace_1_9.setupStaticVars();
-            } else {
-                WrappedPacketInBlockPlace_Legacy.setupStaticVars();
-            }
+        if (version.isHigherThan(ServerVersion.v_1_8_8)) {
+            WrappedPacketInBlockPlace_1_9.setupStaticVars();
+        } else {
+            WrappedPacketInBlockPlace_Legacy.setupStaticVars();
+        }
     }
 
 }

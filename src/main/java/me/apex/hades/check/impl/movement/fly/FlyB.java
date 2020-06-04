@@ -18,6 +18,7 @@ public class FlyB extends Check {
             if (!user.onGround()
             		&& !user.getPlayer().getAllowFlight()
             		&& !PlayerUtils.isClimbableBlock(user.getLocation().getBlock())
+            		&& !PlayerUtils.isClimbableBlock(user.getLocation().subtract(0,1,0).getBlock())
             		&& !PlayerUtils.isInWeb(user.getPlayer())
             		&& !PlayerUtils.isInLiquid(user.getPlayer())) {
                 if (dist >= 0.0D) {
