@@ -1,8 +1,5 @@
 package me.apex.hades.listeners;
 
-import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
-
 import me.apex.hades.Hades;
 import me.apex.hades.objects.User;
 import me.apex.hades.objects.UserManager;
@@ -12,6 +9,8 @@ import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.event.impl.PacketSendEvent;
 import me.purplex.packetevents.event.listener.PacketListener;
 import me.purplex.packetevents.packet.Packet;
+import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 
 public class NetworkListener implements PacketListener, Listener {
 	

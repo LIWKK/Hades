@@ -1,20 +1,19 @@
 package me.apex.hades.objects;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
 import me.apex.hades.Hades;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckManager;
 import me.apex.hades.utils.ChatUtils;
 import me.apex.hades.utils.LogUtils;
 import me.apex.hades.utils.PlayerUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 public class User {
 
@@ -25,7 +24,7 @@ public class User {
     private boolean alerts, lagging, digging;
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, lastVelX, lastVelY, lastVelZ, optifineTicks, iceTicks, hitTicks, slimeTicks, velocityTicks, teleportTicks, airTicks, groundTicks, clientGroundTicks;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, lastYawDiff, lastPitchDiff;
-    private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet;
+    private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity;
     private String address;
     private int ping, flagDelay;
     private LogUtils.TextFile logFile;
@@ -101,6 +100,10 @@ public class User {
     public void setDeltaY(double deltaY) {
     	this.deltaY = deltaY;
     }
+
+    public long getLastVelocity(){ return lastVelocity;}
+
+    public void setLastVelocity(long lastVelocity) { this.lastVelocity = lastVelocity; }
     
     public double getLastDeltaY() {
     	return lastDeltaY;

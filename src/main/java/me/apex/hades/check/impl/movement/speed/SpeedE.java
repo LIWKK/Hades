@@ -11,7 +11,7 @@ public class SpeedE extends Check {
 
 	@Override
 	public void onPacket(PacketReceiveEvent e, User user) {
-		if(PacketUtils.isFlyingPacket(e.getPacketName()) && !user.getPlayer().isFlying()) {
+		if(PacketUtils.isFlyingPacket(e.getPacketName()) && !user.getPlayer().isFlying() && (System.currentTimeMillis() - user.getLastVelocity()) > 1000) {
 			double diffX = Math.abs(user.getLocation().getX() - user.getLastLocation().getX());
             double diffZ = Math.abs(user.getLocation().getZ() - user.getLastLocation().getZ());
             double spd = Math.abs(diffX + diffZ);

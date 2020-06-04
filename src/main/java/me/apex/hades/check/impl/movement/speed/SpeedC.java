@@ -13,7 +13,7 @@ public class SpeedC extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
+        if (PacketUtils.isFlyingPacket(e.getPacketName()) && (System.currentTimeMillis() - user.getLastVelocity()) > 1000) {
             if (user.getTeleportTicks() > 0) return;
 
             double dist = user.getDeltaXZ();
