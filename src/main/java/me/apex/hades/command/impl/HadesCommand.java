@@ -1,10 +1,5 @@
 package me.apex.hades.command.impl;
 
-import java.util.UUID;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
 import me.apex.hades.Hades;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.command.api.CommandAdapter;
@@ -14,6 +9,10 @@ import me.apex.hades.objects.User;
 import me.apex.hades.objects.UserManager;
 import me.apex.hades.utils.HastebinUtils;
 import me.apex.hades.utils.LogUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class HadesCommand extends CommandAdapter {
 

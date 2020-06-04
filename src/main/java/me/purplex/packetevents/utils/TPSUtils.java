@@ -1,7 +1,9 @@
 package me.purplex.packetevents.utils;
+import javax.annotation.Nullable;
 import java.lang.reflect.InvocationTargetException;
 
 public class TPSUtils {
+    @Nullable
     public static double[] getRecentTPS() {
         try {
             return NMSUtils.recentTPS();

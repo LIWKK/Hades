@@ -1,13 +1,7 @@
 package me.purplex.packetevents.injector;
 
 import me.purplex.packetevents.enums.ServerVersion;
-
-import net.minecraft.server.v1_7_R4.EntityPlayer;
-import net.minecraft.server.v1_8_R3.NetworkManager;
-import net.minecraft.util.io.netty.channel.Channel;
-import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

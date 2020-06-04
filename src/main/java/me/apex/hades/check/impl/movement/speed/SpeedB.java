@@ -1,7 +1,5 @@
 package me.apex.hades.check.impl.movement.speed;
 
-import org.bukkit.Bukkit;
-
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
@@ -14,7 +12,7 @@ public class SpeedB extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
+        if (PacketUtils.isFlyingPacket(e.getPacketName()) && (System.currentTimeMillis() - user.getLastVelocity()) > 1000) {
             if (user.getTeleportTicks() > 0) return;
 
             double dist = user.getDeltaXZ();
@@ -32,5 +30,4 @@ public class SpeedB extends Check {
             } else vl = 0;
         }
     }
-
 }

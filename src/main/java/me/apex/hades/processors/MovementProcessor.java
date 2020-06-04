@@ -1,8 +1,5 @@
 package me.apex.hades.processors;
 
-import org.bukkit.Location;
-import org.bukkit.block.BlockFace;
-
 import me.apex.hades.Hades;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.PacketUtils;
@@ -12,8 +9,11 @@ import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
 import me.purplex.packetevents.packetwrappers.in.blockdig.WrappedPacketInBlockDig;
 import me.purplex.packetevents.packetwrappers.in.flying.WrappedPacketInFlying;
+import org.bukkit.Location;
+import org.bukkit.block.BlockFace;
+import org.bukkit.event.Listener;
 
-public enum MovementProcessor {
+public enum MovementProcessor implements Listener {
     INSTANCE;
 
     public void processMovement(PacketReceiveEvent e, User user) {
@@ -97,6 +97,12 @@ public enum MovementProcessor {
 
             //Process Optifine
             OptifineProcessor.INSTANCE.processOptifine(user);
+
+            if (!user.onGround() && user.getPlayer().isFlying()){
+                user.setFlyAFix(true);
+            }else if(user.onGround() && !user.getPlayer().isFlying()){
+                user.setFlyAFix(false);
+            }
         } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_DIG)) {
         	WrappedPacketInBlockDig packet = new WrappedPacketInBlockDig(e.getPacket());
             if (packet.getDigType() == PlayerDigType.START_DESTROY_BLOCK) {

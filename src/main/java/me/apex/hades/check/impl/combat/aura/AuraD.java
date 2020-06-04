@@ -25,7 +25,7 @@ public class AuraD extends Check {
                 int offset = (int) ((remainder * hypot) / Math.PI);
 
                 if ((offset < -2 && offset > -7) || (offset < -10 && offset > -15) && Math.abs(yawDiff) > 0) {
-                    if (++vl > 5)
+                    if (++vl > 3)
                         flag(user, "offset = " + offset);
                 } else vl = 0;
             }

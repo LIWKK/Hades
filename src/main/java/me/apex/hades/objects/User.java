@@ -1,20 +1,19 @@
 package me.apex.hades.objects;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
 import me.apex.hades.Hades;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckManager;
 import me.apex.hades.utils.ChatUtils;
 import me.apex.hades.utils.LogUtils;
 import me.apex.hades.utils.PlayerUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 public class User {
 
@@ -22,10 +21,10 @@ public class User {
     private final Player player;
     private final UUID playerUUID;
     private Location location, lastLocation;
-    private boolean alerts, lagging, digging;
+    private boolean alerts, lagging, digging, flyAFix;
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, lastVelX, lastVelY, lastVelZ, optifineTicks, iceTicks, hitTicks, slimeTicks, velocityTicks, teleportTicks, airTicks, groundTicks, clientGroundTicks;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, lastYawDiff, lastPitchDiff;
-    private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet;
+    private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity;
     private String address;
     private int ping, flagDelay;
     private LogUtils.TextFile logFile;
@@ -85,7 +84,11 @@ public class User {
     public void setLagging(boolean lagging) {
     	this.lagging = lagging;
     }
-    
+
+    public void setFlyAFix(boolean flyAFix) { this.flyAFix = flyAFix; }
+
+    public boolean getFlyAFix() { return flyAFix; }
+
     public boolean isDigging() {
     	return digging;
     }
@@ -101,6 +104,10 @@ public class User {
     public void setDeltaY(double deltaY) {
     	this.deltaY = deltaY;
     }
+
+    public long getLastVelocity(){ return lastVelocity;}
+
+    public void setLastVelocity(long lastVelocity) { this.lastVelocity = lastVelocity; }
     
     public double getLastDeltaY() {
     	return lastDeltaY;

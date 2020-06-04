@@ -1,4 +1,4 @@
-package me.purplex.packetevents.utils.math;
+package me.purplex.packetevents.utils.vector;
 
 public class Vector3f {
     public float x, y, z;

@@ -187,6 +187,11 @@ checks:
         enabled: true
         punishable: true
         max-vl: 20
+    smallhop:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
     badpackets:
       a:
         enabled: true

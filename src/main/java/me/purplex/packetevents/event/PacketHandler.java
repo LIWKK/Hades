@@ -1,4 +1,4 @@
-package me.purplex.packetevents.event.handler;
+package me.purplex.packetevents.event;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

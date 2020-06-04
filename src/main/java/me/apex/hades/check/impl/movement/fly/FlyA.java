@@ -14,7 +14,7 @@ public class FlyA extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
+        if (PacketUtils.isFlyingPacket(e.getPacketName()) && !user.getFlyAFix()) {
             if (user.onGround()) {
                 lastGround = user.getLocation().getY();
             } else {

@@ -1,10 +1,10 @@
 package me.apex.hades.processors;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import me.apex.hades.Hades;
 import me.apex.hades.objects.User;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public enum VPNProcessor {
     INSTANCE;

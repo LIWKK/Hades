@@ -1,9 +1,10 @@
 package me.purplex.packetevents.utils;
 
 import me.purplex.packetevents.enums.ServerVersion;
-import me.purplex.packetevents.utils.entityfinder.EntityFinderUtils;
+import me.purplex.packetevents.utils.nms_entityfinder.EntityFinderUtils;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -27,12 +28,20 @@ public class NMSUtils {
     private static Method getCraftWorldHandleMethod;
     private static Method entityMethod;
 
+    private static Class<?> craftPlayerClass;
+
+    private static Class<?> entityPlayerClass;
+    private static Method getCraftPlayerHandle;
+
+    private static Field entityPlayerPingField;
     static {
 
         try {
             minecraftServerClass = getNMSClass("MinecraftServer");
             worldServerClass = getNMSClass("WorldServer");
             craftWorldsClass = getOBCClass("CraftWorld");
+            craftPlayerClass = getOBCClass("entity.CraftPlayer");
+            entityPlayerClass= getNMSClass("EntityPlayer");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -42,6 +51,7 @@ public class NMSUtils {
             getServerMethod = minecraftServerClass.getMethod("getServer");
             getCraftWorldHandleMethod = craftWorldsClass.getMethod("getHandle");
             // entityMethod = worldServerClass.getMethod(is_1_8() ? "a" : "getEntity");
+            getCraftPlayerHandle = craftPlayerClass.getMethod("getHandle");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -49,6 +59,7 @@ public class NMSUtils {
 
         try {
             recentTPSField = minecraftServerClass.getField("recentTps");
+            entityPlayerPingField =entityPlayerClass.getField("ping");
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
@@ -78,6 +89,24 @@ public class NMSUtils {
 
     public static Entity getNearByEntityById(final World w, final int id) throws InvocationTargetException, IllegalAccessException {
         return EntityFinderUtils.getEntityById(w, id);
+    }
+
+    public static int getPlayerPing(final Player player){
+        final Object craftPlayer = craftPlayerClass.cast(player);
+        Object entityPlayer = null;
+        try {
+            entityPlayer = getCraftPlayerHandle.invoke(craftPlayer);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        try {
+            return entityPlayerPingField.getInt(entityPlayer);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     public static boolean is_1_8() {

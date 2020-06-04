@@ -1,21 +1,22 @@
 package me.purplex.packetevents;
 
-import me.purplex.packetevents.enums.ServerVersion;
 import me.purplex.packetevents.event.impl.ServerTickEvent;
 import me.purplex.packetevents.event.manager.EventManager;
-import me.purplex.packetevents.injector.PacketInjector; //public packet injector
-import me.purplex.packetevents.utils.TPSUtils; //tps utils
-import me.purplex.packetevents.utils.playerprotocolversion.PlayerVersionManager;
+import me.purplex.packetevents.injector.PacketInjector;
+import me.purplex.packetevents.utils.NMSUtils;
+import me.purplex.packetevents.utils.TPSUtils;
+import me.purplex.packetevents.enums.ServerVersion;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
+import javax.annotation.Nullable;
 import java.util.concurrent.*;
 
 public class PacketEvents implements Listener {
-    public static boolean viaVersionPresent = false;
     private static final ServerVersion version = ServerVersion.getVersion();
     private static PacketEvents instance;
     private static final PacketInjector packetInjector = new PacketInjector();
@@ -32,7 +33,6 @@ public class PacketEvents implements Listener {
         return eventManager;
     }
 
-    @Deprecated
     public static void setup(final JavaPlugin plugin, final boolean serverTickEventEnabled) {
         PacketEvents.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(getInstance(), plugin);
@@ -48,7 +48,6 @@ public class PacketEvents implements Listener {
         }
     }
 
-    @Deprecated
     public static void cleanup() {
         if (serverTickTask != null) {
             serverTickTask.cancel();
@@ -77,7 +76,6 @@ public class PacketEvents implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         packetInjector.uninjectPlayer(e.getPlayer());
-        PlayerVersionManager.clearPlayerProtocolVersion(e.getPlayer());
     }
 
     public static ServerVersion getServerVersion() {
@@ -92,6 +90,7 @@ public class PacketEvents implements Listener {
         return serverTickTask != null;
     }
 
+    @Nullable
     public static double[] getRecentServerTPS() {
         final double[] tpsArray = TPSUtils.getRecentTPS();
         final int size = tpsArray.length;
@@ -105,6 +104,10 @@ public class PacketEvents implements Listener {
 
     public static double getCurrentServerTPS() {
         return getRecentServerTPS()[0];
+    }
+
+    public static int getPing(final Player player) {
+        return NMSUtils.getPlayerPing(player);
     }
 
     public static long currentTimeMS() {

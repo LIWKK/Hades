@@ -8,6 +8,7 @@ import me.purplex.packetevents.enums.EntityUseAction;
 import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 import me.purplex.packetevents.packet.Packet;
 import me.purplex.packetevents.packetwrappers.in.useentity.WrappedPacketInUseEntity;
+import org.bukkit.Bukkit;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -26,7 +27,6 @@ public class AuraG extends Check {
                 diffs.add((long) user.getDeltaYaw());
                 if (diffs.size() == 10) {
                     double deviation = MathUtils.getStandardDeviation(diffs.stream().mapToLong(l -> l).toArray());
-
                     if (deviation > 100)
                         flag(user, "deviation = " + deviation);
 
