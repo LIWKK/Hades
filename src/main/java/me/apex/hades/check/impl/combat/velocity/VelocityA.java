@@ -16,7 +16,7 @@ public class VelocityA extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (PacketUtils.isFlyingPacket(e.getPacketName())) {
-            if (e.getTimestamp() - user.getLastVelocity() < 250 && user.getLastVelY() > 0.2) {
+            if (user.getVelocityTicks() == 1 && user.getLastVelY() > 0.2) {
                 double diff = MathUtils.sigmoid(user.getDeltaY() - user.getLastVelY()) * 0.4D;
                 double lastDiff = this.lastDiff;
                 this.lastDiff = diff;

@@ -2,16 +2,26 @@ package me.apex.hades.check.api;
 
 import me.apex.hades.check.impl.combat.aim.*;
 import me.apex.hades.check.impl.combat.aura.*;
-import me.apex.hades.check.impl.combat.autoclicker.*;
-import me.apex.hades.check.impl.combat.reach.*;
-import me.apex.hades.check.impl.combat.velocity.*;
-import me.apex.hades.check.impl.movement.fly.*;
-import me.apex.hades.check.impl.movement.motion.*;
-import me.apex.hades.check.impl.movement.scaffold.*;
+import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
+import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
+import me.apex.hades.check.impl.combat.autoclicker.AutoClickerC;
+import me.apex.hades.check.impl.combat.autoclicker.AutoClickerD;
+import me.apex.hades.check.impl.combat.criticals.CriticalsA;
+import me.apex.hades.check.impl.combat.reach.ReachA;
+import me.apex.hades.check.impl.combat.velocity.VelocityA;
+import me.apex.hades.check.impl.movement.fly.FlyA;
+import me.apex.hades.check.impl.movement.fly.FlyB;
+import me.apex.hades.check.impl.movement.fly.FlyC;
+import me.apex.hades.check.impl.movement.motion.MotionA;
+import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
+import me.apex.hades.check.impl.movement.scaffold.ScaffoldB;
+import me.apex.hades.check.impl.movement.smallhop.SmallHopA;
 import me.apex.hades.check.impl.movement.speed.*;
 import me.apex.hades.check.impl.packet.badpackets.*;
-import me.apex.hades.check.impl.packet.nofall.*;
-import me.apex.hades.check.impl.packet.timer.*;
+import me.apex.hades.check.impl.packet.nofall.NoFallA;
+import me.apex.hades.check.impl.packet.timer.TimerA;
+import me.apex.hades.check.impl.packet.timer.TimerB;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,17 +45,16 @@ public enum CheckManager {
             AuraF.class,
             AuraG.class,
             AuraH.class,
+            CriticalsA.class,
             AutoClickerA.class,
             AutoClickerB.class,
             AutoClickerC.class,
             AutoClickerD.class,
-            AutoClickerE.class,
             ReachA.class,
-            ReachB.class,
             VelocityA.class,
-            VelocityB.class,
             FlyA.class,
             FlyB.class,
+            FlyC.class,
             MotionA.class,
             ScaffoldA.class,
             ScaffoldB.class,
@@ -53,6 +62,9 @@ public enum CheckManager {
             SpeedB.class,
             SpeedC.class,
             SpeedD.class,
+            SpeedE.class,
+            SpeedF.class,
+            SmallHopA.class,
             BadPacketsA.class,
             BadPacketsB.class,
             BadPacketsC.class,

@@ -14,9 +14,9 @@ public class NoFallA extends Check {
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.POSITION) || e.getPacketName().equalsIgnoreCase(Packet.Client.POSITION_LOOK)) {
         	WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
-            if (packet.f && !user.onGround() && !user.isLagging()) {
+            if (packet.isOnGround() && !user.onGround()) {
                 if (vl++ > 4)
-                    flag(user, "client = " + packet.f + ", server = " + user.onGround());
+                    flag(user, "client = " + packet.isOnGround() + ", server = " + user.onGround());
             } else vl = 0;
         }
     }

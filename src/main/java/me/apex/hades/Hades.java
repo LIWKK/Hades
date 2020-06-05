@@ -1,19 +1,22 @@
 package me.apex.hades;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import me.apex.hades.command.api.CommandManager;
 import me.apex.hades.command.impl.HadesCommand;
-import me.apex.hades.objects.UserManager;
 import me.apex.hades.listeners.HadesListener;
 import me.apex.hades.listeners.LagListener;
 import me.apex.hades.listeners.NetworkListener;
 import me.apex.hades.listeners.VelocityListener;
 import me.apex.hades.menu.api.GuiManager;
 import me.apex.hades.menu.impl.HomeMenu;
+import me.apex.hades.objects.User;
+import me.apex.hades.objects.UserManager;
+import me.apex.hades.processors.VPNProcessor;
 import me.apex.hades.utils.ChatUtils;
 import me.purplex.packetevents.PacketEvents;
-
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class Hades extends JavaPlugin {
     private static Hades instance;
@@ -26,13 +29,13 @@ public class Hades extends JavaPlugin {
         saveDefaultConfig();
         
         //Register Listeners
-        new HadesListener();
         new VelocityListener();
 
         //Register Network
         PacketEvents.setup(this, false);
-        PacketEvents.getPacketManager().registerListener(new LagListener());
-        PacketEvents.getPacketManager().registerListener(new NetworkListener());
+        PacketEvents.getEventManager().registerListener(new LagListener());
+        PacketEvents.getEventManager().registerListener(new HadesListener());
+        PacketEvents.getEventManager().registerListener(new NetworkListener());
 
         //Register System Variables
         baseCommand = getConfig().getString("system.base-command");
@@ -43,6 +46,26 @@ public class Hades extends JavaPlugin {
 
         //Register Menus
         GuiManager.INSTANCE.registerGui(new HomeMenu());
+        
+        //Re-register Any Online Players
+        for(Player p : Bukkit.getOnlinePlayers()) {
+        	if(UserManager.INSTANCE.getUser(p.getUniqueId()) == null)
+        	{
+        		String address = p.getAddress().toString();
+
+                User user = new User(p.getUniqueId(), address);
+
+                user.setLastJoin((System.nanoTime() / 1000000));
+
+                UserManager.INSTANCE.register(user);
+
+                if (Hades.getInstance().getConfig().getBoolean("anti-vpn.enabled")) {
+                    if (VPNProcessor.INSTANCE.ProcessVPN(user)) {
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Hades.getInstance().getConfig().getString("anti-vpn.punish-command").replace("%player%", user.getPlayer().getName()));
+                    }
+                }
+        	}
+        }
     }
 
     public void registerCommands() {

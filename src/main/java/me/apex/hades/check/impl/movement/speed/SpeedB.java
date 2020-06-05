@@ -12,9 +12,8 @@ public class SpeedB extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
-            if (e.getTimestamp() - user.getLastServerPosition() < 1000) return;
-            if (e.getTimestamp() - user.getLastVelocity() < 2000) return;
+        if (PacketUtils.isFlyingPacket(e.getPacketName()) && (System.currentTimeMillis() - user.getLastVelocity()) > 1000) {
+            if (user.getTeleportTicks() > 0) return;
 
             double dist = user.getDeltaXZ();
             double lastDist = user.getLastDeltaXZ();
@@ -25,11 +24,10 @@ public class SpeedB extends Check {
 
             double max = PlayerUtils.getBaseMovementSpeed(user, 9.9D, true);
 
-            if (scaledDist > max && !user.isLagging() && !user.getPlayer().getAllowFlight()) {
+            if (scaledDist > max && !user.getPlayer().getAllowFlight()) {
                 if (vl++ > 3)
                     flag(user, "dist = " + scaledDist);
             } else vl = 0;
         }
     }
-
 }

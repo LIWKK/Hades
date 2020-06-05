@@ -3,6 +3,7 @@ package me.purplex.packetevents.event.impl;
 import me.purplex.packetevents.event.PacketEvent;
 import org.bukkit.entity.Player;
 
+//unfinished
 public class PacketLoginEvent extends PacketEvent {
     private final Player player;
     private final String name;
