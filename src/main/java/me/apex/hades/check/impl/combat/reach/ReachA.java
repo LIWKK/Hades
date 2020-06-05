@@ -13,6 +13,11 @@ import me.apex.hades.utils.Ray;
 @CheckInfo(name = "Reach", type = "A")
 public class ReachA extends Check {
     int preVL = 0;
+    
+    @Override
+    public void init() {
+    	dev = true;
+    }
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
@@ -24,7 +29,7 @@ public class ReachA extends Check {
                     double dist = AABB.from(packet.getEntity()).collidesD(ray,0, 10);
                     if (dist != -1) {
                     	if(dist > 3.05) {
-                            //Bukkit.broadcastMessage("" + dist);
+                    		flag(user, "dist = " + dist);
                     	}
                     }
                 }catch (Exception ex){}

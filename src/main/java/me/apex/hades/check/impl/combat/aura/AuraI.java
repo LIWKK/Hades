@@ -17,7 +17,6 @@ public class AuraI extends Check {
 	@Override
 	public void init() {
 		dev = true;
-		enabled = true;
 	}
 	
 	public Entity lastTarget;
@@ -46,7 +45,10 @@ public class AuraI extends Check {
 		            	
 		            	double rot = Math.abs(diff - lastDiff);
 		            	
-		            	Bukkit.broadcastMessage("" + rot);
+		            	if(rot < 0.1) {
+		            		if(vl++ > 3)
+		            			flag(user, "rot = " + rot);
+		            	}else vl = 0;
 		            }
 				}else lastRange = -1;
 				lastTarget = packet.getEntity();

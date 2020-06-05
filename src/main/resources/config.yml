@@ -108,6 +108,10 @@ checks:
         enabled: true
         punishable: true
         max-vl: 10
+      i:
+        enabled: true
+        punishable: false
+        max-vl: 10
     criticals:
       punish-command: 'ban %player% %prefix%Cheating'
       a:
@@ -136,7 +140,7 @@ checks:
       punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
-        punishable: true
+        punishable: false
         max-vl: 10
     velocity:
       punish-command: 'ban %player% %prefix%Cheating'
