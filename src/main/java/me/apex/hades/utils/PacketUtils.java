@@ -4,8 +4,8 @@ import java.lang.reflect.Constructor;
 
 import org.bukkit.Bukkit;
 
+import io.github.retrooper.packetevents.packet.Packet;
 import me.apex.hades.objects.User;
-import me.purplex.packetevents.packet.Packet;
 
 public class PacketUtils {
 

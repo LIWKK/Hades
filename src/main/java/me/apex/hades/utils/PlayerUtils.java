@@ -21,14 +21,20 @@ public class PlayerUtils {
         double expand = 0.3;
         for (double x = -expand; x <= expand; x += expand) {
             for (double z = -expand; z <= expand; z += expand) {
-                if (location.clone().add(x, -0.1, z).getBlock().getType().isSolid()
-                		|| location.clone().add(x, -0.5001, z).getBlock().getType().isSolid()) {
+                if (isSolid(location.clone().add(x, -0.1, z).getBlock())
+                		|| isSolid(location.clone().add(x, -0.5001, z).getBlock())) {
                     return true;
                 }
             }
 
         }
         return false;
+    }
+    
+    public static boolean isOnGround(Player player) {
+        Object box = ReflectionUtils.modifyBoundingBox(ReflectionUtils.getBoundingBox(player), 0, -0.1, 0,0,0,0);
+
+        return ReflectionUtils.getCollidingBlocks(player, box).size() > 0;
     }
 
     public static boolean blockNearHead(Player player) {

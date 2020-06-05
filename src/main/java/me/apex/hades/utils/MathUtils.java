@@ -13,6 +13,8 @@ public class MathUtils {
     public static long gcd(long a, long b) {
         return b <= 0x4000 ? a : gcd(b, a % b);
     }
+    
+    public static long elapsed(long num){ return System.currentTimeMillis() - num; }
 
     public static long getGcd(long current, long previous) {
         return (double) previous <= 16384.0D ? current : getGcd(previous, (long) Math.abs(current - previous));

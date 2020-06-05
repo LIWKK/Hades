@@ -2,6 +2,7 @@ package me.apex.hades.utils;
 
 
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
@@ -26,6 +27,11 @@ public class AABB {
         this.min = getMin(player);
         this.max = getMax(player);
     }
+    
+    private AABB(Entity entity) {
+    	 this.min = getMin(entity);
+    	 this.max = getMax(entity);
+    }
 
     private Vector getMin(Player player) {
         return player.getLocation().toVector().add(new Vector(-0.3, 0, -0.3));
@@ -34,10 +40,23 @@ public class AABB {
     private Vector getMax(Player player) {
         return player.getLocation().toVector().add(new Vector(0.3, 1.8, 0.3));
     }
+    
+    //TODO: Implement hitbox values for all entites!
+    private Vector getMin(Entity entity) {
+        return entity.getLocation().toVector().add(new Vector(-0.3, 0, -0.3));
+    }
+
+    private Vector getMax(Entity entity) {
+        return entity.getLocation().toVector().add(new Vector(0.3, 1.8, 0.3));
+    }
 
     // Create an AABB based on a player's hitbox
     public static AABB from(Player player) {
         return new AABB(player);
+    }
+    
+    public static AABB from(Entity entity) {
+    	return new AABB(entity);
     }
 
     public Vector getMin() {

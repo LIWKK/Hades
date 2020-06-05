@@ -1,10 +1,10 @@
 package me.apex.hades.check.impl.movement.smallhop;
 
+import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.PacketUtils;
-import me.purplex.packetevents.event.impl.PacketReceiveEvent;
 
 @CheckInfo(name = "SmallHop", type = "A")
 public class SmallHopA extends Check {

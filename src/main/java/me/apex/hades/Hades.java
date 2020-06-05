@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import io.github.retrooper.packetevents.PacketEvents;
 import me.apex.hades.command.api.CommandManager;
 import me.apex.hades.command.impl.HadesCommand;
 import me.apex.hades.listeners.HadesListener;
@@ -16,7 +17,6 @@ import me.apex.hades.objects.User;
 import me.apex.hades.objects.UserManager;
 import me.apex.hades.processors.VPNProcessor;
 import me.apex.hades.utils.ChatUtils;
-import me.purplex.packetevents.PacketEvents;
 
 public class Hades extends JavaPlugin {
     private static Hades instance;

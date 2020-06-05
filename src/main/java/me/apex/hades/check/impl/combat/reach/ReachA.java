@@ -1,15 +1,14 @@
 package me.apex.hades.check.impl.combat.reach;
 
+import io.github.retrooper.packetevents.enums.EntityUseAction;
+import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
+import io.github.retrooper.packetevents.packet.Packet;
+import io.github.retrooper.packetevents.packetwrappers.in.useentity.WrappedPacketInUseEntity;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.AABB;
 import me.apex.hades.utils.Ray;
-import me.purplex.packetevents.enums.EntityUseAction;
-import me.purplex.packetevents.event.impl.PacketReceiveEvent;
-import me.purplex.packetevents.packet.Packet;
-import me.purplex.packetevents.packetwrappers.in.useentity.WrappedPacketInUseEntity;
-import org.bukkit.entity.Player;
 
 @CheckInfo(name = "Reach", type = "A")
 public class ReachA extends Check {
@@ -18,15 +17,15 @@ public class ReachA extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
-        	WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPlayer(), e.getPacket());
-            if (packet.getAction() == EntityUseAction.ATTACK && packet.getEntity() instanceof Player && !user.isLagging()){
+        	WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
+            if (packet.getAction() == EntityUseAction.ATTACK && !user.isLagging()){
                 try {
-                    Player player = packet.getPlayer();
-                    Player entity = (Player)packet.getEntity();
-                    Ray ray = Ray.from(player);
-                    double dis = AABB.from(entity).collidesD(ray,0, 10);
-                    if (dis != -1) {
-
+                    Ray ray = Ray.from(user.getPlayer());
+                    double dist = AABB.from(packet.getEntity()).collidesD(ray,0, 10);
+                    if (dist != -1) {
+                    	if(dist > 3.05) {
+                            //Bukkit.broadcastMessage("" + dist);
+                    	}
                     }
                 }catch (Exception ex){}
             }

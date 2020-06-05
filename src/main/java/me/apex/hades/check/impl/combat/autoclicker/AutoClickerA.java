@@ -1,12 +1,12 @@
 package me.apex.hades.check.impl.combat.autoclicker;
 
+import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
+import io.github.retrooper.packetevents.packet.Packet;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.MathUtils;
 import me.apex.hades.utils.PacketUtils;
-import me.purplex.packetevents.event.impl.PacketReceiveEvent;
-import me.purplex.packetevents.packet.Packet;
 
 @CheckInfo(name = "AutoClicker", type = "A")
 public class AutoClickerA extends Check {
