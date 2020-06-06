@@ -8,7 +8,7 @@ lang:
   no-permission: '&cNo permission.'
   base-message-color: '&c'
   flag-format: '%prefix%&c%player% &7has failed &c%check% &8<&c%checktype%&8> &8[&7VL&8:&c %vl%&8]'
-  experimental-notation: '&f*'
+  experimental-notation: '*'
   broadcast-message: '%newline%%prefix%%player% &7was banned for &fCheating&7.%newline% '
 
 #System Configuration

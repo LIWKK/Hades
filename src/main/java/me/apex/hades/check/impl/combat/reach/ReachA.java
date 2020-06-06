@@ -28,7 +28,7 @@ public class ReachA extends Check {
                     Ray ray = Ray.from(user.getPlayer());
                     double dist = AABB.from(packet.getEntity()).collidesD(ray,0, 10);
                     if (dist != -1) {
-                    	if(dist > 3.05) {
+                    	if(dist > 3.2) {
                     		flag(user, "dist = " + dist);
                     		if (shouldMitigate()) e.setCancelled(true);
                     	}
