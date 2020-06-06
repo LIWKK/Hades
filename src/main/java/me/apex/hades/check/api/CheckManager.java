@@ -20,6 +20,7 @@ import me.apex.hades.check.impl.combat.aura.AuraF;
 import me.apex.hades.check.impl.combat.aura.AuraG;
 import me.apex.hades.check.impl.combat.aura.AuraH;
 import me.apex.hades.check.impl.combat.aura.AuraI;
+import me.apex.hades.check.impl.combat.aura.AuraJ;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerC;
@@ -70,6 +71,7 @@ public enum CheckManager {
             AuraG.class,
             AuraH.class,
             AuraI.class,
+            AuraJ.class,
             CriticalsA.class,
             AutoClickerA.class,
             AutoClickerB.class,

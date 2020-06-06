@@ -1,5 +1,8 @@
 package me.apex.hades.check.impl.combat.aura;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 
@@ -11,14 +14,18 @@ import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.MathUtils;
 
-@CheckInfo(name = "Aura", type = "I")
-public class AuraI extends Check {
+@CheckInfo(name = "Aura", type = "J")
+public class AuraJ extends Check {
+	
+	@Override
+	public void init() {
+		dev = true;
+		enabled = true;
+	}
 	
 	public Entity lastTarget;
-	public double lastRange;
-	
-	public double lastDiff;
-	
+	public List<Float> ranges = new ArrayList<>();
+
 	@Override
 	public void onPacket(PacketReceiveEvent e, User user) {
 		if(e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
@@ -30,22 +37,19 @@ public class AuraI extends Check {
 
 		            double range = user.getLocation().clone().toVector().setY(0.0D).distance(lastTarget.getLocation().clone().toVector().setY(0.0D));
 		            
-		            if(lastRange == 0) lastRange = range;
-		            
-		            if(range <= lastRange) {
-		            	double distToTarget = user.getLocation().clone().toVector().setY(0.0D).distance(lastTarget.getLocation().clone().toVector().setY(0.0D));
-		            	double diff = 2 * Math.PI * distToTarget / (range * user.getDeltaYaw());
-		            	double lastDiff = this.lastDiff;
-		            	this.lastDiff = diff;
-		            	
-		            	double rot = Math.abs(diff - lastDiff);
-		            	
-		            	if(rot > 0.0D && rot < 0.2D) {
-		            		if(vl++ > 4)
-		            			flag(user, "rot = " + rot);
-		            	}else vl = 0;
+		            if(range < 5) {
+			            if(user.getDeltaYaw() != 0.0) ranges.add(user.getDeltaYaw());
+			            if(ranges.size() >= 5) {
+			            	double avg = ranges.stream().mapToDouble(d -> d).average().getAsDouble();
+			            	
+			            	if(avg < 1) {
+			            		flag(user, "avg = " + avg);
+			            	}
+			            	
+			            	ranges.clear();
+			            }
 		            }
-				}else lastRange = 0;
+				}else ranges.clear();
 				lastTarget = packet.getEntity();
 			}else lastTarget = packet.getEntity();
 		}

@@ -110,7 +110,7 @@ checks:
         max-vl: 10
       i:
         enabled: true
-        punishable: false
+        punishable: true
         max-vl: 10
     criticals:
       punish-command: 'ban %player% %prefix%Cheating'

@@ -6,9 +6,11 @@ import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.utils.PacketUtils;
 
+//Credits to Moritz
 @CheckInfo(name = "SmallHop", type = "A")
 public class SmallHopA extends Check {
     int preVL = 0;
+    
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (PacketUtils.isFlyingPacket(e.getPacketName())){

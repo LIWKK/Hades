@@ -1,5 +1,6 @@
 package me.apex.hades.utils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -353,7 +354,7 @@ public class PlayerUtils {
     /*
     Movement Utils
      */
-
+    
     public static double getBaseMovementSpeed(User user, double conveinentMax, boolean blockAmplifiers) {
         conveinentMax += getPotionEffectLevel(user.getPlayer(), PotionEffectType.SPEED) * (conveinentMax / 2);
         conveinentMax *= (user.getPlayer().getWalkSpeed() / 0.2D);
@@ -362,19 +363,7 @@ public class PlayerUtils {
             conveinentMax *= (user.getPlayer().getFlySpeed() / 0.2D);
 
         if (blockAmplifiers) {
-            if (blockNearHead(user.getPlayer()) && (user.getIceTicks() > 0 || user.getSlimeTicks() > 0)) {
-                conveinentMax += 2D * (conveinentMax / 1.2);
-            } else {
-                if (blockNearHead(user.getPlayer())) {
-                    conveinentMax += 0.63D * conveinentMax;
-                }
-                if (user.getIceTicks() > 0) {
-                    conveinentMax += 0.63D * conveinentMax;
-                }
-                if (user.getSlimeTicks() > 0) {
-                    conveinentMax += 0.63D * conveinentMax;
-                }
-            }
+        	
         }
 
         return conveinentMax;
