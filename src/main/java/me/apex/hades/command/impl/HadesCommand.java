@@ -18,8 +18,11 @@ import me.apex.hades.utils.LogUtils;
 public class HadesCommand extends CommandAdapter {
 
     @Override
-    public boolean onCommand(User user, UserInput input) {
-        String color = Hades.getInstance().getConfig().getString("lang.base-message-color"), cmd = Hades.getInstance().baseCommand.replaceFirst(String.valueOf(Hades.getInstance().baseCommand.charAt(0)), String.valueOf(Hades.getInstance().baseCommand.charAt(0)).toUpperCase());
+    public boolean onCommand(Player player, UserInput input) {
+    	User user = UserManager.INSTANCE.getUser(player.getUniqueId());
+    	if(user == null) Bukkit.broadcastMessage("User is null!");
+    	if(player == null) Bukkit.broadcastMessage("Player is null!");
+    	String color = Hades.getInstance().getConfig().getString("lang.base-message-color"), cmd = Hades.getInstance().baseCommand.replaceFirst(String.valueOf(Hades.getInstance().baseCommand.charAt(0)), String.valueOf(Hades.getInstance().baseCommand.charAt(0)).toUpperCase());
         if (input.label().equalsIgnoreCase("alerts")) {
             if (user.getPlayer().hasPermission(Hades.getInstance().basePermission + ".alerts")) {
                 if (user.isAlerts()) {

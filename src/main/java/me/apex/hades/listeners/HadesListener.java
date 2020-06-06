@@ -50,43 +50,6 @@ public class HadesListener implements Listener, PacketListener {
     }
 
     @EventHandler
-    public void onCommand(PlayerCommandPreprocessEvent e) {
-        User user = UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId());
-        if (e.getMessage().contains(" ")) {
-            String[] command = e.getMessage().split(" ");
-            String name = command[0].replace("/", "");
-            String[] args = new String[command.length - 1];
-            for (int i = 0; i < command.length - 1; i++) {
-                args[i] = command[i + 1];
-            }
-            if (CommandManager.INSTANCE.handleCommand(user, new UserInput() {
-                @Override
-                public String label() {
-                    return name;
-                }
-
-                @Override
-                public String[] args() {
-                    return args;
-                }
-            })) e.setCancelled(true);
-        } else {
-            String name = e.getMessage().replace("/", "");
-            if (CommandManager.INSTANCE.handleCommand(user, new UserInput() {
-                @Override
-                public String label() {
-                    return name;
-                }
-
-                @Override
-                public String[] args() {
-                    return new String[0];
-                }
-            })) e.setCancelled(true);
-        }
-    }
-
-    @EventHandler
     public void onClick(InventoryClickEvent e) {
         if (e.getCurrentItem() == null || e.getCurrentItem().getType() == Material.AIR || !e.getCurrentItem().hasItemMeta())
             return;

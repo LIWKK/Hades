@@ -41,6 +41,9 @@ public class Hades extends JavaPlugin {
         baseCommand = getConfig().getString("system.base-command");
         basePermission = getConfig().getString("system.base-permission");
 
+        //Register Command API
+    	CommandManager.setup(this);
+    	
         //Register Commands
         registerCommands();
 
@@ -69,7 +72,7 @@ public class Hades extends JavaPlugin {
     }
 
     public void registerCommands() {
-        CommandManager.INSTANCE.register(new HadesCommand());
+        CommandManager.register(new HadesCommand());
     }
 
     public boolean reloadPlugin() {
@@ -77,7 +80,7 @@ public class Hades extends JavaPlugin {
             reloadConfig();
             baseCommand = getConfig().getString("system.base-command");
             basePermission = getConfig().getString("system.base-permission");
-            CommandManager.INSTANCE.getAdapters().clear();
+            CommandManager.getAdapters().clear();
             registerCommands();
             return true;
         } catch (Exception ex) {
