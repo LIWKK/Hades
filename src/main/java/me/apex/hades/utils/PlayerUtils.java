@@ -1,6 +1,6 @@
 package me.apex.hades.utils;
 
-import org.bukkit.Bukkit;
+import me.apex.hades.objects.User;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -8,8 +8,6 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import me.apex.hades.objects.User;
 
 public class PlayerUtils {
 
@@ -75,8 +73,28 @@ public class PlayerUtils {
         }
         return false;
     }
+    public static boolean isInLiquidReflection(Player player) {
+        Object box = ReflectionUtils.getBoundingBox(player);
 
-    public static boolean isOnLilyOrCarpet(Player player) {
+        double minX = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "a"), box);
+        double minY = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "b"), box);
+        double minZ = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "c"), box);
+        double maxX = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "d"), box);
+        double maxY = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "e"), box);
+        double maxZ = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "f"), box);
+
+        for (double x = minX; x < maxX; x++) {
+            for (double y = minY; y < maxY; y++) {
+                for (double z = minZ; z < maxZ; z++) {
+                    Block block = new Location(player.getWorld(), x, y, z).getBlock();
+                    if (block.isLiquid()) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+        public static boolean isOnLilyOrCarpet(Player player) {
         Location loc = player.getLocation();
         double expand = 0.3;
         for (double x = -expand; x <= expand; x += expand) {

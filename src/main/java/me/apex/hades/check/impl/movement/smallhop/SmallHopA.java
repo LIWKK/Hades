@@ -14,9 +14,10 @@ public class SmallHopA extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (PacketUtils.isFlyingPacket(e.getPacketName())){
-            if(user.getDeltaY() == -user.getLastDeltaY() && user.getDeltaY() != 0) {
+            if(user.getDeltaY() == -user.getLastDeltaY() && user.getDeltaY() != 0 && user.getTeleportTicks() <= 0) {
                 if(preVL++ > 1){
                     flag(user, "repetitive vertical motions, m: " + user.getDeltaY());
+                    if(shouldMitigate()) lagBack(user);
                 }
             }else preVL = 0;
         }

@@ -1,14 +1,13 @@
 package io.github.retrooper.packetevents.event.manager;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import io.github.retrooper.packetevents.event.PacketEvent;
+import io.github.retrooper.packetevents.event.PacketListener;
+import io.github.retrooper.packetevents.event.PacketHandler;
+
+import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import io.github.retrooper.packetevents.event.PacketEvent;
-import io.github.retrooper.packetevents.event.PacketHandler;
-import io.github.retrooper.packetevents.event.PacketListener;
 
 public class EventManager {
 
@@ -49,10 +48,5 @@ public class EventManager {
     public static void unregisterAllListeners() {
         registeredMethods.clear();
     }
-
-    /*@Override
-    public void sendPacket(Player player, WrappedPacket packet) {
-
-    }*/
 
 }

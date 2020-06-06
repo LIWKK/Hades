@@ -27,8 +27,10 @@ public class FlyA extends Check {
                 double velocity = user.getPlayer().getVelocity().getY();
 
                 if (dist >= 1.3 && user.getLocation().getY() >= user.getLastLocation().getY() && velocity < -0.06D && user.getPlayer().getVehicle() == null) {
-                    if (vl++ > 9)
+                    if (vl++ > 9){
                         flag(user, "curY = " + user.getLocation().getY() + ", lastGround = " + lastGround);
+                        if (shouldMitigate()) lagBackToGround(user);
+                    }
                 } else vl = 0;
             }
         }

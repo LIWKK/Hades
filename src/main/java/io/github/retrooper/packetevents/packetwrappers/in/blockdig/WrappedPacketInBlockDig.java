@@ -1,14 +1,14 @@
 package io.github.retrooper.packetevents.packetwrappers.in.blockdig;
 
-import java.lang.reflect.Field;
-
-import io.github.retrooper.packetevents.enums.Direction;
 import io.github.retrooper.packetevents.enums.PlayerDigType;
 import io.github.retrooper.packetevents.enums.ServerVersion;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.BaseBlockUtils;
 import io.github.retrooper.packetevents.utils.NMSUtils;
 import io.github.retrooper.packetevents.utils.vector.Vector3i;
+import io.github.retrooper.packetevents.enums.Direction;
+
+import java.lang.reflect.Field;
 
 public class WrappedPacketInBlockDig extends WrappedPacket {
     private Vector3i blockPosition;

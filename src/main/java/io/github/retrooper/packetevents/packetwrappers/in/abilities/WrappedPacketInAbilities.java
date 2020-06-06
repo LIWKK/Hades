@@ -1,9 +1,9 @@
 package io.github.retrooper.packetevents.packetwrappers.in.abilities;
 
-import java.lang.reflect.Field;
-
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.NMSUtils;
+
+import java.lang.reflect.Field;
 
 public class WrappedPacketInAbilities extends WrappedPacket {
     private boolean isVulnerable;

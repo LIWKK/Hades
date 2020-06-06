@@ -1,14 +1,12 @@
 package io.github.retrooper.packetevents.injector;
 
+import io.github.retrooper.packetevents.enums.ServerVersion;
+import org.bukkit.entity.Player;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.UUID;
-
-import org.bukkit.entity.Player;
-
-import io.github.retrooper.packetevents.enums.ServerVersion;
 
 public class ChannelManager {
     private static final ServerVersion version = ServerVersion.getVersion();

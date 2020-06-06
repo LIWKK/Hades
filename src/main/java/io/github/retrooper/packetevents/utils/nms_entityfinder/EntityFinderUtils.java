@@ -1,17 +1,15 @@
 package io.github.retrooper.packetevents.utils.nms_entityfinder;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import javax.annotation.Nullable;
-
+import io.github.retrooper.packetevents.PacketEvents;
+import io.github.retrooper.packetevents.enums.ServerVersion;
+import io.github.retrooper.packetevents.utils.NMSUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.enums.ServerVersion;
-import io.github.retrooper.packetevents.utils.NMSUtils;
+import javax.annotation.Nullable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class EntityFinderUtils {
     @Nullable

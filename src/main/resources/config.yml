@@ -75,6 +75,7 @@ checks:
         punishable: true
         max-vl: 5
     aura:
+      mitigate: true
       punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
@@ -113,6 +114,7 @@ checks:
         punishable: true
         max-vl: 10
     criticals:
+      mitigate: true
       punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
@@ -137,6 +139,7 @@ checks:
         punishable: false
         max-vl: 10
     reach:
+      mitigate: true
       punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
@@ -149,6 +152,7 @@ checks:
         punishable: false
         max-vl: 10
     fly:
+      mitigate: true
       punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
@@ -169,6 +173,7 @@ checks:
         punishable: true
         max-vl: 10
     scaffold:
+      mitigate: true
       punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
@@ -179,6 +184,7 @@ checks:
         punishable: true
         max-vl: 10
     speed:
+      mitigate: true
       punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
@@ -197,6 +203,7 @@ checks:
         punishable: true
         max-vl: 20
     smallhop:
+      mitigate: true
       punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
@@ -243,6 +250,7 @@ checks:
         punishable: true
         max-vl: 10
     timer:
+      mitigate: true
       punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true

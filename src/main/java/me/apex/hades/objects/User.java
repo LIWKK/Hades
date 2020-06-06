@@ -1,28 +1,27 @@
 package me.apex.hades.objects;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
 import me.apex.hades.Hades;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckManager;
 import me.apex.hades.utils.ChatUtils;
 import me.apex.hades.utils.LogUtils;
 import me.apex.hades.utils.PlayerUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 public class User {
 
     private final List<Check> checks;
     private final Player player;
     private final UUID playerUUID;
-    private Location location, lastLocation;
-    private boolean alerts, lagging, digging, flyAFix;
+    private Location location, lastLocation, lastOnGroundLocation;
+    private boolean alerts, lagging, digging, flyAFix, sprinting, sneaking;
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, lastVelX, lastVelY, lastVelZ, optifineTicks, iceTicks, hitTicks, slimeTicks, velocityTicks, teleportTicks, airTicks, groundTicks, clientGroundTicks;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, lastYawDiff, lastPitchDiff;
     private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity, lastServerPosition;
@@ -91,6 +90,24 @@ public class User {
     public boolean getFlyAFix() { return flyAFix; }
     
     public long getLastServerPosition() { return lastServerPosition; }
+
+    public boolean isSprinting(){ return sprinting; }
+
+    public boolean isInLiquid(){ return PlayerUtils.isInLiquidReflection(getPlayer()); }
+
+    public Location getLastOnGroundLocation() { return lastOnGroundLocation; }
+
+    public void setLastOnGroundLocation(Location lastOnGroundLocation) { this.lastOnGroundLocation = lastOnGroundLocation; }
+
+    public void setSprinting(boolean sprinting){ this.sprinting = sprinting; }
+
+    public boolean isSneaking(){ return sneaking ;}
+
+    public void setSneaking(boolean sneaking) { this.sneaking = sneaking; }
+
+    public boolean isOnGroundVanilla() { return getPlayer().isOnGround(); }
+
+    public boolean isFlying(){ return getPlayer().isFlying(); }
 
     public void setLastServerPosition(long lastServerPosition){ this.lastServerPosition = lastServerPosition; }
 

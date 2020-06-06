@@ -1,8 +1,5 @@
 package me.apex.hades.check.impl.movement.fly;
 
-import java.util.Deque;
-import java.util.LinkedList;
-
 import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
@@ -10,6 +7,9 @@ import me.apex.hades.objects.User;
 import me.apex.hades.utils.MathUtils;
 import me.apex.hades.utils.PacketUtils;
 import me.apex.hades.utils.PlayerUtils;
+
+import java.util.Deque;
+import java.util.LinkedList;
 
 @CheckInfo(name = "Fly", type = "C")
 public class FlyC extends Check {
@@ -36,6 +36,7 @@ public class FlyC extends Check {
                 if(!user.onGround() && !PlayerUtils.isClimbableBlock(user.getLocation().getBlock()) && !PlayerUtils.isOnGround(user.getPlayer()) && !user.getPlayer().isFlying() && !user.getPlayer().isInsideVehicle()) {
                 	if(deviation == 0.0D) {
                 		flag(user, "deviation = " + deviation);
+						if (shouldMitigate()) lagBackToGround(user);
                 	}
                 }
 

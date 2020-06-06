@@ -30,6 +30,7 @@ public class ReachA extends Check {
                     if (dist != -1) {
                     	if(dist > 3.05) {
                     		flag(user, "dist = " + dist);
+                    		if (shouldMitigate()) e.setCancelled(true);
                     	}
                     }
                 }catch (Exception ex){}

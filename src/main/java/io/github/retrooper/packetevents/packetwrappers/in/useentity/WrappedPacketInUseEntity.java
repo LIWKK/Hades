@@ -1,12 +1,10 @@
 package io.github.retrooper.packetevents.packetwrappers.in.useentity;
 
-import java.lang.reflect.Field;
-
-import org.bukkit.entity.Entity;
-
 import io.github.retrooper.packetevents.enums.EntityUseAction;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.NMSUtils;
+import org.bukkit.entity.Entity;
+import java.lang.reflect.Field;
 
 public class WrappedPacketInUseEntity extends WrappedPacket {
     private int entityId;

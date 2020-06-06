@@ -1,8 +1,7 @@
 package io.github.retrooper.packetevents.packetwrappers.api;
 
-import org.bukkit.entity.Player;
-
 import io.github.retrooper.packetevents.enums.ServerVersion;
+import org.bukkit.entity.Player;
 
 public class WrappedPacket {
     private final Player player;
@@ -16,6 +15,7 @@ public class WrappedPacket {
 
     public WrappedPacket(final Object packet) {
         this.player = null;
+        if(packet == null)return;
         this.packet = packet;
         try {
             setup();
@@ -26,6 +26,7 @@ public class WrappedPacket {
 
     public WrappedPacket(final Player player, final Object packet) {
         this.player = player;
+        if(packet == null)return;
         this.packet = packet;
         try {
             setup();
@@ -42,7 +43,7 @@ public class WrappedPacket {
         throw new IllegalStateException(err);
     }
 
-    public Player getPlayer() {
+    public final Player getPlayer() {
         return player;
     }
 

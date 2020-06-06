@@ -2,11 +2,11 @@ package io.github.retrooper.packetevents.packetwrappers.in.flying;
 
 
 
-import java.lang.reflect.Field;
-
 import io.github.retrooper.packetevents.enums.ServerVersion;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.NMSUtils;
+
+import java.lang.reflect.Field;
 
 public class WrappedPacketInFlying extends WrappedPacket {
 

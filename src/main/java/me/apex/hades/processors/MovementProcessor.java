@@ -1,5 +1,8 @@
 package me.apex.hades.processors;
 
+import io.github.retrooper.packetevents.enums.PlayerAction;
+import io.github.retrooper.packetevents.packetwrappers.in.entityaction.WrappedPacketInEntityAction;
+import me.apex.hades.utils.PlayerUtils;
 import org.bukkit.Location;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.Listener;
@@ -104,6 +107,10 @@ public enum MovementProcessor implements Listener {
             }else if(user.onGround() && !user.getPlayer().isFlying()){
                 user.setFlyAFix(false);
             }
+
+            if (PlayerUtils.isOnGround(user.getPlayer())){
+                user.setLastOnGroundLocation(user.getLocation());
+            }
         } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_DIG)) {
         	WrappedPacketInBlockDig packet = new WrappedPacketInBlockDig(e.getPacket());
             if (packet.getDigType() == PlayerDigType.START_DESTROY_BLOCK) {
@@ -114,6 +121,20 @@ public enum MovementProcessor implements Listener {
             }
         }else if(e.getPacketName().equalsIgnoreCase(Packet.Server.POSITION)) {
         	user.setLastServerPosition((System.nanoTime() / 1000000));
+        }else if(e.getPacketName().equalsIgnoreCase(Packet.Client.ENTITY_ACTION)){
+            WrappedPacketInEntityAction packet = new WrappedPacketInEntityAction(e.getPacket());
+            if (packet.getAction().equals(PlayerAction.START_SPRINTING)){
+                user.setSprinting(true);
+            }
+            if (packet.getAction().equals(PlayerAction.STOP_SPRINTING)){
+                user.setSprinting(false);
+            }
+            if (packet.getAction().equals(PlayerAction.START_SNEAKING)){
+                user.setSneaking(true);
+            }
+            if (packet.getAction().equals(PlayerAction.STOP_SNEAKING)){
+                user.setSneaking(false);
+            }
         }
     }
 }

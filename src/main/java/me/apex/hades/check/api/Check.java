@@ -1,10 +1,5 @@
 package me.apex.hades.check.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.Bukkit;
-
 import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
 import me.apex.hades.Hades;
 import me.apex.hades.listeners.event.HadesFlagEvent;
@@ -16,6 +11,10 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Check{
 
@@ -69,6 +68,16 @@ public abstract class Check{
             Bukkit.getPluginManager().callEvent(new HadesFlagEvent(user.getPlayer(), this, information));
         });
     }
+
+    public boolean shouldMitigate(){
+        if (Hades.getInstance().getConfig().getBoolean("checks.detections." + getName().toLowerCase() + ".mitigate")){
+            return true;
+        }else return false;
+    }
+
+    public void lagBack(User user){ user.getPlayer().teleport(user.getLastLocation()); }
+
+    public void lagBackToGround(User user){ user.getPlayer().teleport(user.getLastOnGroundLocation()); }
 
     public abstract void onPacket(PacketReceiveEvent e, User user);
 
