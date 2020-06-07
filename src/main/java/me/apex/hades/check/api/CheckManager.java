@@ -11,6 +11,7 @@ import me.apex.hades.check.impl.combat.aim.AimD;
 import me.apex.hades.check.impl.combat.aim.AimE;
 import me.apex.hades.check.impl.combat.aim.AimF;
 import me.apex.hades.check.impl.combat.aim.AimG;
+import me.apex.hades.check.impl.combat.aim.AimH;
 import me.apex.hades.check.impl.combat.aura.AuraA;
 import me.apex.hades.check.impl.combat.aura.AuraB;
 import me.apex.hades.check.impl.combat.aura.AuraC;
@@ -62,6 +63,7 @@ public enum CheckManager {
             AimE.class,
             AimF.class,
             AimG.class,
+            AimH.class,
             AuraA.class,
             AuraB.class,
             AuraC.class,

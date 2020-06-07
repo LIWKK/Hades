@@ -24,7 +24,7 @@ public class AuraJ extends Check {
 	}
 	
 	public Entity lastTarget;
-
+	
 	@Override
 	public void onPacket(PacketReceiveEvent e, User user) {
 		if(e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
