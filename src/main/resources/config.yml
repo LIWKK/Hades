@@ -148,7 +148,7 @@ checks:
     velocity:
       punish-command: 'ban %player% %prefix%Cheating'
       a:
-        enabled: false
+        enabled: true
         punishable: false
         max-vl: 10
     fly:
