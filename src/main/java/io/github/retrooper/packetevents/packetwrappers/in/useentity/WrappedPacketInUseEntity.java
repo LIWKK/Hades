@@ -4,7 +4,6 @@ import io.github.retrooper.packetevents.enums.EntityUseAction;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.NMSUtils;
 import org.bukkit.entity.Entity;
-
 import java.lang.reflect.Field;
 
 public class WrappedPacketInUseEntity extends WrappedPacket {
@@ -18,15 +17,11 @@ public class WrappedPacketInUseEntity extends WrappedPacket {
 
 
     @Override
-    protected void setup() {
-        try {
-            this.entityId = fields[0].getInt(packet);
-            this.entity = NMSUtils.getEntityById(this.entityId);
-            final Object useActionEnum = fields[1].get(packet);
-            this.action = EntityUseAction.valueOf(useActionEnum.toString());
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+    protected void setup() throws IllegalAccessException {
+        this.entityId = fields[0].getInt(packet);
+        this.entity = NMSUtils.getEntityById(this.entityId);
+        final Object useActionEnum = fields[1].get(packet);
+        this.action = EntityUseAction.valueOf(useActionEnum.toString());
     }
 
 

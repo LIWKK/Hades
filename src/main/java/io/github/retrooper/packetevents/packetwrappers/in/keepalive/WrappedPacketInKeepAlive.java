@@ -14,22 +14,18 @@ public class WrappedPacketInKeepAlive extends WrappedPacket {
     private long id;
 
     @Override
-    protected void setup() {
-        try {
-            if (version.isHigherThan(ServerVersion.v_1_12)) {
-                this.id = idField.getLong(packet);
-            } else {
-                this.id = idField.getInt(packet);
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+    protected void setup() throws Exception {
+        if(version.isHigherThan(ServerVersion.v_1_12)) {
+            this.id = idField.getLong(packet);
+        }
+        else {
+            this.id =  idField.getInt(packet);
         }
     }
 
     /**
      * Cast this long to an integer if you are using 1.7.10->1.12.2!
      * In 1.13.2->1.15.2 a long is sent
-     *
      * @return
      */
     public long getId() {

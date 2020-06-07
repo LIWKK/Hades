@@ -14,13 +14,9 @@ public class WrappedPacketInChat extends WrappedPacket {
     }
 
     @Override
-    protected void setup() {
-        try {
-            final Object obj = field.get(packet);
-            this.message = obj.toString();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+    protected void setup() throws IllegalAccessException {
+        final Object obj = field.get(packet);
+        this.message = obj.toString();
     }
 
     public String getMessage() {

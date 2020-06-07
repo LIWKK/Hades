@@ -1,5 +1,6 @@
 package io.github.retrooper.packetevents.packetwrappers.in.blockplace;
 
+import io.github.retrooper.packetevents.enums.Direction;
 import io.github.retrooper.packetevents.enums.Hand;
 import io.github.retrooper.packetevents.enums.ServerVersion;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
@@ -12,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 public class WrappedPacketInBlockPlace extends WrappedPacket {
     private Vector3i blockPosition;
     private Hand hand;
+    private Direction direction;
     private ItemStack itemStack;
 
     public WrappedPacketInBlockPlace(final Player player, final Object packet) {
@@ -19,12 +21,12 @@ public class WrappedPacketInBlockPlace extends WrappedPacket {
     }
 
     @Override
-    protected void setup() {
+    protected void setup() throws Exception {
         //1.7.10
-        Vector3i position = null;
-        ItemStack itemStack = null;
-        Hand hand = null;
-        try {
+        final Direction direction;
+        final Vector3i position;
+        final ItemStack itemStack;
+        final Hand hand;
         if (version.isHigherThan(ServerVersion.v_1_8_8)) {
             final WrappedPacketInBlockPlace_1_9 updatedBlockPlace = new WrappedPacketInBlockPlace_1_9(getPlayer(), packet);
             final Block block = updatedBlockPlace.getBlock();
@@ -38,10 +40,8 @@ public class WrappedPacketInBlockPlace extends WrappedPacket {
             hand = legacyBlockPlace.getHand();
             itemStack = legacyBlockPlace.getItemStack();
             //init direction
-        } }
-        catch(IllegalArgumentException e) {
-            e.printStackTrace();
         }
+        this.direction = Direction.NULL;
         this.blockPosition = position;
         this.itemStack = itemStack;
         this.hand = hand;
@@ -57,6 +57,11 @@ public class WrappedPacketInBlockPlace extends WrappedPacket {
 
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    @Deprecated
+    public Direction getDirection() {
+        return direction;
     }
 
     static {
