@@ -24,6 +24,7 @@ public class AuraJ extends Check {
 	}
 	
 	public Entity lastTarget;
+	public List<Float> ranges = new ArrayList<>();
 
 	@Override
 	public void onPacket(PacketReceiveEvent e, User user) {
@@ -35,12 +36,20 @@ public class AuraJ extends Check {
 		            double dist = MathUtils.getDistanceBetweenAngles360(user.getLocation().getYaw(), dir);
 
 		            double range = user.getLocation().clone().toVector().setY(0.0D).distance(lastTarget.getLocation().clone().toVector().setY(0.0D));
-
-					double diff = Math.abs(2 * Math.PI * (user.getDeltaYaw() - user.getLastDeltaYaw()) / range);
-					if(diff < 0.1) {
-						Bukkit.broadcastMessage("" + diff);
-					}
-				}
+		            
+		            if(range < 5) {
+			            if(user.getDeltaYaw() != 0.0) ranges.add(user.getDeltaYaw());
+			            if(ranges.size() >= 5) {
+			            	double avg = ranges.stream().mapToDouble(d -> d).average().getAsDouble();
+			            	
+			            	if(avg < 1) {
+			            		flag(user, "avg = " + avg);
+			            	}
+			            	
+			            	ranges.clear();
+			            }
+		            }
+				}else ranges.clear();
 				lastTarget = packet.getEntity();
 			}else lastTarget = packet.getEntity();
 		}
