@@ -15,6 +15,7 @@ public class WrappedPacket {
 
     public WrappedPacket(final Object packet) {
         this.player = null;
+        if(packet == null)return;
         this.packet = packet;
         try {
             setup();
@@ -25,6 +26,7 @@ public class WrappedPacket {
 
     public WrappedPacket(final Player player, final Object packet) {
         this.player = player;
+        if(packet == null)return;
         this.packet = packet;
         try {
             setup();
@@ -33,7 +35,7 @@ public class WrappedPacket {
         }
     }
 
-    protected void setup() throws Exception {
+    protected void setup()  {
 
     }
 
@@ -41,7 +43,7 @@ public class WrappedPacket {
         throw new IllegalStateException(err);
     }
 
-    public Player getPlayer() {
+    public final Player getPlayer() {
         return player;
     }
 
