@@ -23,26 +23,11 @@ public class AuraJ extends Check {
 		enabled = true;
 	}
 	
-	public Entity lastTarget;
-	
 	@Override
 	public void onPacket(PacketReceiveEvent e, User user) {
 		if(e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
 			WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
-			if(lastTarget != null) {
-				if(lastTarget.equals(packet.getEntity())) {
-					double dir = MathUtils.getDirection(user.getLocation(), lastTarget.getLocation());
-		            double dist = MathUtils.getDistanceBetweenAngles360(user.getLocation().getYaw(), dir);
-
-		            double range = user.getLocation().clone().toVector().setY(0.0D).distance(lastTarget.getLocation().clone().toVector().setY(0.0D));
-
-					double diff = Math.abs(2 * Math.PI * (user.getDeltaYaw() - user.getLastDeltaYaw()) / range);
-					if(diff < 0.1) {
-						Bukkit.broadcastMessage("" + diff);
-					}
-				}
-				lastTarget = packet.getEntity();
-			}else lastTarget = packet.getEntity();
+			//Remake check!
 		}
 	}
 	

@@ -40,8 +40,8 @@ public class AuraI extends Check {
 		            	
 		            	double rot = Math.abs(diff - lastDiff);
 		            	
-		            	if(rot > 0.0D && rot < 0.1D) {
-		            		if(vl++ > 2)
+		            	if(rot > 0.0D && rot < 0.2D) {
+		            		if(vl++ > 4)
 		            			flag(user, "rot = " + rot);
 		            	}else vl = 0;
 		            }
