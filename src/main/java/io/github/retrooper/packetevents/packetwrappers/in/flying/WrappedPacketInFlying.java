@@ -1,6 +1,7 @@
 package io.github.retrooper.packetevents.packetwrappers.in.flying;
 
 
+
 import io.github.retrooper.packetevents.enums.ServerVersion;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.NMSUtils;
@@ -23,22 +24,18 @@ public class WrappedPacketInFlying extends WrappedPacket {
     }
 
     @Override
-    protected void setup() {
-        try {
-            this.x = fields[0].getDouble(packet);
-            this.y = fields[1].getDouble(packet);
-            this.z = fields[2].getDouble(packet);
+    protected void setup() throws IllegalAccessException {
+        this.x = fields[0].getDouble(packet);
+        this.y = fields[1].getDouble(packet);
+        this.z = fields[2].getDouble(packet);
 
-            this.yaw = fields[3].getFloat(packet);
-            this.pitch = fields[4].getFloat(packet);
+        this.yaw = fields[3].getFloat(packet);
+        this.pitch = fields[4].getFloat(packet);
 
-            this.onGround = fields[5].getBoolean(packet);
+        this.onGround = fields[5].getBoolean(packet);
 
-            this.isPosition = fields[6].getBoolean(packet);
-            this.isLook = fields[7].getBoolean(packet);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        this.isPosition = fields[6].getBoolean(packet);
+        this.isLook = fields[7].getBoolean(packet);
     }
 
     public static class WrappedPacketInPosition extends WrappedPacketInFlying {
