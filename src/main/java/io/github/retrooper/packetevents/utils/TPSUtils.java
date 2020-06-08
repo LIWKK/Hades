@@ -1,6 +1,7 @@
 package io.github.retrooper.packetevents.utils;
-import javax.annotation.Nullable;
 import java.lang.reflect.InvocationTargetException;
+
+import javax.annotation.Nullable;
 
 public class TPSUtils {
     @Nullable

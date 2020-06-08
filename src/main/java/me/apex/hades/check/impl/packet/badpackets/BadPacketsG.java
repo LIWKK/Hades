@@ -17,7 +17,7 @@ public class BadPacketsG extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
-        	WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
+            WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
             if (!lastWasArm && packet.getAction() == EntityUseAction.ATTACK) {
                 if (vl++ > 1)
                     flag(user, "swung = " + lastWasArm);

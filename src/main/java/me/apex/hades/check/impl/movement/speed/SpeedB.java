@@ -23,6 +23,8 @@ public class SpeedB extends Check {
             double scaledDist = diff * 100;
 
             double max = PlayerUtils.getBaseMovementSpeed(user, 9.9D, true);
+            if (user.getLocation().subtract(0,1,0).getBlock().getType().toString().toLowerCase().contains("stairs"))
+                max += 1;
 
             if (scaledDist > max && !user.getPlayer().getAllowFlight()) {
                 if (vl++ > 3){

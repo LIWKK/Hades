@@ -1,16 +1,17 @@
 package io.github.retrooper.packetevents.utils;
 
-import io.github.retrooper.packetevents.enums.ServerVersion;
-import io.github.retrooper.packetevents.utils.nms_entityfinder.EntityFinderUtils;
-import org.bukkit.Bukkit;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import javax.annotation.Nullable;
+
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import io.github.retrooper.packetevents.enums.ServerVersion;
+import io.github.retrooper.packetevents.utils.nms_entityfinder.EntityFinderUtils;
 
 public class NMSUtils {
     private static final ServerVersion version = ServerVersion.getVersion();

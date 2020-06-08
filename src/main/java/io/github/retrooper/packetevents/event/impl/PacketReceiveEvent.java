@@ -1,7 +1,8 @@
 package io.github.retrooper.packetevents.event.impl;
 
-import io.github.retrooper.packetevents.event.PacketEvent;
 import org.bukkit.entity.Player;
+
+import io.github.retrooper.packetevents.event.PacketEvent;
 
 public class PacketReceiveEvent extends PacketEvent {
     private final Player player;

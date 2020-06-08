@@ -1,9 +1,10 @@
 package io.github.retrooper.packetevents.injector;
 
 
+import org.bukkit.entity.Player;
+
 import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.enums.ServerVersion;
-import org.bukkit.entity.Player;
 
 
 public class PacketInjector {

@@ -1,10 +1,10 @@
 package io.github.retrooper.packetevents.packetwrappers.in.keepalive;
 
+import java.lang.reflect.Field;
+
 import io.github.retrooper.packetevents.enums.ServerVersion;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.NMSUtils;
-
-import java.lang.reflect.Field;
 
 public class WrappedPacketInKeepAlive extends WrappedPacket {
     public WrappedPacketInKeepAlive(final Object packet) {

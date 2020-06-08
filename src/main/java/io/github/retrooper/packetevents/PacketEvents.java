@@ -1,20 +1,26 @@
 package io.github.retrooper.packetevents;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import javax.annotation.Nullable;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
+
+import io.github.retrooper.packetevents.enums.ServerVersion;
 import io.github.retrooper.packetevents.event.impl.ServerTickEvent;
 import io.github.retrooper.packetevents.event.manager.EventManager;
 import io.github.retrooper.packetevents.injector.PacketInjector;
 import io.github.retrooper.packetevents.utils.NMSUtils;
 import io.github.retrooper.packetevents.utils.TPSUtils;
-import io.github.retrooper.packetevents.enums.ServerVersion;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.*;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
-import javax.annotation.Nullable;
-import java.util.concurrent.*;
 
 public class PacketEvents implements Listener {
     private static final ServerVersion version = ServerVersion.getVersion();

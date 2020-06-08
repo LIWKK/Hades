@@ -1,6 +1,9 @@
 package io.github.retrooper.packetevents.injector;
 
 
+import org.bukkit.entity.Player;
+
+import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
 import io.github.retrooper.packetevents.event.impl.PacketSendEvent;
 import io.github.retrooper.packetevents.event.impl.PlayerInjectEvent;
@@ -9,8 +12,6 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
-import io.github.retrooper.packetevents.PacketEvents;
-import org.bukkit.entity.Player;
 
 class PlayerInject_1_8 {
     public static void injectPlayer(final Player player) {

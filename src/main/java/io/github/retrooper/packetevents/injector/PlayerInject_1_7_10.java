@@ -1,5 +1,7 @@
 package io.github.retrooper.packetevents.injector;
 
+import org.bukkit.entity.Player;
+
 import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
 import io.github.retrooper.packetevents.event.impl.PacketSendEvent;
@@ -9,7 +11,6 @@ import net.minecraft.util.io.netty.channel.Channel;
 import net.minecraft.util.io.netty.channel.ChannelDuplexHandler;
 import net.minecraft.util.io.netty.channel.ChannelHandlerContext;
 import net.minecraft.util.io.netty.channel.ChannelPromise;
-import org.bukkit.entity.Player;
 
 class PlayerInject_1_7_10 {
     public static void injectPlayer(final Player player) {

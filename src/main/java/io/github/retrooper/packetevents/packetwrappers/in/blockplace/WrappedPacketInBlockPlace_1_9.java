@@ -1,13 +1,14 @@
 package io.github.retrooper.packetevents.packetwrappers.in.blockplace;
 
+import java.lang.reflect.Field;
+
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+
 import io.github.retrooper.packetevents.enums.Hand;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.BlockFinder;
 import io.github.retrooper.packetevents.utils.NMSUtils;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-
-import java.lang.reflect.Field;
 
 class WrappedPacketInBlockPlace_1_9 extends WrappedPacket {
     private Block block;

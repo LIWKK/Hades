@@ -1,13 +1,14 @@
 package io.github.retrooper.packetevents.event.manager;
 
-import io.github.retrooper.packetevents.event.PacketEvent;
-import io.github.retrooper.packetevents.event.PacketListener;
-import io.github.retrooper.packetevents.event.PacketHandler;
-
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import io.github.retrooper.packetevents.event.PacketEvent;
+import io.github.retrooper.packetevents.event.PacketHandler;
+import io.github.retrooper.packetevents.event.PacketListener;
 
 public class EventManager {
 

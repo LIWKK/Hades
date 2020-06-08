@@ -4,9 +4,7 @@ import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
-import me.apex.hades.utils.MathUtils;
 import me.apex.hades.utils.PacketUtils;
-import org.bukkit.Bukkit;
 
 //Credits to Killeurdu2b
 @CheckInfo(name = "Aim", type = "H")
@@ -23,6 +21,7 @@ public class AimH extends Check {
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (PacketUtils.isFlyingPacket(e.getPacketName())) {
+            /*
             float diff = Math.abs(user.getDeltaPitch()) % 180F;
             float lastDiff = this.lastDiff;
             this.lastDiff = diff;
@@ -41,7 +40,7 @@ public class AimH extends Check {
 
                 } else vl = 0;
 
-            }
+            }*/
 
         }
     }

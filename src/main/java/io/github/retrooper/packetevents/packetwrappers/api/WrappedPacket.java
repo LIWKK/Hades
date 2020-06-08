@@ -1,7 +1,8 @@
 package io.github.retrooper.packetevents.packetwrappers.api;
 
-import io.github.retrooper.packetevents.enums.ServerVersion;
 import org.bukkit.entity.Player;
+
+import io.github.retrooper.packetevents.enums.ServerVersion;
 
 public class WrappedPacket {
     private final Player player;

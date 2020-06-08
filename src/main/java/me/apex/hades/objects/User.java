@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class User {
+    public static User INSTANCE;
 
     private final List<Check> checks;
     private final Player player;
@@ -24,7 +25,7 @@ public class User {
     private boolean alerts, lagging, digging, flyAFix, sprinting, sneaking;
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, lastVelX, lastVelY, lastVelZ, optifineTicks, iceTicks, hitTicks, slimeTicks, velocityTicks, teleportTicks, airTicks, groundTicks, clientGroundTicks;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, lastYawDiff, lastPitchDiff;
-    private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity, lastServerPosition;
+    private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity, lastServerPosition, lastArmSwing;
     private String address;
     private int ping, flagDelay;
     private LogUtils.TextFile logFile;
@@ -80,6 +81,8 @@ public class User {
     public boolean isLagging() {
     	return lagging;
     }
+
+    public boolean isInWeb(){return PlayerUtils.isInWeb(getPlayer()); }
     
     public void setLagging(boolean lagging) {
     	this.lagging = lagging;
@@ -92,6 +95,18 @@ public class User {
     public long getLastServerPosition() { return lastServerPosition; }
 
     public boolean isSprinting(){ return sprinting; }
+
+    public long getLastArmSwing(){ return lastArmSwing; }
+
+    public void setLastArmSwing(long lastArmSwing) { this.lastArmSwing = lastArmSwing; }
+
+    public boolean hasBlocksAround() {
+        if (PlayerUtils.hasBlocksAround(getLocation()) && PlayerUtils.hasBlocksAround(getLocation().add(0,1,0))){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public boolean isInLiquid(){ return PlayerUtils.isInLiquidReflection(getPlayer()); }
 
