@@ -209,6 +209,12 @@ checks:
         enabled: true
         punishable: true
         max-vl: 10
+    noslow:
+      punish-command: 'ban %player% %prefix%Cheating'
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
     badpackets:
       punish-command: 'ban %player% %prefix%Cheating'
       a:
