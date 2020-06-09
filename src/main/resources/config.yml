@@ -250,7 +250,6 @@ checks:
         punishable: true
         max-vl: 10
     timer:
-      mitigate: true
       punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
@@ -260,3 +259,16 @@ checks:
         enabled: true
         punishable: true
         max-vl: 10
+    fasteat:
+      mitigate: true
+      punish-command: 'ban %player% %prefix%Cheating'
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 3
+    vape:
+      punish-command: 'ban %player% %prefix%Cheating'
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 1

@@ -20,10 +20,12 @@ import me.apex.hades.check.impl.movement.speed.SpeedA;
 import me.apex.hades.check.impl.movement.speed.SpeedB;
 import me.apex.hades.check.impl.movement.speed.SpeedC;
 import me.apex.hades.check.impl.movement.speed.SpeedD;
+import me.apex.hades.check.impl.other.vape.VapeA;
 import me.apex.hades.check.impl.packet.badpackets.*;
 import me.apex.hades.check.impl.packet.nofall.NoFallA;
 import me.apex.hades.check.impl.packet.timer.TimerA;
 import me.apex.hades.check.impl.packet.timer.TimerB;
+import me.apex.hades.check.impl.player.fasteat.FastEatA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,7 +81,9 @@ public enum CheckManager {
             BadPacketsH.class,
             NoFallA.class,
             TimerA.class,
-            TimerB.class
+            TimerB.class,
+            FastEatA.class,
+            VapeA.class
     };
 
     public List<Check> loadChecks() {

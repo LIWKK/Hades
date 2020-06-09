@@ -27,7 +27,7 @@ public class User {
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, lastYawDiff, lastPitchDiff;
     private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity, lastServerPosition, lastArmSwing;
     private String address;
-    private int ping, flagDelay;
+    private int ping, flagDelay, clientVersion;
     private LogUtils.TextFile logFile;
     private Deque<Long> transactionQueue = new LinkedList<>();
     public boolean banned;
@@ -409,7 +409,11 @@ public class User {
     public void setBanned(boolean banned) {
     	this.banned = banned;
     }
-    
+
+    public int getClientVersion() { return clientVersion; }
+
+    public void setClientVersion(int clientVersion) { this.clientVersion = clientVersion; }
+
     //Global
     public boolean onGround() {
         return PlayerUtils.isNearGround(player.getLocation());
