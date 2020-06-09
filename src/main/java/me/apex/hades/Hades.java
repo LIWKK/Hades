@@ -31,7 +31,7 @@ public class Hades extends JavaPlugin {
         new VelocityListener();
 
         //Register Network
-        PacketEvents.setup(this, false);
+        PacketEvents.start(this, false);
         PacketEvents.getEventManager().registerListener(new LagListener());
         PacketEvents.getEventManager().registerListener(new HadesListener());
         PacketEvents.getEventManager().registerListener(new NetworkListener());
@@ -55,7 +55,7 @@ public class Hades extends JavaPlugin {
         	{
         		String address = p.getAddress().toString();
 
-                User user = new User(p.getUniqueId(), address);
+                User user = new User(p.getUniqueId());
 
                 user.setLastJoin((System.nanoTime() / 1000000));
 
@@ -107,6 +107,6 @@ public class Hades extends JavaPlugin {
     @Override
     public void onDisable() {
         UserManager.INSTANCE.getUsers().clear();
-        PacketEvents.cleanup();
+        PacketEvents.stop();
     }
 }

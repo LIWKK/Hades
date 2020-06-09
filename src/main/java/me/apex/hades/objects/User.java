@@ -1,5 +1,7 @@
 package me.apex.hades.objects;
 
+import io.github.retrooper.packetevents.PacketEvents;
+import io.github.retrooper.packetevents.enums.ClientVersion;
 import me.apex.hades.Hades;
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckManager;
@@ -27,15 +29,17 @@ public class User {
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, lastYawDiff, lastPitchDiff;
     private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity, lastServerPosition, lastArmSwing;
     private String address;
-    private int ping, flagDelay, clientVersion;
+    private int ping, flagDelay;
     private LogUtils.TextFile logFile;
     private Deque<Long> transactionQueue = new LinkedList<>();
     public boolean banned;
+    public ClientVersion clientVersion;
 
-    public User(UUID playerUUID, String address) {
+    public User(UUID playerUUID) {
     	this.player = Bukkit.getPlayer(playerUUID);
         this.playerUUID = playerUUID;
-        this.address = address;
+        this.address = player.getAddress().getHostName();
+        this.clientVersion = PacketEvents.getClientVersion(player);
         checks = CheckManager.INSTANCE.loadChecks();
         if (Hades.getInstance().getConfig().getBoolean("system.logging.file.enabled")) {
             logFile = new LogUtils.TextFile("" + playerUUID, Hades.getInstance().getConfig().getString("system.logging.file.path"));
@@ -409,10 +413,6 @@ public class User {
     public void setBanned(boolean banned) {
     	this.banned = banned;
     }
-
-    public int getClientVersion() { return clientVersion; }
-
-    public void setClientVersion(int clientVersion) { this.clientVersion = clientVersion; }
 
     //Global
     public boolean onGround() {

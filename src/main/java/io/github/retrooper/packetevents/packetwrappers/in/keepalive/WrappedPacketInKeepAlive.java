@@ -1,10 +1,10 @@
 package io.github.retrooper.packetevents.packetwrappers.in.keepalive;
 
-import java.lang.reflect.Field;
-
 import io.github.retrooper.packetevents.enums.ServerVersion;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.NMSUtils;
+
+import java.lang.reflect.Field;
 
 public class WrappedPacketInKeepAlive extends WrappedPacket {
     public WrappedPacketInKeepAlive(final Object packet) {
@@ -14,18 +14,22 @@ public class WrappedPacketInKeepAlive extends WrappedPacket {
     private long id;
 
     @Override
-    protected void setup() throws Exception {
-        if(version.isHigherThan(ServerVersion.v_1_12)) {
-            this.id = idField.getLong(packet);
-        }
-        else {
-            this.id =  idField.getInt(packet);
+    protected void setup() {
+        try {
+            if (version.isHigherThan(ServerVersion.v_1_12)) {
+                this.id = idField.getLong(packet);
+            } else {
+                this.id = idField.getInt(packet);
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 
     /**
      * Cast this long to an integer if you are using 1.7.10->1.12.2!
      * In 1.13.2->1.15.2 a long is sent
+     *
      * @return
      */
     public long getId() {

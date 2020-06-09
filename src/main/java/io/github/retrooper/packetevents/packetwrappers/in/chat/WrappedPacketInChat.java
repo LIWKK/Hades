@@ -1,10 +1,10 @@
 package io.github.retrooper.packetevents.packetwrappers.in.chat;
 
-import java.lang.reflect.Field;
-
 import io.github.retrooper.packetevents.enums.ServerVersion;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.NMSUtils;
+
+import java.lang.reflect.Field;
 
 public class WrappedPacketInChat extends WrappedPacket {
     private String message;
@@ -14,9 +14,13 @@ public class WrappedPacketInChat extends WrappedPacket {
     }
 
     @Override
-    protected void setup() throws IllegalAccessException {
-        final Object obj = field.get(packet);
-        this.message = obj.toString();
+    protected void setup() {
+        try {
+            final Object obj = field.get(packet);
+            this.message = obj.toString();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getMessage() {

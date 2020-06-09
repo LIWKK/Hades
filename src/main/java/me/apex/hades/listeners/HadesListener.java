@@ -19,6 +19,7 @@ import me.apex.hades.menu.api.GuiManager;
 import me.apex.hades.objects.User;
 import me.apex.hades.objects.UserManager;
 import me.apex.hades.processors.VPNProcessor;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 public class HadesListener implements Listener, PacketListener {
 
@@ -26,11 +27,9 @@ public class HadesListener implements Listener, PacketListener {
         Bukkit.getPluginManager().registerEvents(this, Hades.getInstance());
     }
 
-    @PacketHandler
-    public void onInject(PlayerInjectEvent e) {
-        String address = e.getPlayer().getAddress().toString();
-
-        User user = new User(e.getPlayer().getUniqueId(), address);
+    @EventHandler
+    public void onJoin(PlayerJoinEvent e) {
+        User user = new User(e.getPlayer().getUniqueId());
 
         user.setLastJoin((System.nanoTime() / 1000000));
 

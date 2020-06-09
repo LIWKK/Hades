@@ -1,15 +1,13 @@
 package io.github.retrooper.packetevents.packetwrappers.in.entityaction;
 
-import java.lang.reflect.Field;
-
-import javax.annotation.Nullable;
-
-import org.bukkit.entity.Entity;
-
 import io.github.retrooper.packetevents.enums.PlayerAction;
 import io.github.retrooper.packetevents.enums.ServerVersion;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.NMSUtils;
+import org.bukkit.entity.Entity;
+
+import javax.annotation.Nullable;
+import java.lang.reflect.Field;
 
 public class WrappedPacketInEntityAction extends WrappedPacket {
     private Entity entity;
@@ -22,36 +20,40 @@ public class WrappedPacketInEntityAction extends WrappedPacket {
     }
 
     @Override
-    protected void setup() throws Exception {
-        final int entityId = fields[0].getInt(packet);
-        final int jumpBoost = fields[2].getInt(packet);
+    protected void setup() {
+        try {
+            final int entityId = fields[0].getInt(packet);
+            final int jumpBoost = fields[2].getInt(packet);
 
-        int animationIndex = -1;
+            int animationIndex = -1;
 
-        //1.7.10
-        if (version.isLowerThan(ServerVersion.v_1_8)) {
-            animationIndex = fields[1].getInt(packet);
-        } else {
-            final Object enumObj = fields[1].get(packet);
+            //1.7.10
+            if (version.isLowerThan(ServerVersion.v_1_8)) {
+                animationIndex = fields[1].getInt(packet);
+            } else {
+                final Object enumObj = fields[1].get(packet);
 
-            final Object[] enumValues = enumPlayerActionConstants;
-            final int len = enumValues.length;
-            for (int i = 0; i < len; i++) {
-                final Object val = enumValues[i];
-                if (val.toString().equals(enumObj.toString())) {
-                    animationIndex = i;
-                    break;
+                final Object[] enumValues = enumPlayerActionConstants;
+                final int len = enumValues.length;
+                for (int i = 0; i < len; i++) {
+                    final Object val = enumValues[i];
+                    if (val.toString().equals(enumObj.toString())) {
+                        animationIndex = i;
+                        break;
+                    }
                 }
             }
+
+
+            this.entityId = entityId;
+            this.action = action;
+            this.jumpBoost = jumpBoost;
+            this.action = PlayerAction.get((byte) animationIndex);
+
+            this.entity = NMSUtils.getEntityById(this.entityId);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
-
-
-        this.entityId = entityId;
-        this.action = action;
-        this.jumpBoost = jumpBoost;
-        this.action = PlayerAction.get((byte) animationIndex);
-
-        this.entity = NMSUtils.getEntityById(this.entityId);
     }
 
     public Entity getEntity() {

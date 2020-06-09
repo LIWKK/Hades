@@ -1,14 +1,13 @@
 package io.github.retrooper.packetevents.event.impl;
 
-import org.bukkit.entity.Player;
-
 import io.github.retrooper.packetevents.event.PacketEvent;
+import org.bukkit.entity.Player;
 
 public class PlayerUninjectEvent extends PacketEvent {
     private final Player player;
 
     public PlayerUninjectEvent(final Player player) {
-        this.player = player;
+        this.player =player;
     }
 
     public Player getPlayer() {

@@ -1,29 +1,26 @@
 package io.github.retrooper.packetevents.event.impl;
 
-import org.bukkit.entity.Player;
-
 import io.github.retrooper.packetevents.event.PacketEvent;
 
-//unfinished
 public class PacketLoginEvent extends PacketEvent {
-    private final Player player;
+    private final Object channel;
     private final String name;
     private final Object packet;
-    public PacketLoginEvent(final Player player, final String packetName, final Object packet) {
-        this.player = player;
+    public PacketLoginEvent(final Object channel, final String packetName, final Object packet) {
+        this.channel =channel;
         this.name = packetName;
         this.packet = packet;
     }
 
-    public Player getPlayer() {
-        return player;
+    public final Object getNettyChannel() {
+        return channel;
     }
 
-    public String getPacketName() {
+    public final String getPacketName() {
         return name;
     }
 
-    public Object getPacket() {
+    public final Object getPacket() {
         return packet;
     }
 }

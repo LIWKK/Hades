@@ -1,16 +1,17 @@
 package io.github.retrooper.packetevents.packetwrappers.in.blockplace;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-import org.bukkit.inventory.ItemStack;
-
 import io.github.retrooper.packetevents.enums.Hand;
 import io.github.retrooper.packetevents.enums.ServerVersion;
 import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
-import io.github.retrooper.packetevents.utils.BaseBlockUtils;
+import io.github.retrooper.packetevents.tinyprotocol.Reflection;
 import io.github.retrooper.packetevents.utils.NMSUtils;
 import io.github.retrooper.packetevents.utils.vector.Vector3i;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 class WrappedPacketInBlockPlace_Legacy extends WrappedPacket {
     private Vector3i blockPosition;
@@ -22,39 +23,47 @@ class WrappedPacketInBlockPlace_Legacy extends WrappedPacket {
     }
 
     @Override
-    protected void setup() throws Exception {
-        final Hand hand = Hand.MAIN_HAND;
-        final ItemStack itemStack;
-        final int x, y, z;
-        if (version.isHigherThan(ServerVersion.v_1_7_10)) {
-            final Object nmsBlockPosObj = fields[0].get(packet);
+    protected void setup() {
+        try {
+            final Hand hand = Hand.MAIN_HAND;
+            final ItemStack itemStack;
+            final int x, y, z;
+            if (version.isHigherThan(ServerVersion.v_1_7_10)) {
+                final Object nmsBlockPosObj = fields[0].get(packet);
 
-            x = blockPosXYZ[0].getInt(nmsBlockPosObj);
-            y = blockPosXYZ[1].getInt(nmsBlockPosObj);
-            z = blockPosXYZ[2].getInt(nmsBlockPosObj);
+                x = blockPosXYZ[0].get(nmsBlockPosObj);
+                y = blockPosXYZ[1].get(nmsBlockPosObj);
+                z = blockPosXYZ[2].get(nmsBlockPosObj);
 
-            Object nmsItemStackObj = fields[1].get(packet);
+                Object nmsItemStackObj = fields[1].get(packet);
 
-            Object craftItemStack = asBukkitCopyMethod.invoke(null, nmsItemStackObj);
+                Object craftItemStack = asBukkitCopyMethod.invoke(null, nmsItemStackObj);
 
-            itemStack = (ItemStack) craftItemStack;
+                itemStack = (ItemStack) craftItemStack;
+            }
+            //1.7.10
+            else {
+                x = fields_1_7[0].getInt(packet);
+                y = fields_1_7[1].getInt(packet);
+                z = fields_1_7[2].getInt(packet);
+
+                Object nmsItemStackObj = fields_1_7[3].get(packet);
+
+                Object craftItemStack = asBukkitCopyMethod.invoke(null, nmsItemStackObj);
+
+                itemStack = (ItemStack) craftItemStack;
+            }
+
+            this.hand = hand;
+            this.itemStack = itemStack;
+            this.blockPosition = new Vector3i(x, y, z);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
         }
-        //1.7.10
-        else {
-            x = fields_1_7[0].getInt(packet);
-            y = fields_1_7[1].getInt(packet);
-            z = fields_1_7[2].getInt(packet);
+    }
 
-            Object nmsItemStackObj = fields_1_7[3].get(packet);
-
-            Object craftItemStack = asBukkitCopyMethod.invoke(null, nmsItemStackObj);
-
-            itemStack = (ItemStack) craftItemStack;
-        }
-
-        this.hand = hand;
-        this.itemStack = itemStack;
-        this.blockPosition = new Vector3i(x, y, z);
+    public Player getPlayer() {
+        return this.player;
     }
 
     public Hand getHand() {
@@ -80,7 +89,7 @@ class WrappedPacketInBlockPlace_Legacy extends WrappedPacket {
 
     private static Field[] fields_1_7 = new Field[4];
 
-    private static Field[] blockPosXYZ = new Field[3];
+    private static Reflection.FieldAccessor<Integer>[] blockPosXYZ = new Reflection.FieldAccessor[3];
 
     private static Method asBukkitCopyMethod;
 
@@ -120,9 +129,9 @@ class WrappedPacketInBlockPlace_Legacy extends WrappedPacket {
                 fields[1] = blockPlaceClass.getDeclaredField("d");
 
 
-                blockPosXYZ[0] = blockPositionClass.getSuperclass().getDeclaredField(BaseBlockUtils.getPosXFieldName());
-                blockPosXYZ[1] = blockPositionClass.getSuperclass().getDeclaredField(BaseBlockUtils.getPosYFieldName());
-                blockPosXYZ[2] = blockPositionClass.getSuperclass().getDeclaredField(BaseBlockUtils.getPosZFieldName());
+                blockPosXYZ[0] = Reflection.getField(blockPlaceClass.getSuperclass(), int.class, 0);
+                blockPosXYZ[1] = Reflection.getField(blockPlaceClass.getSuperclass(), int.class, 1);
+                blockPosXYZ[2] = Reflection.getField(blockPlaceClass.getSuperclass(), int.class, 2);
             }
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
@@ -140,10 +149,5 @@ class WrappedPacketInBlockPlace_Legacy extends WrappedPacket {
             }
         }
 
-        for (Field f : blockPosXYZ) {
-            if (f != null) {
-                f.setAccessible(true);
-            }
-        }
     }
 }
