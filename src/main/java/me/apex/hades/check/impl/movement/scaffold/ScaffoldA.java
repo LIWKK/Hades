@@ -18,7 +18,7 @@ public class ScaffoldA extends Check {
 
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
-        if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_PLACE)) {
+        if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_PLACE) && user.getPlayer().getItemInHand().getType().isBlock()) {
             WrappedPacketInBlockPlace packet = new WrappedPacketInBlockPlace(user.getPlayer(), e.getPacket());
             //This if should fix this
             // The error (#10) at https://github.com/undersquire/Hades/issues/10 should be resolved here
