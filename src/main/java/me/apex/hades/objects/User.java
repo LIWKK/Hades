@@ -95,6 +95,12 @@ public class User {
     public void setFlyAFix(boolean flyAFix) { this.flyAFix = flyAFix; }
 
     public boolean getFlyAFix() { return flyAFix; }
+
+    public boolean isOnClimbableBlock() {
+        if (PlayerUtils.isClimbableBlock(getLocation().getBlock()) || PlayerUtils.isClimbableBlock(getLocation().add(0,0, 1).getBlock())){
+            return true;
+        }else return false;
+    }
     
     public long getLastServerPosition() { return lastServerPosition; }
 
