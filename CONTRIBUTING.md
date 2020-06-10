@@ -1,0 +1,1 @@
+To contribute to this project, simply clone the repository onto your computer, and make your changes. Then, make a pull request that details what changes you made. Depending on what changes you make, we will accept or close your pull request.
