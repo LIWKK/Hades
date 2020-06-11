@@ -39,6 +39,9 @@ anti-vpn:
   enabled: true
   punish-command: 'kick %player% &cVPNs are not allowed on this server!'
 
+#Check Values
+Max-CPS: 20
+
 #Check Configuration
 #NOTE: Experimental checks are preset to not punish players
 checks:
@@ -135,6 +138,10 @@ checks:
         punishable: true
         max-vl: 10
       d:
+        enabled: true
+        punishable: false
+        max-vl: 10
+      e:
         enabled: true
         punishable: false
         max-vl: 10

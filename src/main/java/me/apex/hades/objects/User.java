@@ -24,12 +24,12 @@ public class User {
     private final Player player;
     private final UUID playerUUID;
     private Location location, lastLocation, lastOnGroundLocation;
-    private boolean alerts, lagging, digging, flyAFix, sprinting, sneaking;
+    private boolean alerts, lagging, digging, flyAFix, sprinting, sneaking, isRightClicking;
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, lastVelX, lastVelY, lastVelZ, optifineTicks, iceTicks, hitTicks, slimeTicks, velocityTicks, teleportTicks, airTicks, groundTicks, clientGroundTicks;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, lastYawDiff, lastPitchDiff;
-    private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity, lastServerPosition, lastArmSwing;
+    private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity, lastServerPosition, lastArmSwing, autoClickerEStart;
     private String address;
-    private int ping, flagDelay;
+    private int ping, flagDelay, clicks;
     private LogUtils.TextFile logFile;
     private Deque<Long> transactionQueue = new LinkedList<>();
     public boolean banned;
@@ -59,7 +59,7 @@ public class User {
     }
     
     public Location getLocation() {
-    	return location;
+    	return getPlayer().getLocation();
     }
     
     public void setLocation(Location location) {
@@ -117,6 +117,18 @@ public class User {
             return false;
         }
     }
+
+    public boolean isRightClicking(){ return isRightClicking; }
+
+    public void setRightClicking(boolean isRightClicking) { this.isRightClicking = isRightClicking; }
+
+    public int getClicks() { return clicks; }
+
+    public void setClicks(int clicks) { this.clicks = clicks; }
+
+    public long getAutoClickerEStart() { return autoClickerEStart; }
+
+    public void setAutoClickerEStart(long autoClickerEStart) { this.autoClickerEStart = autoClickerEStart; }
 
     public boolean isInLiquid(){ return PlayerUtils.isInLiquidReflection(getPlayer()); }
 

@@ -2,10 +2,7 @@ package me.apex.hades.check.api;
 
 import me.apex.hades.check.impl.combat.aim.*;
 import me.apex.hades.check.impl.combat.aura.*;
-import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
-import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
-import me.apex.hades.check.impl.combat.autoclicker.AutoClickerC;
-import me.apex.hades.check.impl.combat.autoclicker.AutoClickerD;
+import me.apex.hades.check.impl.combat.autoclicker.*;
 import me.apex.hades.check.impl.combat.criticals.CriticalsA;
 import me.apex.hades.check.impl.combat.reach.ReachA;
 import me.apex.hades.check.impl.combat.velocity.VelocityA;
@@ -59,6 +56,7 @@ public enum CheckManager {
             AutoClickerB.class,
             AutoClickerC.class,
             AutoClickerD.class,
+            AutoClickerE.class,
             ReachA.class,
             VelocityA.class,
             FlyA.class,

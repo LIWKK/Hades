@@ -24,7 +24,10 @@ public class ScaffoldA extends Check {
             // The error (#10) at https://github.com/undersquire/Hades/issues/10 should be resolved here
             TaskUtils.run(() -> {
                 Block block = new Location(user.getLocation().getWorld(), packet.getBlockPosition().x, packet.getBlockPosition().y, packet.getBlockPosition().y).getBlock();
-                if (user.isSneaking() || !PlayerUtils.isOnGround(user.getPlayer()) || user.getDeltaXZ() < .2) return;
+                if (user.isSneaking()
+                        || !PlayerUtils.isOnGround(user.getPlayer())
+                        || user.getDeltaXZ() < .2) return;
+
                 if (e.getPlayer().getLocation().subtract(0, 1, 0).getBlock().getType().isSolid()
                         && !e.getPlayer().getLocation().subtract(0, 2, 0).getBlock().getType().isSolid() && e.getPlayer().getLocation().getBlockY() > packet.getBlockPosition().y) {
                     if (preVL++ >= 2){

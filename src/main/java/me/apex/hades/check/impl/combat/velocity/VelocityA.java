@@ -10,15 +10,13 @@ import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
 import me.apex.hades.objects.UserManager;
 import me.apex.hades.utils.PlayerUtils;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @CheckInfo(name = "Velocity", type = "A")
 public class VelocityA extends Check {
-
-    private double lastDiff;
-
     @Override
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
@@ -26,6 +24,7 @@ public class VelocityA extends Check {
             if (packet.getAction() == EntityUseAction.ATTACK && packet.getEntity() instanceof Player){
                 Player entity = (Player)packet.getEntity();
                 Location lastLocation = entity.getLocation();
+                if(entity.getGameMode() != GameMode.SURVIVAL || e.isCancelled())return;
                 new BukkitRunnable(){
                     @Override
                     public void run() {
