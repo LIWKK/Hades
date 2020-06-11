@@ -22,7 +22,8 @@ You can also join my discord here. (https://discord.gg/zURutBu)
 
 ## Detections
 Spoiler: Checks
-features.png
+
+## Features
 High Performance:
 Hades is packet-based, meaning it runs completely asynchronously, dropping almost no TPS on your server. The project is also being optimized with every commit/update.
 
@@ -49,7 +50,7 @@ Commands:
 /alerts - hades.command.alerts
 /logs - hades.command.logs
 
-Permissions:
+## Permissions
 hades.alerts - receive notifications
 
 ## Usage
