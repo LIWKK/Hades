@@ -18,7 +18,7 @@ Other spigot forks may not work with Hades.
 
 ## Support
 Project is open-sourced and therefore all support will be handled on the github page (issues)
-You can also join my discord here
+You can also join my discord here. (https://discord.gg/zURutBu)
 
 ## Detections
 Spoiler: Checks
