@@ -35,63 +35,92 @@ You can also join my discord here. (https://discord.gg/zURutBu)
 **Combat:**
 
 AimAssist
+
 KillAura
+
 AutoClicker
+
 Criticals
+
 Reach (unstable)
+
 Velocity (unstable)
 
 **Movement:**
 
 Fly
+
 Motion
+
 Scaffold
+
 SmallHop
+
 Speed
 
 **Packet:**
 
 BadPackets
+
 NoFall
+
 Timer
 
 ## Features
 **High Performance:**
+
 Hades is packet-based, meaning it runs completely asynchronously, dropping almost no TPS on your server. The project is also being optimized with every commit/update.
 
 **Advanced Detections:**
+
 Hades has hard-coded checks that are tested against various hacks from many clients. These checks are always being updated to maintain little false positives but still detecting a vast majority of cheaters.
 
 **AutoPunish:**
+
 Hades comes with an automatic punishment feature. When a player goes over the max violations for a certain check (customizable in config), it will carry out the punishment set in the config.
 
 ## Restrictions
 **Dependencies:**
+
 None!
+
 **Incompatibilities:**
+
 Any plugin that modifies vanilla mechanics (untested)
+
 PlugMan Reload (incompatible)
+
 Custom Enchants (untested)
+
 Spigot forks (such as PaperSpigot) (untested)
 
 ## Commands
 **Commands:**
+
 /hades - hades.command
+
 /hades gui - hades.command.gui
+
 /hades info - hades.command.info
+
 /alerts - hades.command.alerts
+
 /logs - hades.command.logs
 
 ## Permissions
+
 hades.alerts - receive notifications
 
 ## Usage
 **Installation from Jar:**
+
 Just simply download the latest Hades.jar file from from the releases tab, drag it into your server 'plugins' folder, and start your server.
 
 **Installation from Source:**
+
 Start by cloning or downloading the source from the Hades GitHub Repository. You will now need a Java IDE to build the project into a plugin jar. Download and install Eclipse (or any prefered Java IDE) and open the IDE after installation. Import the Hades files as a maven project and allow your IDE to automatically download all of the maven dependencies. Once your IDE has finished downloading the dependencies, simply build the project, drag the outputted jar file into your server's 'plugins' directory, and start your server.
 
 ## Tos
 **License:**
+
 This project is licensed under the GNU General Public License (GPL) 2.0. View the project license on the license tab or in the LICENSE file.
