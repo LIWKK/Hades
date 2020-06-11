@@ -21,7 +21,23 @@ Project is open-sourced and therefore all support will be handled on the github 
 You can also join my discord here. (https://discord.gg/zURutBu)
 
 ## Detections
-Spoiler: Checks
+Combat:
+AimAssist
+KillAura
+AutoClicker
+Criticals
+Reach (unstable)
+Velocity (unstable)
+Movement:
+Fly
+Motion
+Scaffold
+SmallHop
+Speed
+Packet:
+BadPackets
+NoFall
+Timer
 
 ## Features
 High Performance:
