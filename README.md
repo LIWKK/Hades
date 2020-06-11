@@ -6,16 +6,23 @@ Hades is an advanced anticheat with many checks designed to patch various cheats
 **Compatibility:**
 
 Spigot 1.7.x
-Spigot 1.8.x
+
+Spgiot 1.8.x
 
 **Untested Compatibility:**
 
 Spigot 1.9.x
+
 Spigot 1.10.x
+
 Spigot 1.11.x
+
 Spigot 1.12.x
+
 Spigot 1.13.x
+
 Spigot 1.14.x
+
 Spigot 1.15.x
 
 **Other spigot forks may not work with Hades.**
