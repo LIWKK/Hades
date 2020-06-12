@@ -27,9 +27,9 @@ public class User {
     private boolean alerts, lagging, digging, flyAFix, sprinting, sneaking, isRightClicking;
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, lastVelX, lastVelY, lastVelZ, optifineTicks, iceTicks, hitTicks, slimeTicks, velocityTicks, teleportTicks, airTicks, groundTicks, clientGroundTicks;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, lastYawDiff, lastPitchDiff;
-    private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity, lastServerPosition, lastArmSwing, autoClickerEStart;
+    private long lastKeepAlive, lastServerKeepAlive, lastJoin, lastPacket, lastLagPacket, lastLagSet, lastVelocity, lastServerPosition, lastArmSwing, autoClickerEStart, lastOnIce, lastOnSlime;
     private String address;
-    private int ping, flagDelay, clicks;
+    private int ping, flagDelay, clicks, entitiesInteractedThisTick;
     private LogUtils.TextFile logFile;
     private Deque<Long> transactionQueue = new LinkedList<>();
     public boolean banned;
@@ -81,7 +81,15 @@ public class User {
     public void setAlerts(boolean alerts) {
     	this.alerts = alerts;
     }
-    
+
+    public int getEntitiesInteractedThisTick() {
+        return entitiesInteractedThisTick;
+    }
+
+    public void setEntitiesInteractedThisTick(int entitiesInteractedThisTick) {
+        this.entitiesInteractedThisTick = entitiesInteractedThisTick;
+    }
+
     public boolean isLagging() {
     	return lagging;
     }
@@ -95,6 +103,22 @@ public class User {
     public void setFlyAFix(boolean flyAFix) { this.flyAFix = flyAFix; }
 
     public boolean getFlyAFix() { return flyAFix; }
+
+    public long getLastOnIce() {
+        return lastOnIce;
+    }
+
+    public void setLastOnIce(long lastOnIce) {
+        this.lastOnIce = lastOnIce;
+    }
+
+    public long getLastOnSlime() {
+        return lastOnSlime;
+    }
+
+    public void setLastOnSlime(long lastOnSlime) {
+        this.lastOnSlime = lastOnSlime;
+    }
 
     public boolean isOnClimbableBlock() {
         if (PlayerUtils.isClimbableBlock(getLocation().getBlock()) || PlayerUtils.isClimbableBlock(getLocation().add(0,0, 1).getBlock())){

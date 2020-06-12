@@ -24,7 +24,7 @@ public class VelocityA extends Check {
             if (packet.getAction() == EntityUseAction.ATTACK && packet.getEntity() instanceof Player){
                 Player entity = (Player)packet.getEntity();
                 Location lastLocation = entity.getLocation();
-                if(entity.getGameMode() != GameMode.SURVIVAL || e.isCancelled())return;
+                if(entity.getGameMode() != GameMode.SURVIVAL || entity.getGameMode() != GameMode.ADVENTURE || e.isCancelled())return;
                 new BukkitRunnable(){
                     @Override
                     public void run() {

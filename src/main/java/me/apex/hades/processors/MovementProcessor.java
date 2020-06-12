@@ -66,6 +66,12 @@ public enum MovementProcessor implements Listener {
             user.setLastDeltaPitch(lastDeltaPitch);
             user.setDeltaPitch(deltaPitch);
 
+            if (user.getIceTicks() >= 1){
+                user.setLastOnIce(System.nanoTime() / 1000000);
+            }else if (user.getSlimeTicks() >= 1){
+                user.setLastOnSlime(System.nanoTime() / 1000000);
+            }
+
             //Check Surroundings
             if (Hades.getInstance().isEnabled()) {
                 TaskUtils.run(() -> {

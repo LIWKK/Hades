@@ -373,7 +373,7 @@ public class PlayerUtils {
     Movement Utils
      */
     
-    public static double getBaseMovementSpeed(User user, double conveinentMax, boolean blockAmplifiers) {
+    /*public static double getBaseMovementSpeed(User user, double conveinentMax, boolean blockAmplifiers) {
         conveinentMax += getPotionEffectLevel(user.getPlayer(), PotionEffectType.SPEED) * (conveinentMax / 2);
         conveinentMax *= (user.getPlayer().getWalkSpeed() / 0.2D);
 
@@ -382,6 +382,32 @@ public class PlayerUtils {
 
         if (blockAmplifiers) {
         	
+        }
+
+        return conveinentMax;
+    }*/
+    public static double getBaseMovementSpeed(User user, double conveinentMax, boolean blockAmplifiers) {
+        conveinentMax += getPotionEffectLevel(user.getPlayer(), PotionEffectType.SPEED) * (conveinentMax / 2);
+        conveinentMax *= (user.getPlayer().getWalkSpeed() / 0.2D);
+
+        if (user.getPlayer().isFlying())
+            conveinentMax *= (user.getPlayer().getFlySpeed() / 0.2D);
+
+        if (blockAmplifiers) {
+            if (blockNearHead(user.getPlayer()) && ((System.nanoTime() / 1000000) - user.getLastOnIce() < 2500
+                    || (System.nanoTime() / 1000000) - user.getLastOnIce() < 2500)) {
+                conveinentMax += 2D * (conveinentMax / 1.2);
+            } else {
+                if (blockNearHead(user.getPlayer())) {
+                    conveinentMax += 0.63D * conveinentMax;
+                }
+                if ((System.nanoTime() / 1000000) - user.getLastOnIce() < 2500) {
+                    conveinentMax += 0.63D * conveinentMax;
+                }
+                if ((System.nanoTime() / 1000000) - user.getLastOnSlime() < 2500) {
+                    conveinentMax += 0.63D * conveinentMax;
+                }
+            }
         }
 
         return conveinentMax;

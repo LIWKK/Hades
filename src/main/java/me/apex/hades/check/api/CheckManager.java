@@ -51,6 +51,7 @@ public enum CheckManager {
             AuraH.class,
             AuraI.class,
             AuraJ.class,
+            MultiAuraK.class,
             CriticalsA.class,
             AutoClickerA.class,
             AutoClickerB.class,

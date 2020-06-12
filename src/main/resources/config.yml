@@ -1,6 +1,14 @@
 ###############################
 #     Hades Configuration     #
 ###############################
+# This is the configuration file of Hades Anti-Cheat
+
+# Hades is a very configurable anticheat. All the punish commands and max VL's are configurable.
+# Hades supports logging very well. It can write the logs to a file or even a MySQL server.
+# Hades support change of base command, prefix, punish announcements and more!
+# IMPORTANT: If you don't know what does something do don't use it.
+
+# Mitigate: Mitigate means lagback or canceling hits. If you want to make Hades silent or if you want it to false less you can disable it.
 
 #Language Configuration
 lang:
@@ -20,6 +28,7 @@ system:
       enabled: false
   logging:
     log-format: '[%time%] %player% failed %check% (%checktype%) VL:(%vl%) INFO:(%info%)'
+    log-to-console: false
     file:
       enabled: true
       path: '\\logs'
@@ -48,103 +57,126 @@ checks:
   broadcast-punishments: true
   detections:
     aim:
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       b:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       c:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       d:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       e:
         enabled: true
         punishable: true
         max-vl: 5
+        punish-command: 'ban %player% %prefix%Cheating'
       f:
         enabled: true
         punishable: true
         max-vl: 5
+        punish-command: 'ban %player% %prefix%Cheating'
       g:
         enabled: true
         punishable: true
         max-vl: 5
+        punish-command: 'ban %player% %prefix%Cheating'
     aura:
       mitigate: true
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       b:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       c:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       d:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       e:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       f:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       g:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       h:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       i:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+      k:
+        enabled: true
+        punishable: true
+        max-vl: 5
+        punish-command: 'ban %player% %prefix%Cheating'
     criticals:
       mitigate: true
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     autoclicker:
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       b:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       c:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       d:
         enabled: true
         punishable: false
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       e:
         enabled: true
         punishable: false
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     reach:
       mitigate: true
       punish-command: 'ban %player% %prefix%Cheating'
@@ -152,136 +184,151 @@ checks:
         enabled: true
         punishable: false
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     velocity:
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: false
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     fly:
       mitigate: true
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 20
+        punish-command: 'ban %player% %prefix%Cheating'
       b:
         enabled: true
         punishable: true
         max-vl: 20
+        punish-command: 'ban %player% %prefix%Cheating'
       c:
         enabled: true
         punishable: true
         max-vl: 20
+        punish-command: 'ban %player% %prefix%Cheating'
     motion:
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     scaffold:
       mitigate: true
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       b:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     speed:
       mitigate: true
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 20
+        punish-command: 'ban %player% %prefix%Cheating'
       b:
         enabled: true
         punishable: true
         max-vl: 20
+        punish-command: 'ban %player% %prefix%Cheating'
       c:
         enabled: true
         punishable: true
         max-vl: 20
+        punish-command: 'ban %player% %prefix%Cheating'
       d:
         enabled: true
         punishable: true
         max-vl: 20
+        punish-command: 'ban %player% %prefix%Cheating'
     smallhop:
       mitigate: true
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     noslow:
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     badpackets:
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       b:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       c:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       d:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       e:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       f:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       g:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       h:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     nofall:
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     timer:
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
       b:
         enabled: true
         punishable: true
         max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     fasteat:
       mitigate: true
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 3
+        punish-command: 'ban %player% %prefix%Cheating'
     vape:
-      punish-command: 'ban %player% %prefix%Cheating'
       a:
         enabled: true
         punishable: true
         max-vl: 1
+        punish-command: 'ban %player% %prefix%Cheating'
