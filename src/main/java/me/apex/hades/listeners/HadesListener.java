@@ -1,5 +1,6 @@
 package me.apex.hades.listeners;
 
+import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.event.PacketHandler;
 import io.github.retrooper.packetevents.event.PacketListener;
 import io.github.retrooper.packetevents.event.impl.PlayerUninjectEvent;
@@ -26,7 +27,7 @@ public class HadesListener implements Listener, PacketListener {
     public void onJoin(PlayerJoinEvent e) {
         User user = new User(e.getPlayer().getUniqueId());
 
-        user.setLastJoin((System.nanoTime() / 1000000));
+        user.setLastJoin(PacketEvents.currentCalculatedMS());
 
         UserManager.INSTANCE.register(user);
 

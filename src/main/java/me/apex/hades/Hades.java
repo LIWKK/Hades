@@ -31,7 +31,7 @@ public class Hades extends JavaPlugin {
         new VelocityListener();
 
         //Register Network
-        PacketEvents.start(this, false);
+        PacketEvents.start(this);
         PacketEvents.getEventManager().registerListener(new LagListener());
         PacketEvents.getEventManager().registerListener(new HadesListener());
         PacketEvents.getEventManager().registerListener(new NetworkListener());

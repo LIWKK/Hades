@@ -36,10 +36,15 @@ public class NetworkListener implements PacketListener, Listener {
 
     @PacketHandler
     public void onPacketSend(PacketSendEvent e) {
-        if (UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId()) != null) {
-            User user = UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId());
-            if (e.getPacketName().equalsIgnoreCase(Packet.Server.POSITION))
-                user.setTeleportTicks(5);
+	    //There is a bug on when player clicks multiplayer than the server send the info packet.
+        try {
+            if (UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId()) != null) {
+                User user = UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId());
+                if (e.getPacketName().equalsIgnoreCase(Packet.Server.POSITION))
+                    user.setTeleportTicks(5);
+            }
+        }catch (Exception ex){
+
         }
     }
 
