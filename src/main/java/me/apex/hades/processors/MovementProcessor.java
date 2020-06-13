@@ -91,7 +91,7 @@ public enum MovementProcessor implements Listener {
             user.setTeleportTicks(0);
             
             //Update Air/Ground Ticks
-            if(user.onGround()) {
+            if(PlayerUtils.isOnGround(user.getPlayer())) {
             	user.setGroundTicks(user.getGroundTicks() + 1);
             	user.setAirTicks(0);
             }else {

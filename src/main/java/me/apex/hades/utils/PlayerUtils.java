@@ -369,6 +369,34 @@ public class PlayerUtils {
         return false;
     }
 
+    //Credits to funkemunky
+    public static boolean isInStairs(Player player) {
+        Object box = ReflectionUtils.modifyBoundingBox(ReflectionUtils.getBoundingBox(player), 0, -0.5,0,0,0,0);
+
+        double minX = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "a"), box);
+        double minY = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "b"), box);
+        double minZ = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "c"), box);
+        double maxX = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "d"), box);
+        double maxY = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "e"), box);
+        double maxZ = (double) ReflectionUtils.getInvokedField(ReflectionUtils.getField(box.getClass(), "f"), box);
+
+        for(double x = minX ; x < maxX ; x++) {
+            for(double y = minY ; y < maxY ; y++) {
+                for(double z = minZ ; z < maxZ ; z++) {
+                    Block block = new Location(player.getWorld(), x, y, z).getBlock();
+
+                    if(BlockUtils.isStair(block)
+                            || BlockUtils.isSlab(block)
+                            || block.getType().equals(Material.SKULL)
+                            || block.getType().equals(Material.CAKE_BLOCK)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     /*
     Movement Utils
      */

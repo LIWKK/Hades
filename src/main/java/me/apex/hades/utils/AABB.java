@@ -1,29 +1,27 @@
 package me.apex.hades.utils;
 
 
+import me.apex.hades.objects.User;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 // Credits to Tecnio
 
 public class AABB {
 
-    private Vector min, max; // min/max locations
+    private Vector min, max;
 
-    // Create Bounding Box from min/max locations.
     public AABB(Vector min, Vector max) {
         this(min.getX(), min.getY(), min.getZ(), max.getX(), max.getY(), max.getZ());
     }
 
-    // Main constructor for AABB
     public AABB(double x1, double y1, double z1, double x2, double y2, double z2) {
         this.min = new Vector(Math.min(x1, x2), Math.min(y1, y2), Math.min(z1, z2));
         this.max = new Vector(Math.max(x1, x2), Math.max(y1, y2), Math.max(z1, z2));
     }
 
-    private AABB(Player player) {
+    private AABB(User player) {
         this.min = getMin(player);
         this.max = getMax(player);
     }
@@ -33,15 +31,14 @@ public class AABB {
     	 this.max = getMax(entity);
     }
 
-    private Vector getMin(Player player) {
-        return player.getLocation().toVector().add(new Vector(-0.3, 0, -0.3));
+    private Vector getMin(User player) {
+        return player.getLastLocation().toVector().add(new Vector(-0.3, 0, -0.3));
     }
 
-    private Vector getMax(Player player) {
-        return player.getLocation().toVector().add(new Vector(0.3, 1.8, 0.3));
+    private Vector getMax(User player) {
+        return player.getLastLocation().toVector().add(new Vector(0.3, 1.8, 0.3));
     }
-    
-    //TODO: Implement hitbox values for all entites!
+
     private Vector getMin(Entity entity) {
         return entity.getLocation().toVector().add(new Vector(-0.3, 0, -0.3));
     }
@@ -51,7 +48,7 @@ public class AABB {
     }
 
     // Create an AABB based on a player's hitbox
-    public static AABB from(Player player) {
+    public static AABB from(User player) {
         return new AABB(player);
     }
     
@@ -95,9 +92,6 @@ public class AABB {
         }
     }
 
-    // Check if a Ray passes through this box. tmin and tmax are the bounds.
-    // Example: If you wanted to see if the Ray collides anywhere from its
-    // origin to 5 units away, the values would be 0 and 5.
     public boolean collides(Ray ray, double tmin, double tmax) {
         for (int i = 0; i < 3; i++) {
             double d = 1 / ray.direction(i);
@@ -115,8 +109,6 @@ public class AABB {
         return true;
     }
 
-    // Same as other collides method, but returns the distance of the nearest
-    // point of collision of the ray and box, or -1 if no collision.
     public double collidesD(Ray ray, double tmin, double tmax) {
         for (int i = 0; i < 3; i++) {
             double d = 1 / ray.direction(i);

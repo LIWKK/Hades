@@ -20,7 +20,7 @@ public class AuraB extends Check {
         	WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
             Entity entity = packet.getEntity();
             
-            Ray ray = Ray.from(user.getPlayer());
+            Ray ray = Ray.from(user);
             boolean lookingAt = AABB.from(entity).collides(ray, 0, 10);
             
             if(!lookingAt) {

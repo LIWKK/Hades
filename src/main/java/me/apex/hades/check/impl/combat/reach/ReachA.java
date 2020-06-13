@@ -7,8 +7,10 @@ import io.github.retrooper.packetevents.packetwrappers.in.useentity.WrappedPacke
 import me.apex.hades.check.api.Check;
 import me.apex.hades.check.api.CheckInfo;
 import me.apex.hades.objects.User;
+import me.apex.hades.objects.UserManager;
 import me.apex.hades.utils.AABB;
 import me.apex.hades.utils.Ray;
+import org.bukkit.entity.Player;
 
 @CheckInfo(name = "Reach", type = "A")
 public class ReachA extends Check {
@@ -23,19 +25,21 @@ public class ReachA extends Check {
     public void onPacket(PacketReceiveEvent e, User user) {
         if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
         	WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
-            if (packet.getAction() == EntityUseAction.ATTACK && !user.isLagging()){
+            if (packet.getAction() == EntityUseAction.ATTACK && packet.getEntity() instanceof Player){
+                User entity = UserManager.INSTANCE.getUser(packet.getEntity().getUniqueId());
                 try {
-                    Ray ray = Ray.from(user.getPlayer());
-                    double dist = AABB.from(packet.getEntity()).collidesD(ray,0, 10);
+                    Ray ray = Ray.from(user);
+                    double dist = AABB.from(entity).collidesD(ray,0, 10);
                     if (dist != -1) {
-                    	if(dist > 3.05) {
-                    		flag(user, "dist = " + dist);
-                    		if (shouldMitigate()) e.setCancelled(true);
-                    	}
+                    	if(dist > 3.3) {
+                    	    if(++preVL >= 3){
+                                flag(user, "dist = " + dist);
+                                if (shouldMitigate()) e.setCancelled(true);
+                            }
+                    	}else preVL = 0;
                     }
                 }catch (Exception ex){}
             }
         }
     }
-
 }
