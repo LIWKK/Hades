@@ -47,8 +47,9 @@ public abstract class Check {
     }
 
     //Time Util
-    public int elapsed(User user, int start) {
-        return user.tick - start;
+    public long time() { return System.nanoTime() / 1000000; }
+    public int elapsed(int now, int start) {
+        return now - start;
     }
 
 }

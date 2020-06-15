@@ -20,7 +20,8 @@ public class SpeedA extends Check {
             if (((FlyingEvent) e).hasMoved()) {
                 double diff = user.deltaXZ - user.lastDeltaXZ;
                 if (diff == 0.0 && user.deltaXZ > 0.29
-                        && !user.player.getAllowFlight()) {
+                        && !user.player.getAllowFlight()
+                        && elapsed(user.tick, user.teleportTick) > 20) {
                     flag(user, "consistent speed, diff: " + diff);
                 }
             }

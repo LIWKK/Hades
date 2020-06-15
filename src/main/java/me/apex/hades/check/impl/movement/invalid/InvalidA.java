@@ -18,7 +18,7 @@ public class InvalidA extends Check {
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
             if (((FlyingEvent) e).hasMoved()) {
-                if (user.deltaY == -user.lastDeltaY && user.deltaY != 0 && elapsed(user, user.teleportTick) > 0) {
+                if (user.deltaY == -user.lastDeltaY && user.deltaY != 0 && elapsed(user.tick, user.teleportTick) > 0) {
                     if (++threshold > 1) {
                         flag(user, "repetitive vertical motions, m: " + user.deltaY);
                     }

@@ -20,7 +20,7 @@ public class AuraA extends Check {
     @Override
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof AttackEvent) {
-            long timeDiff = (System.nanoTime() / 1000000) - lastFlying;
+            long timeDiff = time() - lastFlying;
 
             if (timeDiff < 5) {
                 if (++threshold > 10) {
@@ -28,7 +28,7 @@ public class AuraA extends Check {
                 }
             } else threshold = 0;
         } else if (e instanceof FlyingEvent) {
-            lastFlying = (System.nanoTime() / 1000000);
+            lastFlying = time();
         }
     }
 
