@@ -6,32 +6,38 @@ import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.util.MathUtil;
-import org.bukkit.entity.Entity;
+
+import java.util.Deque;
+import java.util.LinkedList;
 
 @CheckInfo(name = "Aura", type = "C")
 public class AuraC extends Check {
 
+    private final Deque<Double> diffs = new LinkedList<>();
+    private double average = 100;
+
     @Override
     public void init() {
-        dev = true;
         enabled = true;
     }
 
     @Override
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof AttackEvent) {
-            Entity entity = ((AttackEvent) e).getEntity();
-            double rotation = Math.abs(user.deltaYaw);
+            double diff = Math.abs(user.deltaYaw - user.lastDeltaYaw);
+            if (diff > 0.0) diffs.add(diff);
+            if (diffs.size() >= 5) {
+                double deviation = MathUtil.getStandardDeviation(diffs.stream().mapToDouble(d -> d).toArray());
 
-            double dir = MathUtil.getDirection(user.location, entity.getLocation());
-            double dist = MathUtil.getDistanceBetweenAngles360(user.location.getYaw(), dir);
+                average = ((average * 19) + deviation) / 20;
+                if (average < 5) {
+                    if (++threshold > 2) {
+                        flag(user, "low average deviation, a: " + average);
+                    }
+                } else threshold *= 0.75;
 
-            double range = user.location.clone().toVector().setY(0.0D).distance(entity.getLocation().clone().toVector().setY(0.0D));
-
-            if (dist < 0.7 && rotation > 2) {
-                if (++threshold > 0)
-                    flag(user, "lock view, d: " + dist + ", r: " + rotation);
-            } else threshold = 0;
+                diffs.clear();
+            }
         }
     }
 

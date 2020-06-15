@@ -1,4 +1,4 @@
-package me.apex.hades.check.impl.player.invalid;
+package me.apex.hades.check.impl.movement.invalid;
 
 import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
@@ -6,8 +6,8 @@ import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
 
-@CheckInfo(name = "Invalid", type = "B")
-public class InvalidB extends Check {
+@CheckInfo(name = "Invalid", type = "A")
+public class InvalidA extends Check {
 
     @Override
     public void init() {
