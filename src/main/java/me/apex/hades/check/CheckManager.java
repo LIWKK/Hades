@@ -5,6 +5,7 @@ import me.apex.hades.check.impl.combat.aura.AuraA;
 import me.apex.hades.check.impl.combat.aura.AuraC;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
+import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.speed.SpeedA;
 import me.apex.hades.check.impl.movement.speed.SpeedB;
 import me.apex.hades.check.impl.player.badpackets.BadPacketsA;
@@ -21,14 +22,15 @@ public class CheckManager {
     private static final Class[] checks = new Class[]{
             AimA.class,
             AuraA.class,
+            AuraB.class,
             AuraC.class,
             AutoClickerA.class,
             FlyA.class,
+            InvalidA.class,
+            ScaffoldA.class,
             SpeedA.class,
             SpeedB.class,
             BadPacketsA.class,
-            InvalidA.class,
-            AuraB.class,
             NoFallA.class
     };
 
