@@ -1,40 +1,45 @@
 package me.apex.hades.check.impl.combat.autoclicker;
 
-import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
-import io.github.retrooper.packetevents.packet.Packet;
-import me.apex.hades.check.api.Check;
-import me.apex.hades.check.api.CheckInfo;
-import me.apex.hades.objects.User;
-import me.apex.hades.utils.MathUtils;
-import me.apex.hades.utils.PacketUtils;
+import io.github.retrooper.packetevents.event.PacketEvent;
+import me.apex.hades.check.Check;
+import me.apex.hades.check.CheckInfo;
+import me.apex.hades.event.impl.packetevents.SwingEvent;
+import me.apex.hades.user.User;
+import me.apex.hades.util.MathUtil;
+
+import java.util.Deque;
+import java.util.LinkedList;
 
 @CheckInfo(name = "AutoClicker", type = "A")
 public class AutoClickerA extends Check {
 
-    private int ticks;
-    private double avgClickSpeed, lastCps;
+    private final Deque<Long> ticks = new LinkedList<>();
+    private double lastDeviation;
 
     @Override
-    public void onPacket(PacketReceiveEvent e, User user) {
-        if (e.getPacketName().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
-            int ticks = this.ticks;
-            this.ticks = 0;
+    public void init() {
+        enabled = true;
+    }
 
-            if (user.isDigging() || ticks > 5) return;
+    @Override
+    public void onEvent(PacketEvent e, User user) {
+        if (e instanceof SwingEvent) {
+            if (!user.digging) ticks.add((long) (user.tick * 50.0));
+            if (ticks.size() >= 10) {
+                double deviation = MathUtil.getStandardDeviation(ticks.stream().mapToLong(d -> d).toArray());
+                double lastDeviation = this.lastDeviation;
+                this.lastDeviation = deviation;
 
-            double clickSpeed = ticks * 50.0D;
-            avgClickSpeed = (((avgClickSpeed * 19.0D) + clickSpeed) / 20.0D);
+                double diff = Math.abs(deviation - lastDeviation);
 
-            double cps = 1000.0D / avgClickSpeed;
-            double lastCps = this.lastCps;
-            this.lastCps = cps;
+                if (diff < 10) {
+                    if (++threshold > 1) {
+                        flag(user, "low deviation difference, d: " + diff);
+                    }
+                } else threshold = 0;
 
-            if (MathUtils.isRoughlyEqual(cps, lastCps, 0.00025) && cps > 2.6) {
-                if (vl++ > 12)
-                    flag(user, "cps = " + cps + ", lastCps = " + lastCps);
-            } else vl = 0;
-        } else if (PacketUtils.isFlyingPacket(e.getPacketName())) {
-            ticks++;
+                ticks.clear();
+            }
         }
     }
 

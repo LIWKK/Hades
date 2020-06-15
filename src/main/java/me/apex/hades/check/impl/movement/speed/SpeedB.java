@@ -1,37 +1,39 @@
 package me.apex.hades.check.impl.movement.speed;
 
-import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
-import me.apex.hades.check.api.Check;
-import me.apex.hades.check.api.CheckInfo;
-import me.apex.hades.objects.User;
-import me.apex.hades.utils.PacketUtils;
-import me.apex.hades.utils.PlayerUtils;
+import io.github.retrooper.packetevents.event.PacketEvent;
+import me.apex.hades.check.Check;
+import me.apex.hades.check.CheckInfo;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.user.User;
 
 @CheckInfo(name = "Speed", type = "B")
 public class SpeedB extends Check {
 
     @Override
-    public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getPacketName()) && (System.currentTimeMillis() - user.getLastVelocity()) > 1000) {
-            if (user.getTeleportTicks() > 0) return;
+    public void init() {
+        enabled = true;
+    }
 
-            double dist = user.getDeltaXZ();
-            double lastDist = user.getLastDeltaXZ();
+    @Override
+    public void onEvent(PacketEvent e, User user) {
+        if (e instanceof FlyingEvent) {
+            if (((FlyingEvent) e).hasMoved()) {
+                double max = 0.34;
+                max *= user.player.getWalkSpeed() / 0.2;
 
-            double prediction = lastDist * 0.699999988079071D;
-            double diff = Math.abs(dist - prediction);
-            double scaledDist = diff * 100;
+                if (elapsed(user, user.iceTick) < 20 || elapsed(user, user.slimeTick) < 20) max += 0.34;
+                if (elapsed(user, user.underBlockTick) < 40) max += 0.91;
+                if (elapsed(user, user.velocityTick) < 20) max += 0.21;
 
-            double max = PlayerUtils.getBaseMovementSpeed(user, 9.9D, true);
-            if (user.getLocation().subtract(0,1,0).getBlock().getType().toString().toLowerCase().contains("stairs"))
-                max += 1;
-
-            if (scaledDist > max && !user.getPlayer().getAllowFlight()) {
-                if (vl++ > 3){
-                    flag(user, "dist = " + scaledDist);
-                    if (shouldMitigate()) lagBack(user);
-                }
-            } else vl = 0;
+                if (user.deltaXZ > max
+                        && elapsed(user, user.teleportTick) > 20
+                        && !user.player.getAllowFlight()) {
+                    if (++threshold > 6) {
+                        flag(user, "breached limit, s: " + user.deltaXZ);
+                    }
+                } else threshold *= 0.75;
+            }
         }
     }
+
 }

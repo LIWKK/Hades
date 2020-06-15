@@ -1,4 +1,4 @@
-package me.apex.hades.check.impl.combat.aura;
+package me.apex.hades.check.impl.player.invalid;
 
 import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
@@ -7,10 +7,10 @@ import me.apex.hades.event.impl.packetevents.AttackEvent;
 import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
 
-@CheckInfo(name = "Aura", type = "A")
-public class AuraA extends Check {
+@CheckInfo(name = "Invalid", type = "C")
+public class InvalidC extends Check {
 
-    private long lastFlying;
+    private int ticks;
 
     @Override
     public void init() {
@@ -20,15 +20,14 @@ public class AuraA extends Check {
     @Override
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof AttackEvent) {
-            long timeDiff = (System.nanoTime() / 1000000) - lastFlying;
+            int ticks = this.ticks;
+            this.ticks = 0;
 
-            if (timeDiff < 5) {
-                if (++threshold > 10) {
-                    flag(user, "low flying delay, d: " + timeDiff);
-                }
-            } else threshold = 0;
+            if (ticks < 1) {
+                flag(user, "multiple attacks in tick, t: " + ticks);
+            }
         } else if (e instanceof FlyingEvent) {
-            lastFlying = (System.nanoTime() / 1000000);
+            ticks++;
         }
     }
 

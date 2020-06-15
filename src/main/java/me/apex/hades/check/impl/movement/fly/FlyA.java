@@ -1,38 +1,34 @@
 package me.apex.hades.check.impl.movement.fly;
 
-import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
-import me.apex.hades.check.api.Check;
-import me.apex.hades.check.api.CheckInfo;
-import me.apex.hades.objects.User;
-import me.apex.hades.utils.PacketUtils;
-import me.apex.hades.utils.PlayerUtils;
+import io.github.retrooper.packetevents.event.PacketEvent;
+import me.apex.hades.check.Check;
+import me.apex.hades.check.CheckInfo;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.user.User;
+import me.apex.hades.util.PlayerUtil;
 
 @CheckInfo(name = "Fly", type = "A")
 public class FlyA extends Check {
 
-    private double lastGround;
+    @Override
+    public void init() {
+        enabled = true;
+    }
 
     @Override
-    public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getPacketName()) && !user.getFlyAFix()) {
-            if (user.onGround()) {
-                lastGround = user.getLocation().getY();
-            } else {
-                if (user.getTeleportTicks() > 0 || user.getPlayer().getAllowFlight() || PlayerUtils.isClimbableBlock(user.getLocation().getBlock()) || PlayerUtils.isInWeb(user.getPlayer()) || PlayerUtils.isInLiquid(user.getPlayer())) {
-                    vl = 0;
-                    return;
-                }
-
-                double dist = user.getLocation().getY() - lastGround;
-                double velocity = user.getPlayer().getVelocity().getY();
-
-                if (dist >= 1.3 && user.getLocation().getY() >= user.getLastLocation().getY() && velocity < -0.06D && user.getPlayer().getVehicle() == null) {
-                    if (vl++ > 9){
-                        flag(user, "curY = " + user.getLocation().getY() + ", lastGround = " + lastGround);
-                        if (shouldMitigate()) lagBackToGround(user);
-                    }
-                } else vl = 0;
-            }
+    public void onEvent(PacketEvent e, User user) {
+        if (e instanceof FlyingEvent) {
+            double diff = user.deltaY - user.lastDeltaY;
+            if (diff >= 0.0
+                    && !PlayerUtil.isOnGround(user.location)
+                    && user.player.getVelocity().getY() < 0
+                    && !PlayerUtil.isInLiquid(user.player)
+                    && !PlayerUtil.isInWeb(user.player)
+                    && !user.player.getAllowFlight()
+                    && user.player.getVehicle() == null) {
+                if (++threshold > 3)
+                    flag(user, "y motion higher than 0, m: " + diff);
+            } else threshold *= 0.75;
         }
     }
 

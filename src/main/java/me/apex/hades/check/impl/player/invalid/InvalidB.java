@@ -1,4 +1,4 @@
-package me.apex.hades.check.impl.movement.speed;
+package me.apex.hades.check.impl.player.invalid;
 
 import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
@@ -6,8 +6,8 @@ import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
 
-@CheckInfo(name = "Speed", type = "A")
-public class SpeedA extends Check {
+@CheckInfo(name = "Invalid", type = "B")
+public class InvalidB extends Check {
 
     @Override
     public void init() {
@@ -18,11 +18,11 @@ public class SpeedA extends Check {
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
             if (((FlyingEvent) e).hasMoved()) {
-                double diff = user.deltaXZ - user.lastDeltaXZ;
-                if (diff == 0.0 && user.deltaXZ > 0.29
-                        && !user.player.getAllowFlight()) {
-                    flag(user, "consistent speed, diff: " + diff);
-                }
+                if (user.deltaY == -user.lastDeltaY && user.deltaY != 0 && elapsed(user, user.teleportTick) > 0) {
+                    if (++threshold > 1) {
+                        flag(user, "repetitive vertical motions, m: " + user.deltaY);
+                    }
+                } else threshold = 0;
             }
         }
     }
