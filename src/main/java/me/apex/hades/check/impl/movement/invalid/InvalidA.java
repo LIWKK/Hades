@@ -14,10 +14,10 @@ public class InvalidA extends Check {
         if (e instanceof FlyingEvent) {
             if (((FlyingEvent) e).hasMoved()) {
                 if (user.deltaY == -user.lastDeltaY && user.deltaY != 0 && elapsed(user.tick, user.teleportTick) > 0) {
-                    if (++threshold > 1) {
+                    if (++preVL > 1) {
                         flag(user, "repetitive vertical motions, m: " + user.deltaY);
                     }
-                } else threshold = 0;
+                } else preVL = 0;
             }
         }
     }

@@ -17,8 +17,8 @@ public class FlyA extends Check {
             if (user.onGround()) {
                 lastGround = user.location.getY();
             } else {
-                if (user.teleportTick > 0 || user.player.getAllowFlight() || user.isOnClimbableBlock() || user.isInWeb() || user.isInLiquidReflection() || user.isInLiquid()) {
-                    vl = 0;
+                if (user.teleportTick > 0 || user.player.getAllowFlight() || user.isOnClimbableBlock() || user.isInWeb() || user.isInLiquid() || user.isInLiquid()) {
+                    preVL = 0;
                     return;
                 }
 
@@ -26,10 +26,10 @@ public class FlyA extends Check {
                 double velocity = user.player.getVelocity().getY();
 
                 if (dist >= 1.3 && user.location.getY() >= user.lastLocation.getY() && velocity < -0.06D && user.player.getVehicle() == null) {
-                    if (vl++ > 9){
+                    if (preVL++ > 9){
                         flag(user, "curY = " + user.location.getY() + ", lastGround = " + lastGround);
                     }
-                } else vl = 0;
+                } else preVL = 0;
             }
         }
     }

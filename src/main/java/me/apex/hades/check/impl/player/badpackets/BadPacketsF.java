@@ -21,9 +21,9 @@ public class BadPacketsF extends Check {
             this.ticks = 0;
 
             if (ticks < 2 && PacketUtil.isBlockPacket(packet.getItemStack().getType().toString())) {
-                if (vl++ > 4)
+                if (preVL++ > 4)
                     flag(user, "ticks = " + ticks);
-            } else vl = 0;
+            } else preVL = 0;
         }else if (e instanceof FlyingEvent){
             ticks++;
         }

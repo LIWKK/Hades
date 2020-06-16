@@ -18,9 +18,9 @@ public class AutoClickerC extends Check {
             long timeDiff = Math.abs(e.getTimestamp() - lastFlying);
 
             if (timeDiff < 5) {
-                if (vl++ > 10)
+                if (preVL++ > 10)
                     flag(user, "diff = " + timeDiff);
-            } else vl = 0;
+            } else preVL = 0;
         } else if (e instanceof FlyingEvent) {
             lastFlying = e.getTimestamp();
         }

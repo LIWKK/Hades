@@ -11,8 +11,6 @@ import me.apex.hades.user.User;
 @CheckInfo(name = "NoSlow", type = "A")
 public class NoSlowA extends Check {
 
-    int preVL = 0;
-
     @Override
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof FlyingEvent){

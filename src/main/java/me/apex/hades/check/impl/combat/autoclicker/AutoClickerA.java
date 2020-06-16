@@ -28,10 +28,10 @@ public class AutoClickerA extends Check {
                 double diff = Math.abs(deviation - lastDeviation);
 
                 if (diff < 10) {
-                    if (++threshold > 1) {
+                    if (++preVL > 1) {
                         flag(user, "low deviation difference, d: " + diff);
                     }
-                } else threshold = 0;
+                } else preVL = 0;
 
                 ticks.clear();
             }

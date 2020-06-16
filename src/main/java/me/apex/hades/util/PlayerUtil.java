@@ -13,21 +13,6 @@ public class PlayerUtil {
     /*
     Block Utils
      */
-
-    //Credits to Jonhan :)
-    public static boolean onGround(Location location) {
-        double expand = 0.3;
-        for (double x = -expand; x <= expand; x += expand) {
-            for (double z = -expand; z <= expand; z += expand) {
-                if (isSolid(location.clone().add(x, -0.1, z).getBlock())
-                		|| isSolid(location.clone().add(x, -0.5001, z).getBlock())) {
-                    return true;
-                }
-            }
-
-        }
-        return false;
-    }
     
     public static boolean isOnGround(Player player) {
         Object box = ReflectionUtil.modifyBoundingBox(ReflectionUtil.getBoundingBox(player), 0, -0.1, 0,0,0,0);
@@ -35,44 +20,7 @@ public class PlayerUtil {
         return ReflectionUtil.getCollidingBlocks(player, box).size() > 0;
     }
 
-    public static boolean blockNearHead(Player player) {
-        double expand = 0.3;
-        for (double x = -expand; x <= expand; x += expand) {
-            for (double z = -expand; z <= expand; z += expand) {
-                if (player.getLocation().clone().add(z, 2, x).getBlock().getType() != Material.AIR) {
-                    return true;
-                }
-                if (player.getLocation().clone().add(z, 1.5001, x).getBlock().getType() != Material.AIR) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public static boolean isOnIce(Player p) {
-        if (p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")
-                || p.getLocation().clone().add(0, -0.5, 0).getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")) {
-            return true;
-        }
-        return false;
-    }
-
     public static boolean isInLiquid(Player player) {
-        double expand = 0.3;
-        for (double x = -expand; x <= expand; x += expand) {
-            for (double z = -expand; z <= expand; z += expand) {
-                if (player.getLocation().clone().add(z, 0, x).getBlock().isLiquid()) {
-                    return true;
-                }
-                if (player.getLocation().clone().add(z, player.getEyeLocation().getY(), x).getBlock().isLiquid()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    public static boolean isInLiquidReflection(Player player) {
         Object box = ReflectionUtil.getBoundingBox(player);
 
         double minX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "a"), box);
@@ -93,29 +41,21 @@ public class PlayerUtil {
         return false;
     }
 
-        public static boolean isOnLilyOrCarpet(Player player) {
-        Location loc = player.getLocation();
-        double expand = 0.3;
-        for (double x = -expand; x <= expand; x += expand) {
-            for (double z = -expand; z <= expand; z += expand) {
-                if (loc.clone().add(z, 0, x).getBlock().getType().toString().contains("LILY")
-                        || loc.clone().add(z, -0.001, x).getBlock().getType().toString().contains("CARPET")) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     public static boolean isInWeb(Player player) {
-        double expand = 0.3;
-        for (double x = -expand; x <= expand; x += expand) {
-            for (double z = -expand; z <= expand; z += expand) {
-                if (player.getLocation().clone().add(z, 0, x).getBlock().getType() == Material.WEB) {
-                    return true;
-                }
-                if (player.getLocation().clone().add(z, player.getEyeLocation().getY(), x).getBlock().getType() == Material.WEB) {
-                    return true;
+        Object box = ReflectionUtil.getBoundingBox(player);
+
+        double minX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "a"), box);
+        double minY = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "b"), box);
+        double minZ = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "c"), box);
+        double maxX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "d"), box);
+        double maxY = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "e"), box);
+        double maxZ = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "f"), box);
+
+        for (double x = minX; x < maxX; x++) {
+            for (double y = minY; y < maxY; y++) {
+                for (double z = minZ; z < maxZ; z++) {
+                    Block block = new Location(player.getWorld(), x, y, z).getBlock();
+                    if (block.getType() == Material.WEB) return true;
                 }
             }
         }
@@ -395,28 +335,6 @@ public class PlayerUtil {
         }
         return false;
     }
-
-    /*
-    Movement Utils
-     */
-    
-    /*public static double getBaseMovementSpeed(User user, double conveinentMax, boolean blockAmplifiers) {
-        conveinentMax += getPotionEffectLevel(user.player, PotionEffectType.SPEED) * (conveinentMax / 2);
-        conveinentMax *= (user.player.getWalkSpeed() / 0.2D);
-
-        if (user.player.isFlying())
-            conveinentMax *= (user.player.getFlySpeed() / 0.2D);
-
-        if (blockAmplifiers) {
-        	
-        }
-
-        return conveinentMax;
-    }*/
-    
-    /*
-     * Misc Utils
-     */
     
     //Credits to funkemunky
     public static int getPotionEffectLevel(Player player, PotionEffectType pet) {

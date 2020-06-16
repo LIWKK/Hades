@@ -6,10 +6,10 @@ import io.github.retrooper.packetevents.packetwrappers.api.WrappedPacket;
 import io.github.retrooper.packetevents.utils.NMSUtils;
 import org.bukkit.entity.Entity;
 
-import javax.annotation.Nullable;
+import io.github.retrooper.packetevents.annotations.Nullable;
 import java.lang.reflect.Field;
 
-public class WrappedPacketInEntityAction extends WrappedPacket {
+public final class WrappedPacketInEntityAction extends WrappedPacket {
     private Entity entity;
     private int entityId;
     private PlayerAction action;

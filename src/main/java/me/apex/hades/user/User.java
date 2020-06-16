@@ -8,7 +8,6 @@ import me.apex.hades.util.LogUtils;
 import me.apex.hades.util.PlayerUtil;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -54,7 +53,7 @@ public class User {
     }
 
     public boolean onGround() {
-        return PlayerUtil.onGround(location);
+        return PlayerUtil.isOnGround(player);
     }
 
     public boolean hasBlocksArround(){
@@ -65,12 +64,6 @@ public class User {
 
     public boolean isOnClimbableBlock(){
         if (PlayerUtil.isClimbableBlock(location.getBlock()) && PlayerUtil.isClimbableBlock(location.add(0,1,0).getBlock())){
-            return true;
-        }else return false;
-    }
-
-    public boolean isInLiquidReflection(){
-        if (PlayerUtil.isInLiquidReflection(player)){
             return true;
         }else return false;
     }
@@ -89,5 +82,6 @@ public class User {
 
     public boolean isOnGroundVanilla(){ return player.isOnGround(); }
 
-    public int ping(){ return ((CraftPlayer)player).getHandle().ping; }
+    //Cant do this!
+    //public int ping(){ return ((CraftPlayer)player).getHandle().ping; }
 }

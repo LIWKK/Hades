@@ -56,36 +56,6 @@ checks:
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
-      b:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      c:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      d:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      e:
-        enabled: true
-        punishable: true
-        max-vl: 5
-        punish-command: 'ban %player% %prefix%Cheating'
-      f:
-        enabled: true
-        punishable: true
-        max-vl: 5
-        punish-command: 'ban %player% %prefix%Cheating'
-      g:
-        enabled: true
-        punishable: true
-        max-vl: 5
-        punish-command: 'ban %player% %prefix%Cheating'
     aura:
       mitigate: true
       a:
@@ -102,41 +72,6 @@ checks:
         enabled: true
         punishable: true
         max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      d:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      e:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      f:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      g:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      h:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      i:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      k:
-        enabled: true
-        punishable: true
-        max-vl: 5
         punish-command: 'ban %player% %prefix%Cheating'
     criticals:
       mitigate: true

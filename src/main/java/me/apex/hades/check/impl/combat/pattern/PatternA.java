@@ -26,10 +26,10 @@ public class PatternA extends Check {
 
             if(target != lastTarget) {
                 if(ticks < 2) {
-                    if(++threshold > 2) {
+                    if(++preVL > 2) {
                         flag(user, "switch aura, t: " + ticks);
                     }
-                }else threshold *= 0.75;
+                }else preVL *= 0.75;
             }
         }else if(e instanceof FlyingEvent) {
             ticks++;

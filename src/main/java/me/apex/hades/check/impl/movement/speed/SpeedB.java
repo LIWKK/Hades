@@ -23,10 +23,10 @@ public class SpeedB extends Check {
                 if (user.deltaXZ > max
                         && elapsed(user.tick, user.teleportTick) > 40
                         && !user.player.getAllowFlight()) {
-                    if (++threshold > 7) {
+                    if (++preVL > 7) {
                         flag(user, "breached limit, s: " + user.deltaXZ);
                     }
-                } else threshold *= 0.75;
+                } else preVL *= 0.75;
             }
         }
     }

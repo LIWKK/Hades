@@ -35,12 +35,12 @@ public class AutoClickerD extends Check {
 
                 if (!user.digging) {
                     if (Double.isNaN(remainder)) {
-                        if (vl++ > 2.5) {
+                        if (preVL++ > 2.5) {
                             flag(user, "remainder = " + remainder);
                         }
-                    } else vl -= vl > 0 ? 0.5 : 0;
+                    } else preVL -= preVL > 0 ? 0.5 : 0;
                 }
-            } else vl *= 0.75;
+            } else preVL *= 0.75;
         }else if (e instanceof FlyingEvent){
             ticks++;
         }

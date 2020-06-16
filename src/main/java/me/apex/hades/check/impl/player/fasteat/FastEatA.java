@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 import java.util.HashMap;
 
+//Add interact + Consume packet events for this check
 @CheckInfo(name = "FastEat", type = "A")
 public class FastEatA extends Check implements Listener {
     public FastEatA() {
@@ -31,7 +32,7 @@ public class FastEatA extends Check implements Listener {
     @EventHandler
     public void onConsume(PlayerItemConsumeEvent event){
         if (this.startEat.containsKey(event.getPlayer().getName())) {
-            long diff = (System.currentTimeMillis() - this.startEat.get(event.getPlayer().getName()));
+            long diff = (time() - this.startEat.get(event.getPlayer().getName()));
             User user = UserManager.getUser(event.getPlayer());
             if (diff <= 1200) {
                 flag(user, "ate food faster! Time taken to eat: " + diff);
@@ -45,7 +46,7 @@ public class FastEatA extends Check implements Listener {
             if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 Material m = event.getItem().getType();
                 if (MiscUtil.isFood(m)) {
-                    this.startEat.put(event.getPlayer().getName(), System.currentTimeMillis());
+                    this.startEat.put(event.getPlayer().getName(), time());
                 }
             }
         }

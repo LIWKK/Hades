@@ -17,9 +17,9 @@ public class BadPacketsE extends Check {
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof AttackEvent){
             if (!lastWasArm) {
-                if (vl++ > 1)
+                if (preVL++ > 1)
                     flag(user, "swung = " + lastWasArm);
-            } else vl = 0;
+            } else preVL = 0;
         }else if (e instanceof SwingEvent){
             lastWasArm = true;
         }else if (e instanceof FlyingEvent){

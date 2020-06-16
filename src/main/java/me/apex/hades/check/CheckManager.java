@@ -8,6 +8,7 @@ import me.apex.hades.check.impl.combat.criticals.CriticalsA;
 import me.apex.hades.check.impl.combat.pattern.PatternA;
 import me.apex.hades.check.impl.combat.reach.ReachA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
+import me.apex.hades.check.impl.movement.fly.FlyB;
 import me.apex.hades.check.impl.movement.invalid.InvalidA;
 import me.apex.hades.check.impl.movement.noslow.NoSlowA;
 import me.apex.hades.check.impl.movement.speed.SpeedA;
@@ -38,6 +39,7 @@ public class CheckManager {
             AutoClickerE.class,
             PatternA.class,
             FlyA.class,
+            FlyB.class,
             InvalidA.class,
             SpeedA.class,
             SpeedB.class,

@@ -26,7 +26,7 @@ public abstract class Check {
 
     public long lastFlag;
 
-    public double threshold;
+    public double preVL;
 
     public Check() {
         try {
@@ -60,7 +60,7 @@ public abstract class Check {
             TextComponent message = new TextComponent(formatColor.replace("%prefix%", HadesPlugin.instance.getPrefix()).replace("%player%", user.player.getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? HadesPlugin.instance.getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information));
             message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp "+user.player));
             message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp "+user.player.getName()));
-            message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7* Info\n§7* §c" + information + "\n§7* Ping: §c" + user.ping()+ "\n§7\n§7(Click to teleport)").create()));
+            message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7* Info\n§7* §c" + information + "\n§7* Ping: §c" + 0/*user.ping()*/ + "\n§7\n§7(Click to teleport)").create()));
             ChatUtil.informStaff(message, vl);
 
             if (HadesPlugin.instance.getConfig().getBoolean("system.logging.file.enabled"))

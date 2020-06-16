@@ -25,9 +25,9 @@ public class AutoClickerB extends Check {
             long diff = e.getTimestamp() - lastSwing;
 
             if (ticks < 2 && diff < 50.0D) {
-                if (vl++ > 2)
+                if (preVL++ > 2)
                     flag(user, "ticks = " + ticks + ", delay = " + diff);
-            } else vl = 0;
+            } else preVL = 0;
         }else if (e instanceof FlyingEvent){
             ticks++;
         }

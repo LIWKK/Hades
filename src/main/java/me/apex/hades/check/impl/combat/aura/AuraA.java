@@ -18,10 +18,10 @@ public class AuraA extends Check {
             long timeDiff = time() - lastFlying;
 
             if (timeDiff < 5) {
-                if (++threshold > 10) {
+                if (++preVL > 10) {
                     flag(user, "low flying delay, d: " + timeDiff);
                 }
-            } else threshold = 0;
+            } else preVL = 0;
         } else if (e instanceof FlyingEvent) {
             lastFlying = time();
         }

@@ -24,9 +24,9 @@ public class TimerB extends Check {
                 double deviation = MathUtil.getStandardDeviation(flyingDeque.stream().mapToLong(l -> l).toArray());
 
                 if (deviation > 160) {
-                    if (vl++ > 1)
+                    if (preVL++ > 1)
                         flag(user, "deviation = " + deviation);
-                } else vl = 0;
+                } else preVL = 0;
 
                 flyingDeque.clear();
             }

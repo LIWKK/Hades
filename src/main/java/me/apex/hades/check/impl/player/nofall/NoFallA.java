@@ -14,10 +14,10 @@ public class NoFallA extends Check {
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
             if (((FlyingEvent) e).isOnGround() && !user.onGround() && !PlayerUtil.isOnGround(user.player)) {
-                if (++threshold > 2) {
+                if (++preVL > 2) {
                     flag(user, "groundspoof, g: " + user.onGround());
                 }
-            } else threshold = 0;
+            } else preVL = 0;
         }
     }
 

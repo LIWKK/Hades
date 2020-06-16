@@ -19,9 +19,9 @@ public class BadPacketsB extends Check {
             this.ticks = 0;
 
             if (ticks < 1) {
-                if (vl++ > 1)
+                if (preVL++ > 1)
                     flag(user, "ticks = " + ticks);
-            } else vl = 0;
+            } else preVL = 0;
         }else if (e instanceof FlyingEvent){
             ticks++;
         }

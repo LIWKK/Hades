@@ -27,9 +27,9 @@ public class TimerA extends Check {
                 this.lastDeviation = deviation;
 
                 if (deviation <= 710 && (Math.abs(deviation - lastDeviation) < 20)) {
-                    if (vl++ > 1)
+                    if (preVL++ > 1)
                         flag(user, "deviation = " + deviation);
-                } else vl = 0;
+                } else preVL = 0;
 
                 flyingDeque.clear();
             }

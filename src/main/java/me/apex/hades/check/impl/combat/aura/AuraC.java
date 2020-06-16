@@ -26,10 +26,10 @@ public class AuraC extends Check {
 
                 average = ((average * 19) + deviation) / 20;
                 if (average < 5) {
-                    if (++threshold > 2) {
+                    if (++preVL > 2) {
                         flag(user, "low average deviation, a: " + average);
                     }
-                } else threshold *= 0.75;
+                } else preVL *= 0.75;
 
                 diffs.clear();
             }
