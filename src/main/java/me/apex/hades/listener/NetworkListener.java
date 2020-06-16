@@ -60,7 +60,7 @@ public class NetworkListener implements PacketListener {
                     callEvent = new AttackEvent(packet.getEntityId(), packet.getEntity());
                 }else if(packet.getAction() == EntityUseAction.INTERACT
                         || packet.getAction() == EntityUseAction.INTERACT_AT) {
-                    callEvent = new InteractEvent(packet.getEntityId(), packet.getEntity());
+                    callEvent = new EntityInteractEvent(packet.getEntityId(), packet.getEntity());
                 }else callEvent = e;
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.CHAT)) {
                 WrappedPacketInChat packet = new WrappedPacketInChat(e.getPacket());

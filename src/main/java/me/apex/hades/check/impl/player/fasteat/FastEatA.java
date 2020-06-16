@@ -4,6 +4,8 @@ import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
+import me.apex.hades.event.impl.bukkitevents.InteractEvent;
+import me.apex.hades.event.impl.bukkitevents.ItemConsumeEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.user.UserManager;
 import me.apex.hades.util.MiscUtil;
@@ -17,37 +19,27 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 import java.util.HashMap;
 
-//Add interact + Consume packet events for this check
 @CheckInfo(name = "FastEat", type = "A")
-public class FastEatA extends Check implements Listener {
-    public FastEatA() {
-        Bukkit.getPluginManager().registerEvents(this, HadesPlugin.instance);
-    }
+public class FastEatA extends Check {
+
+    private long startEat;
 
     @Override
-    public void onEvent(PacketEvent e, User user) { }
-
-    private HashMap<String, Long> startEat = new HashMap<>();
-
-    @EventHandler
-    public void onConsume(PlayerItemConsumeEvent event){
-        if (this.startEat.containsKey(event.getPlayer().getName())) {
-            long diff = (time() - this.startEat.get(event.getPlayer().getName()));
-            User user = UserManager.getUser(event.getPlayer());
-            if (diff <= 1200) {
-                flag(user, "ate food faster! Time taken to eat: " + diff);
-            }
-        }
-    }
-
-    @EventHandler
-    public void onInteract(PlayerInteractEvent event) {
-        if (event.hasItem()) {
-            if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                Material m = event.getItem().getType();
-                if (MiscUtil.isFood(m)) {
-                    this.startEat.put(event.getPlayer().getName(), time());
+    public void onEvent(PacketEvent e, User user) {
+        if(e instanceof InteractEvent) {
+            InteractEvent interactEvent = (InteractEvent)e;
+            if (interactEvent.getItem() != null) {
+                if (interactEvent.getAction() == Action.RIGHT_CLICK_AIR || interactEvent.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                    Material m = interactEvent.getItem().getType();
+                    if (MiscUtil.isFood(m)) {
+                        startEat = time();
+                    }
                 }
+            }
+        }else if(e instanceof ItemConsumeEvent) {
+            long diff = time() - startEat;
+            if (diff <= 1200) {
+                flag(user, "ate food faster, t: " + diff);
             }
         }
     }
