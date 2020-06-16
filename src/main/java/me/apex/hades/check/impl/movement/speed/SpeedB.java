@@ -21,12 +21,12 @@ public class SpeedB extends Check {
                 double max = 0.34;
                 max *= user.player.getWalkSpeed() / 0.2;
 
-                if (elapsed(user.tick, user.iceTick) < 20 || elapsed(user.tick, user.slimeTick) < 20) max += 0.34;
+                if (elapsed(user.tick, user.iceTick) < 40 || elapsed(user.tick, user.slimeTick) < 40) max += 0.34;
                 if (elapsed(user.tick, user.underBlockTick) < 40) max += 0.91;
-                if (elapsed(user.tick, user.velocityTick) < 20) max += 0.21;
+                if (elapsed(user.tick, user.velocityTick) < 40) max += 0.21;
 
                 if (user.deltaXZ > max
-                        && elapsed(user.tick, user.teleportTick) > 20
+                        && elapsed(user.tick, user.teleportTick) > 40
                         && !user.player.getAllowFlight()) {
                     if (++threshold > 6) {
                         flag(user, "breached limit, s: " + user.deltaXZ);

@@ -3,12 +3,12 @@ package me.apex.hades.event.impl.packetevents;
 import me.apex.hades.event.Event;
 import org.bukkit.entity.Entity;
 
-public class AttackEvent extends Event {
+public class InteractEvent extends Event {
 
     private final int entityId;
     private final Entity entity;
 
-    public AttackEvent(int entityId, Entity entity) {
+    public InteractEvent(int entityId, Entity entity) {
         this.entityId = entityId;
         this.entity = entity;
     }

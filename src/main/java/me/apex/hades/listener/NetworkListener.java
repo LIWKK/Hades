@@ -1,5 +1,6 @@
 package me.apex.hades.listener;
 
+import io.github.retrooper.packetevents.enums.EntityUseAction;
 import io.github.retrooper.packetevents.enums.PlayerDigType;
 import io.github.retrooper.packetevents.event.PacketEvent;
 import io.github.retrooper.packetevents.event.PacketHandler;
@@ -37,7 +38,12 @@ public class NetworkListener implements PacketListener {
                 callEvent = new SwingEvent();
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
                 WrappedPacketInUseEntity packet = new WrappedPacketInUseEntity(e.getPacket());
-                callEvent = new AttackEvent(packet.getEntityId(), packet.getEntity(), packet.getAction());
+                if(packet.getAction() == EntityUseAction.ATTACK) {
+                    callEvent = new AttackEvent(packet.getEntityId(), packet.getEntity());
+                }else if(packet.getAction() == EntityUseAction.INTERACT
+                        || packet.getAction() == EntityUseAction.INTERACT_AT) {
+                    callEvent = new InteractEvent(packet.getEntityId(), packet.getEntity());
+                }else callEvent = e;
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.CHAT)) {
                 WrappedPacketInChat packet = new WrappedPacketInChat(e.getPacket());
                 callEvent = new ChatEvent(packet.getMessage());

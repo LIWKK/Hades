@@ -4,6 +4,7 @@ import me.apex.hades.check.impl.combat.aim.AimA;
 import me.apex.hades.check.impl.combat.aura.AuraA;
 import me.apex.hades.check.impl.combat.aura.AuraC;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
+import me.apex.hades.check.impl.combat.pattern.PatternA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.speed.SpeedA;
@@ -25,6 +26,7 @@ public class CheckManager {
             AuraB.class,
             AuraC.class,
             AutoClickerA.class,
+            PatternA.class,
             FlyA.class,
             InvalidA.class,
             ScaffoldA.class,
