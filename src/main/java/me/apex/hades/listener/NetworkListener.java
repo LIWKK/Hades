@@ -1,6 +1,7 @@
 package me.apex.hades.listener;
 
 import io.github.retrooper.packetevents.enums.EntityUseAction;
+import io.github.retrooper.packetevents.enums.PlayerAction;
 import io.github.retrooper.packetevents.enums.PlayerDigType;
 import io.github.retrooper.packetevents.event.PacketEvent;
 import io.github.retrooper.packetevents.event.PacketHandler;
@@ -31,6 +32,23 @@ public class NetworkListener implements PacketListener {
 
             //Process Movement
             user.movementProcessor.process(e);
+
+            //Player Vars
+            if (e.getPacketName().equalsIgnoreCase(Packet.Client.ENTITY_ACTION)){
+                WrappedPacketInEntityAction packet = new WrappedPacketInEntityAction(e.getPacket());
+                if (packet.getAction().equals(PlayerAction.START_SPRINTING)){
+                    user.isSprinting = true;
+                }
+                if (packet.getAction().equals(PlayerAction.STOP_SPRINTING)){
+                    user.isSprinting = false;
+                }
+                if (packet.getAction().equals(PlayerAction.START_SNEAKING)){
+                    user.isSneaking = true;
+                }
+                if (packet.getAction().equals(PlayerAction.STOP_SNEAKING)){
+                    user.isSneaking = false;
+                }
+            }
 
             //Call Checks
             PacketEvent callEvent = null;
@@ -68,6 +86,7 @@ public class NetworkListener implements PacketListener {
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_PLACE)) {
                 WrappedPacketInBlockPlace packet = new WrappedPacketInBlockPlace(e.getPlayer(), e.getPacket());
                 callEvent = new PlaceEvent(packet.getBlockPosition(), packet.getItemStack());
+
             } else callEvent = e;
             PacketEvent finalCallEvent = callEvent;
             user.checks.stream().filter(check -> check.enabled).forEach(check -> check.onEvent(finalCallEvent, user));
@@ -84,7 +103,6 @@ public class NetworkListener implements PacketListener {
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Server.ENTITY_VELOCITY)) {
                 WrappedPacketOutEntityVelocity packet = new WrappedPacketOutEntityVelocity(e.getPacket());
                 if (e.getPlayer().getEntityId() == packet.getEntityId()) {
-                    user.velocityTick = user.tick;
                     user.checks.stream().filter(check -> check.enabled).forEach(check -> check.onEvent(new VelocityEvent(packet.getEntityId(), packet.getEntity(), packet.getVelocityX(), packet.getVelocityY(), packet.getVelocityZ()), user));
                 }
             } else {

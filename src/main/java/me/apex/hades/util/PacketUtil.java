@@ -16,4 +16,7 @@ public class PacketUtil {
         return packetName.equalsIgnoreCase(Packet.Client.LOOK);
     }
 
+    public static boolean isBlockPacket(String type) {
+        return type.toLowerCase().contains("sword");
+    }
 }

@@ -17,11 +17,6 @@ public class AutoClickerA extends Check {
     private double lastDeviation;
 
     @Override
-    public void init() {
-        enabled = true;
-    }
-
-    @Override
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof SwingEvent) {
             if (!user.digging) ticks.add((long) (user.tick * 50.0));

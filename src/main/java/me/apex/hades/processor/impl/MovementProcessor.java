@@ -5,6 +5,7 @@ import io.github.retrooper.packetevents.packetwrappers.in.flying.WrappedPacketIn
 import me.apex.hades.processor.Processor;
 import me.apex.hades.user.User;
 import me.apex.hades.util.PacketUtil;
+import me.apex.hades.util.PlayerUtil;
 import me.apex.hades.util.TaskUtil;
 import org.bukkit.Location;
 import org.bukkit.block.BlockFace;
@@ -48,6 +49,10 @@ public class MovementProcessor extends Processor {
 
             user.lastDeltaPitch = lastDeltaPitch;
             user.deltaPitch = deltaPitch;
+
+            if (PlayerUtil.isOnGround(user.player)){
+                user.lastOnGroundLocation = user.location;
+            }
 
             TaskUtil.run(() -> {
                 if (user.player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")

@@ -1,22 +1,48 @@
 package me.apex.hades.util;
 
-import me.apex.hades.user.User;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class PlayerUtil {
 
-    public static boolean isOnGround(Location location) {
+    /*
+    Block Utils
+     */
+
+    //Credits to Jonhan :)
+    public static boolean onGround(Location location) {
         double expand = 0.3;
         for (double x = -expand; x <= expand; x += expand) {
             for (double z = -expand; z <= expand; z += expand) {
-                if (isSolid(location.clone().add(x, -0.1001, z).getBlock())
-                        || location.clone().add(x, -0.5001, z).getBlock().getType().toString().contains("WALL")
-                        || location.clone().add(x, -0.5001, z).getBlock().getType().toString().contains("FENCE")) {
+                if (isSolid(location.clone().add(x, -0.1, z).getBlock())
+                		|| isSolid(location.clone().add(x, -0.5001, z).getBlock())) {
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+    
+    public static boolean isOnGround(Player player) {
+        Object box = ReflectionUtil.modifyBoundingBox(ReflectionUtil.getBoundingBox(player), 0, -0.1, 0,0,0,0);
+
+        return ReflectionUtil.getCollidingBlocks(player, box).size() > 0;
+    }
+
+    public static boolean blockNearHead(Player player) {
+        double expand = 0.3;
+        for (double x = -expand; x <= expand; x += expand) {
+            for (double z = -expand; z <= expand; z += expand) {
+                if (player.getLocation().clone().add(z, 2, x).getBlock().getType() != Material.AIR) {
+                    return true;
+                }
+                if (player.getLocation().clone().add(z, 1.5001, x).getBlock().getType() != Material.AIR) {
                     return true;
                 }
             }
@@ -24,15 +50,29 @@ public class PlayerUtil {
         return false;
     }
 
-    public static double getMaxSpeed(User user, double preferedMax) {
-        preferedMax += (user.player.getWalkSpeed() / 0.2D) % preferedMax;
-        preferedMax += getPotionEffectLevel(user.player, PotionEffectType.SPEED) % preferedMax;
-        preferedMax += (user.player.getVelocity().getX() + user.player.getVelocity().getY() + user.player.getVelocity().getZ()) % preferedMax;
-
-        return preferedMax;
+    public static boolean isOnIce(Player p) {
+        if (p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")
+                || p.getLocation().clone().add(0, -0.5, 0).getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")) {
+            return true;
+        }
+        return false;
     }
 
     public static boolean isInLiquid(Player player) {
+        double expand = 0.3;
+        for (double x = -expand; x <= expand; x += expand) {
+            for (double z = -expand; z <= expand; z += expand) {
+                if (player.getLocation().clone().add(z, 0, x).getBlock().isLiquid()) {
+                    return true;
+                }
+                if (player.getLocation().clone().add(z, player.getEyeLocation().getY(), x).getBlock().isLiquid()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean isInLiquidReflection(Player player) {
         Object box = ReflectionUtil.getBoundingBox(player);
 
         double minX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "a"), box);
@@ -53,7 +93,7 @@ public class PlayerUtil {
         return false;
     }
 
-    public static boolean isOnLilyOrCarpet(Player player) {
+        public static boolean isOnLilyOrCarpet(Player player) {
         Location loc = player.getLocation();
         double expand = 0.3;
         for (double x = -expand; x <= expand; x += expand) {
@@ -68,35 +108,20 @@ public class PlayerUtil {
     }
 
     public static boolean isInWeb(Player player) {
-        Object box = ReflectionUtil.getBoundingBox(player);
-
-        double minX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "a"), box);
-        double minY = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "b"), box);
-        double minZ = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "c"), box);
-        double maxX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "d"), box);
-        double maxY = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "e"), box);
-        double maxZ = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "f"), box);
-
-        for (double x = minX; x < maxX; x++) {
-            for (double y = minY; y < maxY; y++) {
-                for (double z = minZ; z < maxZ; z++) {
-                    Block block = new Location(player.getWorld(), x, y, z).getBlock();
-                    if (block.getType() == Material.WEB) return true;
+        double expand = 0.3;
+        for (double x = -expand; x <= expand; x += expand) {
+            for (double z = -expand; z <= expand; z += expand) {
+                if (player.getLocation().clone().add(z, 0, x).getBlock().getType() == Material.WEB) {
+                    return true;
+                }
+                if (player.getLocation().clone().add(z, player.getEyeLocation().getY(), x).getBlock().getType() == Material.WEB) {
+                    return true;
                 }
             }
         }
         return false;
     }
-
-    //Credits to funkemunky
-    public static int getPotionEffectLevel(Player player, PotionEffectType pet) {
-        for (PotionEffect pe : player.getActivePotionEffects()) {
-            if (!pe.getType().getName().equals(pet.getName())) continue;
-            return pe.getAmplifier() + 1;
-        }
-        return 0;
-    }
-
+    
     //Credits to funkemunky :)
     public static boolean isSolid(Block block) {
         int type = block.getType().getId();
@@ -315,6 +340,91 @@ public class PlayerUtil {
 
         }
         return false;
+    }
+    
+    //Credits to funkemunky :)
+    public static boolean isClimbableBlock(Block block) {
+        return block.getType().toString().contains("LADDER") || block.getType().toString().contains("VINE");
+    }
+    
+    //Credits to funkemunky :)
+    public static boolean hasBlocksAround(Location loc) {
+        Location one = loc.clone().subtract(1, 0, 1), two = loc.clone().add(1, 1, 1);
+
+        int minX = Math.min(one.getBlockX(), two.getBlockX()), minY = Math.min(one.getBlockY(), two.getBlockY()), minZ = Math.min(one.getBlockZ(), two.getBlockZ());
+        int maxX = Math.max(one.getBlockX(), two.getBlockX()), maxY = Math.max(one.getBlockY(), two.getBlockY()), maxZ = Math.max(one.getBlockZ(), two.getBlockZ());
+
+        for (int x = minX; x < maxX; x++) {
+            for (int y = minY; y < maxY; y++) {
+                for (int z = minZ; z < maxZ; z++) {
+                    Location blockLoc = new Location(loc.getWorld(), x, y, z);
+
+                    if (isSolid(blockLoc.getBlock())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    //Credits to funkemunky
+    public static boolean isInStairs(Player player) {
+        Object box = ReflectionUtil.modifyBoundingBox(ReflectionUtil.getBoundingBox(player), 0, -0.5,0,0,0,0);
+
+        double minX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "a"), box);
+        double minY = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "b"), box);
+        double minZ = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "c"), box);
+        double maxX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "d"), box);
+        double maxY = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "e"), box);
+        double maxZ = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "f"), box);
+
+        for(double x = minX ; x < maxX ; x++) {
+            for(double y = minY ; y < maxY ; y++) {
+                for(double z = minZ ; z < maxZ ; z++) {
+                    Block block = new Location(player.getWorld(), x, y, z).getBlock();
+
+                    if(BlockUtil.isStair(block)
+                            || BlockUtil.isSlab(block)
+                            || block.getType().equals(Material.SKULL)
+                            || block.getType().equals(Material.CAKE_BLOCK)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /*
+    Movement Utils
+     */
+    
+    /*public static double getBaseMovementSpeed(User user, double conveinentMax, boolean blockAmplifiers) {
+        conveinentMax += getPotionEffectLevel(user.player, PotionEffectType.SPEED) * (conveinentMax / 2);
+        conveinentMax *= (user.player.getWalkSpeed() / 0.2D);
+
+        if (user.player.isFlying())
+            conveinentMax *= (user.player.getFlySpeed() / 0.2D);
+
+        if (blockAmplifiers) {
+        	
+        }
+
+        return conveinentMax;
+    }*/
+    
+    /*
+     * Misc Utils
+     */
+    
+    //Credits to funkemunky
+    public static int getPotionEffectLevel(Player player, PotionEffectType pet) {
+        for (PotionEffect pe : player.getActivePotionEffects()) {
+            if (!pe.getType().getName().equals(pet.getName())) continue;
+            return pe.getAmplifier() + 1;
+        }
+        return 0;
     }
 
 }

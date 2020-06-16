@@ -10,11 +10,6 @@ import me.apex.hades.user.User;
 public class InvalidA extends Check {
 
     @Override
-    public void init() {
-        enabled = true;
-    }
-
-    @Override
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
             if (((FlyingEvent) e).hasMoved()) {

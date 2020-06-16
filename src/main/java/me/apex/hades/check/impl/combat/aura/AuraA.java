@@ -10,11 +10,6 @@ import me.apex.hades.user.User;
 @CheckInfo(name = "Aura", type = "A")
 public class AuraA extends Check {
 
-    @Override
-    public void init() {
-        enabled = true;
-    }
-
     private long lastFlying;
 
     @Override

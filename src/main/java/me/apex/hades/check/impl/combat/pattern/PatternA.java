@@ -11,11 +11,6 @@ import org.bukkit.entity.Entity;
 @CheckInfo(name = "Pattern", type = "A")
 public class PatternA extends Check {
 
-    @Override
-    public void init() {
-        enabled = true;
-    }
-
     private int ticks;
     private Entity lastTarget;
 
