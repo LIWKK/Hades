@@ -32,6 +32,6 @@ public class HadesPlugin extends JavaPlugin {
     }
 
     public static String getPrefix(){
-        return ChatUtil.color("&8[&c&lHades&8] &7");
+        return ChatUtil.color(instance.getConfig().getString("lang.prefix"));
     }
 }

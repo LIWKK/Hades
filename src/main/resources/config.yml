@@ -12,11 +12,12 @@
 
 #Language Configuration
 lang:
+  prefix: '&8[&7Hades&8] &7'
   no-permission: '&cNo permission.'
   base-message-color: '&c'
-  flag-format: '%prefix%&c%player% &7has failed &c%check% &8<&c%checktype%&8> &8[&7VL&8:&c %vl%&8]'
+  flag-format: '%prefix%&f%player% &7has failed &f%check% &8<&7%checktype%&8> &7VL:%vl%'
   experimental-notation: '*'
-  broadcast-message: '%newline%%prefix%%player% &7was banned for &fCheating&7.%newline% '
+  broadcast-message: '%newline%&7User &f%player% &7was automatically banned by &fHades &7for &fCheating&7.%newline% '
 
 #System Configuration
 system:
