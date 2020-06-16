@@ -1,6 +1,5 @@
 package me.apex.hades.check;
 
-import me.apex.hades.check.impl.combat.aim.AimA;
 import me.apex.hades.check.impl.combat.aura.AuraA;
 import me.apex.hades.check.impl.combat.aura.AuraC;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
@@ -21,7 +20,6 @@ import java.util.List;
 public class CheckManager {
 
     private static final Class[] checks = new Class[]{
-            AimA.class,
             AuraA.class,
             AuraB.class,
             AuraC.class,
