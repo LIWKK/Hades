@@ -15,14 +15,14 @@ public class BadPacketsE extends Check {
 
     @Override
     public void onEvent(PacketEvent e, User user) {
-        if (e instanceof AttackEvent){
+        if (e instanceof AttackEvent) {
             if (!lastWasArm) {
                 if (preVL++ > 1)
                     flag(user, "swung = " + lastWasArm);
             } else preVL = 0;
-        }else if (e instanceof SwingEvent){
+        } else if (e instanceof SwingEvent) {
             lastWasArm = true;
-        }else if (e instanceof FlyingEvent){
+        } else if (e instanceof FlyingEvent) {
             lastWasArm = false;
         }
     }

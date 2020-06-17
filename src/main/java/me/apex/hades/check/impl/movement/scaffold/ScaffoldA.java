@@ -26,5 +26,4 @@ public class ScaffoldA extends Check {
             lastFlying = time();
         }
     }
-
 }

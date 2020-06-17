@@ -17,8 +17,8 @@ public class FastUseA extends Check {
 
     @Override
     public void onEvent(PacketEvent e, User user) {
-        if(e instanceof InteractEvent) {
-            InteractEvent interactEvent = (InteractEvent)e;
+        if (e instanceof InteractEvent) {
+            InteractEvent interactEvent = (InteractEvent) e;
             if (interactEvent.getItem() != null) {
                 if (interactEvent.getAction() == Action.RIGHT_CLICK_AIR || interactEvent.getAction() == Action.RIGHT_CLICK_BLOCK) {
                     Material m = interactEvent.getItem().getType();
@@ -27,7 +27,7 @@ public class FastUseA extends Check {
                     }
                 }
             }
-        }else if(e instanceof ItemConsumeEvent) {
+        } else if (e instanceof ItemConsumeEvent) {
             long diff = time() - startEat;
             if (diff <= 1400) {
                 flag(user, "ate food faster, t: " + diff);

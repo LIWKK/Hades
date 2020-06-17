@@ -15,34 +15,30 @@ public class AutoClickerD extends Check {
     private double lastDelay;
     boolean digging;
 
+    // Disabled due to major falsing and no use
     @Override
     public void onEvent(PacketEvent e, User user) {
-        if (e instanceof SwingEvent){
-            int ticks = this.ticks;
-            this.ticks = 0;
-
-            int lastTicks = this.lastTicks;
-            this.lastTicks = ticks;
-
-            double delay = Math.abs(ticks - lastTicks);
-            double lastDelay = this.lastDelay;
-            this.lastDelay = delay;
-
-            if (delay != 0 || lastDelay != 0) {
-                double lcd = MathUtil.lcd((long) delay, (long) lastDelay);
-                double fixedLcd = lcd * Math.PI;
-                double remainder = Math.IEEEremainder(lcd, lastDelay) / Math.PI;
-
-                if (!user.digging) {
-                    if (Double.isNaN(remainder)) {
-                        if (preVL++ > 2.5) {
-                            flag(user, "remainder = " + remainder);
-                        }
-                    } else preVL -= preVL > 0 ? 0.5 : 0;
-                }
-            } else preVL *= 0.75;
-        }else if (e instanceof FlyingEvent){
-            ticks++;
+        if (e instanceof SwingEvent) {
+//            double delay = Math.abs(ticks - lastTicks);
+//
+//            if (delay != 0 || lastDelay != 0) {
+//                double lcd = MathUtil.lcd((long) delay, (long) lastDelay);
+//                double fixedLcd = lcd * Math.PI;
+//                double remainder = Math.IEEEremainder(lcd, lastDelay) / Math.PI;
+//
+//                if (!user.digging) {
+//                    if (Double.isNaN(remainder)) {
+//                        if (preVL++ > 2.5) {
+//                            flag(user, "remainder = " + remainder);
+//                        }
+//                    } else preVL -= preVL > 0 ? 0.5 : 0;
+//                }
+//            } else preVL *= 0.75;
+//
+//            this.lastTicks = ticks;
+//            this.ticks = 0;
+        } else if (e instanceof FlyingEvent) {
+//            ticks++;
         }
     }
 }

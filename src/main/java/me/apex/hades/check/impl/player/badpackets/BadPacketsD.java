@@ -17,22 +17,21 @@ public class BadPacketsD extends Check {
         if (e instanceof FlyingEvent){
             FlyingEvent packet = (FlyingEvent)e;
             if (packet.hasMoved()){
-                double curX = packet.getX();
-                double lastX = this.lastX;
-                this.lastX = curX;
+                double curX = packet.getX(),
+                        curY = packet.getY(),
+                        curZ = packet.getZ();
 
-                double curY = packet.getY();
-                double lastY = this.lastY;
-                this.lastY = curY;
-
-                double curZ = packet.getZ();
-                double lastZ = this.lastZ;
-                this.lastZ = curZ;
-
-                if (Math.abs(curX - lastX) >= 10 || Math.abs(curY - lastY) >= 10 || Math.abs(curZ - lastZ) >= 10 && user.teleportTick == 0) {
+                if (Math.abs(curX - lastX) >= 10
+                        || Math.abs(curY - lastY) >= 10
+                        || Math.abs(curZ - lastZ) >= 10
+                        && user.teleportTick == 0) {
                     if (++preVL > 1)
                         flag(user, "curXYZ = " + curX + ", " + curY + ", " + curZ + ", lastXYZ = " + lastX + ", " + lastY + ", " + lastZ);
                 } else preVL = 0;
+
+                this.lastX = curX;
+                this.lastY = curY;
+                this.lastZ = curZ;
             }
         }
     }

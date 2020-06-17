@@ -39,7 +39,7 @@ public class User {
     public boolean rightClickingBlock, rightClickingAir, leftClickingBlock, leftClickingAir;
     public Block interactedBlock;
     //Velocity
-    public long lastVelocity;
+    public long lastVelocity, timeStamp;
     public double velocityX, velocityY, velocityZ;
     //Log
     public LogUtils.TextFile logFile;
@@ -48,6 +48,7 @@ public class User {
         this.player = player;
         this.playerUUID = player.getUniqueId();
         this.checks = CheckManager.loadChecks();
+        this.timeStamp = System.currentTimeMillis();
         if (HadesPlugin.instance.getConfig().getBoolean("system.logging.file.enabled")) {
             logFile = new LogUtils.TextFile("" + playerUUID, HadesPlugin.instance.getConfig().getString("system.logging.file.path"));
         }

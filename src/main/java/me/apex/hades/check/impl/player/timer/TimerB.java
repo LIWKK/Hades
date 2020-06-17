@@ -13,11 +13,11 @@ import java.util.LinkedList;
 @CheckInfo(name = "Timer", type = "B")
 public class TimerB extends Check {
 
-    private Deque<Long> flyingDeque = new LinkedList();
+    private final Deque<Long> flyingDeque = new LinkedList<>();
 
     @Override
     public void onEvent(PacketEvent e, User user) {
-        if (e instanceof FlyingEvent){
+        if (e instanceof FlyingEvent) {
             flyingDeque.add(e.getTimestamp());
 
             if (flyingDeque.size() == 50) {

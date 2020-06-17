@@ -8,7 +8,6 @@ import me.apex.hades.user.User;
 
 @CheckInfo(name = "Fly", type = "A")
 public class FlyA extends Check {
-
     private double lastGround;
 
     @Override
@@ -26,12 +25,11 @@ public class FlyA extends Check {
                 double velocity = user.player.getVelocity().getY();
 
                 if (dist >= 1.3 && user.location.getY() >= user.lastLocation.getY() && velocity < -0.06D && user.player.getVehicle() == null) {
-                    if (preVL++ > 9){
+                    if (preVL++ > 9) {
                         flag(user, "curY = " + user.location.getY() + ", lastGround = " + lastGround);
                     }
                 } else preVL = 0;
             }
         }
     }
-
 }

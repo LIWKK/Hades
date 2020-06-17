@@ -21,9 +21,6 @@ public class PatternA extends Check {
             Entity lastTarget = this.lastTarget != null ? this.lastTarget : target;
             this.lastTarget = target;
 
-            int ticks = this.ticks;
-            this.ticks = 0;
-
             if(target != lastTarget) {
                 if(ticks < 2) {
                     if(++preVL > 2) {
@@ -31,6 +28,7 @@ public class PatternA extends Check {
                     }
                 }else preVL *= 0.75;
             }
+            ticks = 0;
         }else if(e instanceof FlyingEvent) {
             ticks++;
         }

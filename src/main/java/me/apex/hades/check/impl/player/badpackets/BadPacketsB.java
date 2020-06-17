@@ -14,15 +14,14 @@ public class BadPacketsB extends Check {
 
     @Override
     public void onEvent(PacketEvent e, User user) {
-        if (e instanceof AttackEvent){
-            int ticks = this.ticks;
-            this.ticks = 0;
-
+        if (e instanceof AttackEvent) {
             if (ticks < 1) {
                 if (preVL++ > 1)
                     flag(user, "ticks = " + ticks);
             } else preVL = 0;
-        }else if (e instanceof FlyingEvent){
+
+            this.ticks = 0;
+        } else if (e instanceof FlyingEvent) {
             ticks++;
         }
     }
