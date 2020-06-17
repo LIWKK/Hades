@@ -21,7 +21,7 @@ public class MiscUtil {
                 || m == Material.RAW_BEEF || m == Material.RAW_CHICKEN || m == Material.RAW_FISH
                 || m == Material.APPLE || m == Material.GOLDEN_APPLE || m == Material.MELON
                 || m == Material.COOKIE || m == Material.BREAD || m == Material.SPIDER_EYE
-                || m == Material.ROTTEN_FLESH || m == Material.POTATO_ITEM);
+                || m == Material.ROTTEN_FLESH || m == Material.POTATO_ITEM || m.toString().contains("POTION"));
 
     }
 

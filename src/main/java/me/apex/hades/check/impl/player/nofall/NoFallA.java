@@ -5,7 +5,8 @@ import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
-import me.apex.hades.util.PlayerUtil;
+import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 
 @CheckInfo(name = "NoFall", type = "A")
 public class NoFallA extends Check {
@@ -13,11 +14,13 @@ public class NoFallA extends Check {
     @Override
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
-            if (((FlyingEvent) e).isOnGround() && !user.onGround() && !PlayerUtil.isOnGround(user.player)) {
+            if (((FlyingEvent) e).isOnGround()
+                    && !user.onGround()
+                    && user.location.getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR) {
                 if (++preVL > 2) {
                     flag(user, "groundspoof, g: " + user.onGround());
                 }
-            } else preVL = 0;
+            } else preVL *= 0.75;
         }
     }
 

@@ -6,6 +6,7 @@ import me.apex.hades.check.CheckManager;
 import me.apex.hades.processor.impl.MovementProcessor;
 import me.apex.hades.util.LogUtils;
 import me.apex.hades.util.PlayerUtil;
+import me.apex.hades.util.ReflectionUtil;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -82,6 +83,14 @@ public class User {
 
     public boolean isOnGroundVanilla(){ return player.isOnGround(); }
 
-    //Cant do this!
-    //public int ping(){ return ((CraftPlayer)player).getHandle().ping; }
+    //Cant do this without reflection!
+    public int ping() {
+        int ping = 0;
+        try{
+            ping = ReflectionUtil.getPlayerPing(player);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ping;
+    }
 }

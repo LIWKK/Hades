@@ -10,8 +10,8 @@ public class ChatUtil {
         return ChatColor.translateAlternateColorCodes('&', in);
     }
 
-    public static void informStaff(TextComponent in, double vl) {
-        UserManager.users.stream().filter(user -> user.alerts && vl == 0).forEach(user -> user.player.spigot().sendMessage(in));
+    public static void informStaff(TextComponent in) {
+        UserManager.users.stream().filter(user -> user.alerts).forEach(user -> user.player.spigot().sendMessage(in));
     }
 
 }

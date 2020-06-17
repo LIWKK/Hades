@@ -1,26 +1,17 @@
-package me.apex.hades.check.impl.player.fasteat;
+package me.apex.hades.check.impl.player.fastuse;
 
 import io.github.retrooper.packetevents.event.PacketEvent;
-import me.apex.hades.HadesPlugin;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.impl.bukkitevents.InteractEvent;
 import me.apex.hades.event.impl.bukkitevents.ItemConsumeEvent;
 import me.apex.hades.user.User;
-import me.apex.hades.user.UserManager;
 import me.apex.hades.util.MiscUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
 
-import java.util.HashMap;
-
-@CheckInfo(name = "FastEat", type = "A")
-public class FastEatA extends Check {
+@CheckInfo(name = "FastUse", type = "A")
+public class FastUseA extends Check {
 
     private long startEat;
 

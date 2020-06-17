@@ -1,5 +1,6 @@
 package me.apex.hades.check;
 
+import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.user.User;
@@ -12,27 +13,19 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class Check {
 
     //Check Data
-    public List<Violation> violations = new ArrayList<>();
-
-    public boolean enabled, punishable, dev;
-
-    public double vl, maxViolations;
-
-    public long lastFlag;
-
     public double preVL;
+    public long lastFlag;
+    public double vl, maxVL;
+    public boolean enabled, punishable, dev;
 
     public Check() {
         try {
             enabled = HadesPlugin.instance.getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".enabled");
             punishable = HadesPlugin.instance.getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".punishable");
-            maxViolations = HadesPlugin.instance.getConfig().getDouble("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".max-vl");
+            maxVL = HadesPlugin.instance.getConfig().getDouble("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".max-vl");
         }catch (Exception e) { }
 
         //Call Post-Init
@@ -53,22 +46,22 @@ public abstract class Check {
 
     protected void flag(User user, String information) {
         assert user != null;
-        violations.add(new Violation(information));
+        vl++;
         lastFlag = time();
         TaskUtil.run(() -> {
             String formatColor = HadesPlugin.instance.getConfig().getString("lang.flag-format").replace("&", "§");
-            TextComponent message = new TextComponent(formatColor.replace("%prefix%", HadesPlugin.instance.getPrefix()).replace("%player%", user.player.getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? HadesPlugin.instance.getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information));
+            TextComponent message = new TextComponent(formatColor.replace("%prefix%", HadesPlugin.instance.getPrefix()).replace("%player%", user.player.getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? HadesPlugin.instance.getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(vl)).replace("%info%", information));
             message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp "+user.player));
             message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp "+user.player.getName()));
-            message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7* Info\n§7* §c" + information + "\n§7* Ping: §c" + 0/*user.ping()*/ + "\n§7\n§7(Click to teleport)").create()));
-            ChatUtil.informStaff(message, vl);
+            message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Info:\n§7* §c" + information + "\n§7Ping: §c" + user.ping() + "\n§7TPS: §c" + PacketEvents.getCurrentServerTPS() + "\n§7\n§7(Click to teleport)").create()));
+            ChatUtil.informStaff(message);
 
             if (HadesPlugin.instance.getConfig().getBoolean("system.logging.file.enabled"))
-                LogUtils.logToFile(user.logFile, HadesPlugin.instance.getConfig().getString("system.logging.log-format").replace("%player%", user.player.getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? HadesPlugin.instance.getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information));
+                LogUtils.logToFile(user.logFile, HadesPlugin.instance.getConfig().getString("system.logging.log-format").replace("%player%", user.player.getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? HadesPlugin.instance.getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(vl)).replace("%info%", information));
             if (HadesPlugin.instance.getConfig().getBoolean("system.logging.log-to-console")){
-                Bukkit.getLogger().info("[Hades] " + HadesPlugin.instance.getConfig().getString("system.logging.log-format").replace("%player%", user.player.getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? HadesPlugin.instance.getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(violations.size())).replace("%info%", information).replace("[%time%]", ""));
+                Bukkit.getLogger().info("[Hades] " + HadesPlugin.instance.getConfig().getString("system.logging.log-format").replace("%player%", user.player.getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? HadesPlugin.instance.getConfig().getString("lang.experimental-notation") : "")).replace("%vl%", String.valueOf(vl)).replace("%info%", information).replace("[%time%]", ""));
             }
-            if (violations.size() >= maxViolations) {
+            if (vl >= maxVL) {
                 if (punishable) {
                     if (HadesPlugin.instance.getConfig().getBoolean("system.logging.file.enabled"))
                         LogUtils.logToFile(user.logFile, "%time% > [ACTION] " + HadesPlugin.instance.getConfig().getString("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".punish-command").replace("%player%", user.player.getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? HadesPlugin.instance.getConfig().getString("lang.experimental-notation") : "")));

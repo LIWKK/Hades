@@ -10,8 +10,6 @@ import org.bukkit.block.BlockFace;
 @CheckInfo(name = "Criticals", type = "A")
 public class CriticalsA extends Check {
 
-    int preVL = 0;
-
     @Override
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof AttackEvent){

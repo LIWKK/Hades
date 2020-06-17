@@ -210,4 +210,9 @@ public class ReflectionUtil {
         return getInvokedMethod(getMethod(CraftPlayer, "getHandle"), player);
     }
 
+    public static int getPlayerPing(Player player) {
+        Object handle = getEntityPlayer(player);
+        return (int)getInvokedField(getField(handle.getClass(), "ping"), getEntityPlayer(player));
+    }
+
 }

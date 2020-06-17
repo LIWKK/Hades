@@ -58,7 +58,6 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     aura:
-      mitigate: true
       a:
         enabled: true
         punishable: true
@@ -70,13 +69,6 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
       c:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-    criticals:
-      mitigate: true
-      a:
         enabled: true
         punishable: true
         max-vl: 10
@@ -84,17 +76,17 @@ checks:
     autoclicker:
       a:
         enabled: true
-        punishable: true
+        punishable: false
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
       b:
         enabled: true
-        punishable: true
+        punishable: false
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
       c:
         enabled: true
-        punishable: true
+        punishable: false
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
       d:
@@ -105,6 +97,19 @@ checks:
       e:
         enabled: true
         punishable: false
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+    criticals:
+      mitigate: true
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+    pattern:
+      a:
+        enabled: true
+        punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     reach:
@@ -132,12 +137,15 @@ checks:
         punishable: true
         max-vl: 20
         punish-command: 'ban %player% %prefix%Cheating'
-      c:
+    invalid:
+      mitigate: true
+      a:
         enabled: true
         punishable: true
-        max-vl: 20
+        max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
-    motion:
+    noslow:
+      mitigate: true
       a:
         enabled: true
         punishable: true
@@ -146,11 +154,6 @@ checks:
     scaffold:
       mitigate: true
       a:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      b:
         enabled: true
         punishable: true
         max-vl: 10
@@ -166,29 +169,6 @@ checks:
         enabled: true
         punishable: true
         max-vl: 20
-        punish-command: 'ban %player% %prefix%Cheating'
-      c:
-        enabled: true
-        punishable: true
-        max-vl: 20
-        punish-command: 'ban %player% %prefix%Cheating'
-      d:
-        enabled: true
-        punishable: true
-        max-vl: 20
-        punish-command: 'ban %player% %prefix%Cheating'
-    smallhop:
-      mitigate: true
-      a:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-    noslow:
-      a:
-        enabled: true
-        punishable: true
-        max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     badpackets:
       a:
@@ -231,6 +211,13 @@ checks:
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
+    fastuse:
+      mitigate: true
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     nofall:
       a:
         enabled: true
@@ -247,13 +234,6 @@ checks:
         enabled: true
         punishable: true
         max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-    fasteat:
-      mitigate: true
-      a:
-        enabled: true
-        punishable: true
-        max-vl: 3
         punish-command: 'ban %player% %prefix%Cheating'
     vape:
       a:
