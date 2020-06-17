@@ -16,7 +16,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 @CheckInfo(name = "Reach", type = "A")
 public class ReachA extends Check implements Listener {
-    public ReachA(){
+    public ReachA() {
         Bukkit.getPluginManager().registerEvents(this, HadesPlugin.instance);
     }
 
@@ -28,23 +28,25 @@ public class ReachA extends Check implements Listener {
     int preVL = 0;
 
     @Override
-    public void onEvent(PacketEvent e, User user) { }
+    public void onEvent(PacketEvent e, User user) {
+    }
 
     @EventHandler
-    public void onAttack(EntityDamageByEntityEvent event){
-        if (event.getDamager() instanceof Player){
-            User user = UserManager.getUser((Player)event.getDamager());
+    public void onAttack(EntityDamageByEntityEvent event) {
+        if (event.getDamager() instanceof Player) {
+            User user = UserManager.getUser((Player) event.getDamager());
             try {
                 Ray ray = Ray.from(user);
-                double dist = AABB.from(event.getEntity()).collidesD(ray,0, 10);
+                double dist = AABB.from(event.getEntity()).collidesD(ray, 0, 10);
                 if (dist != -1) {
-                    if(dist > 3.1) {
-                        if(++preVL >= 3){
+                    if (dist > 3.1) {
+                        if (++preVL >= 3) {
                             flag(user, "dist = " + dist);
                         }
-                    }else preVL = 0;
+                    } else preVL = 0;
                 }
-            }catch (Exception ex){}
+            } catch (Exception ignored) {
+            }
         }
     }
 }

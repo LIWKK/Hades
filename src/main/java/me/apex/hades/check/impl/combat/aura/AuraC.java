@@ -21,10 +21,12 @@ public class AuraC extends Check {
         if (e instanceof AttackEvent) {
             double diff = Math.abs(user.deltaYaw - user.lastDeltaYaw);
             if (diff > 0.0) diffs.add(diff);
+
             if (diffs.size() >= 5) {
                 double deviation = MathUtil.getStandardDeviation(diffs.stream().mapToDouble(d -> d).toArray());
 
                 average = ((average * 19) + deviation) / 20;
+
                 if (average < 5) {
                     if (++preVL > 2) {
                         flag(user, "low average deviation, a: " + average);

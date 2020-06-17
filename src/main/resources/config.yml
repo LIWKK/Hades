@@ -6,7 +6,7 @@
 # Hades is a very configurable anticheat. All the punish commands and max VL's are configurable.
 # Hades supports logging very well. It can write the logs to a file or even a MySQL server.
 # Hades support change of base command, prefix, punish announcements and more!
-# IMPORTANT: If you don't know what does something do don't use it.
+# IMPORTANT: If you don't know what does something does don't use it.
 
 # Mitigate: Mitigate means lagback or canceling hits. If you want to make Hades silent or if you want it to false less you can disable it.
 

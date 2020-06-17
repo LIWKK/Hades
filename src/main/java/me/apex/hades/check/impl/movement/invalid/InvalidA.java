@@ -8,7 +8,6 @@ import me.apex.hades.user.User;
 
 @CheckInfo(name = "Invalid", type = "A")
 public class InvalidA extends Check {
-
     @Override
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
@@ -21,5 +20,4 @@ public class InvalidA extends Check {
             }
         }
     }
-
 }

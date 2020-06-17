@@ -15,12 +15,11 @@ public class AuraB extends Check {
     @Override
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof AttackEvent) {
-            int ticks = this.ticks;
-            this.ticks = 0;
-
             if (ticks < 1) {
                 flag(user, "multiple attacks in tick, t: " + ticks);
             }
+
+            this.ticks = 0;
         } else if (e instanceof FlyingEvent) {
             ticks++;
         }

@@ -25,7 +25,9 @@ public class FlyB extends Check {
                     && !PlayerUtil.isInLiquid(user.player)
                     && !PlayerUtil.isInWeb(user.player)
                     && !user.player.getAllowFlight()
-                    && user.player.getVehicle() == null) {
+                    && user.player.getVehicle() == null
+                    // Due to falses on join, just gonna do it this way, a lot better ways but what ever, Feel free to change.
+                    && (System.currentTimeMillis() - user.timeStamp > 3500)) {
                 if (++preVL > 3)
                     flag(user, "y motion higher than 0, m: " + diff);
             } else preVL *= 0.75;

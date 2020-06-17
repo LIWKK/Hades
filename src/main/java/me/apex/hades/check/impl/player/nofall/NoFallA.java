@@ -18,10 +18,9 @@ public class NoFallA extends Check {
                     && !user.onGround()
                     && user.location.getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR) {
                 if (++preVL > 2) {
-                    flag(user, "groundspoof, g: " + user.onGround());
+                    flag(user, "Spoofed Ground, g: " + user.onGround());
                 }
             } else preVL *= 0.75;
         }
     }
-
 }
