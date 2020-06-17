@@ -37,7 +37,6 @@ system:
       auth:
         username: root
         password: ''
-
 #VPN Protection
 anti-vpn:
   enabled: true
@@ -45,6 +44,8 @@ anti-vpn:
 
 #Check Values
 Max-CPS: 20
+Max-ReachA: 3.4
+Max-ReachB: 3.4
 
 #Check Configuration
 #NOTE: Experimental checks are preset to not punish players
@@ -115,6 +116,11 @@ checks:
     reach:
       mitigate: true
       a:
+        enabled: true
+        punishable: false
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+      b:
         enabled: true
         punishable: false
         max-vl: 10

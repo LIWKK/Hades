@@ -8,6 +8,7 @@ import me.apex.hades.check.impl.combat.autoclicker.*;
 import me.apex.hades.check.impl.combat.criticals.CriticalsA;
 import me.apex.hades.check.impl.combat.pattern.PatternA;
 import me.apex.hades.check.impl.combat.reach.ReachA;
+import me.apex.hades.check.impl.combat.reach.ReachB;
 import me.apex.hades.check.impl.combat.velocity.VelocityA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
 import me.apex.hades.check.impl.movement.fly.FlyB;
@@ -36,6 +37,7 @@ public class CheckManager {
             AuraC.class,
             CriticalsA.class,
             ReachA.class,
+            ReachB.class,
             AutoClickerA.class,
             AutoClickerB.class,
             AutoClickerC.class,

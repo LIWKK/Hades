@@ -18,7 +18,7 @@ public class VelocityA extends Check {
     @Override
     public void onEvent(PacketEvent e, User user) {
         ///Just testing this code from Jonhan, in works on remaking my own check based on this
-        /*if(e instanceof VelocityEvent) {
+        if(e instanceof VelocityEvent) {
             VelocityEvent event = (VelocityEvent)e;
 
             if(event.getVelocityY() > 0.2) {
@@ -46,7 +46,7 @@ public class VelocityA extends Check {
                     hasSent = false;
                 }
             }
-        }*/
+        }
     }
 
 }

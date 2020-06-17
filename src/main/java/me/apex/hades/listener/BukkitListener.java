@@ -1,14 +1,13 @@
 package me.apex.hades.listener;
 
-import me.apex.hades.event.impl.bukkitevents.InteractEvent;
-import me.apex.hades.event.impl.bukkitevents.ItemConsumeEvent;
-import me.apex.hades.event.impl.bukkitevents.MoveEvent;
-import me.apex.hades.event.impl.bukkitevents.TeleportEvent;
+import me.apex.hades.event.impl.bukkitevents.*;
 import me.apex.hades.user.User;
 import me.apex.hades.user.UserManager;
 import me.apex.hades.util.TaskUtil;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.*;
 
 public class BukkitListener implements Listener {
@@ -21,6 +20,18 @@ public class BukkitListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         UserManager.users.remove(UserManager.getUser(e.getPlayer()));
+    }
+
+    @EventHandler
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent e){
+        if (e.getDamager() instanceof Player){
+            User user = UserManager.getUser((Player)e.getDamager());
+            if (user != null) {
+                TaskUtil.runAsync(() -> {
+                    user.checks.stream().filter(check -> check.enabled).forEach(check -> check.onEvent(new EntityDamageByPlayerEvent(e), user));
+                });
+            }
+        }
     }
 
     @EventHandler

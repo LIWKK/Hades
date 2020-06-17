@@ -20,10 +20,10 @@ public class TimerB extends Check {
         if (e instanceof FlyingEvent){
             flyingDeque.add(e.getTimestamp());
 
-            if (flyingDeque.size() == 10) {
+            if (flyingDeque.size() == 50) {
                 double deviation = MathUtil.getStandardDeviation(flyingDeque.stream().mapToLong(l -> l).toArray());
 
-                if (deviation > 160) {
+                if (deviation > 900) {
                     if (preVL++ > 1)
                         flag(user, "deviation = " + deviation);
                 } else preVL = 0;

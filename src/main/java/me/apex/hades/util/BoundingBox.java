@@ -8,6 +8,7 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
+//Credits to funkemunky:)
 public class BoundingBox {
 
     public float minX, minY, minZ, maxX, maxY, maxZ;

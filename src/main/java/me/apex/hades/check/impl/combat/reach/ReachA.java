@@ -25,8 +25,6 @@ public class ReachA extends Check implements Listener {
         dev = true;
     }
 
-    int preVL = 0;
-
     @Override
     public void onEvent(PacketEvent e, User user) { }
 
@@ -35,14 +33,16 @@ public class ReachA extends Check implements Listener {
         if (event.getDamager() instanceof Player){
             User user = UserManager.getUser((Player)event.getDamager());
             try {
+                double max = HadesPlugin.instance.getConfig().getDouble("Max-ReachA");
                 Ray ray = Ray.from(user);
                 double dist = AABB.from(event.getEntity()).collidesD(ray,0, 10);
+                if (user.isSprinting) max += 0.1;
                 if (dist != -1) {
-                    if(dist > 3.1) {
+                    if(dist > max) {
                         if(++preVL >= 3){
                             flag(user, "dist = " + dist);
                         }
-                    }else preVL = 0;
+                    }else preVL = preVL > 1 ? preVL-- : 0;
                 }
             }catch (Exception ex){}
         }

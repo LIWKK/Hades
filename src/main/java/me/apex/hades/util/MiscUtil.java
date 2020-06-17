@@ -25,6 +25,7 @@ public class MiscUtil {
 
     }
 
+    //Credits to funkemunky:)
     public static BoundingBox getEntityBoundingBox(LivingEntity entity) {
         if (entityDimensions.containsKey(entity.getType())) {
             Vector entityVector = entityDimensions.get(entity.getType());
@@ -40,6 +41,7 @@ public class MiscUtil {
         return toBoundingBox(ReflectionUtil.getBoundingBox((Player) entity));
     }
 
+    //Credits to funkemunky:)
     public static BoundingBox toBoundingBox(Object aaBB) {
         Vector min = getBoxMin(aaBB);
         Vector max = getBoxMax(aaBB);
@@ -47,6 +49,7 @@ public class MiscUtil {
         return new BoundingBox((float) min.getX(), (float) min.getY(), (float) min.getZ(), (float) max.getX(), (float) max.getY(), (float) max.getZ());
     }
 
+    //Credits to funkemunky:)
     private static Vector getBoxMin(Object box) {
         if (hasField(box.getClass(), "a")) {
             double x = (double) getFieldValue(getFieldByName(box.getClass(), "a"), box);
@@ -60,6 +63,7 @@ public class MiscUtil {
             return new Vector(x, y, z);
         }
     }
+    //Credits to funkemunky:)
     public static Field getFieldByName(Class<?> clazz, String fieldName) {
         try {
             Field field = clazz.getDeclaredField(fieldName) != null ? clazz.getDeclaredField(fieldName) : clazz.getSuperclass().getDeclaredField(fieldName);
@@ -71,7 +75,7 @@ public class MiscUtil {
             return null;
         }
     }
-
+    //Credits to funkemunky:)
     private static Vector getBoxMax(Object box) {
         if (hasField(box.getClass(), "d")) {
             double x = (double) getFieldValue(getFieldByName(box.getClass(), "d"), box);
@@ -86,12 +90,12 @@ public class MiscUtil {
         }
     }
 
-
+    //Credits to funkemunky:)
     public static boolean hasField(Class<?> object, String fieldName) {
         return Arrays.stream(object.getFields()).anyMatch(field -> field.getName().equalsIgnoreCase(fieldName));
     }
 
-
+    //Credits to funkemunky:)
     public static Object getFieldValue(Field field, Object object) {
         try {
             field.setAccessible(true);

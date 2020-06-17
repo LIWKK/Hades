@@ -14,7 +14,7 @@ public class SpeedB extends Check {
     @Override
     public void onEvent(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
-            if (((FlyingEvent) e).hasMoved() && (time() - user.lastVelocity) > 2000) {
+            if (((FlyingEvent) e).hasMoved()) {
                 double max = 0.34;
                 max *= user.player.getWalkSpeed() / 0.2;
                 max += PlayerUtil.getPotionEffectLevel(user.player, PotionEffectType.SPEED) * (max / 2);
