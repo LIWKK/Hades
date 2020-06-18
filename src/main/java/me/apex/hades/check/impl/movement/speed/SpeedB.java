@@ -16,7 +16,6 @@ public class SpeedB extends Check implements ClassInterface {
     @Override
     public void onHandle(User user, AnticheatEvent e) {
         if(e instanceof FlyingPacketEvent) {
-            Bukkit.broadcastMessage(e.getClass().getSimpleName());
             if(((FlyingPacketEvent) e).isHasMoved()) {
                 double max = 0.34;
                 max *= user.getPlayer().getWalkSpeed() / 0.2;
