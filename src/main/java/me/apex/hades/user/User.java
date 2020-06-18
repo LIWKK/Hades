@@ -120,7 +120,6 @@ public class User {
         addCheck(new FlyC("Fly", "C", Type.MOVEMENT, true));
         addCheck(new FlyD("Fly", "D", Type.MOVEMENT, true));
         addCheck(new FlyE("Fly", "E", Type.MOVEMENT, true));
-        addCheck(new FlyF("Fly", "F", Type.MOVEMENT, true));
 
         addCheck(new InvalidA("Invalid", "A", Type.MOVEMENT, true));
 
