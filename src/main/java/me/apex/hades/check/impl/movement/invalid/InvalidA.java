@@ -4,7 +4,7 @@ import me.apex.hades.check.Check;
 import me.apex.hades.check.ClassInterface;
 import me.apex.hades.check.Type;
 import me.apex.hades.event.AnticheatEvent;
-import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 
 public class InvalidA extends Check implements ClassInterface {
@@ -16,8 +16,8 @@ public class InvalidA extends Check implements ClassInterface {
 
     @Override
     public void onHandle(User user, AnticheatEvent e) {
-        if(e instanceof FlyingEvent) {
-            if(((FlyingEvent) e).hasMoved()) {
+        if(e instanceof FlyingPacketEvent) {
+            if(((FlyingPacketEvent) e).isHasMoved()) {
                 double deltaY = user.getLocation().getY() - user.getPreviousLocation().getY();
                 double lastDeltaY = this.lastDeltaY;
                 this.lastDeltaY = deltaY;

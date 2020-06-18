@@ -5,7 +5,7 @@ import me.apex.hades.check.ClassInterface;
 import me.apex.hades.check.Type;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
-import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 
 public class KillauraC extends Check implements ClassInterface {
@@ -22,7 +22,7 @@ public class KillauraC extends Check implements ClassInterface {
                 flag(user, "multiple attacks in tick, t: " + ticks);
             }
             ticks = 0;
-        }else if(e instanceof FlyingEvent) {
+        }else if(e instanceof FlyingPacketEvent) {
             ticks++;
         }
     }

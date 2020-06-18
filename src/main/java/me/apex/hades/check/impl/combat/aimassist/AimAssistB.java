@@ -5,7 +5,7 @@ import me.apex.hades.check.Check;
 import me.apex.hades.check.ClassInterface;
 import me.apex.hades.check.Type;
 import me.apex.hades.event.AnticheatEvent;
-import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.utils.math.MathUtil;
 
@@ -25,7 +25,7 @@ public class AimAssistB extends Check implements ClassInterface {
     //But they will be kept for now
     @Override
     public void onHandle(User user, AnticheatEvent e) {
-        if (e instanceof FlyingEvent) {
+        if (e instanceof FlyingPacketEvent) {
             double pitchDifference = Math.abs(user.getTo().getPitch() - user.getFrom().getPitch());
             double yawDifference = MathUtil.clamp180(user.getTo().getYaw() - user.getFrom().getYaw());
             double pitchDelta = Math.abs(pitchDifference - lastPitchDiff);

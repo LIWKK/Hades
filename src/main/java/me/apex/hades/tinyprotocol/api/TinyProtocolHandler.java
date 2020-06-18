@@ -1,5 +1,6 @@
 package me.apex.hades.tinyprotocol.api;
 
+import io.netty.buffer.ByteBuf;
 import lombok.Getter;
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.event.impl.PacketEvent;
@@ -63,6 +64,7 @@ public class TinyProtocolHandler {
 
             User user = HadesPlugin.userManager.getUser(sender.getUniqueId());
             PacketEvent event = new PacketEvent(sender, packet, packetName, PacketEvent.Direction.CLIENT);
+
 
             if (user != null && (System.currentTimeMillis() - user.getTimestamp()) > 500L) {
                 event = new PacketEvent(sender, packet, packetName, PacketEvent.Direction.CLIENT, user);

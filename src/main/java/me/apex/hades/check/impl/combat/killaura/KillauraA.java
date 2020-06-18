@@ -5,7 +5,7 @@ import me.apex.hades.check.ClassInterface;
 import me.apex.hades.check.Type;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
-import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.utils.math.MathUtil;
 import me.apex.hades.utils.time.TimeUtils;
@@ -20,7 +20,7 @@ public class KillauraA extends Check implements ClassInterface {
 
     @Override
     public void onHandle(User user, AnticheatEvent e) {
-        if (e instanceof FlyingEvent) {
+        if (e instanceof FlyingPacketEvent) {
             if (TimeUtils.elapsed(user.lastUseEntityPacket) < 100L) {
                 double deltaXZ = MathUtil.hypot(user.getTo().getX() - user.getFrom().getX(), user.getTo().getZ() - user.getFrom().getZ());
                 double lastDist = this.lastDist;

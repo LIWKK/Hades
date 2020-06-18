@@ -4,7 +4,7 @@ import me.apex.hades.check.Check;
 import me.apex.hades.check.ClassInterface;
 import me.apex.hades.check.Type;
 import me.apex.hades.event.AnticheatEvent;
-import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 
 public class BadPacketsA extends Check implements ClassInterface {
@@ -13,7 +13,7 @@ public class BadPacketsA extends Check implements ClassInterface {
     }
     @Override
     public void onHandle(User user, AnticheatEvent e) {
-        if (e instanceof FlyingEvent) {
+        if (e instanceof FlyingPacketEvent) {
             if (Math.abs(user.getPlayer().getLocation().getPitch()) > 90.0) {
                 flag(user, "Invalid Pitch: "+user.getPlayer().getLocation().getPitch());
             }

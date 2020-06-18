@@ -102,11 +102,11 @@ public class User {
 
     public void registerChecks() {
 
-        addCheck(new AimAssistA("AimAssist", "A", Type.COMBAT, true));
+       /* addCheck(new AimAssistA("AimAssist", "A", Type.COMBAT, true));
         addCheck(new AimAssistB("AimAssist", "B", Type.COMBAT, true));
 
         addCheck(new AutoClickerA("AutoClicker", "A", Type.COMBAT, true));
-        addCheck(new AutoClickerB("AutoClicker", "B", Type.COMBAT, true));
+        addCheck(new AutoClickerB("AutoClicker", "B", Type.COMBAT, true));*/
 
         addCheck(new KillauraA("Killaura", "A", Type.COMBAT, true));
         addCheck(new KillauraB("Killaura", "B", Type.COMBAT, true));
@@ -127,12 +127,6 @@ public class User {
 
         addCheck(new SpeedA("Speed", "A", Type.MOVEMENT, true));
         addCheck(new SpeedB("Speed", "B", Type.MOVEMENT, true));
-
-        addCheck(new BadPacketsA("BadPackets", "A", Type.PLAYER, true));
-        addCheck(new BadPacketsC("BadPackets", "C", Type.PLAYER, true));
-        addCheck(new BadPacketsD("BadPackets", "D", Type.PLAYER, true));
-        addCheck(new BadPacketsE("BadPackets", "E", Type.PLAYER, true));
-        addCheck(new BadPacketsF("BadPackets", "F", Type.PLAYER, true));
 
         addCheck(new TimerA("Timer", "A", Type.PLAYER, true));
 

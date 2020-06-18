@@ -4,7 +4,7 @@ import me.apex.hades.check.Check;
 import me.apex.hades.check.ClassInterface;
 import me.apex.hades.check.Type;
 import me.apex.hades.event.AnticheatEvent;
-import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.utils.math.MathUtil;
 
@@ -21,8 +21,8 @@ public class TimerA extends Check implements ClassInterface {
 
     @Override
     public void onHandle(User user, AnticheatEvent e) {
-        if(e instanceof FlyingEvent) {
-            flyingDeque.add(time());
+        if(e instanceof FlyingPacketEvent) {
+            flyingDeque.add(System.currentTimeMillis());
 
             if(flyingDeque.size() == 50) {
                 double deviation = MathUtil.getStandardDeviation(flyingDeque.stream().mapToLong(l -> l).toArray());

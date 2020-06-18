@@ -5,7 +5,7 @@ import me.apex.hades.check.Check;
 import me.apex.hades.check.Type;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
-import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.utils.location.NewLocation;
 import me.apex.hades.utils.math.MathUtil;
@@ -37,8 +37,8 @@ public class ReachA extends Check {
                     }
                 }
             }
-        } else if (e instanceof FlyingEvent) {
-            FlyingEvent event = (FlyingEvent)e;
+        } else if (e instanceof FlyingPacketEvent) {
+            FlyingPacketEvent event = (FlyingPacketEvent)e;
             NewLocation location = user.getLocation();
             if (event.isClientMoved()) {
                 if (location != null) {

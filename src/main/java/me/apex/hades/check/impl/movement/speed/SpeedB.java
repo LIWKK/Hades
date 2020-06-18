@@ -4,7 +4,7 @@ import me.apex.hades.check.Check;
 import me.apex.hades.check.ClassInterface;
 import me.apex.hades.check.Type;
 import me.apex.hades.event.AnticheatEvent;
-import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 import org.bukkit.Bukkit;
 
@@ -15,9 +15,9 @@ public class SpeedB extends Check implements ClassInterface {
 
     @Override
     public void onHandle(User user, AnticheatEvent e) {
-        if(e instanceof FlyingEvent) {
+        if(e instanceof FlyingPacketEvent) {
             Bukkit.broadcastMessage(e.getClass().getSimpleName());
-            if(((FlyingEvent) e).hasMoved()) {
+            if(((FlyingPacketEvent) e).isHasMoved()) {
                 double max = 0.34;
                 max *= user.getPlayer().getWalkSpeed() / 0.2;
                 max += user.getSpeedPotionEffectLevel() % max;

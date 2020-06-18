@@ -28,7 +28,16 @@ public class PacketListener implements AnticheatListener {
 
             //Wrap Packet in Event
             AnticheatEvent checkEvent = e;
-            if(e.getType().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
+            if(e.getType().equalsIgnoreCase(Packet.Client.FLYING) || e.getType().equalsIgnoreCase(Packet.Client.LOOK)
+                    || e.getType().equalsIgnoreCase(Packet.Client.POSITION)
+                    || e.getType().equalsIgnoreCase(Packet.Client.POSITION_LOOK)) {
+                WrappedInFlyingPacket packet = new WrappedInFlyingPacket(e.getPacket(), user.getPlayer());
+                checkEvent = new FlyingPacketEvent(packet.getX(), packet.getY(), packet.getZ(), packet.getYaw(),
+                        packet.getPitch(),
+                        packet.isGround(),
+                        packet.isPos(),
+                        packet.isLook());
+            }else if(e.getType().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
                 checkEvent = new SwingEvent();
             }else if(e.getType().equalsIgnoreCase(Packet.Client.USE_ENTITY)) {
                 WrappedInUseEntityPacket packet = new WrappedInUseEntityPacket(e.getPacket(), e.getPlayer());
@@ -47,17 +56,6 @@ public class PacketListener implements AnticheatListener {
             }else if(e.getType().equalsIgnoreCase(Packet.Client.ENTITY_ACTION)) {
                 WrappedInEntityActionPacket packet = new WrappedInEntityActionPacket(e.getPacket(), e.getPlayer());
                 checkEvent = new EntityActionEvent(packet.getAction());
-            }else if(e.getType().equalsIgnoreCase(Packet.Client.LOOK)
-                    || e.getType().equalsIgnoreCase(Packet.Client.FLYING)
-                    || e.getType().equalsIgnoreCase(Packet.Client.POSITION)
-                    || e.getType().equalsIgnoreCase(Packet.Client.POSITION_LOOK)) {
-                WrappedInFlyingPacket packet = new WrappedInFlyingPacket(e.getPacket(), e.getPlayer());
-                checkEvent = new FlyingEvent(packet.getX(), packet.getY(), packet.getZ(), packet.getYaw(), packet.getPitch(),
-                        e.getType().contains("Position"),
-                        e.getType().contains("Look"),
-                        packet.isGround(),
-                        packet.isPos(),
-                        packet.isLook());
             }else if(e.getType().equalsIgnoreCase(Packet.Client.KEEP_ALIVE)) {
                 checkEvent = new PingEvent();
             }else if(e.getType().equalsIgnoreCase(Packet.Client.BLOCK_PLACE)) {
@@ -71,12 +69,9 @@ public class PacketListener implements AnticheatListener {
                 if(packet.getId() == e.getPlayer().getEntityId()) {
                     checkEvent = new VelocityEvent(packet.getId(), packet.getX(), packet.getY(), packet.getZ());
                 }
-            }else checkEvent = e;
+            }
 
             AnticheatEvent finalCheckEvent = checkEvent;
-            if(finalCheckEvent instanceof FlyingEvent) {
-                Bukkit.broadcastMessage("stage 5");
-            }
             user.getCheckList().forEach(check -> check.onHandle(user, finalCheckEvent));
         }
     }

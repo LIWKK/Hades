@@ -49,10 +49,4 @@ public class Check implements AnticheatListener, ClassInterface {
     public void onHandle(User user, AnticheatEvent e) {
 
     }
-
-    //Time Utils
-    public long time() { return TimeUtil.getCurrentTimeNanosOrMillis(); }
-    public long elapsed(long now, long previous) {
-        return now - previous;
-    }
 }
