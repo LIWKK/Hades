@@ -32,7 +32,7 @@ public class FlyB extends Check implements ClassInterface {
                 predictedDist = 0;
             }
             if (user.blockData.blockAboveTicks > 0) { //fixes false even tho is hardcodes, but better then being bypassed
-                if (Math.abs(predictedDist) == 0.08307781780646571 || Math.abs(predictedDist) == 0.04518702986887144) {
+                if (Math.abs(predictedDist) == 0.08307781780646571 || Math.abs(predictedDist) == 0.04518702986887144 || distY <= 0.3) {
                     return;
                 }
             }
