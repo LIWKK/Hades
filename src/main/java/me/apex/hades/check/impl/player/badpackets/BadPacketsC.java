@@ -19,9 +19,9 @@ public class BadPacketsC extends Check implements Listener {
         if (e instanceof FlyingPacketEvent) {
             sprintTicks = 0;
         }else if (e instanceof EntityActionEvent) {
-            if (((EntityActionEvent) e).getAction() == WrappedInEntityActionPacket.EnumPlayerAction.START_SPRINTING) {
+            if (((EntityActionEvent) e).getAction() == WrappedInEntityActionPacket.EnumPlayerAction.STOP_SPRINTING) {
                 sprintTicks++;
-                if (sprintTicks > 2) {
+                if (sprintTicks >= 2) {
                     flag(user, "Sprint Sent Packet Twice");
                 }
             }

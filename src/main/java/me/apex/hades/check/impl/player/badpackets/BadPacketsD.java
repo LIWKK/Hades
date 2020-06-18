@@ -13,16 +13,16 @@ public class BadPacketsD extends Check implements Listener {
     public BadPacketsD(String checkName, String letter, Type type, boolean enabled) {
         super(checkName, letter, type, enabled);
     }
-    int sprintTicks;
+    int sneakTicks;
     @Override
     public void onHandle(User user, AnticheatEvent e) {
         if (e instanceof FlyingPacketEvent) {
-            sprintTicks = 0;
+            sneakTicks = 0;
         }else if (e instanceof EntityActionEvent) {
-            if (((EntityActionEvent) e).getAction() == WrappedInEntityActionPacket.EnumPlayerAction.STOP_SPRINTING) {
-                sprintTicks++;
-                if (sprintTicks > 2) {
-                    flag(user, "Sprint Sent Packet Twice");
+            if (((EntityActionEvent) e).getAction() == WrappedInEntityActionPacket.EnumPlayerAction.STOP_SNEAKING) {
+                sneakTicks++;
+                if (sneakTicks >= 2) {
+                    flag(user, "Sneak Sent Packet Twice");
                 }
             }
         }

@@ -31,10 +31,17 @@ public class FlyB extends Check implements ClassInterface {
             if (Math.abs(predictedDist) <= 0.005D) {
                 predictedDist = 0;
             }
+            if (user.blockData.blockAboveTicks > 0) { //fixes false even tho is hardcodes, but better then being bypassed
+                if (Math.abs(predictedDist) == 0.08307781780646571 || Math.abs(predictedDist) == 0.04518702986887144) {
+                    return;
+                }
+            }
             if ((!clientOnGround && !clientLastGround)) {
                 if (Math.abs(distY - predictedDist) > 1E-12) {
-                    flag(user, "" + Math.abs(distY - predictedDist) + " " + Math.abs(predictedDist));
-                }
+                    if (++preVL > 2) {
+                        flag(user, "" + Math.abs(distY - predictedDist) + " " + Math.abs(predictedDist));
+                    }
+                }else preVL -= Math.min(preVL, 0.5);
             }
             lastGround = serverOnGround;
             lastY = distY;

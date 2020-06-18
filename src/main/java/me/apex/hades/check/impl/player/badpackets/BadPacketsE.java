@@ -19,9 +19,9 @@ public class BadPacketsE extends Check implements Listener {
         if (e instanceof FlyingPacketEvent) {
             sneakTicks = 0;
         }else if (e instanceof EntityActionEvent) {
-            if (((EntityActionEvent) e).getAction() == WrappedInEntityActionPacket.EnumPlayerAction.STOP_SNEAKING) {
+            if (((EntityActionEvent) e).getAction() == WrappedInEntityActionPacket.EnumPlayerAction.START_SNEAKING) {
                 sneakTicks++;
-                if (sneakTicks > 2) {
+                if (sneakTicks >= 2) {
                     flag(user, "Sneak Sent Packet Twice");
                 }
             }
