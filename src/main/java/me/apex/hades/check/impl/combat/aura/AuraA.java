@@ -1,8 +1,7 @@
-package me.apex.hades.check.impl.combat.killaura;
+package me.apex.hades.check.impl.combat.aura;
 
 import me.apex.hades.check.Check;
-import me.apex.hades.check.ClassInterface;
-import me.apex.hades.check.Type;
+import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
 import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
@@ -10,10 +9,8 @@ import me.apex.hades.user.User;
 import me.apex.hades.utils.math.MathUtil;
 import me.apex.hades.utils.time.TimeUtils;
 
-public class KillauraA extends Check implements ClassInterface {
-    public KillauraA(String checkName, String letter, Type type, boolean enabled) {
-        super(checkName, letter, type, enabled);
-    }
+@CheckInfo(name = "Aura", type = "A")
+public class AuraA extends Check {
 
     double lastDist;
     int hits;

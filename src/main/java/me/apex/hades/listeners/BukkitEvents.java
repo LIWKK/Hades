@@ -3,6 +3,7 @@ package me.apex.hades.listeners;
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.tinyprotocol.api.TinyProtocolHandler;
 import me.apex.hades.user.User;
+import me.apex.hades.user.UserManager;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -23,6 +24,9 @@ public class BukkitEvents implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         HadesPlugin.userManager.addUser(new User(e.getPlayer()));
         TinyProtocolHandler.getInstance().addChannel(e.getPlayer());
+        if (e.getPlayer().isOp() || e.getPlayer().hasPermission("hades.alerts")){
+            UserManager.INSTANCE.getUser(e.getPlayer().getUniqueId()).alerts = true;
+        }
     }
 
     @EventHandler

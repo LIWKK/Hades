@@ -1,17 +1,14 @@
 package me.apex.hades.check.impl.movement.scaffold;
 
 import me.apex.hades.check.Check;
-import me.apex.hades.check.ClassInterface;
-import me.apex.hades.check.Type;
+import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.event.impl.packetevents.PlaceEvent;
 import me.apex.hades.user.User;
 
-public class ScaffoldA extends Check implements ClassInterface {
-    public ScaffoldA(String checkName, String letter, Type type, boolean enabled) {
-        super(checkName, letter, type, enabled);
-    }
+@CheckInfo(name = "Scaffold", type = "A")
+public class ScaffoldA extends Check {
 
     private long lastFlying;
 

@@ -1,17 +1,14 @@
-package me.apex.hades.check.impl.combat.killaura;
+package me.apex.hades.check.impl.combat.aura;
 
 import me.apex.hades.check.Check;
-import me.apex.hades.check.ClassInterface;
-import me.apex.hades.check.Type;
+import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
 import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 
-public class KillauraC extends Check implements ClassInterface {
-    public KillauraC(String checkName, String letter, Type type, boolean enabled) {
-        super(checkName, letter, type, enabled);
-    }
+@CheckInfo(name = "Aura", type = "C")
+public class AuraC extends Check{
 
     private int ticks;
 

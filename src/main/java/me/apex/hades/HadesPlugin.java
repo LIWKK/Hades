@@ -12,10 +12,9 @@ import me.apex.hades.user.UserManager;
 import me.apex.hades.utils.boundingbox.block.BlockUtil;
 import me.apex.hades.utils.boundingbox.box.BlockBoxManager;
 import me.apex.hades.utils.boundingbox.box.impl.BoundingBoxes;
-import me.apex.hades.utils.config.ConfigLoader;
-import me.apex.hades.utils.config.ConfigManager;
 import me.apex.hades.utils.math.MathUtil;
 import me.apex.hades.utils.math.RunUtils;
+import me.apex.hades.utils.other.ChatUtils;
 import me.apex.hades.utils.reflection.CraftReflection;
 import me.apex.hades.utils.version.VersionUtil;
 import org.bukkit.Bukkit;
@@ -48,21 +47,19 @@ public class HadesPlugin extends JavaPlugin {
     private Map<UUID, List<Entity>> entities = new ConcurrentHashMap<>();
     private WrappedField entityList = Reflections.getNMSClass("World").getFieldByName("entityList");
     private EventManager eventManager = new EventManager();
-    private ConfigManager configManager = new ConfigManager();
-    private ConfigLoader configLoader = new ConfigLoader();
 
     @Override
     public void onEnable() {
         instance = this;
         userManager = new UserManager();
 
-        configLoader.load();
-
         tinyProtocolHandler = new TinyProtocolHandler();
         getServer().getPluginManager().registerEvents(new BukkitEvents(), HadesPlugin.instance);
 
         new MathUtil();
         new BlockUtil();
+
+        saveDefaultConfig();
 
         bukkitVersion = Bukkit.getServer().getClass().getPackage().getName().substring(23);
         versionUtil = new VersionUtil();
@@ -101,5 +98,9 @@ public class HadesPlugin extends JavaPlugin {
         });
 
         executorService.shutdownNow();
+    }
+
+    public String getPrefix(){
+        return ChatUtils.color(this.getConfig().getString("lang.prefix"));
     }
 }

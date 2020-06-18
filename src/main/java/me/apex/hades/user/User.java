@@ -5,18 +5,25 @@ import lombok.Getter;
 import lombok.Setter;
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.check.Check;
-import me.apex.hades.check.Type;
-import me.apex.hades.check.impl.combat.aimassist.*;
-import me.apex.hades.check.impl.combat.autoclicker.*;
-import me.apex.hades.check.impl.combat.killaura.*;
-import me.apex.hades.check.impl.combat.reach.*;
-import me.apex.hades.check.impl.combat.velocity.*;
-import me.apex.hades.check.impl.movement.fly.*;
-import me.apex.hades.check.impl.movement.invalid.*;
-import me.apex.hades.check.impl.movement.scaffold.*;
-import me.apex.hades.check.impl.movement.speed.*;
+import me.apex.hades.check.impl.combat.aim.AimA;
+import me.apex.hades.check.impl.combat.aura.*;
+import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
+import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
+import me.apex.hades.check.impl.combat.reach.ReachA;
+import me.apex.hades.check.impl.combat.velocity.VelocityA;
+import me.apex.hades.check.impl.movement.fly.FlyA;
+import me.apex.hades.check.impl.movement.fly.FlyB;
+import me.apex.hades.check.impl.movement.fly.FlyC;
+import me.apex.hades.check.impl.movement.fly.FlyE;
+import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
+import me.apex.hades.check.impl.movement.smallhop.SmallHopA;
+import me.apex.hades.check.impl.movement.speed.SpeedA;
+import me.apex.hades.check.impl.movement.speed.SpeedB;
+import me.apex.hades.check.impl.movement.speed.SpeedC;
 import me.apex.hades.check.impl.player.badpackets.*;
-import me.apex.hades.check.impl.player.timer.*;
+import me.apex.hades.check.impl.player.fasteat.FastEatA;
+import me.apex.hades.check.impl.player.nofall.NoFallA;
+import me.apex.hades.check.impl.player.timer.TimerA;
 import me.apex.hades.processors.CombatProcessor;
 import me.apex.hades.processors.LagProcessor;
 import me.apex.hades.processors.MovementProcessor;
@@ -28,6 +35,7 @@ import me.apex.hades.utils.location.CustomLocation;
 import me.apex.hades.utils.location.NewLocation;
 import me.apex.hades.utils.location.PastLocation;
 import me.apex.hades.utils.math.MathUtil;
+import me.apex.hades.utils.other.LogUtils;
 import me.apex.hades.utils.version.VersionUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -57,7 +65,7 @@ public class User {
     public Queue<NewLocation> locationDataQueue = EvictingQueue.create(10);
     public PastLocation hitBoxPastLocations = new PastLocation();
     public CustomLocation lastGroundLocation, to = new CustomLocation(0, 0, 0), lastSlimeLocation = new CustomLocation(0,0,0), from = to, fromFrom = from;
-    public boolean breakingOrPlacingBlock, sprinting, sneaking, switchedGamemodes, safe, hasVerify, waitingForMovementVerify, explode, clientGround, lastClientGround, chunkLoaded, onGround, lastOnGround, wasFlying, collidedGround, collidesHorizontally, collidesVertically, lastCollidedVrtically, hasJumpPotion, hasSpeedPotion, dead, didUnknownTeleport;
+    public boolean alerts, breakingOrPlacingBlock, sprinting, sneaking, switchedGamemodes, safe, hasVerify, waitingForMovementVerify, explode, clientGround, lastClientGround, chunkLoaded, onGround, lastOnGround, wasFlying, collidedGround, collidesHorizontally, collidesVertically, lastCollidedVrtically, hasJumpPotion, hasSpeedPotion, dead, didUnknownTeleport;
     public int clientGroundTicks, clientAirTicks, sprintingTicks, cancelTicks, noDamageTicks, violation, lastServerPostionTick, constantEntityTicks, lastBlockPlaceTick, movementVerifyStage, totalBlocksCheck, lastCheckBlockTick, flyingTick, velocityTicks, movementVerifyBlocks, invalidTeleportMovementVerbose, unknownTeleportTick, totalBlockUpdates, lastBlockGroundTick, connectedTick, mountedTicks, jumpPotionTicks, speedPotionTicks, collidedGroundTicks, groundTicks, airTicks, lastDeadTick;
     public long lastMovePacket, lastEntityDamageAttack, breakingOrPlacingTime, lastUseEntityPacket, lastVelocity, lastRandomDamage, lastEntityDamage, lastFallDamage, lastFireDamage, lastBowDamage, lastTeleport, lastFullTeleport, lastUnknownTeleport, lastUnknownValidTeleport, lastBlockPlace, lastBlockCancel, lastBlockBreakCancel, lastGamemodeSwitch, lastFullBlockMoved, lastBlockJump, lastBlockFall, lastPos, timestamp, lastExplode, lastCollidedGround, lastMoutUpdate, lastMount;
     public double packetsFromLag, horizontalVelocity, verticalVelocity, lastBowStrength, deltaXZ, lastGroundPrediction, groundYPredict, lastFallJumpPrediction, movementSpeed, walkSpeed;
@@ -69,6 +77,7 @@ public class User {
     public CombatProcessor combatProcessor;
     public LagProcessor lagProcessor;
     private Executor executorService;
+    private LogUtils.TextFile logFile;
 
     public User(Player player) {
         this.player = player;
@@ -84,6 +93,9 @@ public class User {
         location = new NewLocation(0, 0, 0, 0.0f, 0.0f);
         boundingBox = new BoundingBox(0f, 0f, 0f, 0f, 0f, 0f);
 
+        if (HadesPlugin.getInstance().getConfig().getBoolean("system.logging.file.enabled")) {
+            logFile = new LogUtils.TextFile("" + uuid, HadesPlugin.getInstance().getConfig().getString("system.logging.file.path"));
+        }
 
         setupProcessors();
 
@@ -98,45 +110,50 @@ public class User {
 
     public void registerChecks() {
 
-        addCheck(new AimAssistA("AimAssist", "A", Type.COMBAT, true));
+        addCheck(new AimA());
 
-        addCheck(new AutoClickerA("AutoClicker", "A", Type.COMBAT, true));
-        addCheck(new AutoClickerB("AutoClicker", "B", Type.COMBAT, true));
+        addCheck(new AutoClickerA());
+        addCheck(new AutoClickerB());
 
-        addCheck(new KillauraA("Killaura", "A", Type.COMBAT, true));
-        addCheck(new KillauraB("Killaura", "B", Type.COMBAT, true));
-        addCheck(new KillauraC("Killaura", "C", Type.COMBAT, true));
-        addCheck(new KillauraD("Killaura", "D", Type.COMBAT, true));
-        addCheck(new KillauraE("Killaura", "E", Type.COMBAT, true));
-        addCheck(new KillauraF("Killaura", "F", Type.COMBAT, true));
+        addCheck(new AuraA());
+        addCheck(new AuraB());
+        addCheck(new AuraC());
+        addCheck(new AuraD());
+        addCheck(new AuraE());
+        addCheck(new AuraF());
 
-        addCheck(new ReachA("Reach", "A", Type.COMBAT, true));
+        addCheck(new ReachA());
 
-        addCheck(new VelocityA("Velocity", "A", Type.COMBAT, true));
-
-
-        addCheck(new FlyA("Fly", "A", Type.MOVEMENT, true));
-        addCheck(new FlyB("Fly", "B", Type.MOVEMENT, true));
-        addCheck(new FlyC("Fly", "C", Type.MOVEMENT, true));
-        addCheck(new FlyD("Fly", "D", Type.MOVEMENT, true));
-        addCheck(new FlyE("Fly", "E", Type.MOVEMENT, true));
-
-        addCheck(new InvalidA("Invalid", "A", Type.MOVEMENT, true));
-
-        addCheck(new ScaffoldA("Scaffold", "A", Type.MOVEMENT, true));
-
-        addCheck(new SpeedA("Speed", "A", Type.MOVEMENT, true));
-        addCheck(new SpeedB("Speed", "B", Type.MOVEMENT, true));
-        addCheck(new SpeedC("Speed", "C", Type.MOVEMENT, true));
+        addCheck(new VelocityA());
 
 
-        addCheck(new BadPacketsA("BadPackets", "A", Type.PLAYER, true));
-        addCheck(new BadPacketsB("BadPackets", "B", Type.PLAYER, true));
-        addCheck(new BadPacketsC("BadPackets", "C", Type.PLAYER, true));
-        addCheck(new BadPacketsD("BadPackets", "D", Type.PLAYER, true));
-        addCheck(new BadPacketsE("BadPackets", "E", Type.PLAYER, true));
+        addCheck(new FlyA());
+        addCheck(new FlyB());
+        addCheck(new FlyC());
+        addCheck(new FlyE());
 
-        addCheck(new TimerA("Timer", "A", Type.PLAYER, true));
+        addCheck(new SmallHopA());
+
+        addCheck(new ScaffoldA());
+
+        addCheck(new SpeedA());
+        addCheck(new SpeedB());
+        addCheck(new SpeedC());
+
+
+        addCheck(new BadPacketsA());
+        addCheck(new BadPacketsB());
+        addCheck(new BadPacketsC());
+        addCheck(new BadPacketsD());
+        addCheck(new BadPacketsE());
+        addCheck(new BadPacketsF());
+        addCheck(new BadPacketsG());
+
+        addCheck(new NoFallA());
+
+        addCheck(new FastEatA());
+
+        addCheck(new TimerA());
 
         checkList.forEach(check -> {
             HadesPlugin.getInstance().getEventManager().registerListeners(check, HadesPlugin.getInstance());

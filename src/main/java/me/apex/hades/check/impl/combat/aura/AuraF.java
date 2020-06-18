@@ -1,21 +1,14 @@
-package me.apex.hades.check.impl.combat.killaura;
+package me.apex.hades.check.impl.combat.aura;
 
 import me.apex.hades.check.Check;
-import me.apex.hades.check.ClassInterface;
-import me.apex.hades.check.Type;
+import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.utils.math.MathUtil;
-import org.bukkit.Bukkit;
 
-import java.util.Deque;
-import java.util.LinkedList;
-
-public class KillauraF extends Check implements ClassInterface {
-    public KillauraF(String checkName, String letter, Type type, boolean enabled) {
-        super(checkName, letter, type, enabled);
-    }
+@CheckInfo(name = "Aura", type = "F")
+public class AuraF extends Check {
 
     double lastYaw, lastDeltaXZ;
 

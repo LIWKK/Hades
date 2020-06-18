@@ -1,30 +1,29 @@
 package me.apex.hades.check.impl.movement.speed;
 
 import me.apex.hades.check.Check;
-import me.apex.hades.check.ClassInterface;
-import me.apex.hades.check.Type;
+import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.utils.location.CustomLocation;
 import me.apex.hades.utils.time.TimeUtils;
 
-public class SpeedC extends Check implements ClassInterface {
-    public SpeedC(String checkName, String letter, Type type, boolean enabled) {
-        super(checkName, letter, type, enabled);
-    }
+@CheckInfo(name = "Speed", type = "C")
+public class SpeedC extends Check {
 
     double lastDistance;
     boolean lastGround;
 
     /*
             Prediction for player friction (really good check be thankful lol)
+
+            Thanks - Tecnio
      */
 
     @Override
     public void onHandle(User user, AnticheatEvent e) {
         if (e instanceof FlyingPacketEvent) {
-            if (user != null) {
+            if (user != null && ((FlyingPacketEvent)e).isClientMoved()) {
 
                 if (TimeUtils.elapsed(user.lastVelocity) < 1000L || user.getPlayer().getAllowFlight() || TimeUtils.secondsFromLong(user.getLastTeleport()) < 3L || user.getMountedTicks() > 0 || user.isSwitchedGamemodes() || user.getBlockData().stairTicks > 0 || user.getBlockData().slabTicks > 0) {
                     return;

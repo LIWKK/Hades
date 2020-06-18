@@ -1,8 +1,7 @@
-package me.apex.hades.check.impl.combat.killaura;
+package me.apex.hades.check.impl.combat.aura;
 
 import me.apex.hades.check.Check;
-import me.apex.hades.check.ClassInterface;
-import me.apex.hades.check.Type;
+import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
 import me.apex.hades.user.User;
@@ -11,10 +10,8 @@ import me.apex.hades.utils.math.MathUtil;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class KillauraE extends Check implements ClassInterface {
-    public KillauraE(String checkName, String letter, Type type, boolean enabled) {
-        super(checkName, letter, type, enabled);
-    }
+@CheckInfo(name = "Aura", type = "E")
+public class AuraE extends Check {
 
     private final Deque<Double> diffs = new LinkedList<>();
     private double average = 100;

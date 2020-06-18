@@ -1,19 +1,16 @@
 package me.apex.hades.check.impl.combat.autoclicker;
 
+import me.apex.hades.HadesPlugin;
 import me.apex.hades.check.Check;
-import me.apex.hades.check.ClassInterface;
-import me.apex.hades.check.Type;
+import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.event.impl.packetevents.SwingEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.utils.time.TimeUtils;
 
-public class AutoClickerA extends Check implements ClassInterface {
-    public AutoClickerA(String checkName, String letter, Type type, boolean enabled) {
-        super(checkName, letter, type, enabled);
-    }
-
+@CheckInfo(name = "AutoClicker", type = "A")
+public class AutoClickerA extends Check{
     int ticks;
     int cps;
 
@@ -26,8 +23,8 @@ public class AutoClickerA extends Check implements ClassInterface {
                 return;
             }
             if (ticks == 20) {
-                if (cps >= 22) {
-                    flag(user, "Cps: "+cps);
+                if (cps >= HadesPlugin.getInstance().getConfig().getInt("Max-CPS")) {
+                    flag(user, "cps: " + cps);
                 }
                 cps = ticks = 0;
             }

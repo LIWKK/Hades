@@ -1,19 +1,15 @@
-package me.apex.hades.check.impl.combat.killaura;
+package me.apex.hades.check.impl.combat.aura;
 
 import me.apex.hades.check.Check;
-import me.apex.hades.check.ClassInterface;
-import me.apex.hades.check.Type;
+import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
 import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 import org.bukkit.entity.Entity;
 
-public class KillauraD extends Check implements ClassInterface {
-    public KillauraD(String checkName, String letter, Type type, boolean enabled) {
-        super(checkName, letter, type, enabled);
-    }
-
+@CheckInfo(name = "Aura", type = "D")
+public class AuraD extends Check{
     private int ticks;
     private Entity lastTarget;
 

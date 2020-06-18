@@ -2,20 +2,18 @@ package me.apex.hades.check.impl.combat.reach;
 
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.check.Check;
-import me.apex.hades.check.Type;
+import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
 import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.utils.location.NewLocation;
 import me.apex.hades.utils.math.MathUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+@CheckInfo(name = "Reach", type = "A")
 public class ReachA extends Check {
-
-    public ReachA(String checkName, String letter, Type type, boolean enabled) {
-        super(checkName, letter, type, enabled);
-    }
 
     @Override
     public void onHandle(User user, AnticheatEvent e) {
@@ -32,6 +30,7 @@ public class ReachA extends Check {
                     }).min().orElse(0.0);
 
                     double maxReach = MathUtil.calculatePlayerReach(user, 3.0);
+                    Bukkit.broadcastMessage(range + "  " + maxReach);
                     if (range > maxReach) {
                         flag(user, "Reach: " + range);
                     }

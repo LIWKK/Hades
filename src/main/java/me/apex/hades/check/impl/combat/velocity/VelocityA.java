@@ -1,22 +1,15 @@
 package me.apex.hades.check.impl.combat.velocity;
 
 import me.apex.hades.check.Check;
-import me.apex.hades.check.ClassInterface;
-import me.apex.hades.check.Type;
+import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.AnticheatEvent;
-import me.apex.hades.event.impl.packetevents.AttackEvent;
 import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
-import me.apex.hades.event.impl.packetevents.PingEvent;
 import me.apex.hades.event.impl.packetevents.VelocityEvent;
 import me.apex.hades.user.User;
-import me.apex.hades.utils.math.MathUtil;
 import me.apex.hades.utils.time.TimeUtils;
-import org.bukkit.Bukkit;
 
-public class VelocityA extends Check implements ClassInterface {
-    public VelocityA(String checkName, String letter, Type type, boolean enabled) {
-        super(checkName, letter, type, enabled);
-    }
+@CheckInfo(name = "Velocity", type = "A")
+public class VelocityA extends Check {
 
     int ticks;
 

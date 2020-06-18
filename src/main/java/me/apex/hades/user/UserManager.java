@@ -10,9 +10,11 @@ import java.util.UUID;
 @Getter
 public class UserManager {
     private List<User> users;
+    public static UserManager INSTANCE;
 
     public UserManager() {
         users = Collections.synchronizedList(new ArrayList<>());
+        INSTANCE = this;
     }
 
     public User getUser(UUID uuid) {
