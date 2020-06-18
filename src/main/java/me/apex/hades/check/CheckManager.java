@@ -4,15 +4,16 @@ import me.apex.hades.check.impl.combat.aim.AimA;
 import me.apex.hades.check.impl.combat.aura.AuraA;
 import me.apex.hades.check.impl.combat.aura.AuraB;
 import me.apex.hades.check.impl.combat.aura.AuraC;
-import me.apex.hades.check.impl.combat.autoclicker.*;
-import me.apex.hades.check.impl.combat.criticals.CriticalsA;
 import me.apex.hades.check.impl.combat.aura.AuraD;
+import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
+import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
+import me.apex.hades.check.impl.combat.criticals.CriticalsA;
 import me.apex.hades.check.impl.combat.reach.ReachA;
 import me.apex.hades.check.impl.combat.reach.ReachB;
 import me.apex.hades.check.impl.combat.velocity.VelocityA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
-import me.apex.hades.check.impl.movement.fly.FlyB;
 import me.apex.hades.check.impl.movement.invalid.InvalidA;
+import me.apex.hades.check.impl.movement.invalid.InvalidB;
 import me.apex.hades.check.impl.movement.noslow.NoSlowA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.speed.SpeedA;
@@ -42,8 +43,8 @@ public class CheckManager {
             ReachB.class,
             VelocityA.class,
             FlyA.class,
-            FlyB.class,
             InvalidA.class,
+            InvalidB.class,
             NoSlowA.class,
             ScaffoldA.class,
             SpeedA.class,
