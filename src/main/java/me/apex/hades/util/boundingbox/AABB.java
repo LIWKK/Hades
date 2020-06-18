@@ -1,5 +1,4 @@
-package me.apex.hades.util;
-
+package me.apex.hades.util.boundingbox;
 
 import me.apex.hades.user.User;
 import org.bukkit.Location;
@@ -25,18 +24,18 @@ public class AABB {
         this.min = getMin(player);
         this.max = getMax(player);
     }
-    
+
     private AABB(Entity entity) {
-    	 this.min = getMin(entity);
-    	 this.max = getMax(entity);
+        this.min = getMin(entity);
+        this.max = getMax(entity);
     }
 
     private Vector getMin(User player) {
-        return player.lastLocation.toVector().add(new Vector(-0.3, 0, -0.3));
+        return player.getLastLocation().toVector().add(new Vector(-0.3, 0, -0.3));
     }
 
     private Vector getMax(User player) {
-        return player.lastLocation.toVector().add(new Vector(0.3, 1.8, 0.3));
+        return player.getLastLocation().toVector().add(new Vector(0.3, 1.8, 0.3));
     }
 
     private Vector getMin(Entity entity) {
@@ -51,9 +50,9 @@ public class AABB {
     public static AABB from(User player) {
         return new AABB(player);
     }
-    
+
     public static AABB from(Entity entity) {
-    	return new AABB(entity);
+        return new AABB(entity);
     }
 
     public Vector getMin() {

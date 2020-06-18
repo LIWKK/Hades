@@ -1,4 +1,4 @@
-package me.apex.hades.util;
+package me.apex.hades.util.boundingbox;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;

@@ -17,9 +17,9 @@ public class TimerA extends Check {
     private double lastDeviation;
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
+    public void onHandle(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
-            flyingDeque.add(e.getTimestamp());
+            flyingDeque.add(System.currentTimeMillis());
 
             if (flyingDeque.size() == 50) {
                 double deviation = MathUtil.getStandardDeviation(flyingDeque.stream().mapToLong(l -> l).toArray());

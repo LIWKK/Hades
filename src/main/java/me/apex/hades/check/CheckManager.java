@@ -6,7 +6,7 @@ import me.apex.hades.check.impl.combat.aura.AuraB;
 import me.apex.hades.check.impl.combat.aura.AuraC;
 import me.apex.hades.check.impl.combat.autoclicker.*;
 import me.apex.hades.check.impl.combat.criticals.CriticalsA;
-import me.apex.hades.check.impl.combat.pattern.PatternA;
+import me.apex.hades.check.impl.combat.aura.AuraD;
 import me.apex.hades.check.impl.combat.reach.ReachA;
 import me.apex.hades.check.impl.combat.reach.ReachB;
 import me.apex.hades.check.impl.combat.velocity.VelocityA;
@@ -22,7 +22,6 @@ import me.apex.hades.check.impl.player.badpackets.*;
 import me.apex.hades.check.impl.player.fastuse.FastUseA;
 import me.apex.hades.check.impl.player.nofall.NoFallA;
 import me.apex.hades.check.impl.player.timer.TimerA;
-import me.apex.hades.check.impl.player.timer.TimerB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,16 +34,13 @@ public class CheckManager {
             AuraA.class,
             AuraB.class,
             AuraC.class,
+            AuraD.class,
+            AutoClickerA.class,
+            AutoClickerB.class,
             CriticalsA.class,
             ReachA.class,
             ReachB.class,
-            AutoClickerA.class,
-            AutoClickerB.class,
-            AutoClickerC.class,
-            AutoClickerD.class,
-            AutoClickerE.class,
             VelocityA.class,
-            PatternA.class,
             FlyA.class,
             FlyB.class,
             InvalidA.class,
@@ -57,10 +53,8 @@ public class CheckManager {
             BadPacketsC.class,
             BadPacketsD.class,
             BadPacketsE.class,
-            BadPacketsF.class,
             NoFallA.class,
             TimerA.class,
-            TimerB.class,
             FastUseA.class,
             Vape.class
     };

@@ -16,7 +16,7 @@ public class FastUseA extends Check {
     private long startEat;
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
+    public void onHandle(PacketEvent e, User user) {
         if (e instanceof InteractEvent) {
             InteractEvent interactEvent = (InteractEvent) e;
             if (interactEvent.getItem() != null) {

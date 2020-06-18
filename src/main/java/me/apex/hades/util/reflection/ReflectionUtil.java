@@ -1,4 +1,4 @@
-package me.apex.hades.util;
+package me.apex.hades.util.reflection;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

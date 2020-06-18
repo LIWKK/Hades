@@ -1,9 +1,11 @@
 package me.apex.hades.event.impl.packetevents;
 
 import io.github.retrooper.packetevents.utils.vector.Vector3i;
+import lombok.Getter;
 import me.apex.hades.event.Event;
 import org.bukkit.inventory.ItemStack;
 
+@Getter
 public class PlaceEvent extends Event {
 
     private final Vector3i blockPos;
@@ -12,14 +14,6 @@ public class PlaceEvent extends Event {
     public PlaceEvent(Vector3i blockPos, ItemStack itemStack) {
         this.blockPos = blockPos;
         this.itemStack = itemStack;
-    }
-
-    public Vector3i getBlockPos() {
-        return blockPos;
-    }
-
-    public ItemStack getItemStack() {
-        return itemStack;
     }
 
 }

@@ -17,11 +17,11 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 public class Vape extends Check implements Listener, PluginMessageListener {
 
     public Vape(){
-        Bukkit.getServer().getPluginManager().registerEvents(this, HadesPlugin.instance);
+        Bukkit.getServer().getPluginManager().registerEvents(this, HadesPlugin.getInstance());
     }
 
     @Override
-    public void onEvent(PacketEvent e, User user) { }
+    public void onHandle(PacketEvent e, User user) { }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {

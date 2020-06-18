@@ -1,13 +1,13 @@
 package io.github.retrooper.packetevents;
 
+import io.github.retrooper.packetevents.annotations.NotNull;
+import io.github.retrooper.packetevents.annotations.Nullable;
+import io.github.retrooper.packetevents.annotations.PacketHandler;
 import io.github.retrooper.packetevents.enums.ClientVersion;
 import io.github.retrooper.packetevents.enums.ServerVersion;
-import io.github.retrooper.packetevents.annotations.PacketHandler;
+import io.github.retrooper.packetevents.event.PacketEvent;
 import io.github.retrooper.packetevents.event.PacketListener;
-import io.github.retrooper.packetevents.event.impl.PacketLoginEvent;
-import io.github.retrooper.packetevents.event.impl.PlayerInjectEvent;
-import io.github.retrooper.packetevents.event.impl.PostPlayerInjectEvent;
-import io.github.retrooper.packetevents.event.impl.ServerTickEvent;
+import io.github.retrooper.packetevents.event.impl.*;
 import io.github.retrooper.packetevents.event.manager.EventManager;
 import io.github.retrooper.packetevents.handler.TinyProtocolHandler;
 import io.github.retrooper.packetevents.packet.Packet;
@@ -17,34 +17,24 @@ import io.github.retrooper.packetevents.utils.NMSUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
-import io.github.retrooper.packetevents.annotations.Nullable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
-public final class PacketEvents implements PacketListener{
-
-
-    /*
-     * Login wrappers TODO
-     * PacketLoginInStart
-     * PacketLoginInEncryptionBegin
-     */
-
-    private static boolean hasRegistered;
+public final class PacketEvents implements PacketListener, Listener {
 
     private static final ServerVersion version = ServerVersion.getVersion();
-    private static PacketEvents instance;
     private static final EventManager eventManager = new EventManager();
-
-    private static int currentTick;
-
-    private static BukkitTask serverTickTask;
-
     private static final HashMap<Object, ClientVersion> clientVersionLookup = new HashMap<Object, ClientVersion>();
+    private static boolean hasRegistered;
+    private static PacketEvents instance;
+    private static int currentTick;
+    private static BukkitTask serverTickTask;
+    private static boolean kickOnRestart;
 
     public static EventManager getEventManager() {
         return eventManager;
@@ -61,6 +51,7 @@ public final class PacketEvents implements PacketListener{
             //Register Bukkit and PacketListener
             getEventManager().registerListener(getInstance());
 
+            Bukkit.getPluginManager().registerEvents(getInstance(), plugin);
             //Initialize the TinyProtocolHandler
             TinyProtocolHandler.initTinyProtocol(plugin);
 
@@ -68,7 +59,7 @@ public final class PacketEvents implements PacketListener{
             final Runnable tickRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    getEventManager().callEvent(new ServerTickEvent(currentTick++, PacketEvents.currentCalculatedMS()));
+                    getEventManager().callEvent(new ServerTickEvent(currentTick++, highlyPreciseMillis()));
                 }
             };
             serverTickTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, tickRunnable, 0L, 1L);
@@ -77,13 +68,20 @@ public final class PacketEvents implements PacketListener{
     }
 
     /**
-     * Stop all tasks and unregisters all packetevent listeners
+     * Stop all tasks and unregisters all PacketEvents' listeners
      */
     public static void stop() {
         if (serverTickTask != null) {
             serverTickTask.cancel();
         }
         getEventManager().unregisterAllListeners();
+        if (shouldKickOnStop()) {
+            for (final Player p : Bukkit.getOnlinePlayers()) {
+                if (p != null) {
+                    p.kickPlayer("Please wait till the server finishes reloading/restarting.");
+                }
+            }
+        }
     }
 
     /**
@@ -152,22 +150,29 @@ public final class PacketEvents implements PacketListener{
      * @param player
      * @return ping
      */
-    public static int getPing(final Player player) {
+    public static int getPing(@NotNull final Player player) {
         return NMSUtils.getPlayerPing(player);
     }
 
     /**
-     * Should I use this over System.currentTimeMillis()?
-     * <p>
-     * 1. System.currentTimeMillis() isn't supported on all machines
-     * 2. This is way more accurate than System.currentTimeMillis()
-     * 3. System.currentTimeMillis() can be up to 50ms off, depending on the operating system.
-     *
+     * When to use this(nano / 1 million) over {@link System#currentTimeMillis()}
+     * This is preciser than System.currentTimeMillis(), System.currentTimeMillis() can be up to 50ms off on some operating systems, but using this isn't cheap.
+     * Java documentation recommend using nano time if you are measuring elapsed time.
+     * In this function nanoTime is divided by 1 million giving us milliseconds.
+     * It is also important to mention that using this method doesn't guarantee thread safety.
      * @return nanoTime / 1 million
+     */
+    public static long highlyPreciseMillis() {
+        return System.nanoTime() / 1000000;
+    }
+
+    /**
+     * This is deprecated, use {@link #highlyPreciseMillis()} as they do the same thing, this is basically just a method rename.
      */
     public static long currentCalculatedMS() {
         return System.nanoTime() / 1000000;
     }
+
 
     /**
      * Get the player's version.
@@ -178,7 +183,7 @@ public final class PacketEvents implements PacketListener{
      * @return ClientVersion
      */
     @Nullable
-    public static ClientVersion getClientVersion(final Player player) {
+    public static ClientVersion getClientVersion(@NotNull final Player player) {
         final Object channel = TinyProtocolHandler.getPlayerChannel(player);
         return clientVersionLookup.get(channel);
     }
@@ -192,8 +197,54 @@ public final class PacketEvents implements PacketListener{
      * @return ClientVersion
      */
     @Nullable
-    public static ClientVersion getClientVersion(final Object channel) {
+    public static ClientVersion getClientVersion(@NotNull final Object channel) {
         return clientVersionLookup.get(channel);
+    }
+
+    public static boolean shouldKickOnStop() {
+        return kickOnRestart;
+    }
+
+    public static void setShouldKickOnRestart(final boolean val) {
+        kickOnRestart = val;
+    }
+
+    /**
+     * Version independent player injection
+     *
+     * @param player
+     */
+    public static void injectPlayer(final Player player) {
+        TinyProtocolHandler.inject(player);
+    }
+
+    /**
+     * Version independant player injection
+     *
+     * @param player
+     */
+    public static void uninjectPlayer(final Player player) {
+        TinyProtocolHandler.uninject(player);
+    }
+
+    /**
+     * Returns whether we have injected the player
+     *
+     * @param player
+     * @return hasInjected
+     */
+    public static boolean hasInjected(final Player player) {
+        return TinyProtocolHandler.hasInjected(player);
+    }
+
+    /**
+     * Send a wrapped sendable packet to a player
+     *
+     * @param player
+     * @param sendable
+     */
+    public static void sendPacket(final Player player, final Sendable sendable) {
+        NMSUtils.sendSendableWrapper(player, sendable);
     }
 
     @PacketHandler
@@ -202,6 +253,13 @@ public final class PacketEvents implements PacketListener{
             final WrappedPacketLoginHandshake handshake = new WrappedPacketLoginHandshake(e.getPacket());
             final ClientVersion clientVersion = ClientVersion.fromProtocolVersion(handshake.getProtocolVersion());
             clientVersionLookup.put(e.getNettyChannel(), clientVersion);
+        }
+    }
+
+    @PacketHandler
+    public void onPacket(final PacketEvent e) {
+        if (e instanceof PacketReceiveEvent) {
+            // System.out.println("RECEIVED");
         }
     }
 
@@ -219,6 +277,7 @@ public final class PacketEvents implements PacketListener{
 
     /**
      * Called after the PlayerJoinEvent ONLY if the player has been injected!
+     *
      * @param e
      */
     @PacketHandler
@@ -232,40 +291,5 @@ public final class PacketEvents implements PacketListener{
         if (hasInjected(e.getPlayer())) {
             PacketEvents.getEventManager().callEvent(new PostPlayerInjectEvent(e.getPlayer()));
         }
-    }
-
-    /**
-     * Version independant player injection
-     * @param player
-     */
-    public static void injectPlayer(final Player player) {
-        TinyProtocolHandler.inject(player);
-    }
-
-    /**
-     * Version independant player injection
-     * @param player
-     */
-    public static void uninjectPlayer(final Player player) {
-        TinyProtocolHandler.uninject(player);
-    }
-
-    /**
-     * Returns whether we have injected the player
-     * @param player
-     * @return hasInjected
-     */
-    public static boolean hasInjected(final Player player) {
-        return TinyProtocolHandler.hasInjected(player);
-    }
-
-    /**
-     * Send a wrapped sendable packet to a player
-     *
-     * @param player
-     * @param sendable
-     */
-    public static void sendPacket(final Player player, final Sendable sendable) {
-        NMSUtils.sendSendableWrapper(player, sendable);
     }
 }

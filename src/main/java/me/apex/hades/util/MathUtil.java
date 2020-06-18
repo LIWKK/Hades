@@ -2,11 +2,17 @@ package me.apex.hades.util;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MathUtil {
 
@@ -194,6 +200,87 @@ public class MathUtil {
         float yaw = (float) (Math.atan2(zDiff, xDiff) * 180.0D / 3.141592653589793D) - 90.0F;
         float pitch = (float) -(Math.atan2(yDiff, dist) * 180.0D / 3.141592653589793D);
         return new float[]{yaw, pitch > 90 ? 90 : pitch < -90 ? -90 : pitch};
+    }
+
+    public static Map<EntityType, Vector> entityDimensions;
+
+
+    public MathUtil() {
+        entityDimensions = new HashMap<>();
+        entityDimensions.put(EntityType.WOLF, new Vector(0.31, 0.8, 0.31));
+        entityDimensions.put(EntityType.SHEEP, new Vector(0.45, 1.3, 0.45));
+        entityDimensions.put(EntityType.COW, new Vector(0.45, 1.3, 0.45));
+        entityDimensions.put(EntityType.PIG, new Vector(0.45, 0.9, 0.45));
+        entityDimensions.put(EntityType.MUSHROOM_COW, new Vector(0.45, 1.3, 0.45));
+        entityDimensions.put(EntityType.WITCH, new Vector(0.31, 1.95, 0.31));
+        entityDimensions.put(EntityType.BLAZE, new Vector(0.31, 1.8, 0.31));
+        entityDimensions.put(EntityType.PLAYER, new Vector(0.3, 1.8, 0.3));
+        entityDimensions.put(EntityType.VILLAGER, new Vector(0.31, 1.8, 0.31));
+        entityDimensions.put(EntityType.CREEPER, new Vector(0.31, 1.8, 0.31));
+        entityDimensions.put(EntityType.GIANT, new Vector(1.8, 10.8, 1.8));
+        entityDimensions.put(EntityType.SKELETON, new Vector(0.31, 1.8, 0.31));
+        entityDimensions.put(EntityType.ZOMBIE, new Vector(0.31, 1.8, 0.31));
+        entityDimensions.put(EntityType.SNOWMAN, new Vector(0.35, 1.9, 0.35));
+        entityDimensions.put(EntityType.HORSE, new Vector(0.7, 1.6, 0.7));
+        entityDimensions.put(EntityType.ENDER_DRAGON, new Vector(1.5, 1.5, 1.5));
+
+        entityDimensions.put(EntityType.ENDERMAN, new Vector(0.31, 2.9, 0.31));
+        entityDimensions.put(EntityType.CHICKEN, new Vector(0.2, 0.7, 0.2));
+        entityDimensions.put(EntityType.OCELOT, new Vector(0.31, 0.7, 0.31));
+        entityDimensions.put(EntityType.SPIDER, new Vector(0.7, 0.9, 0.7));
+        entityDimensions.put(EntityType.WITHER, new Vector(0.45, 3.5, 0.45));
+        entityDimensions.put(EntityType.IRON_GOLEM, new Vector(0.7, 2.9, 0.7));
+        entityDimensions.put(EntityType.GHAST, new Vector(2, 4, 2));
+    }
+
+    public static int floor(double var0) {
+        int var2 = (int) var0;
+        return var0 < var2 ? var2 - 1 : var2;
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) {
+            throw new IllegalArgumentException();
+        }
+        BigDecimal bd2 = new BigDecimal(value);
+        bd2 = bd2.setScale(places, RoundingMode.HALF_UP);
+        return bd2.doubleValue();
+    }
+
+    public static double hypot(double... values) {
+        return Math.sqrt(MathUtil.hypotSquared(values));
+    }
+
+    public static double hypotSquared(double... values) {
+        double total = 0.0;
+        double[] var1 = values;
+        int var2 = values.length;
+        for (int var3 = 0; var3 < var2; ++var3) {
+            double value = var1[var3];
+            total += Math.pow(value, 2.0);
+        }
+        return total;
+    }
+    public static double trim(int degree, double d) {
+        String format = "#.#";
+        for (int i = 1; i < degree; ++i) {
+            format = String.valueOf(format) + "#";
+        }
+        DecimalFormat twoDForm = new DecimalFormat(format);
+        return Double.parseDouble(twoDForm.format(d).replaceAll(",", "."));
+    }
+    public static float getBaseSpeed(Player player) {
+        return 0.34f + (PlayerUtil.getPotionEffectLevel(player, PotionEffectType.SPEED) * 0.062f) + ((player.getWalkSpeed() - 0.2f) * 1.6f);
+    }
+
+    public static double clamp180(double theta) {
+        if ((theta %= 360.0) >= 180.0) {
+            theta -= 360.0;
+        }
+        if (theta < -180.0) {
+            theta += 360.0;
+        }
+        return theta;
     }
 
 }

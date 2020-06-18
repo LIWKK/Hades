@@ -17,9 +17,9 @@ public class AuraC extends Check {
     private double average = 100;
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
+    public void onHandle(PacketEvent e, User user) {
         if (e instanceof AttackEvent) {
-            double diff = Math.abs(user.deltaYaw - user.lastDeltaYaw);
+            double diff = Math.abs(user.getDeltaYaw() - user.getLastDeltaYaw());
             if (diff > 0.0) diffs.add(diff);
 
             if (diffs.size() >= 5) {

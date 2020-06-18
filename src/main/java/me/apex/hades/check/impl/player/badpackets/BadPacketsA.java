@@ -10,7 +10,7 @@ import me.apex.hades.user.User;
 public class BadPacketsA extends Check {
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
+    public void onHandle(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
             if (Math.abs(((FlyingEvent) e).getPitch()) > 90.0F) {
                 flag(user, "invalid pitch, p: " + ((FlyingEvent) e).getPitch());

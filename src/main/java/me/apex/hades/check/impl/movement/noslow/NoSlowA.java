@@ -12,16 +12,16 @@ import me.apex.hades.user.User;
 public class NoSlowA extends Check {
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
+    public void onHandle(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
-            if (PacketEvents.getClientVersion(user.player) == ClientVersion.v_1_8) {
-                if (user.isSprinting && user.player.isBlocking()) {
+            if (PacketEvents.getClientVersion(user.getPlayer()) == ClientVersion.v_1_8) {
+                if (user.isSprinting() && user.getPlayer().isBlocking()) {
                     if (++preVL >= 3) flag(user, "not slowing down while blocking sword.");
                 } else preVL = 0;
             }
             //You cant sprint while sneaking on old versions.
-            if (PacketEvents.getClientVersion(user.player) == ClientVersion.v_1_8) {
-                if (user.isSprinting && user.isSneaking) {
+            if (PacketEvents.getClientVersion(user.getPlayer()) == ClientVersion.v_1_8) {
+                if (user.isSprinting() && user.isSneaking()) {
                     flag(user, "is sprinting while sneaking.");
                 }
             }

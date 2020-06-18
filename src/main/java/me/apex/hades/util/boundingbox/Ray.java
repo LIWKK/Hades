@@ -1,4 +1,4 @@
-package me.apex.hades.util;
+package me.apex.hades.util.boundingbox;
 
 import me.apex.hades.user.User;
 import org.bukkit.Location;
@@ -20,8 +20,8 @@ public class Ray {
     // Create a ray based on where the player is looking.
     // Origin: Player Eye Location
     // Direction: Player-looking direction
-    public static Ray from(User player) {
-        return new Ray(player.player.getEyeLocation().toVector(), player.lastLocation.getDirection());
+    public static Ray from(User user) {
+        return new Ray(user.getPlayer().getEyeLocation().toVector(), user.getLastLocation().getDirection());
     }
 
     // (Used for rotating vectors) Creates a vector in the horizontal plane (y=0) perpendicular to a vector.
@@ -82,6 +82,6 @@ public class Ray {
     // Same as above, but no need to construct object.
     public static Location getPoint(User player, double distance) {
         Vector point = Ray.from(player).getPoint(distance);
-        return new Location(player.lastLocation.getWorld(), point.getX(), point.getY(), point.getZ());
+        return new Location(player.getLastLocation().getWorld(), point.getX(), point.getY(), point.getZ());
     }
 }

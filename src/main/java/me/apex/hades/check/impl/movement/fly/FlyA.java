@@ -11,22 +11,22 @@ public class FlyA extends Check {
     private double lastGround;
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
+    public void onHandle(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
-            if (user.onGround()) {
-                lastGround = user.location.getY();
+            if (user.isOnGround()) {
+                lastGround = user.getLocation().getY();
             } else {
-                if (user.teleportTick > 0 || user.player.getAllowFlight() || user.isOnClimbableBlock() || user.isInWeb() || user.isInLiquid() || user.isInLiquid()) {
+                if (user.getTeleportTick() > 0 || user.getPlayer().getAllowFlight() || user.isOnClimbableBlock() || user.isInWeb() || user.isInLiquid() || user.isInLiquid()) {
                     preVL = 0;
                     return;
                 }
 
-                double dist = user.location.getY() - lastGround;
-                double velocity = user.player.getVelocity().getY();
+                double dist = user.getLocation().getY() - lastGround;
+                double velocity = user.getPlayer().getVelocity().getY();
 
-                if (dist >= 1.3 && user.location.getY() >= user.lastLocation.getY() && velocity < -0.06D && user.player.getVehicle() == null) {
+                if (dist >= 1.3 && user.getLocation().getY() >= user.getLastLocation().getY() && velocity < -0.06D && user.getPlayer().getVehicle() == null) {
                     if (preVL++ > 9) {
-                        flag(user, "curY = " + user.location.getY() + ", lastGround = " + lastGround);
+                        flag(user, "curY = " + user.getLocation().getY() + ", lastGround = " + lastGround);
                     }
                 } else preVL = 0;
             }

@@ -9,15 +9,13 @@ import me.apex.hades.user.User;
 @CheckInfo(name = "Invalid", type = "A")
 public class InvalidA extends Check {
     @Override
-    public void onEvent(PacketEvent e, User user) {
+    public void onHandle(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
-            if (((FlyingEvent) e).hasMoved()) {
-                if (user.deltaY == -user.lastDeltaY && user.deltaY != 0 && elapsed(user.tick, user.teleportTick) > 0) {
-                    if (++preVL > 1) {
-                        flag(user, "repetitive vertical motions, m: " + user.deltaY);
-                    }
-                } else preVL = 0;
-            }
+            if (user.getDeltaY() == -user.getLastDeltaY() && user.getDeltaY() != 0 && elapsed(user.getTick(), user.getTeleportTick()) > 0) {
+                if (++preVL > 1) {
+                    flag(user, "repetitive vertical motions, m: " + user.getDeltaY());
+                }
+            } else preVL = 0;
         }
     }
 }

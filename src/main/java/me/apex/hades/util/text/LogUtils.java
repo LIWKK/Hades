@@ -1,4 +1,4 @@
-package me.apex.hades.util;
+package me.apex.hades.util.text;
 
 import me.apex.hades.HadesPlugin;
 
@@ -35,9 +35,9 @@ public class LogUtils {
         private List<String> lines = new ArrayList<>();
 
         public TextFile(String name, String path) {
-            this.file = new File(HadesPlugin.instance.getDataFolder() + path);
+            this.file = new File(HadesPlugin.getInstance().getDataFolder() + path);
             this.file.mkdirs();
-            this.file = new File(HadesPlugin.instance.getDataFolder() + path, name + ".txt");
+            this.file = new File(HadesPlugin.getInstance().getDataFolder() + path, name + ".txt");
             try {
                 if (!this.file.exists()) this.file.createNewFile();
             } catch (Exception e) {

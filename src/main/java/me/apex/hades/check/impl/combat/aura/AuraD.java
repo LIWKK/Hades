@@ -1,4 +1,4 @@
-package me.apex.hades.check.impl.combat.pattern;
+package me.apex.hades.check.impl.combat.aura;
 
 import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
@@ -8,14 +8,14 @@ import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
 import org.bukkit.entity.Entity;
 
-@CheckInfo(name = "Pattern", type = "A")
-public class PatternA extends Check {
+@CheckInfo(name = "Aura", type = "D")
+public class AuraD extends Check {
 
     private int ticks;
     private Entity lastTarget;
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
+    public void onHandle(PacketEvent e, User user) {
         if(e instanceof AttackEvent) {
             Entity target = ((AttackEvent) e).getEntity();
             Entity lastTarget = this.lastTarget != null ? this.lastTarget : target;

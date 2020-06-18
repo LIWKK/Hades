@@ -1,5 +1,6 @@
-package me.apex.hades.util;
+package me.apex.hades.util.boundingbox;
 
+import me.apex.hades.util.reflection.ReflectionUtil;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -8,7 +9,6 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
-//Credits to funkemunky:)
 public class BoundingBox {
 
     public float minX, minY, minZ, maxX, maxY, maxZ;

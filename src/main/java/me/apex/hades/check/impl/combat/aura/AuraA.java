@@ -13,7 +13,7 @@ public class AuraA extends Check {
     private long lastFlying;
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
+    public void onHandle(PacketEvent e, User user) {
         if (e instanceof AttackEvent) {
             long timeDiff = time() - lastFlying;
 

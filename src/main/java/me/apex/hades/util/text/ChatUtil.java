@@ -1,4 +1,4 @@
-package me.apex.hades.util;
+package me.apex.hades.util.text;
 
 import me.apex.hades.user.UserManager;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -11,7 +11,7 @@ public class ChatUtil {
     }
 
     public static void informStaff(TextComponent in) {
-        UserManager.users.stream().filter(user -> user.alerts).forEach(user -> user.player.spigot().sendMessage(in));
+        UserManager.users.stream().filter(user -> user.isAlerts()).forEach(user -> user.getPlayer().spigot().sendMessage(in));
     }
 
 }

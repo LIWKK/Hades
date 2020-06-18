@@ -13,7 +13,7 @@ public class BadPacketsB extends Check {
     private int ticks;
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
+    public void onHandle(PacketEvent e, User user) {
         if (e instanceof AttackEvent) {
             if (ticks < 1) {
                 if (preVL++ > 1)

@@ -74,6 +74,11 @@ checks:
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
+      d:
+        enabled: true
+        punishable: true
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     autoclicker:
       a:
         enabled: true
@@ -85,29 +90,8 @@ checks:
         punishable: false
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
-      c:
-        enabled: true
-        punishable: false
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      d:
-        enabled: true
-        punishable: false
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      e:
-        enabled: true
-        punishable: false
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
     criticals:
       mitigate: true
-      a:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-    pattern:
       a:
         enabled: true
         punishable: true

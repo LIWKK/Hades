@@ -7,7 +7,7 @@ public class PingEvent extends Event {
     private final long timeStamp;
 
     public PingEvent() {
-        timeStamp = (System.nanoTime() / 1000000);
+        timeStamp = System.currentTimeMillis();
     }
 
     public long getTimeStamp() {

@@ -1,61 +1,69 @@
 package me.apex.hades.user;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckManager;
+import me.apex.hades.processor.Processor;
+import me.apex.hades.processor.impl.BlockProcessor;
 import me.apex.hades.processor.impl.MovementProcessor;
-import me.apex.hades.util.LogUtils;
 import me.apex.hades.util.PlayerUtil;
-import me.apex.hades.util.ReflectionUtil;
+import me.apex.hades.util.reflection.ReflectionUtil;
+import me.apex.hades.util.text.LogUtils;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
+@Getter
+@Setter
 public class User {
 
     //Player
-    public final Player player;
-    public final UUID playerUUID;
+    private final Player player;
+    private final UUID playerUUID;
 
     //Checks
-    public final List<Check> checks;
+    private final List<Check> checks;
     //Processors
-    public final MovementProcessor movementProcessor = new MovementProcessor(this);
+    private final Processor movementProcessor = new MovementProcessor(this), blockProcessor = new BlockProcessor(this);
     //Booleans
-    public boolean alerts = true, digging, isSprinting, isSneaking;
+    private boolean alerts = true, onGround, collidedGround, digging, isSprinting, isSneaking, chunkLoaded;
     //Location
-    public Location location, lastLocation, lastOnGroundLocation;
+    private Location location, lastLocation, lastOnGroundLocation;
     //Ticks
-    public int tick, digTick, iceTick, slimeTick, velocityTick, underBlockTick, teleportTick, airTick, airTicks, groundTick, groundTicks;
+    private int tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks;
     //Deltas
-    public double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ;
-    public float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch;
+    private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ;
+    private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch;
     //Ints
-    public int CPS;
+    private int CPS;
     //Interact
-    public boolean rightClickingBlock, rightClickingAir, leftClickingBlock, leftClickingAir;
-    public Block interactedBlock;
+    private boolean rightClickingBlock, rightClickingAir, leftClickingBlock, leftClickingAir;
+    private Block interactedBlock;
     //Velocity
-    public long lastVelocity, timeStamp;
-    public double velocityX, velocityY, velocityZ;
+    private long lastVelocity, timeStamp, lastAnyBlockWithLiquid;
+    private double velocityX, velocityY, velocityZ;
     //Log
-    public LogUtils.TextFile logFile;
+    private LogUtils.TextFile logFile;
+    //Thread
+    private Executor executorService;
 
     public User(Player player) {
         this.player = player;
+        this.location = player.getLocation();
         this.playerUUID = player.getUniqueId();
         this.checks = CheckManager.loadChecks();
         this.timeStamp = System.currentTimeMillis();
-        if (HadesPlugin.instance.getConfig().getBoolean("system.logging.file.enabled")) {
-            logFile = new LogUtils.TextFile("" + playerUUID, HadesPlugin.instance.getConfig().getString("system.logging.file.path"));
+        this.executorService = Executors.newSingleThreadExecutor();
+        if (HadesPlugin.getInstance().getConfig().getBoolean("system.logging.file.enabled")) {
+            logFile = new LogUtils.TextFile("" + playerUUID, HadesPlugin.getInstance().getConfig().getString("system.logging.file.path"));
         }
-    }
-
-    public boolean onGround() {
-        return PlayerUtil.isOnGround(player);
     }
 
     public boolean hasBlocksArround(){
@@ -81,8 +89,6 @@ public class User {
             return true;
         }else return false;
     }
-
-    public boolean isOnGroundVanilla(){ return player.isOnGround(); }
 
     //Cant do this without reflection!
     public int ping() {

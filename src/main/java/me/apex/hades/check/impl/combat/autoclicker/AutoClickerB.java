@@ -14,15 +14,15 @@ public class AutoClickerB extends Check {
     private long lastSwing;
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
+    public void onHandle(PacketEvent e, User user) {
         if (e instanceof SwingEvent){
             int ticks = this.ticks;
             this.ticks = 0;
 
             long lastSwing = -this.lastSwing;
-            this.lastSwing = e.getTimestamp();
+            this.lastSwing = System.currentTimeMillis();
 
-            long diff = e.getTimestamp() - lastSwing;
+            long diff = System.currentTimeMillis() - lastSwing;
 
             if (ticks < 2 && diff < 50.0D) {
                 if (preVL++ > 2)

@@ -4,10 +4,10 @@ import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
-import me.apex.hades.event.impl.bukkitevents.EntityDamageByPlayerEvent;
+import me.apex.hades.event.impl.packetevents.AttackEvent;
 import me.apex.hades.user.User;
-import me.apex.hades.util.BoundingBox;
 import me.apex.hades.util.MiscUtil;
+import me.apex.hades.util.boundingbox.BoundingBox;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -15,13 +15,12 @@ import org.bukkit.entity.Player;
 @CheckInfo(name = "Reach", type = "B")
 public class ReachB extends Check {
     @Override
-    public void onEvent(PacketEvent e, User user) {
-        if (e instanceof EntityDamageByPlayerEvent){
-            EntityDamageByPlayerEvent event = (EntityDamageByPlayerEvent)e;
-            if (event.getDamaged() instanceof Player){
-                double reach = getDistToHitbox(user.player, event.getDamaged(), MiscUtil.getEntityBoundingBox((LivingEntity)event.getDamaged()));
-                double max = HadesPlugin.instance.getConfig().getDouble("Max-ReachB");
-                if (user.isSprinting) max += 0.1;
+    public void onHandle(PacketEvent e, User user) {
+        if (e instanceof AttackEvent){
+            if(((AttackEvent) e).getEntity() instanceof Player) {
+                double reach = getDistToHitbox(user.getPlayer(), ((AttackEvent) e).getEntity(), MiscUtil.getEntityBoundingBox((LivingEntity)((AttackEvent) e).getEntity()));
+                double max = HadesPlugin.getInstance().getConfig().getDouble("Max-ReachB");
+                if (user.isSprinting()) max += 0.1;
                 if(reach >= max){
                     if (++preVL >= 2){
                         flag(user,"dist = " + reach);

@@ -1,9 +1,10 @@
 package me.apex.hades.util;
 
+import me.apex.hades.util.boundingbox.BlockUtil;
+import me.apex.hades.util.reflection.ReflectionUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -15,7 +16,7 @@ public class PlayerUtil {
      */
     
     public static boolean isOnGround(Player player) {
-        Object box = ReflectionUtil.modifyBoundingBox(ReflectionUtil.getBoundingBox(player), 0, -0.1, 0,0,0,0);
+        Object box = ReflectionUtil.modifyBoundingBox(ReflectionUtil.getBoundingBox(player), 0, -0.15, 0,0,0,0);
 
         return ReflectionUtil.getCollidingBlocks(player, box).size() > 0;
     }

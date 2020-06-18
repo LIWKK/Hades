@@ -16,13 +16,13 @@ public class VelocityA extends Check {
     private double lastVertical;
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
-        ///Just testing this code from Jonhan, in works on remaking my own check based on this
+    public void onHandle(PacketEvent e, User user) {
+        ///Just testing this code from Jonhan, may remake my own
         if(e instanceof VelocityEvent) {
             VelocityEvent event = (VelocityEvent)e;
 
-            if(event.getVelocityY() > 0.2) {
-                lastVertical = event.getVelocityY();
+            if(event.getVelY() > 0.2) {
+                lastVertical = event.getVelY();
                 ticksSinceSend = 0;
                 hasSent = true;
             }
@@ -33,13 +33,13 @@ public class VelocityA extends Check {
                 int maxTicks = (int) (user.ping() / 50) + 5;
 
                 if(ticksSinceSend <= maxTicks
-                        && user.deltaY <= lastVertical * 0.99
-                        && elapsed(user.tick, user.underBlockTick) > 5
-                        && !PlayerUtil.isInWeb(user.player)
-                        && !PlayerUtil.isInLiquid(user.player)) {
+                        && user.getDeltaY() <= lastVertical * 0.99
+                        && elapsed(user.getTick(), user.getUnderBlockTick()) > 5
+                        && !PlayerUtil.isInWeb(user.getPlayer())
+                        && !PlayerUtil.isInLiquid(user.getPlayer())) {
                     if(++preVL >= maxTicks) {
                         preVL = 0;
-                        flag(user, "didnt take sent velocity, v: " + user.deltaY);
+                        flag(user, "didnt take sent velocity, v: " + user.getDeltaY());
                     }
                 }else {
                     preVL = 0;

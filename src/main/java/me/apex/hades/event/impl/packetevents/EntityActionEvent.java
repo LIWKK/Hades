@@ -1,9 +1,11 @@
 package me.apex.hades.event.impl.packetevents;
 
 import io.github.retrooper.packetevents.enums.PlayerAction;
+import lombok.Getter;
 import me.apex.hades.event.Event;
 import org.bukkit.entity.Entity;
 
+@Getter
 public class EntityActionEvent extends Event {
 
     private final int entityId;
@@ -16,22 +18,6 @@ public class EntityActionEvent extends Event {
         this.entity = entity;
         this.jumpBoost = jumpBoost;
         this.action = action;
-    }
-
-    public int getEntityId() {
-        return entityId;
-    }
-
-    public Entity getEntity() {
-        return entity;
-    }
-
-    public int getJumpBoost() {
-        return jumpBoost;
-    }
-
-    public PlayerAction getAction() {
-        return action;
     }
 
 }

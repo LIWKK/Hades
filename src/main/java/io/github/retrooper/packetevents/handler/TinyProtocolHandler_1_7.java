@@ -1,6 +1,7 @@
 package io.github.retrooper.packetevents.handler;
 
 import io.github.retrooper.packetevents.PacketEvents;
+import io.github.retrooper.packetevents.annotations.Nullable;
 import io.github.retrooper.packetevents.event.impl.PacketLoginEvent;
 import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
 import io.github.retrooper.packetevents.event.impl.PacketSendEvent;
@@ -10,17 +11,14 @@ import net.minecraft.util.io.netty.channel.Channel;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import io.github.retrooper.packetevents.annotations.Nullable;
-
 public final class TinyProtocolHandler_1_7 {
     private final Plugin plugin;
+    @Nullable
+    public TinyProtocol7 tinyProtocol;
 
     public TinyProtocolHandler_1_7(final Plugin plugin) {
         this.plugin = plugin;
     }
-
-    @Nullable
-    public TinyProtocol7 tinyProtocol;
 
     public void initTinyProtocol() {
         tinyProtocol = new TinyProtocol7(getPlugin()) {
@@ -38,8 +36,8 @@ public final class TinyProtocolHandler_1_7 {
             @Override
             public Object onPacketInAsync(Player sender, Channel channel, Object packet) {
                 final String packetName = packet.getClass().getSimpleName();
-                for(final String loginPacket : Packet.Login.LOGIN_PACKETS) {
-                    if(packetName.equals(loginPacket)) {
+                for (final String loginPacket : Packet.Login.LOGIN_PACKETS) {
+                    if (packetName.equals(loginPacket)) {
                         PacketEvents.getEventManager().callEvent(new PacketLoginEvent(channel, packetName, packet));
                         return packet;
                     }

@@ -1,14 +1,12 @@
 package me.apex.hades.processor.impl;
 
 import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
+import io.github.retrooper.packetevents.packet.Packet;
 import io.github.retrooper.packetevents.packetwrappers.in.flying.WrappedPacketInFlying;
 import me.apex.hades.processor.Processor;
 import me.apex.hades.user.User;
 import me.apex.hades.util.PacketUtil;
-import me.apex.hades.util.PlayerUtil;
-import me.apex.hades.util.TaskUtil;
 import org.bukkit.Location;
-import org.bukkit.block.BlockFace;
 
 public class MovementProcessor extends Processor {
 
@@ -16,80 +14,70 @@ public class MovementProcessor extends Processor {
         super(user);
     }
 
-    @Override
     public void process(PacketReceiveEvent e) {
         if (PacketUtil.isPositionPacket(e.getPacketName())) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
-            Location location = new Location(user.player.getWorld(), packet.getX(), packet.getY(), packet.getZ(), packet.getYaw(), packet.getPitch());
-            Location lastLocation = user.location != null ? user.location : location;
+            user.setOnGround(packet.isOnGround());
 
-            user.lastLocation = lastLocation;
-            user.location = location;
+            Location location = new Location(user.getPlayer().getWorld(), packet.getX(), packet.getY(), packet.getZ(), packet.getYaw(), packet.getPitch());
+            Location lastLocation = user.getLocation() != null ? user.getLocation() : location;
 
-            double lastDeltaY = user.deltaY;
+            user.setLastLocation(lastLocation);
+            user.setLocation(location);
+
+            double lastDeltaY = user.getDeltaY();
             double deltaY = location.getY() - lastLocation.getY();
 
-            user.lastDeltaY = lastDeltaY;
-            user.deltaY = deltaY;
+            user.setLastDeltaY(lastDeltaY);
+            user.setDeltaY(deltaY);
 
-            double lastDeltaXZ = user.deltaXZ;
+            double lastDeltaXZ = user.getDeltaXZ();
             double deltaXZ = location.clone().toVector().setY(0.0).distance(lastLocation.clone().toVector().setY(0.0));
 
-            user.lastDeltaXZ = lastDeltaXZ;
-            user.deltaXZ = deltaXZ;
+            user.setLastDeltaXZ(lastDeltaXZ);
+            user.setDeltaXZ(deltaXZ);
 
-            float lastDeltaYaw = user.deltaYaw;
+            float lastDeltaYaw = user.getDeltaYaw();
             float deltaYaw = Math.abs(location.getYaw() - lastLocation.getYaw());
 
-            user.lastDeltaYaw = lastDeltaYaw;
-            user.deltaYaw = deltaYaw;
+            user.setLastDeltaYaw(lastDeltaYaw);
+            user.setDeltaYaw(deltaYaw);
 
-            float lastDeltaPitch = user.deltaPitch;
+            float lastDeltaPitch = user.getDeltaPitch();
             float deltaPitch = Math.abs(location.getPitch() - lastLocation.getPitch());
 
-            user.lastDeltaPitch = lastDeltaPitch;
-            user.deltaPitch = deltaPitch;
+            user.setLastDeltaPitch(lastDeltaPitch);
+            user.setDeltaPitch(deltaPitch);
 
-            if (PlayerUtil.isOnGround(user.player)){
-                user.airTicks = 0;
-                user.groundTicks++;
-                user.groundTick = user.tick;
-                user.lastOnGroundLocation = user.location;
-            }else {
-                user.airTicks++;
-                user.groundTicks = 0;
-                user.airTick = user.tick;
-            }
-
-            TaskUtil.run(() -> {
-                if (user.player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")
-                        || user.player.getLocation().clone().add(0, -0.5, 0).getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("ICE")) {
-                    user.iceTick = user.tick;
-                }
-                if (user.player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("SLIME")) {
-                    user.slimeTick = user.tick;
-                }
-                if (user.player.getEyeLocation().getBlock().getType().isSolid()
-                        || user.player.getEyeLocation().getBlock().getRelative(BlockFace.UP).getType().isSolid()) {
-                    user.underBlockTick = user.tick;
-                }
-            });
+            //Update Block Check
+            ((BlockProcessor)user.getBlockProcessor()).process(user);
         } else if (PacketUtil.isRotationPacket(e.getPacketName())) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
-            Location location = new Location(user.player.getWorld(), user.location.getX(), user.location.getY(), user.location.getZ(), packet.getYaw(), packet.getPitch());
-            Location lastLocation = user.location != null ? user.location : location;
+            user.setOnGround(packet.isOnGround());
 
-            float lastDeltaYaw = user.deltaYaw;
+            Location location = new Location(user.getPlayer().getWorld(), user.getLocation().getX(), user.getLocation().getY(), user.getLocation().getZ(), packet.getYaw(), packet.getPitch());
+            Location lastLocation = user.getLocation() != null ? user.getLocation() : location;
+
+            float lastDeltaYaw = user.getDeltaYaw();
             float deltaYaw = Math.abs(location.getYaw() - lastLocation.getYaw());
 
-            user.lastDeltaYaw = lastDeltaYaw;
-            user.deltaYaw = deltaYaw;
+            user.setLastDeltaYaw(user.getDeltaYaw());
+            user.setDeltaYaw(deltaYaw);
 
-            float lastDeltaPitch = user.deltaPitch;
+            float lastDeltaPitch = user.getDeltaPitch();
             float deltaPitch = Math.abs(location.getPitch() - lastLocation.getPitch());
 
-            user.lastDeltaPitch = lastDeltaPitch;
-            user.deltaPitch = deltaPitch;
+            user.setLastDeltaPitch(lastDeltaPitch);
+            user.setDeltaPitch(deltaPitch);
+
+            //Update Block Check
+            ((BlockProcessor)user.getBlockProcessor()).process(user);
+        }else if(e.getPacketName().equalsIgnoreCase(Packet.Client.FLYING)) {
+            WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
+            user.setOnGround(packet.isOnGround());
+
+            //Update Block Check
+            ((BlockProcessor)user.getBlockProcessor()).process(user);
         }
     }
 
