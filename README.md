@@ -1,4 +1,3 @@
-# BEING RECODED
 # Hades Anti-Cheat
 
 ## Overview
