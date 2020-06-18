@@ -1,35 +1,43 @@
 package me.apex.hades.check.impl.combat.autoclicker;
 
-import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
-import me.apex.hades.check.CheckInfo;
-import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.check.ClassInterface;
+import me.apex.hades.check.Type;
+import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.SwingEvent;
 import me.apex.hades.user.User;
+import me.apex.hades.utils.math.MathUtil;
 
-@CheckInfo(name = "AutoClicker", type = "B")
-public class AutoClickerB extends Check {
+import java.util.Deque;
+import java.util.LinkedList;
 
-    private int ticks;
-    private long lastSwing;
+public class AutoClickerB extends Check implements ClassInterface {
+    public AutoClickerB(String checkName, String letter, Type type, boolean enabled) {
+        super(checkName, letter, type, enabled);
+    }
+
+    private final Deque<Long> ticks = new LinkedList<>();
+    private double lastDeviation;
 
     @Override
-    public void onEvent(PacketEvent e, User user) {
-        if (e instanceof SwingEvent){
-            int ticks = this.ticks;
-            this.ticks = 0;
+    public void onHandle(User user, AnticheatEvent e) {
+        if (e instanceof SwingEvent) {
+            if (!user.isBreakingOrPlacingBlock()) ticks.add((long) (user.getFlyingTick() * 50.0));
+            if (ticks.size() >= 10) {
+                double deviation = MathUtil.getStandardDeviation(ticks.stream().mapToLong(d -> d).toArray());
+                double lastDeviation = this.lastDeviation;
+                this.lastDeviation = deviation;
 
-            long lastSwing = -this.lastSwing;
-            this.lastSwing = e.getTimestamp();
+                double diff = Math.abs(deviation - lastDeviation);
 
-            long diff = e.getTimestamp() - lastSwing;
+                if (diff < 10) {
+                    if (++preVL > 1) {
+                        flag(user, "low deviation difference, d: " + diff);
+                    }
+                } else preVL = 0;
 
-            if (ticks < 2 && diff < 50.0D) {
-                if (preVL++ > 2)
-                    flag(user, "ticks = " + ticks + ", delay = " + diff);
-            } else preVL = 0;
-        }else if (e instanceof FlyingEvent){
-            ticks++;
+                ticks.clear();
+            }
         }
     }
 }

@@ -1,8 +1,8 @@
 package me.apex.hades.event.impl.packetevents;
 
-import me.apex.hades.event.Event;
+import me.apex.hades.event.AnticheatEvent;
 
-public class FlyingEvent extends Event {
+public class FlyingEvent extends AnticheatEvent {
 
     private final double x;
     private final double y;
@@ -12,8 +12,10 @@ public class FlyingEvent extends Event {
     private final boolean hasMoved;
     private final boolean hasLooked;
     private final boolean isOnGround;
+    private final boolean clientMoved;
+    private final boolean clientLooked;
 
-    public FlyingEvent(double x, double y, double z, float yaw, float pitch, boolean hasMoved, boolean hasLooked, boolean isOnGround) {
+    public FlyingEvent(double x, double y, double z, float yaw, float pitch, boolean hasMoved, boolean hasLooked, boolean isOnGround, boolean clientMoved, boolean clientLooked) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -22,6 +24,8 @@ public class FlyingEvent extends Event {
         this.hasMoved = hasMoved;
         this.hasLooked = hasLooked;
         this.isOnGround = isOnGround;
+        this.clientMoved = clientMoved;
+        this.clientLooked = clientLooked;
     }
 
     public double getX() {
@@ -54,6 +58,14 @@ public class FlyingEvent extends Event {
 
     public boolean isOnGround() {
         return isOnGround;
+    }
+
+    public boolean isClientMoved() {
+        return clientMoved;
+    }
+
+    public boolean isClientLooked() {
+        return clientLooked;
     }
 
 }

@@ -1,36 +1,17 @@
 package me.apex.hades.event.impl.packetevents;
 
-import io.github.retrooper.packetevents.enums.PlayerAction;
-import me.apex.hades.event.Event;
-import org.bukkit.entity.Entity;
+import me.apex.hades.event.AnticheatEvent;
+import me.apex.hades.tinyprotocol.packet.in.WrappedInEntityActionPacket;
 
-public class EntityActionEvent extends Event {
+public class EntityActionEvent extends AnticheatEvent {
 
-    private final int entityId;
-    private final Entity entity;
-    private final int jumpBoost;
-    private final PlayerAction action;
+    private final WrappedInEntityActionPacket.EnumPlayerAction action;
 
-    public EntityActionEvent(int entityId, Entity entity, int jumpBoost, PlayerAction action) {
-        this.entityId = entityId;
-        this.entity = entity;
-        this.jumpBoost = jumpBoost;
+    public EntityActionEvent(WrappedInEntityActionPacket.EnumPlayerAction action) {
         this.action = action;
     }
 
-    public int getEntityId() {
-        return entityId;
-    }
-
-    public Entity getEntity() {
-        return entity;
-    }
-
-    public int getJumpBoost() {
-        return jumpBoost;
-    }
-
-    public PlayerAction getAction() {
+    public WrappedInEntityActionPacket.EnumPlayerAction getAction() {
         return action;
     }
 

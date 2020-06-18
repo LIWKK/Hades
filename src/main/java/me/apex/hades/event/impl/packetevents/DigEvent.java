@@ -1,31 +1,31 @@
 package me.apex.hades.event.impl.packetevents;
 
-import io.github.retrooper.packetevents.enums.Direction;
-import io.github.retrooper.packetevents.enums.PlayerDigType;
-import io.github.retrooper.packetevents.utils.vector.Vector3i;
-import me.apex.hades.event.Event;
+import me.apex.hades.event.AnticheatEvent;
+import me.apex.hades.tinyprotocol.packet.in.WrappedInBlockDigPacket;
+import me.apex.hades.tinyprotocol.packet.types.BaseBlockPosition;
+import me.apex.hades.tinyprotocol.packet.types.EnumDirection;
 
-public class DigEvent extends Event {
+public class DigEvent extends AnticheatEvent {
 
-    private final Vector3i blockPos;
-    private final Direction direction;
-    private final PlayerDigType digType;
+    private final BaseBlockPosition blockPos;
+    private final EnumDirection direction;
+    private final WrappedInBlockDigPacket.EnumPlayerDigType digType;
 
-    public DigEvent(Vector3i blockPos, Direction direction, PlayerDigType digType) {
+    public DigEvent(BaseBlockPosition blockPos, EnumDirection direction, WrappedInBlockDigPacket.EnumPlayerDigType digType) {
         this.blockPos = blockPos;
         this.direction = direction;
         this.digType = digType;
     }
 
-    public Vector3i getBlockPos() {
+    public BaseBlockPosition getBlockPos() {
         return blockPos;
     }
 
-    public Direction getDirection() {
+    public EnumDirection getDirection() {
         return direction;
     }
 
-    public PlayerDigType getDigType() {
+    public WrappedInBlockDigPacket.EnumPlayerDigType getDigType() {
         return digType;
     }
 

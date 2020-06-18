@@ -1,12 +1,12 @@
 package me.apex.hades.event.impl.bukkitevents;
 
-import me.apex.hades.event.Event;
+import me.apex.hades.event.AnticheatEvent;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.block.Action;
 import org.bukkit.inventory.ItemStack;
 
-public class InteractEvent extends Event {
+public class InteractEvent extends AnticheatEvent {
 
     private Action action;
     private ItemStack item;
