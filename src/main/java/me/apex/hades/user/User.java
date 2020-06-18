@@ -11,10 +11,7 @@ import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
 import me.apex.hades.check.impl.combat.reach.ReachA;
 import me.apex.hades.check.impl.combat.velocity.VelocityA;
-import me.apex.hades.check.impl.movement.fly.FlyA;
-import me.apex.hades.check.impl.movement.fly.FlyB;
-import me.apex.hades.check.impl.movement.fly.FlyC;
-import me.apex.hades.check.impl.movement.fly.FlyE;
+import me.apex.hades.check.impl.movement.fly.*;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.smallhop.SmallHopA;
 import me.apex.hades.check.impl.movement.speed.SpeedA;
@@ -22,7 +19,6 @@ import me.apex.hades.check.impl.movement.speed.SpeedB;
 import me.apex.hades.check.impl.movement.speed.SpeedC;
 import me.apex.hades.check.impl.player.badpackets.*;
 import me.apex.hades.check.impl.player.fasteat.FastEatA;
-import me.apex.hades.check.impl.player.nofall.NoFallA;
 import me.apex.hades.check.impl.player.timer.TimerA;
 import me.apex.hades.processors.CombatProcessor;
 import me.apex.hades.processors.LagProcessor;
@@ -130,6 +126,7 @@ public class User {
         addCheck(new FlyA());
         addCheck(new FlyB());
         addCheck(new FlyC());
+        addCheck(new FlyD());
         addCheck(new FlyE());
 
         addCheck(new SmallHopA());
@@ -148,8 +145,6 @@ public class User {
         addCheck(new BadPacketsE());
         addCheck(new BadPacketsF());
         addCheck(new BadPacketsG());
-
-        addCheck(new NoFallA());
 
         addCheck(new FastEatA());
 

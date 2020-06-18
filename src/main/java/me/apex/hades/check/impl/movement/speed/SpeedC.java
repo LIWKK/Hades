@@ -23,7 +23,7 @@ public class SpeedC extends Check {
     @Override
     public void onHandle(User user, AnticheatEvent e) {
         if (e instanceof FlyingPacketEvent) {
-            if (user != null && ((FlyingPacketEvent)e).isClientMoved()) {
+            if (user != null) {
 
                 if (TimeUtils.elapsed(user.lastVelocity) < 1000L || user.getPlayer().getAllowFlight() || TimeUtils.secondsFromLong(user.getLastTeleport()) < 3L || user.getMountedTicks() > 0 || user.isSwitchedGamemodes() || user.getBlockData().stairTicks > 0 || user.getBlockData().slabTicks > 0) {
                     return;

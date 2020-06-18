@@ -30,7 +30,6 @@ public class ReachA extends Check {
                     }).min().orElse(0.0);
 
                     double maxReach = MathUtil.calculatePlayerReach(user, 3.0);
-                    Bukkit.broadcastMessage(range + "  " + maxReach);
                     if (range > maxReach) {
                         flag(user, "Reach: " + range);
                     }

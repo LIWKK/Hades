@@ -6,9 +6,7 @@ import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
 import me.apex.hades.check.impl.combat.aura.*;
 import me.apex.hades.check.impl.combat.reach.ReachA;
 import me.apex.hades.check.impl.combat.velocity.VelocityA;
-import me.apex.hades.check.impl.movement.fly.FlyA;
-import me.apex.hades.check.impl.movement.fly.FlyB;
-import me.apex.hades.check.impl.movement.fly.FlyC;
+import me.apex.hades.check.impl.movement.fly.*;
 import me.apex.hades.check.impl.movement.smallhop.SmallHopA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.speed.SpeedA;
@@ -39,6 +37,8 @@ public enum CheckManager {
             FlyA.class,
             FlyB.class,
             FlyC.class,
+            FlyD.class,
+            FlyE.class,
             ScaffoldA.class,
             SmallHopA.class,
             SpeedA.class,
