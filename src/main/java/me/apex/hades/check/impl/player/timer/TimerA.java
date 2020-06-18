@@ -7,6 +7,7 @@ import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.utils.math.MathUtil;
+import me.apex.hades.utils.math.RollingAverageDouble;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -16,25 +17,27 @@ public class TimerA extends Check implements ClassInterface {
         super(checkName, letter, type, enabled);
     }
 
-    private final Deque<Long> flyingDeque = new LinkedList<>();
-    private double lastDeviation;
+    long lastTimer, lastTimerMove;
+    RollingAverageDouble timerRate = new RollingAverageDouble(40, 50.0);
 
     @Override
     public void onHandle(User user, AnticheatEvent e) {
         if(e instanceof FlyingPacketEvent) {
-            flyingDeque.add(System.currentTimeMillis());
+            long current = System.currentTimeMillis();
+            long difference = current - lastTimerMove;
 
-            if(flyingDeque.size() == 50) {
-                double deviation = MathUtil.getStandardDeviation(flyingDeque.stream().mapToLong(l -> l).toArray());
-                double lastDeviation = this.lastDeviation;
-                this.lastDeviation = deviation;
+            timerRate.add((double) difference);
 
-                if(deviation <= 710 && (Math.abs(deviation - lastDeviation) < 20)) {
-                    if(preVL++ > 1) {
-                        flag(user, "high packet rate, d: " + deviation);
+            if ((current - lastTimer) >= 1000L) {
+                lastTimer = current;
+                double timerSpeed = 50.0 / timerRate.getAverage();
+                if (timerSpeed >= 1.01) {
+                    if (++preVL > 4) {
+                        flag(user, "Timer Speed: "+timerSpeed);
                     }
-                }else preVL = 0;
+                }else preVL -= Math.min(preVL, 0.5);
             }
+            lastTimerMove = current;
         }
     }
 }

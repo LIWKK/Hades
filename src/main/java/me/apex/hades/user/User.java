@@ -6,21 +6,17 @@ import lombok.Setter;
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.Type;
-import me.apex.hades.check.impl.combat.aimassist.AimAssistA;
-import me.apex.hades.check.impl.combat.aimassist.AimAssistB;
-import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
-import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
+import me.apex.hades.check.impl.combat.aimassist.*;
+import me.apex.hades.check.impl.combat.autoclicker.*;
 import me.apex.hades.check.impl.combat.killaura.*;
-import me.apex.hades.check.impl.combat.reach.ReachA;
-import me.apex.hades.check.impl.movement.fly.FlyA;
-import me.apex.hades.check.impl.movement.fly.FlyB;
-import me.apex.hades.check.impl.movement.fly.FlyC;
-import me.apex.hades.check.impl.movement.invalid.InvalidA;
-import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
-import me.apex.hades.check.impl.movement.speed.SpeedA;
-import me.apex.hades.check.impl.movement.speed.SpeedB;
+import me.apex.hades.check.impl.combat.reach.*;
+import me.apex.hades.check.impl.combat.velocity.*;
+import me.apex.hades.check.impl.movement.fly.*;
+import me.apex.hades.check.impl.movement.invalid.*;
+import me.apex.hades.check.impl.movement.scaffold.*;
+import me.apex.hades.check.impl.movement.speed.*;
 import me.apex.hades.check.impl.player.badpackets.*;
-import me.apex.hades.check.impl.player.timer.TimerA;
+import me.apex.hades.check.impl.player.timer.*;
 import me.apex.hades.processors.CombatProcessor;
 import me.apex.hades.processors.LagProcessor;
 import me.apex.hades.processors.MovementProcessor;
@@ -62,7 +58,7 @@ public class User {
     public PastLocation hitBoxPastLocations = new PastLocation();
     public CustomLocation lastGroundLocation, to = new CustomLocation(0, 0, 0), lastSlimeLocation = new CustomLocation(0,0,0), from = to, fromFrom = from;
     public boolean breakingOrPlacingBlock, sprinting, sneaking, switchedGamemodes, safe, hasVerify, waitingForMovementVerify, explode, clientGround, lastClientGround, chunkLoaded, onGround, lastOnGround, wasFlying, collidedGround, collidesHorizontally, collidesVertically, lastCollidedVrtically, hasJumpPotion, hasSpeedPotion, dead, didUnknownTeleport;
-    public int sprintingTicks, cancelTicks, noDamageTicks, violation, lastServerPostionTick, constantEntityTicks, lastBlockPlaceTick, movementVerifyStage, totalBlocksCheck, lastCheckBlockTick, flyingTick, velocityTicks, movementVerifyBlocks, invalidTeleportMovementVerbose, unknownTeleportTick, totalBlockUpdates, lastBlockGroundTick, connectedTick, mountedTicks, jumpPotionTicks, speedPotionTicks, collidedGroundTicks, groundTicks, airTicks, lastDeadTick;
+    public int clientGroundTicks, clientAirTicks, sprintingTicks, cancelTicks, noDamageTicks, violation, lastServerPostionTick, constantEntityTicks, lastBlockPlaceTick, movementVerifyStage, totalBlocksCheck, lastCheckBlockTick, flyingTick, velocityTicks, movementVerifyBlocks, invalidTeleportMovementVerbose, unknownTeleportTick, totalBlockUpdates, lastBlockGroundTick, connectedTick, mountedTicks, jumpPotionTicks, speedPotionTicks, collidedGroundTicks, groundTicks, airTicks, lastDeadTick;
     public long lastMovePacket, lastEntityDamageAttack, breakingOrPlacingTime, lastUseEntityPacket, lastVelocity, lastRandomDamage, lastEntityDamage, lastFallDamage, lastFireDamage, lastBowDamage, lastTeleport, lastFullTeleport, lastUnknownTeleport, lastUnknownValidTeleport, lastBlockPlace, lastBlockCancel, lastBlockBreakCancel, lastGamemodeSwitch, lastFullBlockMoved, lastBlockJump, lastBlockFall, lastPos, timestamp, lastExplode, lastCollidedGround, lastMoutUpdate, lastMount;
     public double packetsFromLag, horizontalVelocity, verticalVelocity, lastBowStrength, deltaXZ, lastGroundPrediction, groundYPredict, lastFallJumpPrediction, movementSpeed, walkSpeed;
     public float speedPotionEffectLevel, jumpPotionMultiplyer;
@@ -102,6 +98,8 @@ public class User {
 
     public void registerChecks() {
 
+        addCheck(new AimAssistA("AimAssist", "A", Type.COMBAT, true));
+
         addCheck(new AutoClickerA("AutoClicker", "A", Type.COMBAT, true));
         addCheck(new AutoClickerB("AutoClicker", "B", Type.COMBAT, true));
 
@@ -110,13 +108,19 @@ public class User {
         addCheck(new KillauraC("Killaura", "C", Type.COMBAT, true));
         addCheck(new KillauraD("Killaura", "D", Type.COMBAT, true));
         addCheck(new KillauraE("Killaura", "E", Type.COMBAT, true));
+        addCheck(new KillauraF("Killaura", "F", Type.COMBAT, true));
 
         addCheck(new ReachA("Reach", "A", Type.COMBAT, true));
+
+        addCheck(new VelocityA("Velocity", "A", Type.COMBAT, true));
 
 
         addCheck(new FlyA("Fly", "A", Type.MOVEMENT, true));
         addCheck(new FlyB("Fly", "B", Type.MOVEMENT, true));
         addCheck(new FlyC("Fly", "C", Type.MOVEMENT, true));
+        addCheck(new FlyD("Fly", "D", Type.MOVEMENT, true));
+        addCheck(new FlyE("Fly", "E", Type.MOVEMENT, true));
+        addCheck(new FlyF("Fly", "F", Type.MOVEMENT, true));
 
         addCheck(new InvalidA("Invalid", "A", Type.MOVEMENT, true));
 
@@ -124,6 +128,7 @@ public class User {
 
         addCheck(new SpeedA("Speed", "A", Type.MOVEMENT, true));
         addCheck(new SpeedB("Speed", "B", Type.MOVEMENT, true));
+        addCheck(new SpeedC("Speed", "C", Type.MOVEMENT, true));
 
 
         addCheck(new BadPacketsA("BadPackets", "A", Type.PLAYER, true));
@@ -334,6 +339,15 @@ public class User {
             groundTicks = 0;
         }
 
+        if (getPlayer().isOnGround()) {
+
+            if (clientGroundTicks < 20) clientGroundTicks++;
+            clientAirTicks = 0;
+        } else {
+            if (clientAirTicks < 20) clientAirTicks++;
+            clientGroundTicks = 0;
+        }
+
         if (isSprinting()) {
             if (getSprintingTicks() < 50) setSprintingTicks(getSprintingTicks() + 1);
         } else {
@@ -446,6 +460,7 @@ public class User {
         } else {
             if (blockData.doorTicks > 0) blockData.doorTicks--;
         }
+
 
 
         setAirTicks(airTicks);

@@ -20,7 +20,7 @@ public class FlyA extends Check implements ClassInterface {
 
             double maxJump = 0.41999998688697815F;
             double deltaY = user.getTo().getY() - user.getFrom().getY();
-            if (TimeUtils.elapsed(user.lastVelocity) < 1000L || deltaY <= 0.404445 && deltaY > 0.404444 && TimeUtils.elapsed(user.lastBlockJump) < 1000L || user.blockData.climbableTicks > 0 || user.getPlayer().getAllowFlight() || TimeUtils.elapsed(user.lastFullTeleport) < 1000L) {
+            if (TimeUtils.elapsed(user.lastVelocity) < 1000L || user.isWaitingForMovementVerify() || !user.isSafe() || deltaY <= 0.404445 && deltaY > 0.404444 && TimeUtils.elapsed(user.lastBlockJump) < 1000L || user.blockData.climbableTicks > 0 || user.getPlayer().getAllowFlight() || TimeUtils.elapsed(user.lastFullTeleport) < 1000L) {
                 return;
             }
             if (user.getBlockData().halfBlockTicks > 0 || user.getBlockData().stairTicks > 0) {
