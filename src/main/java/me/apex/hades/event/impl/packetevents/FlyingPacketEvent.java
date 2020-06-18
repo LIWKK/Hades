@@ -13,8 +13,6 @@ public class FlyingPacketEvent extends AnticheatEvent {
     private double z;
     private float yaw;
     private float pitch;
-    private boolean hasMoved;
-    private boolean hasLooked;
     private boolean isOnGround;
     private boolean clientMoved;
     private boolean clientLooked;

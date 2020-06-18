@@ -16,7 +16,7 @@ public class SpeedB extends Check implements ClassInterface {
     @Override
     public void onHandle(User user, AnticheatEvent e) {
         if(e instanceof FlyingPacketEvent) {
-            if(((FlyingPacketEvent) e).isHasMoved()) {
+            if(((FlyingPacketEvent) e).isClientMoved()) {
                 double max = 0.34;
                 max *= user.getPlayer().getWalkSpeed() / 0.2;
                 max += user.getSpeedPotionEffectLevel() % max;

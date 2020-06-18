@@ -17,7 +17,7 @@ public class InvalidA extends Check implements ClassInterface {
     @Override
     public void onHandle(User user, AnticheatEvent e) {
         if(e instanceof FlyingPacketEvent) {
-            if(((FlyingPacketEvent) e).isHasMoved()) {
+            if(((FlyingPacketEvent) e).isClientMoved()) {
                 double deltaY = user.getLocation().getY() - user.getPreviousLocation().getY();
                 double lastDeltaY = this.lastDeltaY;
                 this.lastDeltaY = deltaY;
