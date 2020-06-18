@@ -1,40 +1,52 @@
 package me.apex.hades.check.impl.combat.velocity;
 
+import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
-import me.apex.hades.event.AnticheatEvent;
-import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.event.impl.packetevents.VelocityEvent;
 import me.apex.hades.user.User;
-import me.apex.hades.utils.time.TimeUtils;
+import me.apex.hades.util.PlayerUtil;
 
 @CheckInfo(name = "Velocity", type = "A")
 public class VelocityA extends Check {
 
-    int ticks;
+    private boolean hasSent;
+    private int ticksSinceSend;
+    private double lastVertical;
 
     @Override
-    public void onHandle(User user, AnticheatEvent e) {
-        if (e instanceof VelocityEvent) {
-            ticks = 0;
-        }
-        if (e instanceof FlyingPacketEvent) {
-            ticks++;
+    public void onEvent(PacketEvent e, User user) {
+        ///Just testing this code from Jonhan, in works on remaking my own check based on this
+        if(e instanceof VelocityEvent) {
+            VelocityEvent event = (VelocityEvent)e;
 
-            long time = System.currentTimeMillis() - user.getLastMovePacket();
-            if (time >= 100L) {
-                return;
+            if(event.getVelocityY() > 0.2) {
+                lastVertical = event.getVelocityY();
+                ticksSinceSend = 0;
+                hasSent = true;
             }
-            if (ticks == 2) {
-                if (user.getBlockData().blockAboveTicks > 0 || TimeUtils.elapsed(user.lastTeleport) < 2000L) {
-                    return;
-                }
-                double deltaY = Math.abs(user.getTo().getY() - user.getFrom().getY());
-                double vertical = user.getVerticalVelocity();
-                if (deltaY < vertical) {
-                    flag(user, "Vertical Velocity: " + deltaY);
+        }else if(e instanceof FlyingEvent) {
+            if(hasSent) {
+                ticksSinceSend++;
+
+                int maxTicks = (int) (user.ping() / 50) + 5;
+
+                if(ticksSinceSend <= maxTicks
+                        && user.deltaY <= lastVertical * 0.99
+                        && elapsed(user.tick, user.underBlockTick) > 5
+                        && !PlayerUtil.isInWeb(user.player)
+                        && !PlayerUtil.isInLiquid(user.player)) {
+                    if(++preVL >= maxTicks) {
+                        preVL = 0;
+                        flag(user, "didnt take sent velocity, v: " + user.deltaY);
+                    }
+                }else {
+                    preVL = 0;
+                    hasSent = false;
                 }
             }
         }
     }
+
 }

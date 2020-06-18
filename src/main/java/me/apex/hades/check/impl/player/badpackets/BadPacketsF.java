@@ -1,28 +1,30 @@
 package me.apex.hades.check.impl.player.badpackets;
 
+import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
-import me.apex.hades.event.AnticheatEvent;
-import me.apex.hades.event.impl.packetevents.AttackEvent;
-import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
-import me.apex.hades.event.impl.packetevents.SwingEvent;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.event.impl.packetevents.PlaceEvent;
 import me.apex.hades.user.User;
+import me.apex.hades.util.PacketUtil;
 
 @CheckInfo(name = "BadPackets", type = "F")
 public class BadPacketsF extends Check {
-    private boolean lastWasArm;
+
+    private int ticks;
 
     @Override
-    public void onHandle(User user, AnticheatEvent e) {
-        if (e instanceof AttackEvent) {
-            if (!lastWasArm) {
-                if (vl++ > 1)
-                    flag(user, "swung = " + lastWasArm);
-            } else vl = 0;
-        } else if (e instanceof SwingEvent) {
-            lastWasArm = true;
-        } else if (e instanceof FlyingPacketEvent) {
-            lastWasArm = false;
+    public void onEvent(PacketEvent e, User user) {
+        if (e instanceof PlaceEvent) {
+            PlaceEvent packet = (PlaceEvent) e;
+            if (ticks < 2 && PacketUtil.isBlockPacket(packet.getItemStack().getType().toString())) {
+                if (preVL++ > 4)
+                    flag(user, "ticks = " + ticks);
+            } else preVL = 0;
+
+            this.ticks = 0;
+        } else if (e instanceof FlyingEvent) {
+            ticks++;
         }
     }
 }

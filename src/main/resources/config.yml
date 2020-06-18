@@ -44,6 +44,8 @@ anti-vpn:
 
 #Check Values
 Max-CPS: 20
+Max-ReachA: 3.4
+Max-ReachB: 3.4
 
 #Check Configuration
 #NOTE: Experimental checks are preset to not punish players
@@ -72,21 +74,6 @@ checks:
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
-      d:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      e:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      f:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
     autoclicker:
       a:
         enabled: true
@@ -98,14 +85,42 @@ checks:
         punishable: false
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
+      c:
+        enabled: true
+        punishable: false
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+      d:
+        enabled: true
+        punishable: false
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+      e:
+        enabled: true
+        punishable: false
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     criticals:
+      mitigate: true
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+    pattern:
       a:
         enabled: true
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     reach:
+      mitigate: true
       a:
+        enabled: true
+        punishable: false
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+      b:
         enabled: true
         punishable: false
         max-vl: 10
@@ -117,6 +132,7 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     fly:
+      mitigate: true
       a:
         enabled: true
         punishable: true
@@ -127,45 +143,35 @@ checks:
         punishable: true
         max-vl: 20
         punish-command: 'ban %player% %prefix%Cheating'
-      c:
+    invalid:
+      mitigate: true
+      a:
         enabled: true
         punishable: true
-        max-vl: 20
+        max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
-      e:
-        enabled: true
-        punishable: true
-        max-vl: 20
-        punish-command: 'ban %player% %prefix%Cheating'
-      f:
-        enabled: true
-        punishable: true
-        max-vl: 20
-        punish-command: 'ban %player% %prefix%Cheating'
-    smallhop:
+    noslow:
+      mitigate: true
       a:
         enabled: true
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     scaffold:
+      mitigate: true
       a:
         enabled: true
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     speed:
+      mitigate: true
       a:
         enabled: true
         punishable: true
         max-vl: 20
         punish-command: 'ban %player% %prefix%Cheating'
       b:
-        enabled: true
-        punishable: true
-        max-vl: 20
-        punish-command: 'ban %player% %prefix%Cheating'
-      c:
         enabled: true
         punishable: true
         max-vl: 20
@@ -206,7 +212,13 @@ checks:
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
-    fasteat:
+      h:
+        enabled: true
+        punishable: true
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+    fastuse:
+      mitigate: true
       a:
         enabled: true
         punishable: true
@@ -220,6 +232,11 @@ checks:
         punish-command: 'ban %player% %prefix%Cheating'
     timer:
       a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+      b:
         enabled: true
         punishable: true
         max-vl: 10

@@ -1,41 +1,30 @@
 package me.apex.hades.check.impl.combat.aura;
 
+import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
-import me.apex.hades.event.AnticheatEvent;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
-import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
-import me.apex.hades.utils.math.MathUtil;
-import me.apex.hades.utils.time.TimeUtils;
 
 @CheckInfo(name = "Aura", type = "A")
 public class AuraA extends Check {
 
-    double lastDist;
-    int hits;
+    private long lastFlying;
 
     @Override
-    public void onHandle(User user, AnticheatEvent e) {
-        if (e instanceof FlyingPacketEvent) {
-            if (TimeUtils.elapsed(user.lastUseEntityPacket) < 100L) {
-                double deltaXZ = MathUtil.hypot(user.getTo().getX() - user.getFrom().getX(), user.getTo().getZ() - user.getFrom().getZ());
-                double lastDist = this.lastDist;
-                this.lastDist = deltaXZ;
+    public void onEvent(PacketEvent e, User user) {
+        if (e instanceof AttackEvent) {
+            long timeDiff = time() - lastFlying;
 
-                if (user.isSprinting() && ++hits <= 2 && user.isOnGround()) {
-                    double accel = Math.abs(deltaXZ - lastDist);
-                    if (accel < 0.027) {
-                        if (preVL++ > 7) {
-                            flag(user, "Keep Sprint");
-                        }
-                    } else {
-                        preVL = 0;
-                    }
+            if (timeDiff < 5) {
+                if (++preVL > 10) {
+                    flag(user, "low flying delay, d: " + timeDiff);
                 }
-            }
-        } else if (e instanceof AttackEvent) {
-            hits = 0;
+            } else preVL = 0;
+        } else if (e instanceof FlyingEvent) {
+            lastFlying = time();
         }
     }
+
 }

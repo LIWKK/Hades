@@ -1,8 +1,8 @@
 package me.apex.hades.event.impl.packetevents;
 
-import me.apex.hades.event.AnticheatEvent;
+import me.apex.hades.event.Event;
 
-public class SwingEvent extends AnticheatEvent {
+public class SwingEvent extends Event {
 
     private final long timeStamp;
 

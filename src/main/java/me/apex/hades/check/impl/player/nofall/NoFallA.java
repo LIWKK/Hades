@@ -1,22 +1,26 @@
 package me.apex.hades.check.impl.player.nofall;
 
+import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
-import me.apex.hades.event.AnticheatEvent;
-import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
-import me.apex.hades.utils.other.PlayerUtils;
+import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 
 @CheckInfo(name = "NoFall", type = "A")
 public class NoFallA extends Check {
+
     @Override
-    public void onHandle(User user, AnticheatEvent e) {
-        if (e instanceof FlyingPacketEvent){
-            if (user.isClientGround() && !user.onGround && !PlayerUtils.isOnGround(user.getPlayer())){
-                if (++preVL >= 4){
-                    flag(user, "client: " + user.isClientGround() + " server: " + user.onGround);
+    public void onEvent(PacketEvent e, User user) {
+        if (e instanceof FlyingEvent) {
+            if (((FlyingEvent) e).isOnGround()
+                    && !user.onGround()
+                    && user.location.getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR) {
+                if (++preVL > 2) {
+                    flag(user, "Spoofed Ground, g: " + user.onGround());
                 }
-            }else preVL = 0;
+            } else preVL *= 0.75;
         }
     }
 }

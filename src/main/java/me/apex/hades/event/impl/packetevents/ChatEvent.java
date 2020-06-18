@@ -1,8 +1,8 @@
 package me.apex.hades.event.impl.packetevents;
 
-import me.apex.hades.event.AnticheatEvent;
+import me.apex.hades.event.Event;
 
-public class ChatEvent extends AnticheatEvent {
+public class ChatEvent extends Event {
 
     private final String message;
 

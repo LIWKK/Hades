@@ -1,9 +1,9 @@
 package me.apex.hades.event.impl.bukkitevents;
 
-import me.apex.hades.event.AnticheatEvent;
+import me.apex.hades.event.Event;
 import org.bukkit.inventory.ItemStack;
 
-public class ItemConsumeEvent extends AnticheatEvent {
+public class ItemConsumeEvent extends Event {
 
     private ItemStack item;
 

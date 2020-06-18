@@ -1,36 +1,36 @@
 package me.apex.hades.check.impl.player.timer;
 
+import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
-import me.apex.hades.event.AnticheatEvent;
-import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
-import me.apex.hades.utils.math.RollingAverageDouble;
+import me.apex.hades.util.MathUtil;
+
+import java.util.Deque;
+import java.util.LinkedList;
 
 @CheckInfo(name = "Timer", type = "A")
-public class TimerA extends Check  {
+public class TimerA extends Check {
 
-    long lastTimer, lastTimerMove;
-    RollingAverageDouble timerRate = new RollingAverageDouble(40, 50.0);
+    private final Deque<Long> flyingDeque = new LinkedList<>();
+    private double lastDeviation;
 
     @Override
-    public void onHandle(User user, AnticheatEvent e) {
-        if(e instanceof FlyingPacketEvent) {
-            long current = System.currentTimeMillis();
-            long difference = current - lastTimerMove;
+    public void onEvent(PacketEvent e, User user) {
+        if (e instanceof FlyingEvent) {
+            flyingDeque.add(e.getTimestamp());
 
-            timerRate.add((double) difference);
+            if (flyingDeque.size() == 50) {
+                double deviation = MathUtil.getStandardDeviation(flyingDeque.stream().mapToLong(l -> l).toArray());
 
-            if ((current - lastTimer) >= 1000L) {
-                lastTimer = current;
-                double timerSpeed = 50.0 / timerRate.getAverage();
-                if (timerSpeed >= 1.01) {
-                    if (++preVL > 4) {
-                        flag(user, "Timer Speed: "+timerSpeed);
-                    }
-                }else preVL -= Math.min(preVL, 0.5);
+                if (deviation <= 710 && (Math.abs(deviation - lastDeviation) < 20)) {
+                    if (preVL++ > 1)
+                        flag(user, "deviation = " + deviation);
+                } else preVL = 0;
+                this.lastDeviation = deviation;
+                flyingDeque.clear();
             }
-            lastTimerMove = current;
         }
     }
 }

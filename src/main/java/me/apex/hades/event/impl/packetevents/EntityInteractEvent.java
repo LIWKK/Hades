@@ -1,9 +1,9 @@
 package me.apex.hades.event.impl.packetevents;
 
-import me.apex.hades.event.AnticheatEvent;
+import me.apex.hades.event.Event;
 import org.bukkit.entity.Entity;
 
-public class EntityInteractEvent extends AnticheatEvent {
+public class EntityInteractEvent extends Event {
 
     private final int entityId;
     private final Entity entity;

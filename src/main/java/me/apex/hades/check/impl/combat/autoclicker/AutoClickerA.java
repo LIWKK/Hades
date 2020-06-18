@@ -1,35 +1,41 @@
 package me.apex.hades.check.impl.combat.autoclicker;
 
-import me.apex.hades.HadesPlugin;
+import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
-import me.apex.hades.event.AnticheatEvent;
-import me.apex.hades.event.impl.packetevents.FlyingPacketEvent;
 import me.apex.hades.event.impl.packetevents.SwingEvent;
 import me.apex.hades.user.User;
-import me.apex.hades.utils.time.TimeUtils;
+import me.apex.hades.util.MathUtil;
+
+import java.util.Deque;
+import java.util.LinkedList;
 
 @CheckInfo(name = "AutoClicker", type = "A")
-public class AutoClickerA extends Check{
-    int ticks;
-    int cps;
+public class AutoClickerA extends Check {
+
+    private final Deque<Long> ticks = new LinkedList<>();
+    private double lastDeviation;
 
     @Override
-    public void onHandle(User user, AnticheatEvent e) {
-        if (e instanceof FlyingPacketEvent) {
-            if (user.isBreakingOrPlacingBlock() || TimeUtils.elapsed(user.getBreakingOrPlacingTime()) < 1000L) {
-                ticks = 0;
-                cps = 0;
-                return;
+    public void onEvent(PacketEvent e, User user) {
+        if (e instanceof SwingEvent) {
+            if (!user.digging) ticks.add((long) (user.tick * 50.0));
+            if (ticks.size() >= 10) {
+                double deviation = MathUtil.getStandardDeviation(ticks.stream().mapToLong(d -> d).toArray());
+                double lastDeviation = this.lastDeviation;
+                this.lastDeviation = deviation;
+
+                double diff = Math.abs(deviation - lastDeviation);
+
+                if (diff < 10) {
+                    if (++preVL > 1) {
+                        flag(user, "low deviation difference, d: " + diff);
+                    }
+                } else preVL = 0;
+
+                ticks.clear();
             }
-            if (ticks == 20) {
-                if (cps >= HadesPlugin.getInstance().getConfig().getInt("Max-CPS")) {
-                    flag(user, "cps: " + cps);
-                }
-                cps = ticks = 0;
-            }
-        }else if (e instanceof SwingEvent) {
-            cps++;
         }
     }
+
 }

@@ -1,9 +1,9 @@
 package me.apex.hades.event.impl.bukkitevents;
 
-import me.apex.hades.event.AnticheatEvent;
+import me.apex.hades.event.Event;
 import org.bukkit.Location;
 
-public class MoveEvent extends AnticheatEvent {
+public class MoveEvent extends Event {
 
     private final Location to;
     private final Location from;
