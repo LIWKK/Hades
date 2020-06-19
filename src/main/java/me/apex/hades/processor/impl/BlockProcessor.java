@@ -48,6 +48,12 @@ public class BlockProcessor extends Processor {
                 user.setLiquidTick(user.getTick());
                 user.setLiquidTicks(user.getLiquidTicks() + 1);
             }else user.setLiquidTicks(0);
+            if (user.isOnClimbableBlock()){
+                user.setClimbableTick(user.getTick());
+                user.setClimbableTicks(user.getClimbableTicks() + 1);
+            }else{
+                user.setClimbableTicks(0);
+            }
         });
     }
 
