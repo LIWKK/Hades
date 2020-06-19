@@ -12,9 +12,7 @@ public class AimA extends Check {
     @Override
     public void onHandle(PacketEvent e, User user) {
         if(e instanceof FlyingEvent) {
-            if(((FlyingEvent) e).hasMoved()) {
 
-            }
         }
     }
 

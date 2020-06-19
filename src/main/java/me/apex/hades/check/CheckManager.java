@@ -1,10 +1,7 @@
 package me.apex.hades.check;
 
 import me.apex.hades.check.impl.combat.aim.AimA;
-import me.apex.hades.check.impl.combat.aura.AuraA;
-import me.apex.hades.check.impl.combat.aura.AuraB;
-import me.apex.hades.check.impl.combat.aura.AuraC;
-import me.apex.hades.check.impl.combat.aura.AuraD;
+import me.apex.hades.check.impl.combat.aura.*;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
 import me.apex.hades.check.impl.combat.criticals.CriticalsA;
@@ -36,6 +33,7 @@ public class CheckManager {
             AuraB.class,
             AuraC.class,
             AuraD.class,
+            AuraE.class,
             AutoClickerA.class,
             AutoClickerB.class,
             CriticalsA.class,

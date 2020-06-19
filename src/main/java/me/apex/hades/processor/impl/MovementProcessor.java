@@ -51,6 +51,9 @@ public class MovementProcessor extends Processor {
 
             //Update Block Check
             ((BlockProcessor)user.getBlockProcessor()).process(user);
+
+            //Update Optifine
+            ((OptifineProcessor)user.getOptifineProcessor()).process(user);
         } else if (PacketUtil.isRotationPacket(e.getPacketName())) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
             user.setOnGround(packet.isOnGround());
@@ -72,6 +75,9 @@ public class MovementProcessor extends Processor {
 
             //Update Block Check
             ((BlockProcessor)user.getBlockProcessor()).process(user);
+
+            //Update Optifine
+            ((OptifineProcessor)user.getOptifineProcessor()).process(user);
         }else if(e.getPacketName().equalsIgnoreCase(Packet.Client.FLYING)) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
             user.setOnGround(packet.isOnGround());

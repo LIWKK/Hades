@@ -8,6 +8,7 @@ import me.apex.hades.check.CheckManager;
 import me.apex.hades.processor.Processor;
 import me.apex.hades.processor.impl.BlockProcessor;
 import me.apex.hades.processor.impl.MovementProcessor;
+import me.apex.hades.processor.impl.OptifineProcessor;
 import me.apex.hades.util.PlayerUtil;
 import me.apex.hades.util.reflection.ReflectionUtil;
 import me.apex.hades.util.text.LogUtils;
@@ -31,15 +32,15 @@ public class User {
     //Checks
     private final List<Check> checks;
     //Processors
-    private final Processor movementProcessor = new MovementProcessor(this), blockProcessor = new BlockProcessor(this);
+    private final Processor movementProcessor = new MovementProcessor(this), blockProcessor = new BlockProcessor(this), optifineProcessor = new OptifineProcessor(this);
     //Booleans
     private boolean alerts = true, onGround, collidedGround, digging, isSprinting, isSneaking, chunkLoaded;
     //Location
     private Location location, lastLocation, lastOnGroundLocation;
     //Ticks
-    private int tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks;
+    private int tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks, serverGroundTick, optifineTick;
     //Deltas
-    private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ;
+    private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, mouseSensitivity;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch;
     //Ints
     private int CPS;

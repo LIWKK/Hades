@@ -19,7 +19,8 @@ public class FlyA extends Check {
                     && !user.isOnClimbableBlock()
                     && !user.getPlayer().getAllowFlight()
                     && user.getPlayer().getVehicle() == null
-                    && user.getTick() > 5) {
+                    && user.getTick() > 5
+                    && elapsed(user.getTick(), user.getVelocityTick()) > 100) {
                     flag(user, "y motion higher than 0, m: " + user.getDeltaY());
             }
         }

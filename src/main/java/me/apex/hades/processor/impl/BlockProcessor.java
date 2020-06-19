@@ -2,6 +2,7 @@ package me.apex.hades.processor.impl;
 
 import me.apex.hades.processor.Processor;
 import me.apex.hades.user.User;
+import me.apex.hades.util.PlayerUtil;
 import me.apex.hades.util.TaskUtil;
 import org.bukkit.block.BlockFace;
 
@@ -12,6 +13,10 @@ public class BlockProcessor extends Processor {
     }
 
     public void process(User user) {
+        if(PlayerUtil.isOnGround(user.getPlayer())) {
+            user.setServerGroundTick(user.getTick());
+        }
+
         if(user.isOnGround()) {
             user.setAirTicks(0);
             user.setGroundTick(user.getTick());

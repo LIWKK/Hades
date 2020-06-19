@@ -17,7 +17,7 @@ public class InvalidB extends Check {
             if(user.getDeltaY() > 0.0) {
                 ticks++;
             }else if(user.getDeltaY() < 0.0) {
-                if(ticks > 0 && ticks < 5 && !user.isOnGround() && elapsed(user.getTick(), user.getUnderBlockTick()) > 40) {
+                if(ticks > 0 && ticks < 5 && !user.isOnGround() && elapsed(user.getTick(), user.getUnderBlockTick()) > 40 && elapsed(user.getTick(), user.getVelocityTick()) < 100) {
                     flag(user, "too few air ticks, t: " + ticks);
                 }
                 ticks = 0;
