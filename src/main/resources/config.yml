@@ -185,6 +185,11 @@ checks:
         punishable: true
         max-vl: 20
         punish-command: 'ban %player% %prefix%Cheating'
+      d:
+        enabled: true
+        punishable: true
+        max-vl: 20
+        punish-command: 'ban %player% %prefix%Cheating'
     fastladder:
       a:
         enabled: true

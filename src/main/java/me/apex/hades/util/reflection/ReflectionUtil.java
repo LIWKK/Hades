@@ -6,6 +6,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
@@ -213,6 +214,16 @@ public class ReflectionUtil {
     public static int getPlayerPing(Player player) {
         Object handle = getEntityPlayer(player);
         return (int)getInvokedField(getField(handle.getClass(), "ping"), getEntityPlayer(player));
+    }
+
+    public static void sendPacket(Player p, Object packet) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException {
+        Object nmsPlayer = p.getClass().getMethod("getHandle").invoke(p);
+        Object plrConnection = nmsPlayer.getClass().getField("playerConnection").get(nmsPlayer);
+        plrConnection.getClass().getMethod("sendPacket", getNmsClass("Packet")).invoke(plrConnection, packet);
+    }
+
+    public static Class<?> getNmsClass(String nmsClassName) throws ClassNotFoundException {
+        return Class.forName("net.minecraft.server." + Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3] + "." + nmsClassName);
     }
 
 }

@@ -34,7 +34,7 @@ public class User {
     //Processors
     private final Processor movementProcessor = new MovementProcessor(this), blockProcessor = new BlockProcessor(this), optifineProcessor = new OptifineProcessor(this);
     //Booleans
-    private boolean alerts = true, onGround, collidedGround, digging, isSprinting, isSneaking, chunkLoaded;
+    private boolean alerts = true, usingLunarClient, onGround, collidedGround, digging, isSprinting, isSneaking, chunkLoaded;
     //Location
     private Location location, lastLocation, lastOnGroundLocation;
     //Ticks

@@ -5,11 +5,19 @@ import lombok.Getter;
 import me.apex.hades.listener.BukkitListener;
 import me.apex.hades.listener.NetworkListener;
 import me.apex.hades.util.MathUtil;
+import me.apex.hades.util.lunar.BufferUtils;
+import me.apex.hades.util.lunar.implementation.LunarClientImplementation;
 import me.apex.hades.util.reflection.VersionUtil;
 import me.apex.hades.util.text.ChatUtil;
+import net.mineaus.lunar.api.LunarClientAPI;
+import net.mineaus.lunar.api.event.impl.AuthenticateEvent;
+import net.mineaus.lunar.api.user.User;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Arrays;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -25,6 +33,8 @@ public class HadesPlugin extends JavaPlugin {
     public static String bukkitVersion;
 
     private ScheduledExecutorService executorService;
+
+    private LunarClientAPI lunarClientAPI;
 
     @Override
     public void onEnable() {
@@ -50,6 +60,33 @@ public class HadesPlugin extends JavaPlugin {
         //Register PacketEvents
         PacketEvents.start(this);
         PacketEvents.getEventManager().registerListener(new NetworkListener());
+
+        //Register Lunar Client API
+        lunarClientAPI = new LunarClientImplementation(this);
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "Lunar-Client");
+        this.getServer().getMessenger().registerIncomingPluginChannel(this, "Lunar-Client", (channel, player, bytes) -> {
+            if (bytes[0] == 26) {
+                final UUID outcoming = BufferUtils.getUUIDFromBytes(Arrays.copyOfRange(bytes, 1, 30));
+
+                // To stop server wide spoofing.
+                if (!outcoming.equals(player.getUniqueId())) {
+                    return;
+                }
+
+                User user = getLunarClientAPI().getUserManager().getPlayerData(player);
+
+                if (user != null && !user.isLunarClient()){
+                    user.setLunarClient(true);
+                    new AuthenticateEvent(player).call(this);
+                }
+
+                for (Player other : Bukkit.getOnlinePlayers()) {
+                    if (getLunarClientAPI().isAuthenticated(other)) {
+                        other.sendPluginMessage(this, channel, bytes);
+                    }
+                }
+            }
+        });
     }
 
     @Override
