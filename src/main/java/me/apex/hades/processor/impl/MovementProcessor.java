@@ -51,6 +51,13 @@ public class MovementProcessor extends Processor {
 
             //Update Block Check
             ((BlockProcessor)user.getBlockProcessor()).process(user);
+
+            if (user.isOnClimbableBlock()){
+                user.setClimbableTicks(user.getClimbableTicks() + 1);
+            }else{
+                user.setClimbableTicks(0);
+                user.setClimbableTicks(0);
+            }
         } else if (PacketUtil.isRotationPacket(e.getPacketName())) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
             user.setOnGround(packet.isOnGround());

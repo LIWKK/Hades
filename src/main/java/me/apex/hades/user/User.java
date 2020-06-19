@@ -37,7 +37,7 @@ public class User {
     //Location
     private Location location, lastLocation, lastOnGroundLocation;
     //Ticks
-    private int tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks;
+    private int tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks, climbableTicks;
     //Deltas
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch;

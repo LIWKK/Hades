@@ -32,7 +32,7 @@ public class ReachA extends Check implements Listener {
                 if (user.isSprinting()) max += 0.1;
                 if (dist != -1) {
                     if(dist > max) {
-                        if(++preVL >= 3){
+                        if(++preVL >= max){
                             flag(user, "dist = " + dist);
                         }
                     }else preVL = preVL > 1 ? preVL-- : 0;

@@ -62,6 +62,27 @@ public class PlayerUtil {
         }
         return false;
     }
+    public static boolean isOnClimbable(Player player) {
+        Object box = ReflectionUtil.getBoundingBox(player);
+        box = ReflectionUtil.expandBoundingBox(box, -0.1, 0, -0.1);
+
+        double minX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "a"), box);
+        double minY = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "b"), box);
+        double minZ = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "c"), box);
+        double maxX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "d"), box);
+        double maxY = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "e"), box);
+        double maxZ = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "f"), box);
+
+        for (double x = minX; x < maxX; x++) {
+            for (double y = minY; y < maxY; y++) {
+                for (double z = minZ; z < maxZ; z++) {
+                    Block block = new Location(player.getWorld(), x, y, z).getBlock();
+                    if (PlayerUtil.isClimbableBlock(block)) return true;
+                }
+            }
+        }
+        return false;
+    }
     
     //Credits to funkemunky :)
     public static boolean isSolid(Block block) {

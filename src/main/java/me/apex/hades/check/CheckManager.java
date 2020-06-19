@@ -7,20 +7,25 @@ import me.apex.hades.check.impl.combat.aura.AuraC;
 import me.apex.hades.check.impl.combat.aura.AuraD;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
+import me.apex.hades.check.impl.combat.autoclicker.AutoClickerC;
 import me.apex.hades.check.impl.combat.criticals.CriticalsA;
 import me.apex.hades.check.impl.combat.reach.ReachA;
 import me.apex.hades.check.impl.combat.reach.ReachB;
 import me.apex.hades.check.impl.combat.velocity.VelocityA;
+import me.apex.hades.check.impl.movement.fastladder.FastLadderA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
 import me.apex.hades.check.impl.movement.invalid.InvalidA;
 import me.apex.hades.check.impl.movement.invalid.InvalidB;
 import me.apex.hades.check.impl.movement.noslow.NoSlowA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
+import me.apex.hades.check.impl.movement.scaffold.ScaffoldB;
 import me.apex.hades.check.impl.movement.speed.SpeedA;
 import me.apex.hades.check.impl.movement.speed.SpeedB;
+import me.apex.hades.check.impl.movement.speed.SpeedC;
 import me.apex.hades.check.impl.other.vape.Vape;
 import me.apex.hades.check.impl.player.badpackets.*;
 import me.apex.hades.check.impl.player.fastuse.FastUseA;
+import me.apex.hades.check.impl.player.invmove.InvMoveA;
 import me.apex.hades.check.impl.player.nofall.NoFallA;
 import me.apex.hades.check.impl.player.timer.TimerA;
 
@@ -38,6 +43,7 @@ public class CheckManager {
             AuraD.class,
             AutoClickerA.class,
             AutoClickerB.class,
+            AutoClickerC.class,
             CriticalsA.class,
             ReachA.class,
             ReachB.class,
@@ -47,13 +53,17 @@ public class CheckManager {
             InvalidB.class,
             NoSlowA.class,
             ScaffoldA.class,
+            ScaffoldB.class,
             SpeedA.class,
             SpeedB.class,
+            SpeedC.class,
+            FastLadderA.class,
             BadPacketsA.class,
             BadPacketsB.class,
             BadPacketsC.class,
             BadPacketsD.class,
             BadPacketsE.class,
+            InvMoveA.class,
             NoFallA.class,
             TimerA.class,
             FastUseA.class,
