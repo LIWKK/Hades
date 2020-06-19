@@ -78,5 +78,7 @@ public abstract class Check {
     public int elapsed(int now, int start) {
         return now - start;
     }
-
+    public long elapsed(long now, long start) {
+        return now - start;
+    }
 }

@@ -95,6 +95,11 @@ checks:
         punishable: false
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
+      c:
+        enabled: true
+        punishable: false
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     criticals:
       mitigate: true
       a:
@@ -158,6 +163,11 @@ checks:
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
+      b:
+        enabled: true
+        punishable: true
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     speed:
       mitigate: true
       a:
@@ -169,6 +179,17 @@ checks:
         enabled: true
         punishable: true
         max-vl: 20
+        punish-command: 'ban %player% %prefix%Cheating'
+      c:
+        enabled: true
+        punishable: true
+        max-vl: 20
+        punish-command: 'ban %player% %prefix%Cheating'
+    fastladder:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     badpackets:
       a:
@@ -207,6 +228,12 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
       h:
+        enabled: true
+        punishable: true
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+    invmove:
+      a:
         enabled: true
         punishable: true
         max-vl: 10
