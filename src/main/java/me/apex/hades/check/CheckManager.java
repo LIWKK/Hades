@@ -12,6 +12,7 @@ import me.apex.hades.check.impl.combat.velocity.VelocityA;
 import me.apex.hades.check.impl.movement.fastladder.FastLadderA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
 import me.apex.hades.check.impl.movement.fly.FlyB;
+import me.apex.hades.check.impl.movement.fly.FlyC;
 import me.apex.hades.check.impl.movement.invalid.InvalidA;
 import me.apex.hades.check.impl.movement.invalid.InvalidB;
 import me.apex.hades.check.impl.movement.noslow.NoSlowA;
@@ -24,6 +25,7 @@ import me.apex.hades.check.impl.movement.speed.SpeedD;
 import me.apex.hades.check.impl.other.vape.Vape;
 import me.apex.hades.check.impl.player.badpackets.*;
 import me.apex.hades.check.impl.player.fastuse.FastUseA;
+import me.apex.hades.check.impl.player.interactreach.InteractReachA;
 import me.apex.hades.check.impl.player.invmove.InvMoveA;
 import me.apex.hades.check.impl.player.nofall.NoFallA;
 import me.apex.hades.check.impl.player.timer.TimerA;
@@ -50,6 +52,7 @@ public class CheckManager {
             VelocityA.class,
             FlyA.class,
             FlyB.class,
+            FlyC.class,
             InvalidA.class,
             InvalidB.class,
             NoSlowA.class,
@@ -68,6 +71,7 @@ public class CheckManager {
             InvMoveA.class,
             NoFallA.class,
             TimerA.class,
+            InteractReachA.class,
             FastUseA.class,
             Vape.class
     };

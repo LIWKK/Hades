@@ -137,6 +137,11 @@ checks:
         punishable: true
         max-vl: 20
         punish-command: 'ban %player% %prefix%Cheating'
+      c:
+        enabled: true
+        punishable: true
+        max-vl: 20
+        punish-command: 'ban %player% %prefix%Cheating'
     invalid:
       mitigate: true
       a:
@@ -263,6 +268,12 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
       b:
+        enabled: true
+        punishable: true
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
+    interactreach:
+      a:
         enabled: true
         punishable: true
         max-vl: 10

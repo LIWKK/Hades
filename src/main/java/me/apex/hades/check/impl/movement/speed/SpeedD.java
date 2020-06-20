@@ -13,7 +13,7 @@ public class SpeedD extends Check {
     public void onHandle(PacketEvent e, User user) {
         if(e instanceof FlyingEvent) {
             double diff = user.getDeltaXZ() - user.getLastDeltaXZ();
-            if(diff > MathUtil.getBaseSpeed(user.getPlayer())) {
+            if(diff > MathUtil.getBaseSpeed(user.getPlayer()) && !user.getPlayer().isInsideVehicle()) {
                 flag(user, "invalid acceleration, a: " + diff);
             }
         }

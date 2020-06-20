@@ -5,6 +5,7 @@ import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
+import me.apex.hades.util.PlayerUtil;
 
 @CheckInfo(name = "Fly", type = "B")
 public class FlyB extends Check {
@@ -21,7 +22,9 @@ public class FlyB extends Check {
                     && !user.getPlayer().getAllowFlight()
                     && user.getPlayer().getVehicle() == null
                     && user.getTick() > 5
-                    && elapsed(user.getTick(), user.getVelocityTick()) > 100) {
+                    && !PlayerUtil.isOnClimbable(user.getPlayer())
+                    && elapsed(user.getTick(), user.getVelocityTick()) > 100
+                    && !PlayerUtil.isClimbableBlock(user.getLocation().subtract(0,1,0).getBlock())) {
                 flag(user, "consistent falling speed, d: " + diff);
             }
         }
