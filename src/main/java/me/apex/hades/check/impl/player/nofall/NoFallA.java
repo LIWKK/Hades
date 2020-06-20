@@ -13,7 +13,7 @@ public class NoFallA extends Check {
     @Override
     public void onHandle(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
-            if (((FlyingEvent) e).isOnGround() && elapsed(user.getTick(), user.getServerGroundTick()) > 20 && user.getTick() > 10) {
+            if (((FlyingEvent) e).isOnGround() && elapsed(user.getTick(), user.getServerGroundTick()) > 20 && user.getTick() > 10 & !user.isOnGround()) {
                 flag(user, "Spoofed Ground, g: " + !PlayerUtil.isOnGround(user.getPlayer()));
             }
         }

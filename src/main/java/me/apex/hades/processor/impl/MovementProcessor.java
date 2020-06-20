@@ -54,6 +54,7 @@ public class MovementProcessor extends Processor {
 
             //Update Optifine
             ((OptifineProcessor)user.getOptifineProcessor()).process(user);
+
         } else if (PacketUtil.isRotationPacket(e.getPacketName())) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
             user.setOnGround(packet.isOnGround());

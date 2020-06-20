@@ -81,5 +81,4 @@ public class BukkitListener implements Listener {
             }, HadesPlugin.getInstance());
         }
     }
-
 }

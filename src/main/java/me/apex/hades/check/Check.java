@@ -12,8 +12,9 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 
-public abstract class Check {
+public abstract class Check implements Listener {
 
     //Check Data
     public double preVL;
@@ -22,6 +23,8 @@ public abstract class Check {
     public boolean enabled, punishable, dev;
 
     public Check() {
+        Bukkit.getServer().getPluginManager().registerEvents(this, HadesPlugin.getInstance());
+
         try {
             enabled = HadesPlugin.getInstance().getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".enabled");
             punishable = HadesPlugin.getInstance().getConfig().getBoolean("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() + ".punishable");

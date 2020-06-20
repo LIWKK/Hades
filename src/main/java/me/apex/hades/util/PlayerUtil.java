@@ -64,7 +64,6 @@ public class PlayerUtil {
     }
     public static boolean isOnClimbable(Player player) {
         Object box = ReflectionUtil.getBoundingBox(player);
-        box = ReflectionUtil.expandBoundingBox(box, -0.1, 0, -0.1);
 
         double minX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "a"), box);
         double minY = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "b"), box);
