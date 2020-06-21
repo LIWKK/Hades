@@ -13,10 +13,11 @@ import me.apex.hades.check.impl.movement.fastladder.FastLadderA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
 import me.apex.hades.check.impl.movement.fly.FlyB;
 import me.apex.hades.check.impl.movement.fly.FlyC;
-import me.apex.hades.check.impl.movement.invalid.InvalidA;
-import me.apex.hades.check.impl.movement.invalid.InvalidB;
-import me.apex.hades.check.impl.movement.invalid.InvalidC;
-import me.apex.hades.check.impl.movement.invalid.InvalidD;
+import me.apex.hades.check.impl.movement.sprint.SprintA;
+import me.apex.hades.check.impl.other.vape.invalid.InvalidA;
+import me.apex.hades.check.impl.other.vape.invalid.InvalidB;
+import me.apex.hades.check.impl.other.vape.invalid.InvalidC;
+import me.apex.hades.check.impl.other.vape.invalid.InvalidD;
 import me.apex.hades.check.impl.movement.noslow.NoSlowA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldB;
@@ -67,6 +68,7 @@ public class CheckManager {
             SpeedB.class,
             SpeedC.class,
             SpeedD.class,
+            SprintA.class,
             FastLadderA.class,
             InvMoveA.class,
             NoFallA.class,

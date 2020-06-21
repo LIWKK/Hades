@@ -7,7 +7,7 @@ import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.event.impl.packetevents.PlaceEvent;
 import me.apex.hades.user.User;
 
-@CheckInfo(name = "Scaffold", type = "B")
+@CheckInfo(name = "Scaffold", type = "A")
 public class ScaffoldA extends Check {
 
     private long lastFlying;

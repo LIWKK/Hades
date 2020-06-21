@@ -7,6 +7,7 @@ import me.apex.hades.processor.Processor;
 import me.apex.hades.user.User;
 import me.apex.hades.util.PacketUtil;
 import org.bukkit.Location;
+import org.bukkit.util.Vector;
 
 public class MovementProcessor extends Processor {
 
@@ -55,6 +56,9 @@ public class MovementProcessor extends Processor {
             //Update Optifine
             ((OptifineProcessor)user.getOptifineProcessor()).process(user);
 
+            user.setDeltaAngle(Math.abs(user.getDeltaYaw()) + Math.abs(user.getDeltaPitch()));
+
+            user.setDirection(new Vector(-Math.sin(user.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F, 0, Math.cos(user.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F));
         } else if (PacketUtil.isRotationPacket(e.getPacketName())) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
             user.setOnGround(packet.isOnGround());
@@ -79,6 +83,10 @@ public class MovementProcessor extends Processor {
 
             //Update Optifine
             ((OptifineProcessor)user.getOptifineProcessor()).process(user);
+
+            user.setDeltaAngle(Math.abs(user.getDeltaYaw()) + Math.abs(user.getDeltaPitch()));
+
+            user.setDirection(new Vector(-Math.sin(user.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F, 0, Math.cos(user.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F));
         }else if(e.getPacketName().equalsIgnoreCase(Packet.Client.FLYING)) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
             user.setOnGround(packet.isOnGround());

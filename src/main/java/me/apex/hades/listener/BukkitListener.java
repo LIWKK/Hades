@@ -19,6 +19,8 @@ public class BukkitListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         UserManager.users.add(new User(e.getPlayer()));
+        User user = UserManager.getUser(e.getPlayer());
+        user.setJoinTime(System.currentTimeMillis());
         HadesPlugin.getInstance().getLunarClientAPI().getUserManager().setPlayerData(e.getPlayer().getUniqueId(), new net.mineaus.lunar.api.user.User(e.getPlayer().getUniqueId(), e.getPlayer().getName()));
         TaskUtil.taskLater(() -> {
             if(HadesPlugin.getInstance().getLunarClientAPI().getUserManager().getPlayerData(e.getPlayer().getUniqueId()).isLunarClient()

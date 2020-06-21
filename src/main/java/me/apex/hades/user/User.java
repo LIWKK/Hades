@@ -15,6 +15,7 @@ import me.apex.hades.util.text.LogUtils;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.util.List;
 import java.util.UUID;
@@ -41,7 +42,7 @@ public class User {
     private int tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks, climbableTick, climbableTicks, serverGroundTick, optifineTick;
     //Deltas
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, mouseSensitivity;
-    private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch;
+    private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, deltaAngle;
     //Ints
     private int CPS;
     //Interact
@@ -54,6 +55,9 @@ public class User {
     private LogUtils.TextFile logFile;
     //Thread
     private Executor executorService;
+    private long joinTime;
+
+    Vector direction;
 
     public User(Player player) {
         this.player = player;
