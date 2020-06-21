@@ -2,6 +2,8 @@ package me.apex.hades.processor.impl;
 
 import me.apex.hades.processor.Processor;
 import me.apex.hades.user.User;
+import me.apex.hades.util.MathUtil;
+import org.bukkit.Bukkit;
 
 //Working on this...
 public class VelocityProcessor extends Processor {
@@ -9,23 +11,18 @@ public class VelocityProcessor extends Processor {
         super(user);
     }
 
-    private double lastMultiplierY, lastMultiplierXZ;
-
     public void process() {
-        double multiplierY = user.getDeltaY() / user.getVelocityY();
-        double multiplierXZ = user.getDeltaXZ() / (user.getVelocityX() * user.getVelocityX() + user.getVelocityZ() * user.getVelocityZ());
-
-        double lastMultiplierY = this.lastMultiplierY;
-        this.lastMultiplierY = multiplierY;
-
-        double lastMultiplierXZ = this.lastMultiplierXZ;
-        this.lastMultiplierXZ = multiplierXZ;
-
-        double diffY = multiplierY - lastMultiplierY;
-        double diffXZ = multiplierXZ - lastMultiplierXZ;
-
         if((user.getTick() - user.getVelocityTick()) <= 1) {
-            user.setTakingVelocity(true);
+            if((MathUtil.isRoughlyEqual(user.getDeltaY(), user.getLastDeltaY() + user.getVelocityY(), 0.1))
+                    && (MathUtil.isRoughlyEqual(user.getDeltaXZ(), user.getLastDeltaXZ() + (user.getVelocityX() * user.getVelocityX() + user.getVelocityZ() * user.getVelocityZ()), 0.1))) {
+                user.setTakingVelocity(true);
+            }
+        }else {
+            if((!MathUtil.isRoughlyEqual(user.getDeltaY(), user.getLastDeltaY() + user.getVelocityY(), 0.1))
+                    && (!MathUtil.isRoughlyEqual(user.getDeltaXZ(), user.getLastDeltaXZ() + (user.getVelocityX() * user.getVelocityX() + user.getVelocityZ() * user.getVelocityZ()), 0.1))) {
+                user.setTakingVelocity(false);
+            }
         }
+        Bukkit.broadcastMessage("" + user.isTakingVelocity());
     }
 }
