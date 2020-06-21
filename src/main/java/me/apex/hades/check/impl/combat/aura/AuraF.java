@@ -1,4 +1,4 @@
-package me.apex.hades.check.impl.player.badpackets;
+package me.apex.hades.check.impl.combat.aura;
 
 import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
@@ -8,8 +8,8 @@ import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.event.impl.packetevents.SwingEvent;
 import me.apex.hades.user.User;
 
-@CheckInfo(name = "BadPackets", type = "D")
-public class BadPacketsD extends Check {
+@CheckInfo(name = "Aura", type = "F")
+public class AuraF extends Check {
 
     private boolean lastWasArm;
 

@@ -5,9 +5,9 @@ import me.apex.hades.check.impl.combat.aura.*;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerC;
+import me.apex.hades.check.impl.combat.autoclicker.AutoClickerD;
 import me.apex.hades.check.impl.combat.criticals.CriticalsA;
 import me.apex.hades.check.impl.combat.reach.ReachA;
-import me.apex.hades.check.impl.combat.reach.ReachB;
 import me.apex.hades.check.impl.combat.velocity.VelocityA;
 import me.apex.hades.check.impl.movement.fastladder.FastLadderA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
@@ -15,6 +15,8 @@ import me.apex.hades.check.impl.movement.fly.FlyB;
 import me.apex.hades.check.impl.movement.fly.FlyC;
 import me.apex.hades.check.impl.movement.invalid.InvalidA;
 import me.apex.hades.check.impl.movement.invalid.InvalidB;
+import me.apex.hades.check.impl.movement.invalid.InvalidC;
+import me.apex.hades.check.impl.movement.invalid.InvalidD;
 import me.apex.hades.check.impl.movement.noslow.NoSlowA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldB;
@@ -23,7 +25,6 @@ import me.apex.hades.check.impl.movement.speed.SpeedB;
 import me.apex.hades.check.impl.movement.speed.SpeedC;
 import me.apex.hades.check.impl.movement.speed.SpeedD;
 import me.apex.hades.check.impl.other.vape.Vape;
-import me.apex.hades.check.impl.player.badpackets.*;
 import me.apex.hades.check.impl.player.fastuse.FastUseA;
 import me.apex.hades.check.impl.player.interactreach.InteractReachA;
 import me.apex.hades.check.impl.player.invmove.InvMoveA;
@@ -43,18 +44,22 @@ public class CheckManager {
             AuraC.class,
             AuraD.class,
             AuraE.class,
+            AuraF.class,
+            AuraG.class,
             AutoClickerA.class,
             AutoClickerB.class,
             AutoClickerC.class,
+            AutoClickerD.class,
             CriticalsA.class,
             ReachA.class,
-            ReachB.class,
             VelocityA.class,
             FlyA.class,
             FlyB.class,
             FlyC.class,
             InvalidA.class,
             InvalidB.class,
+            InvalidC.class,
+            InvalidD.class,
             NoSlowA.class,
             ScaffoldA.class,
             ScaffoldB.class,
@@ -63,11 +68,6 @@ public class CheckManager {
             SpeedC.class,
             SpeedD.class,
             FastLadderA.class,
-            BadPacketsA.class,
-            BadPacketsB.class,
-            BadPacketsC.class,
-            BadPacketsD.class,
-            BadPacketsE.class,
             InvMoveA.class,
             NoFallA.class,
             TimerA.class,

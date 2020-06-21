@@ -16,7 +16,7 @@ public class PlayerUtil {
      */
     
     public static boolean isOnGround(Player player) {
-        Object box = ReflectionUtil.modifyBoundingBox(ReflectionUtil.getBoundingBox(player), 0, -0.15, 0,0,0,0);
+        Object box = ReflectionUtil.modifyBoundingBox(ReflectionUtil.getBoundingBox(player), 0, -0.1001, 0,0,0,0);
 
         return ReflectionUtil.getCollidingBlocks(player, box).size() > 0;
     }

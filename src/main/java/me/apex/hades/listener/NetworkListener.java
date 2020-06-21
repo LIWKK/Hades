@@ -101,6 +101,10 @@ public class NetworkListener implements PacketListener {
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Server.ENTITY_VELOCITY)) {
                 WrappedPacketOutEntityVelocity packet = new WrappedPacketOutEntityVelocity(e.getPacket());
                 if (e.getPlayer().getEntityId() == packet.getEntityId()) {
+                    user.setVelocityTick(user.getTick());
+                    user.setVelocityX(packet.getVelocityX());
+                    user.setVelocityY(packet.getVelocityY());
+                    user.setVelocityZ(packet.getVelocityZ());
                     user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(new VelocityEvent(packet.getEntityId(), packet.getVelocityX(), packet.getVelocityY(), packet.getVelocityZ()), user)));
                 }
             } else {

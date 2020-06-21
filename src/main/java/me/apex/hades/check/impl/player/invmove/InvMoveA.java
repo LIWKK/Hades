@@ -28,7 +28,7 @@ public class InvMoveA extends Check implements Listener {
     public void onInventoryClick(InventoryClickEvent event){
         User user = UserManager.getUser((Player) event.getWhoClicked());
         if(user != null){
-            if (user.isInWeb() || user.isInLiquid() || user.isOnClimbableBlock() || elapsed(time(), user.getLastVelocity()) < 2000 || event.getClick() == ClickType.CREATIVE || event.getAction() == InventoryAction.PLACE_ALL)return;
+            if (user.isInWeb() || user.isInLiquid() || user.isOnClimbableBlock() || elapsed(time(), user.getVelocityTick()) < 40 || event.getClick() == ClickType.CREATIVE || event.getAction() == InventoryAction.PLACE_ALL)return;
 
             if (user.isOnGround() && user.getDeltaXZ() > 0.1){
                 if (++preVL > 2){

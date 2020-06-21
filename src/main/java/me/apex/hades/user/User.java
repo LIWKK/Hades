@@ -48,7 +48,7 @@ public class User {
     private boolean rightClickingBlock, rightClickingAir, leftClickingBlock, leftClickingAir;
     private Block interactedBlock;
     //Velocity
-    private long lastVelocity, timeStamp, lastAnyBlockWithLiquid;
+    private long timeStamp, lastAnyBlockWithLiquid;
     private double velocityX, velocityY, velocityZ;
     //Log
     private LogUtils.TextFile logFile;

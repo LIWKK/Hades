@@ -26,7 +26,7 @@ public class ReachA extends Check implements Listener {
     public void onHandle(PacketEvent e, User user) {
         if(e instanceof AttackEvent) {
             try {
-                double max = HadesPlugin.getInstance().getConfig().getDouble("Max-ReachA");
+                double max = HadesPlugin.getInstance().getConfig().getDouble("Max-Reach");
                 Ray ray = Ray.from(user);
                 double dist = AABB.from(((AttackEvent) e).getEntity()).collidesD(ray,0, 10);
                 if (user.isSprinting()) max += 0.1;
