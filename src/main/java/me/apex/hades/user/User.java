@@ -9,6 +9,7 @@ import me.apex.hades.processor.Processor;
 import me.apex.hades.processor.impl.BlockProcessor;
 import me.apex.hades.processor.impl.MovementProcessor;
 import me.apex.hades.processor.impl.OptifineProcessor;
+import me.apex.hades.processor.impl.VelocityProcessor;
 import me.apex.hades.util.PlayerUtil;
 import me.apex.hades.util.reflection.ReflectionUtil;
 import me.apex.hades.util.text.LogUtils;
@@ -33,9 +34,9 @@ public class User {
     //Checks
     private final List<Check> checks;
     //Processors
-    private final Processor movementProcessor = new MovementProcessor(this), blockProcessor = new BlockProcessor(this), optifineProcessor = new OptifineProcessor(this);
+    private final Processor movementProcessor = new MovementProcessor(this), blockProcessor = new BlockProcessor(this), velocityProcessor = new VelocityProcessor(this), optifineProcessor = new OptifineProcessor(this);
     //Booleans
-    private boolean alerts = true, usingLunarClient, onGround, collidedGround, digging, isSprinting, isSneaking, chunkLoaded;
+    private boolean alerts = true, usingLunarClient, onGround, collidedGround, digging, isSprinting, isSneaking, chunkLoaded, takingVelocity;
     //Location
     private Location location, lastLocation, lastOnGroundLocation;
     //Ticks

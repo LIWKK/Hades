@@ -1,4 +1,4 @@
-package me.apex.hades.check.impl.other.vape.invalid;
+package me.apex.hades.check.impl.other.invalid;
 
 import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;

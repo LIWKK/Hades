@@ -173,6 +173,11 @@ checks:
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
+      e:
+        enabled: true
+        punishable: true
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     noslow:
       mitigate: true
       a:

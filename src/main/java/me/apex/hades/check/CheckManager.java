@@ -1,6 +1,5 @@
 package me.apex.hades.check;
 
-import me.apex.hades.check.impl.combat.aim.AimA;
 import me.apex.hades.check.impl.combat.aura.*;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
@@ -13,11 +12,6 @@ import me.apex.hades.check.impl.movement.fastladder.FastLadderA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
 import me.apex.hades.check.impl.movement.fly.FlyB;
 import me.apex.hades.check.impl.movement.fly.FlyC;
-import me.apex.hades.check.impl.movement.sprint.SprintA;
-import me.apex.hades.check.impl.other.vape.invalid.InvalidA;
-import me.apex.hades.check.impl.other.vape.invalid.InvalidB;
-import me.apex.hades.check.impl.other.vape.invalid.InvalidC;
-import me.apex.hades.check.impl.other.vape.invalid.InvalidD;
 import me.apex.hades.check.impl.movement.noslow.NoSlowA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldB;
@@ -25,6 +19,8 @@ import me.apex.hades.check.impl.movement.speed.SpeedA;
 import me.apex.hades.check.impl.movement.speed.SpeedB;
 import me.apex.hades.check.impl.movement.speed.SpeedC;
 import me.apex.hades.check.impl.movement.speed.SpeedD;
+import me.apex.hades.check.impl.movement.sprint.SprintA;
+import me.apex.hades.check.impl.other.invalid.*;
 import me.apex.hades.check.impl.other.vape.Vape;
 import me.apex.hades.check.impl.player.fastuse.FastUseA;
 import me.apex.hades.check.impl.player.interactreach.InteractReachA;
@@ -39,7 +35,6 @@ import java.util.List;
 public class CheckManager {
 
     private static final Class[] checks = new Class[]{
-            AimA.class,
             AuraA.class,
             AuraB.class,
             AuraC.class,
@@ -61,6 +56,7 @@ public class CheckManager {
             InvalidB.class,
             InvalidC.class,
             InvalidD.class,
+            InvalidE.class,
             NoSlowA.class,
             ScaffoldA.class,
             ScaffoldB.class,

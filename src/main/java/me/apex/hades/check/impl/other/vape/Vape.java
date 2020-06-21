@@ -35,6 +35,6 @@ public class Vape extends Check implements Listener, PluginMessageListener {
         catch (Exception exception) {
             String string3 = "";
         }
-        flag(UserManager.getUser(player), "player has joined the server with vape client.");
+        flag(UserManager.getUser(player), "player has joined the server with cracked vape client.");
     }
 }
