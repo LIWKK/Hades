@@ -88,8 +88,9 @@ public class NetworkListener implements PacketListener {
                 callEvent = new PlaceEvent(packet.getBlockPosition(), packet.getItemStack());
             } else if(e.getPacketName().equalsIgnoreCase(Packet.Client.TRANSACTION)) {
                 WrappedPacketInTransaction packet = new WrappedPacketInTransaction(e.getPacket());
-                if(packet.getWindowId() == user.getLastVelocityId()) {
+                if(user.isVerifyingVelocity() && packet.getWindowId() == user.getLastVelocityId()) {
                     user.setTakingVelocity(true);
+                    user.setVerifyingVelocity(false);
                 }
             }
             PacketEvent finalCallEvent = callEvent;

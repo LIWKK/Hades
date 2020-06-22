@@ -4,7 +4,6 @@ import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.packetwrappers.out.transaction.WrappedPacketOutTransaction;
 import me.apex.hades.processor.Processor;
 import me.apex.hades.user.User;
-import me.apex.hades.util.MathUtil;
 
 import java.util.Random;
 
@@ -18,12 +17,13 @@ public class VelocityProcessor extends Processor {
         if(!user.isTakingVelocity()) {
             if((user.getTick() - user.getVelocityTick()) < 1) {
                 Random random = new Random();
+                user.setVerifyingVelocity(true);
                 user.setLastVelocityId(random.nextInt());
                 PacketEvents.sendPacket(user.getPlayer(), new WrappedPacketOutTransaction(user.getLastVelocityId(), (short)0, false));
             }
         }else {
             user.setVelocityTick(user.getTick());
-            if((user.getTick() - user.getVelocityTick()) < 10) {
+            if((user.getTick() - user.getVelocityTick()) < 20) {
                 user.setTakingVelocity(true);
             }else user.setTakingVelocity(false);
         }

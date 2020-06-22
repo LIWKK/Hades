@@ -10,14 +10,20 @@ import me.apex.hades.util.PlayerUtil;
 @CheckInfo(name = "NoFall", type = "A")
 public class NoFallA extends Check {
 
+    private boolean lastOnGround, lastLastOnGround;
+
     @Override
     public void onHandle(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
-            if (((FlyingEvent) e).isOnGround() && !PlayerUtil.isOnGround(user.getPlayer()) && elapsed(user.getTick(), user.getServerGroundTick()) > 20 && user.getTick() > 10) {
-                if(++preVL > 1) {
-                    flag(user, "Spoofed Ground, g: " + !PlayerUtil.isOnGround(user.getPlayer()));
-                }
-            }else preVL = 0;
+
+            boolean onGround = PlayerUtil.isOnGround(user.getPlayer());
+
+            if (((FlyingEvent) e).isOnGround() && !onGround && !lastOnGround && !lastLastOnGround) {
+                flag(user, "Spoofed Ground, g: " + !PlayerUtil.isOnGround(user.getPlayer()));
+            }
+
+            this.lastLastOnGround = lastOnGround;
+            this.lastOnGround = onGround;
         }
     }
 }

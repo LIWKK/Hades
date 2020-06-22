@@ -71,6 +71,7 @@ public abstract class Check implements Listener {
                     if (HadesPlugin.getInstance().getConfig().getBoolean("checks.broadcast-punishments"))
                         Bukkit.broadcastMessage(ChatUtil.color(HadesPlugin.getInstance().getConfig().getString("lang.broadcast-message").replace("%prefix%", HadesPlugin.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%newline%", "\n")));
                     TaskUtil.task(() -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), HadesPlugin.getInstance().getConfig().getString("checks.detections." + getName().toLowerCase() + "." + getType().toLowerCase() +  ".punish-command").replace("%prefix%", HadesPlugin.getInstance().getPrefix()).replace("%player%", user.getPlayer().getName()).replace("%check%", getName()).replace("%checktype%", getType() + (dev ? HadesPlugin.getInstance().getConfig().getString("lang.experimental-notation") : ""))));
+                    vl = 0;
                 }
             }
         });
