@@ -19,7 +19,7 @@ public class NoFallA extends Check {
             boolean onGround = PlayerUtil.isOnGround(user.getPlayer());
 
             if (((FlyingEvent) e).isOnGround() && !onGround && !lastOnGround && !lastLastOnGround) {
-                if(++preVL > 1) {
+                if(++preVL > 2) {
                     flag(user, "Spoofed Ground, g: " + !PlayerUtil.isOnGround(user.getPlayer()));
                 }
             }else preVL = 0;

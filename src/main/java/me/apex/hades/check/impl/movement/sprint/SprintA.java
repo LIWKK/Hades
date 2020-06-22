@@ -18,8 +18,8 @@ public class SprintA extends Check {
             Vector move = new Vector(user.getLocation().getX() - user.getLastLocation().getX(), 0, user.getLocation().getZ() - user.getLastLocation().getZ());
             double predictedDelta = move.distanceSquared(user.getDirection());
             if (predictedDelta >= .23 && PlayerUtil.isOnGround(user.getPlayer()) && user.isSprinting() && user.getDeltaXZ() > 0.1 && !user.isInLiquid() && !user.isInWeb()) {
-                if (++preVL > 2){
-                    flag(user, "yes");
+                if (++preVL > 4){
+                    flag(user, "omni sprint, p: " + predictedDelta);
                 }
             }else preVL = 0;
         }

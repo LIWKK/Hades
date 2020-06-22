@@ -14,7 +14,7 @@ public class SpeedC extends Check {
     @Override
     public void onHandle(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
-            if (elapsed(user.getTick(), user.getLiquidTick()) <= 20 || user.getPlayer().getAllowFlight() || user.getPlayer().isInsideVehicle() || user.isTakingVelocity()) {
+            if (elapsed(user.getTick(), user.getLiquidTick()) <= 20 || elapsed(user.getTick(), user.getTeleportTick()) < 20 || user.getPlayer().getAllowFlight() || user.getPlayer().isInsideVehicle() || user.isTakingVelocity()) {
                 return;
             }
 
@@ -27,7 +27,7 @@ public class SpeedC extends Check {
             double diff = deltaXZ - prediction;
 
             if (diff > 1E-12 && !onGround && !lastOnGround && user.getLocation().getY() != user.getLastLocation().getY()) {
-                if (++preVL > 2) {
+                if (++preVL > 3) {
                     flag(user, "Invalid Predicted Friction: " + diff);
                 }
             } else {
