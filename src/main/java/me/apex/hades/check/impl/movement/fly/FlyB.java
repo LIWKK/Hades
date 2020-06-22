@@ -15,7 +15,7 @@ public class FlyB extends Check {
             double diff = user.getDeltaY() - user.getLastDeltaY();
             if(diff == 0.0
                     && user.getAirTicks() > 6
-                    && user.getPlayer().getVelocity().getY() < -0.075
+                    && !user.isTakingVelocity()
                     && !user.isInLiquid()
                     && !user.isInWeb()
                     && !user.isOnClimbableBlock()

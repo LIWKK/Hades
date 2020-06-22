@@ -12,6 +12,7 @@ import me.apex.hades.processor.impl.OptifineProcessor;
 import me.apex.hades.processor.impl.VelocityProcessor;
 import me.apex.hades.util.PlayerUtil;
 import me.apex.hades.util.reflection.ReflectionUtil;
+import me.apex.hades.util.text.ChatUtil;
 import me.apex.hades.util.text.LogUtils;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -36,11 +37,11 @@ public class User {
     //Processors
     private final Processor movementProcessor = new MovementProcessor(this), blockProcessor = new BlockProcessor(this), velocityProcessor = new VelocityProcessor(this), optifineProcessor = new OptifineProcessor(this);
     //Booleans
-    private boolean alerts = true, usingLunarClient, onGround, collidedGround, digging, isSprinting, isSneaking, chunkLoaded, takingVelocity;
+    private boolean alerts, usingLunarClient, onGround, collidedGround, digging, isSprinting, isSneaking, chunkLoaded, takingVelocity;
     //Location
     private Location location, lastLocation, lastOnGroundLocation;
     //Ticks
-    private int tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks, climbableTick, climbableTicks, serverGroundTick, optifineTick;
+    private int tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, lastVelocityId, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks, climbableTick, climbableTicks, serverGroundTick, optifineTick;
     //Deltas
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, mouseSensitivity;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, deltaAngle;
@@ -105,5 +106,10 @@ public class User {
             e.printStackTrace();
         }
         return ping;
+    }
+
+    //Send Message
+    public void sendMessage(String message) {
+        player.sendMessage(ChatUtil.color(message.replace("%prefix%", HadesPlugin.getPrefix()).replace("%player%", player.getName())));
     }
 }

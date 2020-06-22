@@ -2,6 +2,8 @@ package me.apex.hades;
 
 import io.github.retrooper.packetevents.PacketEvents;
 import lombok.Getter;
+import me.apex.hades.command.CommandManager;
+import me.apex.hades.command.impl.HadesCommand;
 import me.apex.hades.listener.BukkitListener;
 import me.apex.hades.listener.NetworkListener;
 import me.apex.hades.util.MathUtil;
@@ -60,6 +62,10 @@ public class HadesPlugin extends JavaPlugin {
         //Register PacketEvents
         PacketEvents.start(this);
         PacketEvents.getEventManager().registerListener(new NetworkListener());
+
+        //Register Commands
+        CommandManager.setup(this);
+        CommandManager.register(new HadesCommand());
 
         //Register Lunar Client API
         lunarClientAPI = new LunarClientImplementation(this);

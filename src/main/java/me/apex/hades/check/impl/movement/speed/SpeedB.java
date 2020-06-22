@@ -17,7 +17,7 @@ public class SpeedB extends Check {
 
             if (elapsed(user.getTick(), user.getIceTick()) < 40 || elapsed(user.getTick(), user.getSlimeTick()) < 40) max += 0.34;
             if (elapsed(user.getTick(), user.getUnderBlockTick()) < 40) max += 0.91;
-            if (elapsed(user.getTick(), user.getVelocityTick()) < 40) max += 0.21;
+            if (user.isTakingVelocity()) max += 0.21;
 
             if (user.getDeltaXZ() > max
                     && elapsed(user.getTick(), user.getTeleportTick()) > 40

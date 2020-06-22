@@ -1,28 +1,30 @@
 package me.apex.hades.processor.impl;
 
+import io.github.retrooper.packetevents.PacketEvents;
+import io.github.retrooper.packetevents.packetwrappers.out.transaction.WrappedPacketOutTransaction;
 import me.apex.hades.processor.Processor;
 import me.apex.hades.user.User;
-import me.apex.hades.util.MathUtil;
-import org.bukkit.Bukkit;
 
-//Working on this...
+import java.util.Random;
+
+//Credits to OilSlug (ExslodingDogs) for idea
 public class VelocityProcessor extends Processor {
     public VelocityProcessor(User user) {
         super(user);
     }
 
     public void process() {
-        if((user.getTick() - user.getVelocityTick()) <= 1) {
-            if((MathUtil.isRoughlyEqual(user.getDeltaY(), user.getLastDeltaY() + user.getVelocityY(), 0.1))
-                    && (MathUtil.isRoughlyEqual(user.getDeltaXZ(), user.getLastDeltaXZ() + (user.getVelocityX() * user.getVelocityX() + user.getVelocityZ() * user.getVelocityZ()), 0.1))) {
-                user.setTakingVelocity(true);
+        if(!user.isTakingVelocity()) {
+            if((user.getTick() - user.getVelocityTick()) < 1) {
+                Random random = new Random();
+                user.setLastVelocityId(random.nextInt());
+                PacketEvents.sendPacket(user.getPlayer(), new WrappedPacketOutTransaction(user.getLastVelocityId(), (short)0, false));
             }
         }else {
-            if((!MathUtil.isRoughlyEqual(user.getDeltaY(), user.getLastDeltaY() + user.getVelocityY(), 0.1))
-                    && (!MathUtil.isRoughlyEqual(user.getDeltaXZ(), user.getLastDeltaXZ() + (user.getVelocityX() * user.getVelocityX() + user.getVelocityZ() * user.getVelocityZ()), 0.1))) {
-                user.setTakingVelocity(false);
-            }
+            user.setVelocityTick(user.getTick());
+            if((user.getTick() - user.getVelocityTick()) < 10) {
+                user.setTakingVelocity(true);
+            }else user.setTakingVelocity(false);
         }
-        Bukkit.broadcastMessage("" + user.isTakingVelocity());
     }
 }

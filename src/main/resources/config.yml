@@ -12,7 +12,7 @@
 
 #Language Configuration
 lang:
-  prefix: '&8[&7Hades&8] &7'
+  prefix: '&8[&fHades&8] &7'
   no-permission: '&cNo permission.'
   base-message-color: '&c'
   flag-format: '%prefix%&f%player% &7has failed &f%check% &8<&7%checktype%&8> &7VL:%vl%'

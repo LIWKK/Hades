@@ -14,7 +14,7 @@ public class SpeedC extends Check {
     @Override
     public void onHandle(PacketEvent e, User user) {
         if (e instanceof FlyingEvent) {
-            if (elapsed(user.getTick(), user.getLiquidTick()) <= 20 || user.getPlayer().getAllowFlight() || user.getPlayer().isInsideVehicle()) {
+            if (elapsed(user.getTick(), user.getLiquidTick()) <= 20 || user.getPlayer().getAllowFlight() || user.getPlayer().isInsideVehicle() || user.isTakingVelocity()) {
                 return;
             }
 
