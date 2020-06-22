@@ -42,6 +42,21 @@ public class PlayerUtil {
         return false;
     }
 
+    public static boolean blockNearHead(Player player) {
+        double expand = 0.3;
+        for (double x = -expand; x <= expand; x += expand) {
+            for (double z = -expand; z <= expand; z += expand) {
+                if (player.getLocation().clone().add(z, 2, x).getBlock().getType() != Material.AIR) {
+                    return true;
+                }
+                if (player.getLocation().clone().add(z, 1.5001, x).getBlock().getType() != Material.AIR) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static boolean isInWeb(Player player) {
         Object box = ReflectionUtil.getBoundingBox(player);
 

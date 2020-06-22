@@ -1,12 +1,10 @@
 package me.apex.hades.check.impl.player.invmove;
 
 import io.github.retrooper.packetevents.event.PacketEvent;
-import me.apex.hades.HadesPlugin;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
 import me.apex.hades.user.User;
 import me.apex.hades.user.UserManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,9 +14,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 @CheckInfo(name = "InvMove", type = "A")
 public class InvMoveA extends Check implements Listener {
-    public InvMoveA(){
-        Bukkit.getServer().getPluginManager().registerEvents(this, HadesPlugin.getInstance());
-    }
 
     @Override
     public void onHandle(PacketEvent e, User user) {

@@ -4,6 +4,7 @@ import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.packetwrappers.out.transaction.WrappedPacketOutTransaction;
 import me.apex.hades.processor.Processor;
 import me.apex.hades.user.User;
+import me.apex.hades.util.MathUtil;
 
 import java.util.Random;
 
