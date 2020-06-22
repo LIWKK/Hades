@@ -85,15 +85,15 @@ public class User {
     }
 
     public boolean isInLiquid(){
-        if (PlayerUtil.isInLiquid(player)){
-            return true;
-        }else return false;
+        return PlayerUtil.isInLiquid(player);
     }
 
     public boolean isInWeb(){
-        if (PlayerUtil.isInWeb(player)){
-            return true;
-        }else return false;
+        return PlayerUtil.isInWeb(player);
+    }
+
+    public boolean isUnderBlock(){
+        return PlayerUtil.blockNearHead(player);
     }
 
     //Cant do this without reflection!
