@@ -231,6 +231,12 @@ checks:
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
+    step:
+      a:
+        enabled: true
+        punishable: true
+        max-vl: 10
+        punish-command: 'ban %player% %prefix%Cheating'
     invmove:
       a:
         enabled: true
@@ -248,7 +254,7 @@ checks:
       a:
         enabled: true
         punishable: true
-        max-vl: 10
+        max-vl: 5
         punish-command: 'ban %player% %prefix%Cheating'
     timer:
       a:

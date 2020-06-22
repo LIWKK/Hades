@@ -3,7 +3,6 @@ package me.apex.hades.processor.impl;
 import me.apex.hades.processor.Processor;
 import me.apex.hades.user.User;
 import me.apex.hades.util.MathUtil;
-import org.bukkit.Bukkit;
 
 //Working on this...
 public class VelocityProcessor extends Processor {
@@ -23,6 +22,6 @@ public class VelocityProcessor extends Processor {
                 user.setTakingVelocity(false);
             }
         }
-        Bukkit.broadcastMessage("" + user.isTakingVelocity());
+        //Bukkit.broadcastMessage("" + user.isTakingVelocity());
     }
 }

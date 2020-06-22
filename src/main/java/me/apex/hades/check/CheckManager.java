@@ -20,6 +20,7 @@ import me.apex.hades.check.impl.movement.speed.SpeedB;
 import me.apex.hades.check.impl.movement.speed.SpeedC;
 import me.apex.hades.check.impl.movement.speed.SpeedD;
 import me.apex.hades.check.impl.movement.sprint.SprintA;
+import me.apex.hades.check.impl.movement.step.StepA;
 import me.apex.hades.check.impl.other.invalid.*;
 import me.apex.hades.check.impl.other.vape.Vape;
 import me.apex.hades.check.impl.player.fastuse.FastUseA;
@@ -66,6 +67,7 @@ public class CheckManager {
             SpeedD.class,
             SprintA.class,
             FastLadderA.class,
+            StepA.class,
             InvMoveA.class,
             NoFallA.class,
             TimerA.class,

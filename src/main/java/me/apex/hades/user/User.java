@@ -72,7 +72,7 @@ public class User {
         }
     }
 
-    public boolean hasBlocksArround(){
+    public boolean hasBlocksAround(){
         if (PlayerUtil.hasBlocksAround(location) && PlayerUtil.hasBlocksAround(location.add(0,1,0))){
             return true;
         }else return false;
