@@ -108,6 +108,10 @@ public class User {
         return ping;
     }
 
+    public String address() {
+        return player.getAddress().getHostName();
+    }
+
     //Send Message
     public void sendMessage(String message) {
         player.sendMessage(ChatUtil.color(message.replace("%prefix%", HadesPlugin.getPrefix()).replace("%player%", player.getName())));

@@ -17,6 +17,7 @@ import io.github.retrooper.packetevents.packetwrappers.in.flying.WrappedPacketIn
 import io.github.retrooper.packetevents.packetwrappers.in.transaction.WrappedPacketInTransaction;
 import io.github.retrooper.packetevents.packetwrappers.in.useentity.WrappedPacketInUseEntity;
 import io.github.retrooper.packetevents.packetwrappers.out.entityvelocity.WrappedPacketOutEntityVelocity;
+import me.apex.hades.HadesPlugin;
 import me.apex.hades.event.impl.packetevents.*;
 import me.apex.hades.processor.impl.MovementProcessor;
 import me.apex.hades.user.User;
@@ -94,7 +95,7 @@ public class NetworkListener implements PacketListener {
                 }
             }
             PacketEvent finalCallEvent = callEvent;
-            user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(finalCallEvent, user)));
+            if(!HadesPlugin.getInstance().getConfig().getBoolean("checks.exempt-players") || !user.getPlayer().hasPermission(HadesPlugin.getInstance().getBasePermission() + ".exempt.checks")) user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(finalCallEvent, user)));
         }
     }
 
@@ -104,7 +105,7 @@ public class NetworkListener implements PacketListener {
         if (user != null) {
             if (e.getPacketName().equalsIgnoreCase(Packet.Server.POSITION)) {
                 user.setTeleportTick(user.getTick());
-                user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(new TeleportEvent(-1, -1, -1, -1, -1), user)));
+                if(!HadesPlugin.getInstance().getConfig().getBoolean("checks.exempt-players") || !user.getPlayer().hasPermission(HadesPlugin.getInstance().getBasePermission() + ".exempt.checks")) user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(new TeleportEvent(-1, -1, -1, -1, -1), user)));
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Server.ENTITY_VELOCITY)) {
                 WrappedPacketOutEntityVelocity packet = new WrappedPacketOutEntityVelocity(e.getPacket());
                 if (e.getPlayer().getEntityId() == packet.getEntityId()) {
@@ -112,10 +113,10 @@ public class NetworkListener implements PacketListener {
                     user.setVelocityX(packet.getVelocityX());
                     user.setVelocityY(packet.getVelocityY());
                     user.setVelocityZ(packet.getVelocityZ());
-                    user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(new VelocityEvent(packet.getEntityId(), packet.getVelocityX(), packet.getVelocityY(), packet.getVelocityZ()), user)));
+                    if(!HadesPlugin.getInstance().getConfig().getBoolean("checks.exempt-players") || !user.getPlayer().hasPermission(HadesPlugin.getInstance().getBasePermission() + ".exempt.checks")) user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(new VelocityEvent(packet.getEntityId(), packet.getVelocityX(), packet.getVelocityY(), packet.getVelocityZ()), user)));
                 }
             } else {
-                user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(e, user)));
+                if(!HadesPlugin.getInstance().getConfig().getBoolean("checks.exempt-players") || !user.getPlayer().hasPermission(HadesPlugin.getInstance().getBasePermission() + ".exempt.checks")) user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(e, user)));
             }
         }
     }

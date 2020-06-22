@@ -7,6 +7,9 @@ import me.apex.hades.user.User;
 import me.apex.hades.user.UserManager;
 import me.apex.hades.util.TaskUtil;
 import me.apex.hades.util.reflection.ReflectionUtil;
+import me.apex.hades.util.text.ChatUtil;
+import me.apex.hades.util.vpn.VPNChecker;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
@@ -18,9 +21,17 @@ public class BukkitListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        UserManager.users.add(new User(e.getPlayer()));
-        User user = UserManager.getUser(e.getPlayer());
-        user.setJoinTime(System.currentTimeMillis());
+        User user = new User(e.getPlayer());
+        UserManager.users.add(user);
+
+        //Check for VPN
+        if(VPNChecker.INSTANCE.checkUser(user)) {
+            TaskUtil.task(() -> {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatUtil.color(HadesPlugin.getInstance().getConfig().getString("anti-vpn.punish-command")));
+            });
+        }
+
+        //Check for Lunar Client
         HadesPlugin.getInstance().getLunarClientAPI().getUserManager().setPlayerData(e.getPlayer().getUniqueId(), new net.mineaus.lunar.api.user.User(e.getPlayer().getUniqueId(), e.getPlayer().getName()));
         TaskUtil.taskLater(() -> {
             if(HadesPlugin.getInstance().getLunarClientAPI().getUserManager().getPlayerData(e.getPlayer().getUniqueId()).isLunarClient()

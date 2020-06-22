@@ -21,6 +21,8 @@ lang:
 
 #System Configuration
 system:
+  #Example Permission: 'basepermission'.exempt.checks
+  base-permission: 'hades'
   logging:
     log-format: '[%time%] %player% failed %check% (%checktype%) VL:(%vl%) INFO:(%info%)'
     log-to-console: false
@@ -28,15 +30,7 @@ system:
       enabled: true
       path: '\\logs'
       file-name: 'log.txt'
-    mysql:
-      enabled: false
-      host: localhost
-      port: 3306
-      pool: 4
-      database: Hades
-      auth:
-        username: root
-        password: ''
+
 #VPN Protection
 anti-vpn:
   enabled: true
@@ -49,6 +43,8 @@ Max-Reach: 3.4
 #Check Configuration
 #NOTE: Experimental checks are preset to not punish players
 checks:
+  #Will exempt any players with permission 'base-permission'.exempt.checks
+  exempt-players: false
   broadcast-punishments: true
   detections:
     aim:
