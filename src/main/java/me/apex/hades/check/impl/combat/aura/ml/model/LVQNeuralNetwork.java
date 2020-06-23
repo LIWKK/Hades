@@ -10,11 +10,14 @@ import java.util.stream.Collectors;
 //Credits to Nova41
 public class LVQNeuralNetwork {
 
-    private int epoch, dimension;
-    private double stepSize, stepDecrementRate, minStepSize;
+    private int epoch;
+    private final int dimension;
+    private double stepSize;
+    private final double stepDecrementRate;
+    private final double minStepSize;
 
-    private List<LabeledData> vectors = new ArrayList<>();
-    private List<LabeledData> classCenters = new ArrayList<>();
+    private final List<LabeledData> vectors = new ArrayList<>();
+    private final List<LabeledData> classCenters = new ArrayList<>();
 
     private double[][] minMaxRow;
 
@@ -26,7 +29,7 @@ public class LVQNeuralNetwork {
     }
 
     public void addData(LabeledData vector) {
-        if(vector.getData().length != dimension) {
+        if (vector.getData().length != dimension) {
             throw new IllegalArgumentException("Input has invalid dimensions!");
         }
 
@@ -34,12 +37,12 @@ public class LVQNeuralNetwork {
     }
 
     private TreeMap<Double, Integer> getDistanceToClassCenters(double[] vector) {
-        if(classCenters.size() == 0) {
+        if (classCenters.size() == 0) {
             throw new IllegalStateException("Output layer is not initialized yet!");
         }
 
         TreeMap<Double, Integer> distanceToInput = new TreeMap<>();
-        for(int i = 0; i <= classCenters.size(); i++) {
+        for (int i = 0; i <= classCenters.size(); i++) {
             distanceToInput.put(MathUtil.euclideanDistance(vector, classCenters.get(i).getData()), i);
         }
         return distanceToInput;
@@ -62,31 +65,31 @@ public class LVQNeuralNetwork {
     }
 
     public void train() {
-        for(LabeledData vector : vectors) {
+        for (LabeledData vector : vectors) {
             LabeledData nearestOutput = classCenters.get(getDistanceToClassCenters(vector.getData()).firstEntry().getValue());
             double[] distToNearestOutput = MathUtil.multiply(MathUtil.subtract(vector.getData(), nearestOutput.getData()), stepSize);
 
-            if(vector.getCategory() == nearestOutput.getCategory()) {
+            if (vector.getCategory() == nearestOutput.getCategory()) {
                 nearestOutput.setData(MathUtil.add(nearestOutput.getData(), distToNearestOutput));
-            }else {
+            } else {
                 nearestOutput.setData(MathUtil.subtract(nearestOutput.getData(), distToNearestOutput));
             }
         }
 
-        if(stepSize > minStepSize) {
+        if (stepSize > minStepSize) {
             stepSize *= stepDecrementRate;
-        }else stepSize = minStepSize;
+        } else stepSize = minStepSize;
 
         epoch++;
     }
 
     public LVQNeuralNetworkResult predict(double[] vector) {
-        if(classCenters.size() == 0) {
+        if (classCenters.size() == 0) {
             throw new IllegalStateException("Output layer is not initialized yet!");
         }
 
         double[] vectorNormalized = vector.clone();
-        for(int i = 0; i <= vector.length - 1; i++) {
+        for (int i = 0; i <= vector.length - 1; i++) {
             vectorNormalized[i] = MathUtil.normalize(vector[i], minMaxRow[i][0], minMaxRow[i][1]);
         }
 

@@ -25,7 +25,7 @@ public class BukkitListener implements Listener {
         UserManager.users.add(user);
 
         //Check for VPN
-        if(VPNChecker.INSTANCE.checkUser(user)) {
+        if (VPNChecker.INSTANCE.checkUser(user)) {
             TaskUtil.task(() -> {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatUtil.color(HadesPlugin.getInstance().getConfig().getString("anti-vpn.punish-command")));
             });
@@ -34,12 +34,8 @@ public class BukkitListener implements Listener {
         //Check for Lunar Client
         HadesPlugin.getInstance().getLunarClientAPI().getUserManager().setPlayerData(e.getPlayer().getUniqueId(), new net.mineaus.lunar.api.user.User(e.getPlayer().getUniqueId(), e.getPlayer().getName()));
         TaskUtil.taskLater(() -> {
-            if(HadesPlugin.getInstance().getLunarClientAPI().getUserManager().getPlayerData(e.getPlayer().getUniqueId()).isLunarClient()
-                    && HadesPlugin.getInstance().getLunarClientAPI().isAuthenticated(e.getPlayer())) {
-                UserManager.getUser(e.getPlayer()).setUsingLunarClient(true);
-            }else {
-                UserManager.getUser(e.getPlayer()).setUsingLunarClient(false);
-            }
+            UserManager.getUser(e.getPlayer()).setUsingLunarClient(HadesPlugin.getInstance().getLunarClientAPI().getUserManager().getPlayerData(e.getPlayer().getUniqueId()).isLunarClient()
+                    && HadesPlugin.getInstance().getLunarClientAPI().isAuthenticated(e.getPlayer()));
         }, HadesPlugin.getInstance(), 40L);
     }
 
@@ -51,7 +47,7 @@ public class BukkitListener implements Listener {
 
     @EventHandler
     public void onRegister(PlayerRegisterChannelEvent e) {
-        if(e.getChannel().equals("Lunar-Client")) {
+        if (e.getChannel().equals("Lunar-Client")) {
             try {
                 HadesPlugin.getInstance().getLunarClientAPI().performEmote(e.getPlayer(), 5, false);
                 HadesPlugin.getInstance().getLunarClientAPI().performEmote(e.getPlayer(), -1, false);
@@ -59,7 +55,7 @@ public class BukkitListener implements Listener {
                 Object nmsPlayer = e.getPlayer().getClass().getMethod("getHandle").invoke(e.getPlayer());
                 Object packet = ReflectionUtil.getNmsClass("PacketPlayOutEntityStatus")
                         .getConstructor(ReflectionUtil.getNmsClass("Entity"), byte.class)
-                        .newInstance(nmsPlayer, (byte)2);
+                        .newInstance(nmsPlayer, (byte) 2);
                 ReflectionUtil.sendPacket(e.getPlayer(), packet);
             } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | NoSuchFieldException | ClassNotFoundException | IOException ex) {
                 ex.printStackTrace();

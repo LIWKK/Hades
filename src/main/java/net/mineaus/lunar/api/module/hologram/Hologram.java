@@ -37,15 +37,15 @@ public abstract class Hologram {
     /**
      * create the object of a hologram.
      *
-     * @param id the id of the hologram.
-     * @param name the name of the hologram.
-     * @param x the x location of a hologram.
-     * @param y the y location of a hologram.
-     * @param z the z location of a hologram.
+     * @param id    the id of the hologram.
+     * @param name  the name of the hologram.
+     * @param x     the x location of a hologram.
+     * @param y     the y location of a hologram.
+     * @param z     the z location of a hologram.
      * @param world the world of the hologram.
      * @param lines the lines of the hologram.
      */
-    public Hologram(UUID id, String name, int x, int y, int z, World world, String... lines){
+    public Hologram(UUID id, String name, int x, int y, int z, World world, String... lines) {
         this.id = id;
         this.name = name;
         this.x = x;
@@ -60,10 +60,10 @@ public abstract class Hologram {
     /**
      * add a line to the array list.
      *
-     * @param text the text of the line.
+     * @param text  the text of the line.
      * @param index the index of the line.
      */
-    public void addLine(String text, int index){
+    public void addLine(String text, int index) {
         this.lines.add(index, text);
     }
 
@@ -72,7 +72,7 @@ public abstract class Hologram {
      *
      * @param index the index of the line.
      */
-    public void removeLine(int index){
+    public void removeLine(int index) {
         this.lines.remove(index);
     }
 

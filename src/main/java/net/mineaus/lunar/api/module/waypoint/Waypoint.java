@@ -26,10 +26,11 @@ public abstract class Waypoint {
 
     /**
      * creates the object for the waypoint.
-     * @param name the name of the waypoint.
-     * @param red the red in the waypoint.
-     * @param green the green in the waypoint.
-     * @param blue the blue in the waypoint.
+     *
+     * @param name   the name of the waypoint.
+     * @param red    the red in the waypoint.
+     * @param green  the green in the waypoint.
+     * @param blue   the blue in the waypoint.
      * @param forced if the waypoint is forced or not.
      */
     public Waypoint(String name, Location location, int red, int green, int blue, boolean forced) {
@@ -43,12 +44,14 @@ public abstract class Waypoint {
 
     /**
      * assign the waypoint to the player.
+     *
      * @param player the player instance.
      */
     public abstract void enable(Player player) throws IOException;
 
     /**
      * disable the waypoint for the player.
+     *
      * @param player the player instance.
      */
     public abstract void disable(Player player, boolean enable) throws IOException;

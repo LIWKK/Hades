@@ -14,18 +14,16 @@ public class VelocityProcessor extends Processor {
     }
 
     public void process() {
-        if(!user.isTakingVelocity()) {
-            if((user.getTick() - user.getVelocityTick()) < 1) {
+        if (!user.isTakingVelocity()) {
+            if ((user.getTick() - user.getVelocityTick()) < 1) {
                 Random random = new Random();
                 user.setVerifyingVelocity(true);
                 user.setLastVelocityId(random.nextInt());
-                PacketEvents.sendPacket(user.getPlayer(), new WrappedPacketOutTransaction(user.getLastVelocityId(), (short)0, false));
+                PacketEvents.sendPacket(user.getPlayer(), new WrappedPacketOutTransaction(user.getLastVelocityId(), (short) 0, false));
             }
-        }else {
+        } else {
             user.setVelocityTick(user.getTick());
-            if((user.getTick() - user.getVelocityTick()) < 20) {
-                user.setTakingVelocity(true);
-            }else user.setTakingVelocity(false);
+            user.setTakingVelocity((user.getTick() - user.getVelocityTick()) < 20);
         }
     }
 }

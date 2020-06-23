@@ -8,12 +8,12 @@ import org.bukkit.inventory.ItemStack;
 
 public class InteractEvent extends Event {
 
-    private Action action;
-    private ItemStack item;
-    private Block blockClicked;
-    private BlockFace blockFace;
-    private org.bukkit.event.Event.Result useItemInHand;
-    private org.bukkit.event.Event.Result useClickedBlock;
+    private final Action action;
+    private final ItemStack item;
+    private final Block blockClicked;
+    private final BlockFace blockFace;
+    private final org.bukkit.event.Event.Result useItemInHand;
+    private final org.bukkit.event.Event.Result useClickedBlock;
 
     public InteractEvent(Action action, ItemStack item, Block blockClicked, BlockFace blockFace, org.bukkit.event.Event.Result useItemInHand, org.bukkit.event.Event.Result useClickedBlock) {
         this.action = action;

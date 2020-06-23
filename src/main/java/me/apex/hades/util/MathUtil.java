@@ -27,21 +27,18 @@ public class MathUtil {
     private static final double[] field_181164_e;
     private static final double[] field_181165_f;
 
-    static
-    {
-        for (int i = 0; i < 65536; ++i)
-        {
-            SIN_TABLE[i] = (float)Math.sin((double)i * Math.PI * 2.0D / 65536.0D);
+    static {
+        for (int i = 0; i < 65536; ++i) {
+            SIN_TABLE[i] = (float) Math.sin((double) i * Math.PI * 2.0D / 65536.0D);
         }
 
-        multiplyDeBruijnBitPosition = new int[] {0, 1, 28, 2, 29, 14, 24, 3, 30, 22, 20, 15, 25, 17, 4, 8, 31, 27, 13, 23, 21, 19, 16, 7, 26, 12, 18, 6, 11, 5, 10, 9};
+        multiplyDeBruijnBitPosition = new int[]{0, 1, 28, 2, 29, 14, 24, 3, 30, 22, 20, 15, 25, 17, 4, 8, 31, 27, 13, 23, 21, 19, 16, 7, 26, 12, 18, 6, 11, 5, 10, 9};
         field_181163_d = Double.longBitsToDouble(4805340802404319232L);
         field_181164_e = new double[257];
         field_181165_f = new double[257];
 
-        for (int j = 0; j < 257; ++j)
-        {
-            double d0 = (double)j / 256.0D;
+        for (int j = 0; j < 257; ++j) {
+            double d0 = (double) j / 256.0D;
             double d1 = Math.asin(d0);
             field_181165_f[j] = Math.cos(d1);
             field_181164_e[j] = d1;
@@ -62,9 +59,9 @@ public class MathUtil {
 
     public static long lcd(long a, long b) {
         long value = 0;
-        try{
+        try {
             value = a * (b / absGCD(a, b));
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
         return value;
@@ -163,51 +160,41 @@ public class MathUtil {
         return value;
     }
 
-    public static double wrapAngleTo180_double(double value)
-    {
+    public static double wrapAngleTo180_double(double value) {
         value = value % 360.0D;
 
-        if (value >= 180.0D)
-        {
+        if (value >= 180.0D) {
             value -= 360.0D;
         }
 
-        if (value < -180.0D)
-        {
+        if (value < -180.0D) {
             value += 360.0D;
         }
 
         return value;
     }
 
-    public static double func_181159_b(double p_181159_0_, double p_181159_2_)
-    {
+    public static double func_181159_b(double p_181159_0_, double p_181159_2_) {
         double d0 = p_181159_2_ * p_181159_2_ + p_181159_0_ * p_181159_0_;
 
-        if (Double.isNaN(d0))
-        {
+        if (Double.isNaN(d0)) {
             return Double.NaN;
-        }
-        else
-        {
+        } else {
             boolean flag = p_181159_0_ < 0.0D;
 
-            if (flag)
-            {
+            if (flag) {
                 p_181159_0_ = -p_181159_0_;
             }
 
             boolean flag1 = p_181159_2_ < 0.0D;
 
-            if (flag1)
-            {
+            if (flag1) {
                 p_181159_2_ = -p_181159_2_;
             }
 
             boolean flag2 = p_181159_0_ > p_181159_2_;
 
-            if (flag2)
-            {
+            if (flag2) {
                 double d1 = p_181159_2_;
                 p_181159_2_ = p_181159_0_;
                 p_181159_0_ = d1;
@@ -217,7 +204,7 @@ public class MathUtil {
             p_181159_2_ = p_181159_2_ * d9;
             p_181159_0_ = p_181159_0_ * d9;
             double d2 = field_181163_d + p_181159_0_;
-            int i = (int)Double.doubleToRawLongBits(d2);
+            int i = (int) Double.doubleToRawLongBits(d2);
             double d3 = field_181164_e[i];
             double d4 = field_181165_f[i];
             double d5 = d2 - field_181163_d;
@@ -225,18 +212,15 @@ public class MathUtil {
             double d7 = (6.0D + d6 * d6) * d6 * 0.16666666666666666D;
             double d8 = d3 + d7;
 
-            if (flag2)
-            {
+            if (flag2) {
                 d8 = (Math.PI / 2D) - d8;
             }
 
-            if (flag1)
-            {
+            if (flag1) {
                 d8 = Math.PI - d8;
             }
 
-            if (flag)
-            {
+            if (flag) {
                 d8 = -d8;
             }
 
@@ -244,8 +228,7 @@ public class MathUtil {
         }
     }
 
-    public static double func_181161_i(double p_181161_0_)
-    {
+    public static double func_181161_i(double p_181161_0_) {
         double d0 = 0.5D * p_181161_0_;
         long i = Double.doubleToRawLongBits(p_181161_0_);
         i = 6910469410427058090L - (i >> 1);
@@ -312,7 +295,9 @@ public class MathUtil {
         return Math.sqrt(deviation / length);
     }
 
-    private float getMouseDelta(float rotation) { return ((float)Math.cbrt((rotation / 0.01875F)) - 0.2F) / 0.6F; }
+    private float getMouseDelta(float rotation) {
+        return ((float) Math.cbrt((rotation / 0.01875F)) - 0.2F) / 0.6F;
+    }
 
     public static float[] getRotationFromPosition(Player player, double x, double z, double y) {
         double xDiff = x - player.getLocation().getX();
@@ -384,14 +369,16 @@ public class MathUtil {
         }
         return total;
     }
+
     public static double trim(int degree, double d) {
         String format = "#.#";
         for (int i = 1; i < degree; ++i) {
-            format = String.valueOf(format) + "#";
+            format = format + "#";
         }
         DecimalFormat twoDForm = new DecimalFormat(format);
         return Double.parseDouble(twoDForm.format(d).replaceAll(",", "."));
     }
+
     public static float getBaseSpeed(Player player) {
         return 0.34f + (PlayerUtil.getPotionEffectLevel(player, PotionEffectType.SPEED) * 0.062f) + ((player.getWalkSpeed() - 0.2f) * 1.6f);
     }

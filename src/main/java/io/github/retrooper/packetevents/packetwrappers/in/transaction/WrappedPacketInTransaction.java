@@ -8,6 +8,7 @@ public final class WrappedPacketInTransaction extends WrappedPacket {
     private int windowId;
     private short actionNumber;
     private boolean accepted;
+
     public WrappedPacketInTransaction(final Object packet) {
         super(packet);
     }
@@ -46,6 +47,6 @@ public final class WrappedPacketInTransaction extends WrappedPacket {
 
         windowIdAccessor = Reflection.getField(packetClass, int.class, 0);
         actionNumberAccessor = Reflection.getField(packetClass, short.class, 0);
-        acceptedAccessor= Reflection.getField(packetClass, boolean.class, 0);
+        acceptedAccessor = Reflection.getField(packetClass, boolean.class, 0);
     }
 }

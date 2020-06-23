@@ -14,7 +14,7 @@ public class MouseFilter {
         p1 = (this.a - this.b) * p2;
         this.c += (p1 - this.c) * 0.5F;
 
-        if(p1 > 0.0F && p1 > this.c || p1 < 0.0F && p1 < this.c) {
+        if (p1 > 0.0F && p1 > this.c || p1 < 0.0F && p1 < this.c) {
             p1 = this.c;
         }
 

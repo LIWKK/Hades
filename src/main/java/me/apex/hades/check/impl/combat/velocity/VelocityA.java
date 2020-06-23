@@ -14,15 +14,15 @@ public class VelocityA extends Check {
 
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if(e instanceof VelocityEvent) {
-            if(((VelocityEvent) e).getEntityId() == user.getPlayer().getEntityId()) {
-                if(((VelocityEvent) e).getVelY() > 0.2) {
+        if (e instanceof VelocityEvent) {
+            if (((VelocityEvent) e).getEntityId() == user.getPlayer().getEntityId()) {
+                if (((VelocityEvent) e).getVelY() > 0.2) {
                     lastVertical = ((VelocityEvent) e).getVelY();
                 }
             }
-        }else if(e instanceof FlyingEvent) {
-            if(user.isTakingVelocity()) {
-                if(user.getDeltaY() <= lastVertical * 0.99
+        } else if (e instanceof FlyingEvent) {
+            if (user.isTakingVelocity()) {
+                if (user.getDeltaY() <= lastVertical * 0.99
                         && elapsed(user.getTick(), user.getUnderBlockTick()) > 20
                         && elapsed(user.getTick(), user.getLiquidTick()) > 20
                         && elapsed(user.getTick(), user.getLiquidTick()) > 20) {

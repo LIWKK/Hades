@@ -213,7 +213,7 @@ public class ReflectionUtil {
 
     public static int getPlayerPing(Player player) {
         Object handle = getEntityPlayer(player);
-        return (int)getInvokedField(getField(handle.getClass(), "ping"), getEntityPlayer(player));
+        return (int) getInvokedField(getField(handle.getClass(), "ping"), getEntityPlayer(player));
     }
 
     public static void sendPacket(Player p, Object packet) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException {

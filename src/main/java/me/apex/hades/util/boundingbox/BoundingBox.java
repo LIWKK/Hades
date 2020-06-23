@@ -302,7 +302,7 @@ public class BoundingBox {
             d5 += z;
         }
 
-        return new BoundingBox(d0,d1,d2,d3,d4,d5);
+        return new BoundingBox(d0, d1, d2, d3, d4, d5);
     }
 
 

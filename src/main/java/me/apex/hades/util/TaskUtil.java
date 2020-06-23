@@ -1,7 +1,6 @@
 package me.apex.hades.util;
 
 import me.apex.hades.HadesPlugin;
-
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;

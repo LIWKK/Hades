@@ -20,27 +20,27 @@ public class AuraH extends Check {
         enabled = true;
     }
 
-    private Deque<Float> angles = new LinkedList<>();
+    private final Deque<Float> angles = new LinkedList<>();
 
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if(e instanceof AttackEvent) {
+        if (e instanceof AttackEvent) {
             Entity entity = ((AttackEvent) e).getEntity();
             Vector vec = entity.getLocation().toVector().subtract(user.getPlayer().getEyeLocation().toVector());
             float angle = user.getPlayer().getEyeLocation().getDirection().angle(vec);
 
             angles.add(angle);
 
-            if(angles.size() == 5) {
+            if (angles.size() == 5) {
                 double deviation = MathUtil.getStandardDeviation(angles.stream().mapToDouble(d -> d).toArray());
 
                 double diff = user.getDeltaAngle() * deviation;
 
-                if(diff > 11 && user.getPlayer().getLocation().toVector().setY(0.0).distance(entity.getLocation().toVector().setY(0.0)) > 1.0) {
-                    if(++preVL > 4) {
+                if (diff > 11 && user.getPlayer().getLocation().toVector().setY(0.0).distance(entity.getLocation().toVector().setY(0.0)) > 1.0) {
+                    if (++preVL > 4) {
                         flag(user, "high angle deviation, d: " + diff);
                     }
-                }else preVL *= 0.75;
+                } else preVL *= 0.75;
 
                 angles.clear();
             }

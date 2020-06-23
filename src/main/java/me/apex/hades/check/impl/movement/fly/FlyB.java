@@ -11,9 +11,9 @@ import me.apex.hades.util.PlayerUtil;
 public class FlyB extends Check {
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if(e instanceof FlyingEvent) {
+        if (e instanceof FlyingEvent) {
             double diff = user.getDeltaY() - user.getLastDeltaY();
-            if(diff == 0.0
+            if (diff == 0.0
                     && user.getAirTicks() > 6
                     && !user.isTakingVelocity()
                     && !user.isInLiquid()
@@ -24,7 +24,7 @@ public class FlyB extends Check {
                     && user.getTick() > 5
                     && !PlayerUtil.isOnClimbable(user.getPlayer())
                     && elapsed(user.getTick(), user.getVelocityTick()) > 100
-                    && !PlayerUtil.isClimbableBlock(user.getLocation().subtract(0,1,0).getBlock())) {
+                    && !PlayerUtil.isClimbableBlock(user.getLocation().subtract(0, 1, 0).getBlock())) {
                 flag(user, "consistent falling speed, d: " + diff);
             }
         }

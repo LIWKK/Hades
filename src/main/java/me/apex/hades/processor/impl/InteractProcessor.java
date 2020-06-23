@@ -10,25 +10,23 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class InteractProcessor implements Listener {
-    public InteractProcessor() { Bukkit.getPluginManager().registerEvents(this, HadesPlugin.getInstance());}
+    public InteractProcessor() {
+        Bukkit.getPluginManager().registerEvents(this, HadesPlugin.getInstance());
+    }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event){
+    public void onInteract(PlayerInteractEvent event) {
         User user = UserManager.getUser(event.getPlayer());
 
-        if (event.getAction() == Action.LEFT_CLICK_AIR){
-            user.setLeftClickingAir(true);
-        }else user.setLeftClickingAir(false);
-        if (event.getAction() == Action.LEFT_CLICK_BLOCK){
+        user.setLeftClickingAir(event.getAction() == Action.LEFT_CLICK_AIR);
+        if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
             user.setLeftClickingBlock(true);
             user.setInteractedBlock(event.getClickedBlock());
-        }else user.setLeftClickingBlock(false);
-        if (event.getAction() == Action.RIGHT_CLICK_AIR){
-            user.setRightClickingAir(true);
-        }else user.setRightClickingAir(false);
-        if (event.getAction() == Action.RIGHT_CLICK_BLOCK){
+        } else user.setLeftClickingBlock(false);
+        user.setRightClickingAir(event.getAction() == Action.RIGHT_CLICK_AIR);
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             user.setRightClickingBlock(true);
             user.setInteractedBlock(event.getClickedBlock());
-        }else user.setRightClickingBlock(true);
+        } else user.setRightClickingBlock(true);
     }
 }

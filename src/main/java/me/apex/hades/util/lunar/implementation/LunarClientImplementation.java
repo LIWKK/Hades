@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit;
 
 public class LunarClientImplementation extends LunarClientAPI {
 
-    private HadesPlugin plugin;
-    private UserManager userManager;
+    private final HadesPlugin plugin;
+    private final UserManager userManager;
 
     public LunarClientImplementation(HadesPlugin plugin) {
         this.plugin = plugin;
@@ -34,7 +34,7 @@ public class LunarClientImplementation extends LunarClientAPI {
 
     @Override
     public void sendCooldown(Player player, String name, Material material, int seconds) throws IOException {
-        if (!this.isAuthenticated(player)){
+        if (!this.isAuthenticated(player)) {
             return;
         }
 
@@ -52,7 +52,7 @@ public class LunarClientImplementation extends LunarClientAPI {
 
     @Override
     public void sendCooldown(Player player, String name, Material material, long mill) throws IOException {
-        if (!this.isAuthenticated(player)){
+        if (!this.isAuthenticated(player)) {
             return;
         }
 
@@ -70,7 +70,7 @@ public class LunarClientImplementation extends LunarClientAPI {
 
     @Override
     public void sendTitle(Player player, boolean subTitle, String message, float size, int duration, int fadeIn, int fadeOut) throws IOException {
-        if (!this.isAuthenticated(player)){
+        if (!this.isAuthenticated(player)) {
             return;
         }
 
@@ -113,7 +113,7 @@ public class LunarClientImplementation extends LunarClientAPI {
 
     @Override
     public void sendNotification(Player player, String message, Notification level, int delay) throws IOException {
-        if (!this.isAuthenticated(player)){
+        if (!this.isAuthenticated(player)) {
             return;
         }
 
@@ -131,7 +131,7 @@ public class LunarClientImplementation extends LunarClientAPI {
 
     @Override
     public void toggleStaffModule(Player player, StaffModule module, boolean enabled) throws IOException {
-        if (!this.isAuthenticated(player)){
+        if (!this.isAuthenticated(player)) {
             return;
         }
 
@@ -148,7 +148,7 @@ public class LunarClientImplementation extends LunarClientAPI {
 
     @Override
     public void updateServerRule(Player player, ServerRule rule, boolean b, int i, float f, String s) throws IOException {
-        if (!this.isAuthenticated(player)){
+        if (!this.isAuthenticated(player)) {
             return;
         }
 
@@ -168,7 +168,7 @@ public class LunarClientImplementation extends LunarClientAPI {
 
     @Override
     public void updateServerName(Player player, String name) throws IOException {
-        if (!this.isAuthenticated(player)){
+        if (!this.isAuthenticated(player)) {
             return;
         }
 
@@ -183,7 +183,7 @@ public class LunarClientImplementation extends LunarClientAPI {
 
     @Override
     public void updateNameTag(Player player, Player target, String... tags) throws IOException {
-        if (!this.isAuthenticated(player)){
+        if (!this.isAuthenticated(player)) {
             return;
         }
 
@@ -194,7 +194,7 @@ public class LunarClientImplementation extends LunarClientAPI {
 
         os.write(BufferUtils.writeBoolean(true));
         os.write(BufferUtils.writeVarInt(tags.length));
-        for (String tag : tags){
+        for (String tag : tags) {
             os.write(BufferUtils.writeString(tag));
         }
 
@@ -205,7 +205,7 @@ public class LunarClientImplementation extends LunarClientAPI {
 
     @Override
     public void resetNameTag(Player player, Player target) throws IOException {
-        if (!this.isAuthenticated(player)){
+        if (!this.isAuthenticated(player)) {
             return;
         }
 
@@ -287,7 +287,7 @@ public class LunarClientImplementation extends LunarClientAPI {
     public boolean isAuthenticated(Player player) {
         User user = getUserManager().getPlayerData(player);
 
-        if (user == null){
+        if (user == null) {
             return false;
         }
 

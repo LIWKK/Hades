@@ -73,36 +73,32 @@ public class User {
         }
     }
 
-    public boolean hasBlocksAround(){
-        if (PlayerUtil.hasBlocksAround(location) && PlayerUtil.hasBlocksAround(location.add(0,1,0))){
-            return true;
-        }else return false;
+    public boolean hasBlocksAround() {
+        return PlayerUtil.hasBlocksAround(location) && PlayerUtil.hasBlocksAround(location.add(0, 1, 0));
     }
 
-    public boolean isOnClimbableBlock(){
-        if (PlayerUtil.isClimbableBlock(location.getBlock()) && PlayerUtil.isClimbableBlock(location.add(0,1,0).getBlock())){
-            return true;
-        }else return false;
+    public boolean isOnClimbableBlock() {
+        return PlayerUtil.isClimbableBlock(location.getBlock()) && PlayerUtil.isClimbableBlock(location.add(0, 1, 0).getBlock());
     }
 
-    public boolean isInLiquid(){
+    public boolean isInLiquid() {
         return PlayerUtil.isInLiquid(player);
     }
 
-    public boolean isInWeb(){
+    public boolean isInWeb() {
         return PlayerUtil.isInWeb(player);
     }
 
-    public boolean isUnderBlock(){
+    public boolean isUnderBlock() {
         return PlayerUtil.blockNearHead(player);
     }
 
     //Cant do this without reflection!
     public int ping() {
         int ping = 0;
-        try{
+        try {
             ping = ReflectionUtil.getPlayerPing(player);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ping;

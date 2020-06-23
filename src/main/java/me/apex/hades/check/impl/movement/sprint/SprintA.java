@@ -13,15 +13,16 @@ import org.bukkit.util.Vector;
 public class SprintA extends Check {
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if (e instanceof FlyingEvent){
-            if ((System.currentTimeMillis() - user.getJoinTime()) < 2000 && ((FlyingEvent) e).hasMoved() && user.getPlayer().isFlying())return;
+        if (e instanceof FlyingEvent) {
+            if ((System.currentTimeMillis() - user.getJoinTime()) < 2000 && ((FlyingEvent) e).hasMoved() && user.getPlayer().isFlying())
+                return;
             Vector move = new Vector(user.getLocation().getX() - user.getLastLocation().getX(), 0, user.getLocation().getZ() - user.getLastLocation().getZ());
             double predictedDelta = move.distanceSquared(user.getDirection());
             if (predictedDelta >= .23 && PlayerUtil.isOnGround(user.getPlayer()) && user.isSprinting() && user.getDeltaXZ() > 0.1 && !user.isInLiquid() && !user.isInWeb()) {
-                if (++preVL > 4){
+                if (++preVL > 4) {
                     flag(user, "omni sprint, p: " + predictedDelta);
                 }
-            }else preVL = 0;
+            } else preVL = 0;
         }
     }
 }

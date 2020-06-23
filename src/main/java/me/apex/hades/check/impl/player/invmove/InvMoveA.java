@@ -20,16 +20,17 @@ public class InvMoveA extends Check implements Listener {
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent event){
+    public void onInventoryClick(InventoryClickEvent event) {
         User user = UserManager.getUser((Player) event.getWhoClicked());
-        if(user != null){
-            if (user.isInWeb() || user.isInLiquid() || user.isOnClimbableBlock() || elapsed(time(), user.getVelocityTick()) < 40 || event.getClick() == ClickType.CREATIVE || event.getAction() == InventoryAction.PLACE_ALL)return;
+        if (user != null) {
+            if (user.isInWeb() || user.isInLiquid() || user.isOnClimbableBlock() || elapsed(time(), user.getVelocityTick()) < 40 || event.getClick() == ClickType.CREATIVE || event.getAction() == InventoryAction.PLACE_ALL)
+                return;
 
-            if (user.isOnGround() && user.getDeltaXZ() > 0.1){
-                if (++preVL > 2){
+            if (user.isOnGround() && user.getDeltaXZ() > 0.1) {
+                if (++preVL > 2) {
                     flag(user, "player used inventory while moving.");
                 }
-            }else preVL = 0;
+            } else preVL = 0;
         }
     }
 }

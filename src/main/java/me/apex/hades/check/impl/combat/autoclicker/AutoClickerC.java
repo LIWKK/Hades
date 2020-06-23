@@ -14,10 +14,10 @@ public class AutoClickerC extends Check {
 
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if (e instanceof SwingEvent){
-            if (user.isDigging() || user.isRightClickingBlock())return;
-            if(time() - start >= 1000L) {
-                if(user.getCPS() > HadesPlugin.getInstance().getConfig().getInt("Max-CPS")) {
+        if (e instanceof SwingEvent) {
+            if (user.isDigging() || user.isRightClickingBlock()) return;
+            if (time() - start >= 1000L) {
+                if (user.getCPS() > HadesPlugin.getInstance().getConfig().getInt("Max-CPS")) {
                     flag(user, "CPS: " + user.getCPS());
                 }
                 user.setCPS(0);

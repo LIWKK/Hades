@@ -16,12 +16,13 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 @CheckInfo(name = "Vape", type = "A")
 public class Vape extends Check implements Listener, PluginMessageListener {
 
-    public Vape(){
+    public Vape() {
         Bukkit.getServer().getPluginManager().registerEvents(this, HadesPlugin.getInstance());
     }
 
     @Override
-    public void onHandle(PacketEvent e, User user) { }
+    public void onHandle(PacketEvent e, User user) {
+    }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -31,8 +32,7 @@ public class Vape extends Check implements Listener, PluginMessageListener {
     public void onPluginMessageReceived(String string, Player player, byte[] bytes) {
         try {
             String string2 = new String(bytes);
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             String string3 = "";
         }
         flag(UserManager.getUser(player), "player has joined the server with cracked vape client.");

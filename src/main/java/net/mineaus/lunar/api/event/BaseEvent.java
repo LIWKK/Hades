@@ -7,20 +7,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class BaseEvent extends Event {
 
-	private static final HandlerList handlers = new HandlerList();
+    private static final HandlerList handlers = new HandlerList();
 
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
+    }
 
-	public boolean call(JavaPlugin javaPlugin) {
-		javaPlugin.getServer().getPluginManager().callEvent(this);
-		return this instanceof Cancellable && ((Cancellable) this).isCancelled();
-	}
+    public boolean call(JavaPlugin javaPlugin) {
+        javaPlugin.getServer().getPluginManager().callEvent(this);
+        return this instanceof Cancellable && ((Cancellable) this).isCancelled();
+    }
 
 }

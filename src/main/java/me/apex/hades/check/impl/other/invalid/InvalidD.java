@@ -11,7 +11,7 @@ import org.bukkit.Difficulty;
 public class InvalidD extends Check {
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if(e instanceof FlyingEvent) {
+        if (e instanceof FlyingEvent) {
             if (user.getLocation().getWorld().getDifficulty() == Difficulty.PEACEFUL) return;
             if (user.isSprinting() && user.getPlayer().getFoodLevel() < 6) {
                 flag(user, "sprinting while hunger levels are low.");

@@ -3,7 +3,7 @@ package me.apex.hades.check.impl.combat.aura.ml.model;
 //Credits to Nova41
 public class LabeledData implements Cloneable {
 
-    private int category;
+    private final int category;
     private double[] data;
 
     public LabeledData(int category, double[] data) {
@@ -28,9 +28,9 @@ public class LabeledData implements Cloneable {
     }
 
     public LabeledData clone() {
-        try{
+        try {
             return (LabeledData) super.clone();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

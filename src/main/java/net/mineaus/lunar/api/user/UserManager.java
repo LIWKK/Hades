@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Getter @Setter
+@Getter
+@Setter
 public class UserManager {
 
     /* User Maps */

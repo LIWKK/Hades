@@ -12,20 +12,19 @@ import java.util.HashMap;
 public enum VPNChecker {
     INSTANCE;
 
-    private HashMap<String, Boolean> ips = new HashMap<>();
+    private final HashMap<String, Boolean> ips = new HashMap<>();
 
     public boolean checkUser(User user) {
-        if(!HadesPlugin.getInstance().getConfig().getBoolean("anti-vpn.enabled") || user.getPlayer().hasPermission(HadesPlugin.getInstance().getBasePermission() + ".exempt.antivpn")) return false;
-        if(ips.containsKey(user.address())) {
-            if(ips.get(user.address())) {
-                return true;
-            }
-        }else {
+        if (!HadesPlugin.getInstance().getConfig().getBoolean("anti-vpn.enabled") || user.getPlayer().hasPermission(HadesPlugin.getInstance().getBasePermission() + ".exempt.antivpn"))
+            return false;
+        if (ips.containsKey(user.address())) {
+            return ips.get(user.address());
+        } else {
             try {
-                if(checkAddress(user.address())) {
+                if (checkAddress(user.address())) {
                     return true;
                 }
-            }catch (Exception ex) {
+            } catch (Exception ex) {
 
             }
         }
@@ -34,7 +33,7 @@ public enum VPNChecker {
 
     private boolean checkAddress(String address) throws Exception {
         JSONObject json = new JSONObject(IOUtils.toString(new URL("https://api.iplegit.com/info?ip=" + address), StandardCharsets.UTF_8));
-        if(Boolean.parseBoolean(json.get("bad").toString())) {
+        if (Boolean.parseBoolean(json.get("bad").toString())) {
             ips.put(address, true);
             return true;
         }

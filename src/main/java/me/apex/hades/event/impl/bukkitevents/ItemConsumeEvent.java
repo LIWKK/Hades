@@ -5,7 +5,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class ItemConsumeEvent extends Event {
 
-    private ItemStack item;
+    private final ItemStack item;
 
     public ItemConsumeEvent(ItemStack item) {
         this.item = item;

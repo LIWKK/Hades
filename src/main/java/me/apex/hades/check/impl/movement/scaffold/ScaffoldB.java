@@ -8,7 +8,7 @@ import me.apex.hades.user.User;
 @CheckInfo(name = "Scaffold", type = "B")
 public class ScaffoldB extends Check {
     @Override
-    public void onHandle(PacketEvent e, User user){
+    public void onHandle(PacketEvent e, User user) {
 
     }
 }

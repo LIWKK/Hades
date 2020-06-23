@@ -13,7 +13,7 @@ import org.bukkit.event.Listener;
 
 @CheckInfo(name = "Reach", type = "A")
 public class ReachA extends Check implements Listener {
-    public ReachA(){
+    public ReachA() {
         Bukkit.getPluginManager().registerEvents(this, HadesPlugin.getInstance());
     }
 
@@ -24,19 +24,20 @@ public class ReachA extends Check implements Listener {
 
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if(e instanceof AttackEvent) {
+        if (e instanceof AttackEvent) {
             try {
                 double max = HadesPlugin.getInstance().getConfig().getDouble("Max-Reach");
                 Ray ray = Ray.from(user);
-                double dist = AABB.from(((AttackEvent) e).getEntity()).collidesD(ray,0, 10);
+                double dist = AABB.from(((AttackEvent) e).getEntity()).collidesD(ray, 0, 10);
                 if (dist != -1) {
-                    if(dist > max) {
-                        if(++preVL >= max){
+                    if (dist > max) {
+                        if (++preVL >= max) {
                             flag(user, "dist = " + dist);
                         }
-                    }else preVL = preVL > 1 ? preVL-- : 0;
+                    } else preVL = preVL > 1 ? preVL-- : 0;
                 }
-            }catch (Exception ex){}
+            } catch (Exception ex) {
+            }
         }
     }
 }

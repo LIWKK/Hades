@@ -20,17 +20,17 @@ public class AuraE extends Check {
 
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if(e instanceof FlyingEvent) {
-            if(user.isSprinting() && ++hits <= 2) {
+        if (e instanceof FlyingEvent) {
+            if (user.isSprinting() && ++hits <= 2) {
                 double accel = Math.abs(user.getDeltaXZ() - user.getLastDeltaXZ());
-                if(accel < 0.027) {
-                    if(++preVL >= 7) {
+                if (accel < 0.027) {
+                    if (++preVL >= 7) {
                         flag(user, "invalid acceleration, a: " + accel);
                     }
-                }else preVL = 0;
+                } else preVL = 0;
             }
-        }else if(e instanceof AttackEvent) {
-            if(((AttackEvent) e).getEntity() instanceof Player) {
+        } else if (e instanceof AttackEvent) {
+            if (((AttackEvent) e).getEntity() instanceof Player) {
                 hits = 0;
             }
         }

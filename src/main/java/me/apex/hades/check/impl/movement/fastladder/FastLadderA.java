@@ -11,21 +11,21 @@ import me.apex.hades.util.PlayerUtil;
 public class FastLadderA extends Check {
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if (e instanceof FlyingEvent){
+        if (e instanceof FlyingEvent) {
             if (user.getLocation().getY() == user.getLastLocation().getY()
                     || !PlayerUtil.isOnClimbable(user.getPlayer())
                     || elapsed(user.getTick(), user.getFlyingTick()) < 40
                     || user.isTakingVelocity()
                     || user.getClimbableTicks() < 5
                     || user.getLocation().getY() < user.getLastLocation().getY()
-                    || user.getDeltaY() != user.getLastDeltaY()){
+                    || user.getDeltaY() != user.getLastDeltaY()) {
                 return;
             }
-            if (Math.abs(user.getLocation().getY() - user.getLastLocation().getY()) >= 0.13){
-                if(++preVL > 3){
+            if (Math.abs(user.getLocation().getY() - user.getLastLocation().getY()) >= 0.13) {
+                if (++preVL > 3) {
                     flag(user, "going up a ladder faster than possible. s: " + user.getDeltaY());
                 }
-            }else preVL = 0;
+            } else preVL = 0;
         }
     }
 }

@@ -8,7 +8,7 @@ import java.util.TreeMap;
 //Credits to Nova41
 public class LVQNeuralNetworkResult {
 
-    private List<Map.Entry<Double, Integer>> distances;
+    private final List<Map.Entry<Double, Integer>> distances;
 
     LVQNeuralNetworkResult(TreeMap<Double, Integer> distances) {
         this.distances = new ArrayList<>(distances.entrySet());

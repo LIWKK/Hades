@@ -14,9 +14,9 @@ public class PlayerUtil {
     /*
     Block Utils
      */
-    
+
     public static boolean isOnGround(Player player) {
-        Object box = ReflectionUtil.modifyBoundingBox(ReflectionUtil.getBoundingBox(player), 0, -0.1001, 0,0,0,0);
+        Object box = ReflectionUtil.modifyBoundingBox(ReflectionUtil.getBoundingBox(player), 0, -0.1001, 0, 0, 0, 0);
 
         return ReflectionUtil.getCollidingBlocks(player, box).size() > 0;
     }
@@ -77,6 +77,7 @@ public class PlayerUtil {
         }
         return false;
     }
+
     public static boolean isOnClimbable(Player player) {
         Object box = ReflectionUtil.getBoundingBox(player);
 
@@ -97,7 +98,7 @@ public class PlayerUtil {
         }
         return false;
     }
-    
+
     //Credits to funkemunky :)
     public static boolean isSolid(Block block) {
         int type = block.getType().getId();
@@ -317,12 +318,12 @@ public class PlayerUtil {
         }
         return false;
     }
-    
+
     //Credits to funkemunky :)
     public static boolean isClimbableBlock(Block block) {
         return block.getType().toString().contains("LADDER") || block.getType().toString().contains("VINE");
     }
-    
+
     //Credits to funkemunky :)
     public static boolean hasBlocksAround(Location loc) {
         Location one = loc.clone().subtract(1, 0, 1), two = loc.clone().add(1, 1, 1);
@@ -346,7 +347,7 @@ public class PlayerUtil {
 
     //Credits to funkemunky
     public static boolean isInStairs(Player player) {
-        Object box = ReflectionUtil.modifyBoundingBox(ReflectionUtil.getBoundingBox(player), 0, -0.5,0,0,0,0);
+        Object box = ReflectionUtil.modifyBoundingBox(ReflectionUtil.getBoundingBox(player), 0, -0.5, 0, 0, 0, 0);
 
         double minX = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "a"), box);
         double minY = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "b"), box);
@@ -355,12 +356,12 @@ public class PlayerUtil {
         double maxY = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "e"), box);
         double maxZ = (double) ReflectionUtil.getInvokedField(ReflectionUtil.getField(box.getClass(), "f"), box);
 
-        for(double x = minX ; x < maxX ; x++) {
-            for(double y = minY ; y < maxY ; y++) {
-                for(double z = minZ ; z < maxZ ; z++) {
+        for (double x = minX; x < maxX; x++) {
+            for (double y = minY; y < maxY; y++) {
+                for (double z = minZ; z < maxZ; z++) {
                     Block block = new Location(player.getWorld(), x, y, z).getBlock();
 
-                    if(BlockUtil.isStair(block)
+                    if (BlockUtil.isStair(block)
                             || BlockUtil.isSlab(block)
                             || block.getType().equals(Material.SKULL)
                             || block.getType().equals(Material.CAKE_BLOCK)) {
@@ -371,7 +372,7 @@ public class PlayerUtil {
         }
         return false;
     }
-    
+
     //Credits to funkemunky
     public static int getPotionEffectLevel(Player player, PotionEffectType pet) {
         for (PotionEffect pe : player.getActivePotionEffects()) {

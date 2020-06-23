@@ -31,8 +31,8 @@ public class LogUtils {
     public static class TextFile {
 
         private File file;
-        private String name;
-        private List<String> lines = new ArrayList<>();
+        private final String name;
+        private final List<String> lines = new ArrayList<>();
 
         public TextFile(String name, String path) {
             this.file = new File(HadesPlugin.getInstance().getDataFolder() + path);

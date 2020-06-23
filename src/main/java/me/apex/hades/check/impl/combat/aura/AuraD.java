@@ -16,20 +16,20 @@ public class AuraD extends Check {
 
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if(e instanceof AttackEvent) {
+        if (e instanceof AttackEvent) {
             Entity target = ((AttackEvent) e).getEntity();
             Entity lastTarget = this.lastTarget != null ? this.lastTarget : target;
             this.lastTarget = target;
 
-            if(target != lastTarget) {
-                if(ticks < 2) {
-                    if(++preVL > 2) {
+            if (target != lastTarget) {
+                if (ticks < 2) {
+                    if (++preVL > 2) {
                         flag(user, "switch aura, t: " + ticks);
                     }
-                }else preVL *= 0.75;
+                } else preVL *= 0.75;
             }
             ticks = 0;
-        }else if(e instanceof FlyingEvent) {
+        } else if (e instanceof FlyingEvent) {
             ticks++;
         }
     }

@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MiscUtil {
-    public static Map<EntityType, Vector> entityDimensions = new HashMap<>();;
+    public static Map<EntityType, Vector> entityDimensions = new HashMap<>();
 
     public static boolean isFood(Material m) {
 
@@ -65,6 +65,7 @@ public class MiscUtil {
             return new Vector(x, y, z);
         }
     }
+
     //Credits to funkemunky:)
     public static Field getFieldByName(Class<?> clazz, String fieldName) {
         try {
@@ -77,6 +78,7 @@ public class MiscUtil {
             return null;
         }
     }
+
     //Credits to funkemunky:)
     private static Vector getBoxMax(Object box) {
         if (hasField(box.getClass(), "d")) {

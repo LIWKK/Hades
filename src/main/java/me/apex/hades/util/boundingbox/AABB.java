@@ -9,7 +9,8 @@ import org.bukkit.util.Vector;
 
 public class AABB {
 
-    private Vector min, max;
+    private final Vector min;
+    private final Vector max;
 
     public AABB(Vector min, Vector max) {
         this(min.getX(), min.getY(), min.getZ(), max.getX(), max.getY(), max.getZ());
@@ -132,7 +133,6 @@ public class AABB {
         if (location.getZ() > max.getZ()) return false;
         if (location.getX() < min.getX()) return false;
         if (location.getY() < min.getY()) return false;
-        if (location.getZ() < min.getZ()) return false;
-        return true;
+        return !(location.getZ() < min.getZ());
     }
 }

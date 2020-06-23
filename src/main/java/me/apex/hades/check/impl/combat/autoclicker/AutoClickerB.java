@@ -15,7 +15,7 @@ public class AutoClickerB extends Check {
 
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if (e instanceof SwingEvent){
+        if (e instanceof SwingEvent) {
             int ticks = this.ticks;
             this.ticks = 0;
 
@@ -28,7 +28,7 @@ public class AutoClickerB extends Check {
                 if (preVL++ > 2)
                     flag(user, "ticks = " + ticks + ", delay = " + diff);
             } else preVL = 0;
-        }else if (e instanceof FlyingEvent){
+        } else if (e instanceof FlyingEvent) {
             ticks++;
         }
     }

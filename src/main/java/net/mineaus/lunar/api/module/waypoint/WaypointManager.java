@@ -25,29 +25,32 @@ public abstract class WaypointManager {
 
     /**
      * create the waypoint instance.
-     * @param name the name of the waypoint.
+     *
+     * @param name     the name of the waypoint.
      * @param location the location of the waypoint.
-     * @param red the red color of the waypoint.
-     * @param green the green color of the waypoint.
-     * @param blue the blue color of the waypoint.
-     * @param forced if the waypoint is forced.
+     * @param red      the red color of the waypoint.
+     * @param green    the green color of the waypoint.
+     * @param blue     the blue color of the waypoint.
+     * @param forced   if the waypoint is forced.
      */
     public abstract void createWaypoint(String name, Location location, int red, int green, int blue, boolean forced);
 
     /**
      * create the personal waypoint instance.
-     * @param name the name of the waypoint.
-     * @param player the player uuid.
+     *
+     * @param name     the name of the waypoint.
+     * @param player   the player uuid.
      * @param location the location of the waypoint.
-     * @param red the red color of the waypoint.
-     * @param green the green color of the waypoint.
-     * @param blue the blue color of the waypoint.
-     * @param forced if the waypoint is forced.
+     * @param red      the red color of the waypoint.
+     * @param green    the green color of the waypoint.
+     * @param blue     the blue color of the waypoint.
+     * @param forced   if the waypoint is forced.
      */
     public abstract void createWaypoint(String name, UUID player, Location location, int red, int green, int blue, boolean forced);
 
     /**
      * delete the waypoint instance.
+     *
      * @param name the name of the waypoint you want to delete.
      */
     public void deleteWaypoint(String name, UUID player) {
@@ -78,12 +81,14 @@ public abstract class WaypointManager {
 
     /**
      * reload the waypoints for the player.
+     *
      * @param player the player to reload the waypoints for.
      */
     public abstract void reloadWaypoints(Player player, boolean enable);
 
     /**
      * enable the minimap instance for the player.
+     *
      * @param player the player who would like to enable minimap.
      * @throws IOException if the packets fuck up.
      */
@@ -91,6 +96,7 @@ public abstract class WaypointManager {
 
     /**
      * get the waypoint instance by the name.
+     *
      * @param name the name of the waypoint.
      * @return the waypoint with the name.
      */

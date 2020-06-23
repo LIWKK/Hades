@@ -11,7 +11,7 @@ public class InvalidC extends Check {
     @Override
     public void onHandle(PacketEvent e, User user) {
         if (e instanceof AttackEvent) {
-            if (((AttackEvent) e).getEntity().getEntityId() == user.getPlayer().getEntityId()){
+            if (((AttackEvent) e).getEntity().getEntityId() == user.getPlayer().getEntityId()) {
                 flag(user, "tried to attack himself!");
             }
         }

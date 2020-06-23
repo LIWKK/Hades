@@ -30,10 +30,10 @@ public abstract class LunarClientAPI {
     /**
      * Send a cooldown packet to the player.
      *
-     * @param player the player instance.
-     * @param name the name of the instance.
+     * @param player   the player instance.
+     * @param name     the name of the instance.
      * @param material the material instance.
-     * @param seconds the seconds the cooldown goes up for.
+     * @param seconds  the seconds the cooldown goes up for.
      * @throws IOException the exception called when something fucks up.
      */
     public abstract void sendCooldown(Player player, String name, Material material, int seconds) throws IOException;
@@ -41,10 +41,10 @@ public abstract class LunarClientAPI {
     /**
      * Send a cooldown packet to the player.
      *
-     * @param player the player instance.
-     * @param name the name of the instance.
+     * @param player   the player instance.
+     * @param name     the name of the instance.
      * @param material the material instance.
-     * @param mill the seconds the cooldown goes up for.
+     * @param mill     the seconds the cooldown goes up for.
      * @throws IOException the exception called when something fucks up.
      */
     public abstract void sendCooldown(Player player, String name, Material material, long mill) throws IOException;
@@ -52,12 +52,12 @@ public abstract class LunarClientAPI {
     /**
      * send a title packet to the player.
      *
-     * @param player the player to send packet to.
-     * @param message the message on the title.
-     * @param size the size of the title.
+     * @param player   the player to send packet to.
+     * @param message  the message on the title.
+     * @param size     the size of the title.
      * @param duration the duration of the title.
-     * @param fadeIn the fadeIn duration of the title.
-     * @param fadeOut the fadeOut duration of the title.
+     * @param fadeIn   the fadeIn duration of the title.
+     * @param fadeOut  the fadeOut duration of the title.
      * @throws IOException the exception called if something goes wrong.
      */
     public abstract void sendTitle(Player player, boolean subTitle, String message, float size, int duration, int fadeIn, int fadeOut) throws IOException;
@@ -65,8 +65,8 @@ public abstract class LunarClientAPI {
     /**
      * Make the player perform an emote.
      *
-     * @param player the player which will be performing the emote.
-     * @param type the emote
+     * @param player   the player which will be performing the emote.
+     * @param type     the emote
      * @param everyone if the packet should be sent to everyone.
      * @throws IOException exception.
      */
@@ -75,10 +75,10 @@ public abstract class LunarClientAPI {
     /**
      * send a notification to the player.
      *
-     * @param player the player instance.
+     * @param player  the player instance.
      * @param message the message to send.
-     * @param level the level to send.
-     * @param delay the delay to send the message for.
+     * @param level   the level to send.
+     * @param delay   the delay to send the message for.
      * @throws IOException the exception it sends to the server.
      */
     public abstract void sendNotification(Player player, String message, Notification level, int delay) throws IOException;
@@ -86,8 +86,8 @@ public abstract class LunarClientAPI {
     /**
      * enable or disable a staff modules
      *
-     * @param player the player instance.
-     * @param module the modules name.
+     * @param player  the player instance.
+     * @param module  the modules name.
      * @param enabled if the module should be enabled or disabled.
      * @throws IOException the exception called if something goes wrong.
      */
@@ -97,11 +97,11 @@ public abstract class LunarClientAPI {
      * update a server rule for the player
      *
      * @param player the player to update server rule for.
-     * @param rule the rule to update for the player.
-     * @param b the boolean value of the rule.
-     * @param i the integer value of the rule.
-     * @param f the float value of the rule.
-     * @param s the string value of the rule.
+     * @param rule   the rule to update for the player.
+     * @param b      the boolean value of the rule.
+     * @param i      the integer value of the rule.
+     * @param f      the float value of the rule.
+     * @param s      the string value of the rule.
      * @throws IOException the exception called if something goes wrong.
      */
     public abstract void updateServerRule(Player player, ServerRule rule, boolean b, int i, float f, String s) throws IOException;
@@ -110,7 +110,7 @@ public abstract class LunarClientAPI {
      * updates the players discord rich presence server name
      *
      * @param player the player to affect.
-     * @param name the server name.
+     * @param name   the server name.
      * @throws IOException the exception called if something goes wrong.
      */
     public abstract void updateServerName(Player player, String name) throws IOException;
@@ -120,7 +120,7 @@ public abstract class LunarClientAPI {
      *
      * @param player the player to send the update to.
      * @param target the player to change name tag.
-     * @param tags the tags to add for the player.
+     * @param tags   the tags to add for the player.
      * @throws IOException the exception called if something goes wrong.
      */
     public abstract void updateNameTag(Player player, Player target, String... tags) throws IOException;
@@ -137,7 +137,7 @@ public abstract class LunarClientAPI {
     /**
      * send the teammate packet to the two players.
      *
-     * @param player the player that is gonna see his team mates.
+     * @param player  the player that is gonna see his team mates.
      * @param targets the targets the player should be teamed with.
      * @throws IOException the exception called if something goes wrong.
      */

@@ -13,27 +13,27 @@ import org.bukkit.event.block.BlockPlaceEvent;
 public class InteractReachA extends Check {
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if (e instanceof InteractEvent){
+        if (e instanceof InteractEvent) {
             InteractEvent packet = (InteractEvent) e;
-            if (packet.getBlockClicked() != null){
+            if (packet.getBlockClicked() != null) {
                 double dist = user.getPlayer().getEyeLocation().toVector().distance(packet.getBlockClicked().getLocation().toVector());
-                if (dist > 6){
-                    if (++preVL > 1){
+                if (dist > 6) {
+                    if (++preVL > 1) {
                         flag(user, "interacted block farther than possible. d: " + dist);
                     }
-                }else preVL = 0;
+                } else preVL = 0;
             }
         }
     }
 
     @EventHandler
-    public void onPlace(BlockPlaceEvent event){
+    public void onPlace(BlockPlaceEvent event) {
         User user = UserManager.getUser(event.getPlayer());
         double dist = user.getPlayer().getEyeLocation().toVector().distance(event.getBlockPlaced().getLocation().toVector());
-        if (dist > 4.8){
-            if (++preVL > 1){
+        if (dist > 4.8) {
+            if (++preVL > 1) {
                 flag(user, "placed block farther than possible. d: " + dist);
             }
-        }else preVL = 0;
+        } else preVL = 0;
     }
 }

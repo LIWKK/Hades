@@ -15,7 +15,8 @@ public class SpeedB extends Check {
         if (e instanceof FlyingEvent) {
             double max = MathUtil.getBaseSpeed(user.getPlayer());
 
-            if (elapsed(user.getTick(), user.getIceTick()) < 40 || elapsed(user.getTick(), user.getSlimeTick()) < 40) max += 0.34;
+            if (elapsed(user.getTick(), user.getIceTick()) < 40 || elapsed(user.getTick(), user.getSlimeTick()) < 40)
+                max += 0.34;
             if (elapsed(user.getTick(), user.getUnderBlockTick()) < 40) max += 0.91;
             if (user.isTakingVelocity()) max += 0.21;
 

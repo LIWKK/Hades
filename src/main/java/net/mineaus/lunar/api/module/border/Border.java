@@ -33,17 +33,17 @@ public abstract class Border {
     /**
      * create the object for a border.
      *
-     * @param name the name of the border.
-     * @param world the world of the border.
-     * @param cancelsExit a setting for the border.
+     * @param name            the name of the border.
+     * @param world           the world of the border.
+     * @param cancelsExit     a setting for the border.
      * @param canShrinkExpand a setting for the border.
-     * @param red the red color of the border.
-     * @param green the green color of the border.
-     * @param blue the blue color of the border.
-     * @param minLocation the minimum location of the border.
-     * @param maxLocation the maximum location of the border.
+     * @param red             the red color of the border.
+     * @param green           the green color of the border.
+     * @param blue            the blue color of the border.
+     * @param minLocation     the minimum location of the border.
+     * @param maxLocation     the maximum location of the border.
      */
-    public Border(String name, World world, boolean cancelsExit, boolean canShrinkExpand, int red, int green, int blue, Location minLocation, Location maxLocation){
+    public Border(String name, World world, boolean cancelsExit, boolean canShrinkExpand, int red, int green, int blue, Location minLocation, Location maxLocation) {
         this.name = name;
         this.world = world;
         this.cancelsExit = cancelsExit;

@@ -64,7 +64,7 @@ public enum Emote {
     WAVE_2(56),
     YES(57);
 
-    private int emoteId;
+    private final int emoteId;
 
     Emote(int emoteId) {
         this.emoteId = emoteId;

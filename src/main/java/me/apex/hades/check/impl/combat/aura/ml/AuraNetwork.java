@@ -12,12 +12,12 @@ import java.util.List;
 @CheckInfo(name = "Aura", type = "ML")
 public class AuraNetwork extends Check {
 
-    private List<Float> angles = new ArrayList<>();
+    private final List<Float> angles = new ArrayList<>();
 
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if(e instanceof AttackEvent) {
-            
+        if (e instanceof AttackEvent) {
+
         }
     }
 

@@ -12,6 +12,7 @@ public class WrappedPacketOutTransaction extends WrappedPacket implements Sendab
     private int windowId;
     private short actionNumber;
     private boolean accepted;
+
     public WrappedPacketOutTransaction(final Object packet) {
         super(packet);
     }
@@ -22,6 +23,7 @@ public class WrappedPacketOutTransaction extends WrappedPacket implements Sendab
         this.actionNumber = actionNumber;
         this.accepted = accepted;
     }
+
     @Override
     protected void setup() {
         this.windowId = windowIdAccessor.get(packet);
@@ -74,7 +76,7 @@ public class WrappedPacketOutTransaction extends WrappedPacket implements Sendab
 
         windowIdAccessor = Reflection.getField(packetClass, int.class, 0);
         actionNumberAccessor = Reflection.getField(packetClass, short.class, 0);
-        acceptedAccessor= Reflection.getField(packetClass, boolean.class, 0);
+        acceptedAccessor = Reflection.getField(packetClass, boolean.class, 0);
     }
 
 }

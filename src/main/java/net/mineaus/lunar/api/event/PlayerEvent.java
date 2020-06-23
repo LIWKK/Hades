@@ -7,13 +7,13 @@ import java.util.UUID;
 
 @Getter
 public class PlayerEvent extends BaseEvent {
-	private Player player;
+    private final Player player;
 
-	public PlayerEvent(Player player) {
-		this.player = player;
-	}
+    public PlayerEvent(Player player) {
+        this.player = player;
+    }
 
-	public UUID getUniqueId() {
-		return player.getUniqueId();
-	}
+    public UUID getUniqueId() {
+        return player.getUniqueId();
+    }
 }

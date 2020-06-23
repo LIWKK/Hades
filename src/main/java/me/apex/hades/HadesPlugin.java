@@ -83,7 +83,7 @@ public class HadesPlugin extends JavaPlugin {
 
                 User user = getLunarClientAPI().getUserManager().getPlayerData(player);
 
-                if (user != null && !user.isLunarClient()){
+                if (user != null && !user.isLunarClient()) {
                     user.setLunarClient(true);
                     new AuthenticateEvent(player).call(this);
                 }
@@ -106,7 +106,7 @@ public class HadesPlugin extends JavaPlugin {
         executorService.shutdownNow();
     }
 
-    public static String getPrefix(){
+    public static String getPrefix() {
         return ChatUtil.color(instance.getConfig().getString("lang.prefix"));
     }
 }

@@ -16,7 +16,7 @@ public final class Reflection {
     public static String VERSION = OBC_PREFIX.replace("org.bukkit.craftbukkit", "").replace(".", "");
 
     // Variable replacement
-    private static Pattern MATCH_VARIABLE = Pattern.compile("\\{([^\\}]+)\\}");
+    private static final Pattern MATCH_VARIABLE = Pattern.compile("\\{([^\\}]+)\\}");
 
     private Reflection() {
         // Seal class

@@ -12,7 +12,7 @@ public class CriticalsA extends Check {
 
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if (e instanceof AttackEvent){
+        if (e instanceof AttackEvent) {
             if (user.getLocation().getBlock().getRelative(BlockFace.DOWN).isLiquid()
                     || user.getLocation().getBlock().getRelative(BlockFace.UP).isLiquid())
                 return;
@@ -20,11 +20,11 @@ public class CriticalsA extends Check {
             if (!user.isOnGround() && !user.getPlayer().getAllowFlight()) {
                 if (user.getLocation().getY() % 1.0D == 0.0D) {
                     if (user.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().isSolid()) {
-                        if (preVL++ >= 2){
+                        if (preVL++ >= 2) {
                             flag(user, "tried to hit critical on ground!");
                         }
                     }
-                }else preVL = 0;
+                } else preVL = 0;
             }
         }
     }

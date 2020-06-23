@@ -130,7 +130,7 @@ public class WrappedClass {
 
     public WrappedMethod getDeclaredMethodByType(Class<?> type, int index) {
         for (Method method : this.parent.getDeclaredMethods()) {
-            if(method.getReturnType().equals(type) && index-- <= 0) {
+            if (method.getReturnType().equals(type) && index-- <= 0) {
                 return new WrappedMethod(this, method);
             }
         }
@@ -139,7 +139,7 @@ public class WrappedClass {
 
     public WrappedMethod getMethodByType(Class<?> type, int index) throws NullPointerException {
         for (Method method : this.parent.getMethods()) {
-            if(method.getReturnType().equals(type) && index-- <= 0) {
+            if (method.getReturnType().equals(type) && index-- <= 0) {
                 return new WrappedMethod(this, method);
             }
         }

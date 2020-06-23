@@ -26,7 +26,7 @@ public class FlyA extends Check {
                     && user.getTick() > 5
                     && elapsed(user.getTick(), user.getVelocityTick()) > 100) {
                 TaskUtil.task(() -> {
-                    if (!PlayerUtil.isClimbableBlock(user.getLocation().subtract(0,1,0).getBlock())){
+                    if (!PlayerUtil.isClimbableBlock(user.getLocation().subtract(0, 1, 0).getBlock())) {
                         flag(user, "y motion higher than 0, m: " + user.getDeltaY());
                     }
                 });
