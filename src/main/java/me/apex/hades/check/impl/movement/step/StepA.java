@@ -15,7 +15,7 @@ public class StepA extends Check {
     public void onHandle(PacketEvent e, User user) {
         if (e instanceof FlyingEvent){
             FlyingEvent event = (FlyingEvent)e;
-            if (!user.isInLiquid() && !user.isInWeb() && elapsed(user.getTick(), user.getTeleportTick()) > 20){
+            if (!user.isInLiquid() && elapsed(user.getTick(), user.getFlyingTick()) > 40 && !user.isInWeb() && elapsed(user.getTick(), user.getTeleportTick()) > 20){
                 double max = 0.7 + PlayerUtil.getPotionEffectLevel(user.getPlayer(), PotionEffectType.JUMP) * 0.2;
                 if (user.getDeltaY() > max && MathUtil.isRoughlyEqual(Math.abs(user.getLastDeltaY()), 0, 0.1)){
                     flag(user, "accelerating faster than possible on Y axis. d: " + user.getDeltaY());

@@ -50,6 +50,9 @@ public class MovementProcessor extends Processor {
             user.setLastDeltaPitch(lastDeltaPitch);
             user.setDeltaPitch(deltaPitch);
 
+            //Update Flying
+            if(user.getPlayer().isFlying()) user.setFlyingTick(user.getTick());
+
             //Update Block Check
             ((BlockProcessor)user.getBlockProcessor()).process(user);
 

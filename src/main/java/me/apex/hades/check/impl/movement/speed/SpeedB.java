@@ -21,7 +21,7 @@ public class SpeedB extends Check {
 
             if (user.getDeltaXZ() > max
                     && elapsed(user.getTick(), user.getTeleportTick()) > 40
-                    && !user.getPlayer().getAllowFlight()) {
+                    && elapsed(user.getTick(), user.getFlyingTick()) > 40) {
                 if (++preVL > 7) {
                     flag(user, "breached limit, s: " + user.getDeltaXZ());
                 }

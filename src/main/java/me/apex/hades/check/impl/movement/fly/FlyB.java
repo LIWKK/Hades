@@ -19,7 +19,7 @@ public class FlyB extends Check {
                     && !user.isInLiquid()
                     && !user.isInWeb()
                     && !user.isOnClimbableBlock()
-                    && !user.getPlayer().getAllowFlight()
+                    && elapsed(user.getTick(), user.getFlyingTick()) > 40
                     && user.getPlayer().getVehicle() == null
                     && user.getTick() > 5
                     && !PlayerUtil.isOnClimbable(user.getPlayer())

@@ -21,7 +21,7 @@ public class FlyA extends Check {
                     && !user.isInWeb()
                     && !user.isOnClimbableBlock()
                     && !PlayerUtil.isOnClimbable(user.getPlayer())
-                    && !user.getPlayer().getAllowFlight()
+                    && elapsed(user.getTick(), user.getFlyingTick()) > 40
                     && user.getPlayer().getVehicle() == null
                     && user.getTick() > 5
                     && elapsed(user.getTick(), user.getVelocityTick()) > 100) {

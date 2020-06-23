@@ -14,7 +14,7 @@ public class FastLadderA extends Check {
         if (e instanceof FlyingEvent){
             if (user.getLocation().getY() == user.getLastLocation().getY()
                     || !PlayerUtil.isOnClimbable(user.getPlayer())
-                    || user.getPlayer().isFlying()
+                    || elapsed(user.getTick(), user.getFlyingTick()) < 40
                     || user.isTakingVelocity()
                     || user.getClimbableTicks() < 5
                     || user.getLocation().getY() < user.getLastLocation().getY()

@@ -16,7 +16,7 @@ public class SpeedA extends Check {
             double max = MathUtil.getBaseSpeed(user.getPlayer());
             double diff = user.getDeltaXZ() - user.getLastDeltaXZ();
             if (diff == 0.0 && user.getDeltaXZ() > max
-                    && !user.getPlayer().getAllowFlight()
+                    && elapsed(user.getTick(), user.getFlyingTick()) > 40
                     && !user.isTakingVelocity()
                     && elapsed(user.getTick(), user.getTeleportTick()) > 20) {
                 flag(user, "consistent speed, diff: " + diff);

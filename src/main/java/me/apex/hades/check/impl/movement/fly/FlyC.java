@@ -27,7 +27,7 @@ public class FlyC extends Check {
                 double lastDeviation = this.lastDeviation;
                 this.lastDeviation = deviation;
 
-                if(!user.isOnGround() && !PlayerUtil.isClimbableBlock(user.getLocation().getBlock()) && !PlayerUtil.isOnGround(user.getPlayer()) && !user.getPlayer().isFlying() && !user.getPlayer().isInsideVehicle()) {
+                if(!user.isOnGround() && !PlayerUtil.isClimbableBlock(user.getLocation().getBlock()) && !PlayerUtil.isOnGround(user.getPlayer()) && elapsed(user.getTick(), user.getFlyingTick()) > 40 && !user.getPlayer().isInsideVehicle()) {
                     if(deviation == 0.0D) {
                         flag(user, "deviation = " + deviation);
                     }

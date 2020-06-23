@@ -43,6 +43,7 @@ public class CheckManager {
             AuraE.class,
             AuraF.class,
             AuraG.class,
+            AuraH.class,
             AutoClickerA.class,
             AutoClickerB.class,
             AutoClickerC.class,
