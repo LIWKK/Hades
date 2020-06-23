@@ -12,7 +12,7 @@ public class InvalidC extends Check {
     public void onHandle(PacketEvent e, User user) {
         if (e instanceof AttackEvent) {
             if (((AttackEvent) e).getEntity().getEntityId() == user.getPlayer().getEntityId()) {
-                flag(user, "tried to attack himself!");
+                flag(user, "tried to attack it/her/him self!");
             }
         }
     }
