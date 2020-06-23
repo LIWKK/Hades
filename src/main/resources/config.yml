@@ -111,14 +111,13 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     criticals:
-      mitigate: true
+      
       a:
         enabled: true
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     reach:
-      mitigate: true
       a:
         enabled: true
         punishable: false
@@ -131,7 +130,7 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     fly:
-      mitigate: true
+      
       a:
         enabled: true
         punishable: true
@@ -148,7 +147,6 @@ checks:
         max-vl: 20
         punish-command: 'ban %player% %prefix%Cheating'
     invalid:
-      mitigate: true
       a:
         enabled: true
         punishable: true
@@ -175,14 +173,12 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     noslow:
-      mitigate: true
       a:
         enabled: true
         punishable: true
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     scaffold:
-      mitigate: true
       a:
         enabled: true
         punishable: true
@@ -194,7 +190,6 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     speed:
-      mitigate: true
       a:
         enabled: true
         punishable: true
@@ -240,7 +235,6 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     fastuse:
-      mitigate: true
       a:
         enabled: true
         punishable: true

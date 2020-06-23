@@ -41,7 +41,7 @@ public class User {
     //Location
     private Location location, lastLocation, lastOnGroundLocation;
     //Ticks
-    private int tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, lastVelocityId, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks, climbableTick, climbableTicks, serverGroundTick, optifineTick, flyingTick;
+    private int tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, lastVelocityId, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks, climbableTick, climbableTicks, serverGroundTick, optifineTick, flyingTick, sprintingTicks = 0;
     //Deltas
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, mouseSensitivity;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, deltaAngle;

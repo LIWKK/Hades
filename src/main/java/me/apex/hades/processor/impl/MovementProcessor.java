@@ -98,6 +98,12 @@ public class MovementProcessor extends Processor {
 
             //Update Block Check
             ((BlockProcessor)user.getBlockProcessor()).process(user);
+        }else if (PacketUtil.isFlyingPacket(e.getPacketName())){
+            if (user.isSprinting()){
+                user.setSprintingTicks(user.getSprintingTicks() + 1);
+            }else if (!user.isSprinting()) {
+                user.setSprintingTicks(0);
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package me.apex.hades.command.impl;
 
+import me.apex.hades.HadesPlugin;
 import me.apex.hades.command.CommandAdapter;
 import me.apex.hades.command.UserInput;
 import me.apex.hades.user.User;
@@ -29,6 +30,13 @@ public class HadesCommand extends CommandAdapter {
                         user.sendMessage("%prefix%&7Please specify a username to lookup!");
                     }
                 }
+            }else{
+                user.sendMessage("&8&m----------------------------------------");
+                user.sendMessage("                       " + HadesPlugin.getPrefix());
+                user.sendMessage(" ");
+                user.sendMessage(" &f/hades info <player> : " + "&7View information of a player");
+                user.sendMessage(" &f/hades alerts : " + "&7Enable anti-cheat notifications!");
+                user.sendMessage("&8&m----------------------------------------");
             }
             return true;
         }
