@@ -44,7 +44,6 @@ public class TaskUtil {
         return Bukkit.getScheduler().runTaskLater(plugin, runnable, delay);
     }
 
-
     public static BukkitTask taskLaterAsync(Runnable runnable, Plugin plugin, long delay) {
         return Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, runnable, delay);
     }

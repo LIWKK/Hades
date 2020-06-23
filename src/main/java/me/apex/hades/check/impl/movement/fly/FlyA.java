@@ -24,7 +24,7 @@ public class FlyA extends Check {
                     && user.getPlayer().getVehicle() == null
                     && user.getTick() > 5
                     && elapsed(user.getTick(), user.getVelocityTick()) > 100) {
-                flag(user, "y motion higher than 0, m: " + user.getDeltaY());
+                flag(user, "y motion higher than 0, m: " + user.getDeltaY() + ", " + user.getPlayer().getLocation().getBlock().getType().toString());
             }
         }
     }

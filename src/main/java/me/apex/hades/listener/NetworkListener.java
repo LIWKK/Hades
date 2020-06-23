@@ -24,6 +24,8 @@ import me.apex.hades.user.User;
 import me.apex.hades.user.UserManager;
 import me.apex.hades.util.PacketUtil;
 
+import java.util.Random;
+
 public class NetworkListener implements PacketListener {
 
     @PacketHandler
@@ -83,16 +85,15 @@ public class NetworkListener implements PacketListener {
                         packet.isLook(),
                         packet.isOnGround());
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.KEEP_ALIVE)) {
+                WrappedPacketInKeepAlive packet = new WrappedPacketInKeepAlive(e.getPacket());
+                if (user.isVerifyingVelocity() && packet.getId() == user.getLastVelocityId()) {
+                    user.setVerifyingVelocity(false);
+                    user.setVelocityTick(user.getTick());
+                }
                 callEvent = new PingEvent();
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_PLACE)) {
                 WrappedPacketInBlockPlace packet = new WrappedPacketInBlockPlace(e.getPlayer(), e.getPacket());
                 callEvent = new PlaceEvent(packet.getBlockPosition(), packet.getItemStack());
-            } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.KEEP_ALIVE)) {
-                WrappedPacketInKeepAlive packet = new WrappedPacketInKeepAlive(e.getPacket());
-                if (user.isVerifyingVelocity() && packet.getId() == user.getLastVelocityId()) {
-                    user.setTakingVelocity(true);
-                    user.setVerifyingVelocity(false);
-                }
             }
             PacketEvent finalCallEvent = callEvent;
             if (!HadesPlugin.getInstance().getConfig().getBoolean("checks.exempt-players") || !user.getPlayer().hasPermission(HadesPlugin.getInstance().getBasePermission() + ".exempt.checks"))
@@ -111,10 +112,13 @@ public class NetworkListener implements PacketListener {
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Server.ENTITY_VELOCITY)) {
                 WrappedPacketOutEntityVelocity packet = new WrappedPacketOutEntityVelocity(e.getPacket());
                 if (e.getPlayer().getEntityId() == packet.getEntityId()) {
-                    user.setVelocityTick(user.getTick());
                     user.setVelocityX(packet.getVelocityX());
                     user.setVelocityY(packet.getVelocityY());
                     user.setVelocityZ(packet.getVelocityZ());
+                    Random random = new Random();
+                    user.setVerifyingVelocity(true);
+                    user.setLastVelocityId(random.nextInt() + user.getTick());
+                    PacketUtil.sendKeepAlive(user, user.getLastVelocityId());
                     if (!HadesPlugin.getInstance().getConfig().getBoolean("checks.exempt-players") || !user.getPlayer().hasPermission(HadesPlugin.getInstance().getBasePermission() + ".exempt.checks"))
                         user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(new VelocityEvent(packet.getEntityId(), packet.getVelocityX(), packet.getVelocityY(), packet.getVelocityZ()), user)));
                 }

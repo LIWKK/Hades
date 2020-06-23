@@ -78,7 +78,7 @@ public class User {
     }
 
     public boolean isOnClimbableBlock() {
-        return PlayerUtil.isClimbableBlock(location.getBlock()) && PlayerUtil.isClimbableBlock(location.add(0, 1, 0).getBlock());
+        return PlayerUtil.isOnClimbable(player);
     }
 
     public boolean isInLiquid() {
