@@ -28,10 +28,10 @@ public class PacketUtil {
     Packet Types
      */
 
-    public static void sendKeepAlive(User user) {
+    public static void sendKeepAlive(User user, int id) {
         try {
             Constructor<?> keepAliveConstructor = getNMSClass("PacketPlayOutKeepAlive").getConstructor(int.class);
-            Object packet = keepAliveConstructor.newInstance(-1);
+            Object packet = keepAliveConstructor.newInstance(id);
             sendPacket(packet, user);
         } catch (Exception x) {
             x.printStackTrace();
@@ -41,7 +41,7 @@ public class PacketUtil {
     public static void sendTransaction(User user, int id) {
         try {
             Constructor<?> transactionConstructor = getNMSClass("PacketPlayOutTransaction").getConstructor(int.class, short.class, boolean.class);
-            Object packet = transactionConstructor.newInstance((int) id, (short) 0, false);
+            Object packet = transactionConstructor.newInstance((int) Math.abs(id), (short) user.getTick(), false);
             sendPacket(packet, user);
         } catch (Exception x) {
             x.printStackTrace();

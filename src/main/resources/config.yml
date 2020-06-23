@@ -47,12 +47,6 @@ checks:
   exempt-players: false
   broadcast-punishments: true
   detections:
-    aim:
-      a:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
     aura:
       a:
         enabled: true
@@ -111,7 +105,6 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     criticals:
-      
       a:
         enabled: true
         punishable: true
@@ -130,7 +123,6 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     fly:
-      
       a:
         enabled: true
         punishable: true
@@ -141,7 +133,8 @@ checks:
         punishable: true
         max-vl: 20
         punish-command: 'ban %player% %prefix%Cheating'
-      c:
+    motion:
+      a:
         enabled: true
         punishable: true
         max-vl: 20
@@ -217,12 +210,6 @@ checks:
         max-vl: 10
         punish-command: 'ban %player% %prefix%Cheating'
     fastladder:
-      a:
-        enabled: true
-        punishable: true
-        max-vl: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-    step:
       a:
         enabled: true
         punishable: true

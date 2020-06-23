@@ -1,7 +1,5 @@
 package me.apex.hades.check.impl.movement.noslow;
 
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.enums.ClientVersion;
 import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
@@ -20,11 +18,11 @@ public class NoSlowA extends Check {
                 } else preVL = 0;
             }*/
             //You cant sprint while sneaking on old versions.
-            if (PacketEvents.getClientVersion(user.getPlayer()) == ClientVersion.v_1_8) {
+            /*if (PacketEvents.getClientVersion(user.getPlayer()) == ClientVersion.v_1_8) {
                 if (user.isSprinting() && user.isSneaking()) {
                     flag(user, "is sprinting while sneaking.");
                 }
-            }
+            }*/
         }
     }
 }

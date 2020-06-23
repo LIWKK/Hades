@@ -14,7 +14,7 @@ import io.github.retrooper.packetevents.packetwrappers.in.blockplace.WrappedPack
 import io.github.retrooper.packetevents.packetwrappers.in.chat.WrappedPacketInChat;
 import io.github.retrooper.packetevents.packetwrappers.in.entityaction.WrappedPacketInEntityAction;
 import io.github.retrooper.packetevents.packetwrappers.in.flying.WrappedPacketInFlying;
-import io.github.retrooper.packetevents.packetwrappers.in.transaction.WrappedPacketInTransaction;
+import io.github.retrooper.packetevents.packetwrappers.in.keepalive.WrappedPacketInKeepAlive;
 import io.github.retrooper.packetevents.packetwrappers.in.useentity.WrappedPacketInUseEntity;
 import io.github.retrooper.packetevents.packetwrappers.out.entityvelocity.WrappedPacketOutEntityVelocity;
 import me.apex.hades.HadesPlugin;
@@ -87,9 +87,9 @@ public class NetworkListener implements PacketListener {
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_PLACE)) {
                 WrappedPacketInBlockPlace packet = new WrappedPacketInBlockPlace(e.getPlayer(), e.getPacket());
                 callEvent = new PlaceEvent(packet.getBlockPosition(), packet.getItemStack());
-            } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.TRANSACTION)) {
-                WrappedPacketInTransaction packet = new WrappedPacketInTransaction(e.getPacket());
-                if (user.isVerifyingVelocity() && packet.getWindowId() == user.getLastVelocityId()) {
+            } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.KEEP_ALIVE)) {
+                WrappedPacketInKeepAlive packet = new WrappedPacketInKeepAlive(e.getPacket());
+                if (user.isVerifyingVelocity() && packet.getId() == user.getLastVelocityId()) {
                     user.setTakingVelocity(true);
                     user.setVerifyingVelocity(false);
                 }

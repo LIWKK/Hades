@@ -1,9 +1,8 @@
 package me.apex.hades.processor.impl;
 
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.packetwrappers.out.transaction.WrappedPacketOutTransaction;
 import me.apex.hades.processor.Processor;
 import me.apex.hades.user.User;
+import me.apex.hades.util.PacketUtil;
 
 import java.util.Random;
 
@@ -19,7 +18,7 @@ public class VelocityProcessor extends Processor {
                 Random random = new Random();
                 user.setVerifyingVelocity(true);
                 user.setLastVelocityId(random.nextInt());
-                PacketEvents.sendPacket(user.getPlayer(), new WrappedPacketOutTransaction(user.getLastVelocityId(), (short) 0, false));
+                PacketUtil.sendKeepAlive(user, user.getLastVelocityId());
             }
         } else {
             user.setVelocityTick(user.getTick());
