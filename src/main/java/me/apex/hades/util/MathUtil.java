@@ -4,16 +4,17 @@ import me.apex.hades.check.impl.combat.aura.ml.model.LabeledData;
 import net.minecraft.util.org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -308,37 +309,6 @@ public class MathUtil {
         float yaw = (float) (Math.atan2(zDiff, xDiff) * 180.0D / 3.141592653589793D) - 90.0F;
         float pitch = (float) -(Math.atan2(yDiff, dist) * 180.0D / 3.141592653589793D);
         return new float[]{yaw, pitch > 90 ? 90 : pitch < -90 ? -90 : pitch};
-    }
-
-    public static Map<EntityType, Vector> entityDimensions;
-
-
-    public MathUtil() {
-        entityDimensions = new HashMap<>();
-        entityDimensions.put(EntityType.WOLF, new Vector(0.31, 0.8, 0.31));
-        entityDimensions.put(EntityType.SHEEP, new Vector(0.45, 1.3, 0.45));
-        entityDimensions.put(EntityType.COW, new Vector(0.45, 1.3, 0.45));
-        entityDimensions.put(EntityType.PIG, new Vector(0.45, 0.9, 0.45));
-        entityDimensions.put(EntityType.MUSHROOM_COW, new Vector(0.45, 1.3, 0.45));
-        entityDimensions.put(EntityType.WITCH, new Vector(0.31, 1.95, 0.31));
-        entityDimensions.put(EntityType.BLAZE, new Vector(0.31, 1.8, 0.31));
-        entityDimensions.put(EntityType.PLAYER, new Vector(0.3, 1.8, 0.3));
-        entityDimensions.put(EntityType.VILLAGER, new Vector(0.31, 1.8, 0.31));
-        entityDimensions.put(EntityType.CREEPER, new Vector(0.31, 1.8, 0.31));
-        entityDimensions.put(EntityType.GIANT, new Vector(1.8, 10.8, 1.8));
-        entityDimensions.put(EntityType.SKELETON, new Vector(0.31, 1.8, 0.31));
-        entityDimensions.put(EntityType.ZOMBIE, new Vector(0.31, 1.8, 0.31));
-        entityDimensions.put(EntityType.SNOWMAN, new Vector(0.35, 1.9, 0.35));
-        entityDimensions.put(EntityType.HORSE, new Vector(0.7, 1.6, 0.7));
-        entityDimensions.put(EntityType.ENDER_DRAGON, new Vector(1.5, 1.5, 1.5));
-
-        entityDimensions.put(EntityType.ENDERMAN, new Vector(0.31, 2.9, 0.31));
-        entityDimensions.put(EntityType.CHICKEN, new Vector(0.2, 0.7, 0.2));
-        entityDimensions.put(EntityType.OCELOT, new Vector(0.31, 0.7, 0.31));
-        entityDimensions.put(EntityType.SPIDER, new Vector(0.7, 0.9, 0.7));
-        entityDimensions.put(EntityType.WITHER, new Vector(0.45, 3.5, 0.45));
-        entityDimensions.put(EntityType.IRON_GOLEM, new Vector(0.7, 2.9, 0.7));
-        entityDimensions.put(EntityType.GHAST, new Vector(2, 4, 2));
     }
 
     public static int floor(double var0) {

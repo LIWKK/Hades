@@ -11,6 +11,7 @@ import me.apex.hades.check.impl.combat.velocity.VelocityA;
 import me.apex.hades.check.impl.movement.fastladder.FastLadderA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
 import me.apex.hades.check.impl.movement.fly.FlyB;
+import me.apex.hades.check.impl.movement.motion.MotionA;
 import me.apex.hades.check.impl.movement.noslow.NoSlowA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldB;
@@ -19,7 +20,6 @@ import me.apex.hades.check.impl.movement.speed.SpeedB;
 import me.apex.hades.check.impl.movement.speed.SpeedC;
 import me.apex.hades.check.impl.movement.speed.SpeedD;
 import me.apex.hades.check.impl.movement.sprint.SprintA;
-import me.apex.hades.check.impl.movement.motion.MotionA;
 import me.apex.hades.check.impl.other.invalid.*;
 import me.apex.hades.check.impl.other.vape.Vape;
 import me.apex.hades.check.impl.player.fastuse.FastUseA;
@@ -29,12 +29,11 @@ import me.apex.hades.check.impl.player.nofall.NoFallA;
 import me.apex.hades.check.impl.player.timer.TimerA;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CheckManager {
 
-    private static final Class[] checks = new Class[]{
+    private static final Class[] CHECKS = new Class[]{
             AuraA.class,
             AuraB.class,
             AuraC.class,
@@ -76,14 +75,14 @@ public class CheckManager {
     };
 
     public static List<Check> loadChecks() {
-        List<Check> checklist = new ArrayList<>();
-        Arrays.asList(checks).forEach(check -> {
+        final List<Check> checklist = new ArrayList<>();
+        for(Class clazz : CHECKS) {
             try {
-                checklist.add((Check) check.getConstructor().newInstance());
+                checklist.add((Check) clazz.getConstructor().newInstance());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        });
+        }
         return checklist;
     }
 

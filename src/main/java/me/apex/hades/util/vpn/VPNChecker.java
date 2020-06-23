@@ -20,15 +20,15 @@ public enum VPNChecker {
         if (ips.containsKey(user.address())) {
             return ips.get(user.address());
         } else {
-            try {
-                if (checkAddress(user.address())) {
-                    return true;
-                }
-            } catch (Exception ex) {
+            user.getExecutorService().execute(() -> {
+                try {
+                    checkAddress(user.address());
+                } catch (Exception ex) {
 
-            }
+                }
+            });
         }
-        return false;
+        return (ips.containsKey(user.address())) && ips.get(user.address());
     }
 
     private boolean checkAddress(String address) throws Exception {

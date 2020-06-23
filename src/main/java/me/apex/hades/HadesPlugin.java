@@ -6,7 +6,6 @@ import me.apex.hades.command.CommandManager;
 import me.apex.hades.command.impl.HadesCommand;
 import me.apex.hades.listener.BukkitListener;
 import me.apex.hades.listener.NetworkListener;
-import me.apex.hades.util.MathUtil;
 import me.apex.hades.util.lunar.BufferUtils;
 import me.apex.hades.util.lunar.implementation.LunarClientImplementation;
 import me.apex.hades.util.reflection.VersionUtil;
@@ -25,11 +24,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 @Getter
 public class HadesPlugin extends JavaPlugin {
-    private static HadesPlugin instance;
-
-    public static HadesPlugin getInstance() {
-        return instance;
-    }
+    @Getter private static HadesPlugin instance;
 
     private VersionUtil versionUtil;
     public static String bukkitVersion;
@@ -52,7 +47,6 @@ public class HadesPlugin extends JavaPlugin {
         executorService = Executors.newSingleThreadScheduledExecutor();
 
         //Utils
-        new MathUtil();
         versionUtil = new VersionUtil();
 
         //Save Config
