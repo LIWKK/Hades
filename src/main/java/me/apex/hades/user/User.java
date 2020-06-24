@@ -14,6 +14,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executor;
@@ -52,7 +53,7 @@ public class User {
     private Executor executorService;
     private long joinTime;
 
-    Vector direction;
+    List<Location>locations = new ArrayList<>();
 
     public User(Player player) {
         this.player = player;

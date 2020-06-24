@@ -12,7 +12,7 @@ import org.bukkit.scheduler.BukkitTask;
  */
 public class TaskUtil {
 
-    public static BukkitTask taskTimer(Runnable runnable, Plugin plugin, long delay, long interval) {
+    private static BukkitTask taskTimer(Runnable runnable, Plugin plugin, long delay, long interval) {
         return Bukkit.getScheduler().runTaskTimer(plugin, runnable, delay, interval);
     }
 
@@ -20,7 +20,7 @@ public class TaskUtil {
         return taskTimer(runnable, HadesPlugin.getInstance(), delay, interval);
     }
 
-    public static BukkitTask taskTimerAsync(Runnable runnable, Plugin plugin, long delay, long interval) {
+    private static BukkitTask taskTimerAsync(Runnable runnable, Plugin plugin, long delay, long interval) {
         return Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, runnable, delay, interval);
     }
 
@@ -28,7 +28,7 @@ public class TaskUtil {
         return taskTimerAsync(runnable, HadesPlugin.getInstance(), delay, interval);
     }
 
-    public static BukkitTask task(Runnable runnable, Plugin plugin) {
+    private static BukkitTask task(Runnable runnable, Plugin plugin) {
         return Bukkit.getScheduler().runTask(plugin, runnable);
     }
 
@@ -36,8 +36,12 @@ public class TaskUtil {
         return task(runnable, HadesPlugin.getInstance());
     }
 
-    public static BukkitTask taskAsync(Runnable runnable, Plugin plugin) {
+    private static BukkitTask taskAsync(Runnable runnable, Plugin plugin) {
         return Bukkit.getScheduler().runTaskAsynchronously(plugin, runnable);
+    }
+
+    public static BukkitTask taskAsync(Runnable runnable) {
+        return taskAsync(runnable, HadesPlugin.getInstance());
     }
 
     public static BukkitTask taskLater(Runnable runnable, Plugin plugin, long delay) {

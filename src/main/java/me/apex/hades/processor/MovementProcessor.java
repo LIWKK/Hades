@@ -155,6 +155,11 @@ public class MovementProcessor {
             } else if (!user.isSprinting()) {
                 user.setSprintingTicks(0);
             }
+
+            if (user.getLocations().size() >= 20){
+                user.getLocations().remove(0);
+            }
+            user.getLocations().add(user.getLocation());
         }
     }
 

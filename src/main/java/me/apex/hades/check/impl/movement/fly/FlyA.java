@@ -6,6 +6,7 @@ import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.util.PlayerUtil;
+import me.apex.hades.util.TaskUtil;
 
 @CheckInfo(name = "Fly", type = "A")
 public class FlyA extends Check {
@@ -24,7 +25,11 @@ public class FlyA extends Check {
                     && user.getPlayer().getVehicle() == null
                     && user.getTick() > 5
                     && elapsed(user.getTick(), user.getVelocityTick()) > 100) {
-                flag(user, "y motion higher than 0, m: " + user.getDeltaY() + ", " + user.getPlayer().getLocation().getBlock().getType().toString());
+                TaskUtil.task(() -> {
+                    if (!PlayerUtil.isClimbableBlock(user.getLocation().subtract(0,1,0).getBlock())){
+                        flag(user, "y motion higher than 0, m: " + user.getDeltaY() + ", " + user.getPlayer().getLocation().getBlock().getType().toString());
+                    }
+                });
             }
         }
     }
