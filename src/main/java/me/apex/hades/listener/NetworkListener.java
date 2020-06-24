@@ -88,7 +88,7 @@ public class NetworkListener implements PacketListener {
                 WrappedPacketInKeepAlive packet = new WrappedPacketInKeepAlive(e.getPacket());
                 if (user.isVerifyingVelocity() && packet.getId() == user.getLastVelocityId()) {
                     user.setVerifyingVelocity(false);
-                    user.setVelocityTick(user.getTick());
+                    user.setVelocityTick(user.getTick() + 1);
                 }
                 callEvent = new PingEvent();
             } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.BLOCK_PLACE)) {
@@ -117,7 +117,7 @@ public class NetworkListener implements PacketListener {
                     user.setVelocityZ(packet.getVelocityZ());
                     Random random = new Random();
                     user.setVerifyingVelocity(true);
-                    user.setLastVelocityId(random.nextInt() + user.getTick());
+                    user.setLastVelocityId(Math.abs(random.nextInt()));
                     PacketUtil.sendKeepAlive(user, user.getLastVelocityId());
                     if (!HadesPlugin.getInstance().getConfig().getBoolean("checks.exempt-players") || !user.getPlayer().hasPermission(HadesPlugin.getInstance().getBasePermission() + ".exempt.checks"))
                         user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(new VelocityEvent(packet.getEntityId(), packet.getVelocityX(), packet.getVelocityY(), packet.getVelocityZ()), user)));
