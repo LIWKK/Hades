@@ -11,24 +11,24 @@ import me.apex.hades.user.User;
 public class AutoClickerB extends Check {
 
     private int ticks;
-    private long lastSwing;
+    private double clicksPerSecond;
 
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if (e instanceof SwingEvent) {
-            int ticks = this.ticks;
-            this.ticks = 0;
+        if(e instanceof SwingEvent) {
+            if(user.isDigging() || ticks > 10) {
+                ticks = 0;
+                return;
+            }
 
-            long lastSwing = -this.lastSwing;
-            this.lastSwing = System.currentTimeMillis();
+            double speed = 1000 / (ticks * 50.0);
+            clicksPerSecond = ((clicksPerSecond * 19) + speed) / 20;
 
-            long diff = System.currentTimeMillis() - lastSwing;
+            //This sometimes says Infinity?
+            //Bukkit.broadcastMessage("" + clicksPerSecond");
 
-            if (ticks < 2 && diff < 50.0D) {
-                if (preVL++ > 2)
-                    flag(user, "ticks = " + ticks + ", delay = " + diff);
-            } else preVL = 0;
-        } else if (e instanceof FlyingEvent) {
+            ticks = 0;
+        }else if(e instanceof FlyingEvent) {
             ticks++;
         }
     }
