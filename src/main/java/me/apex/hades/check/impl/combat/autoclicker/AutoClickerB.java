@@ -21,7 +21,7 @@ public class AutoClickerB extends Check {
                 return;
             }
 
-            double speed = 1000 / (ticks * 50.0);
+            double speed = 1000 / ((ticks * 50.0) > 0 ? (ticks * 50.0) : 1); //Says infinite maybe because ticks * 50.0 is 0 sometimes?
             clicksPerSecond = ((clicksPerSecond * 19) + speed) / 20;
 
             //This sometimes says Infinity?
