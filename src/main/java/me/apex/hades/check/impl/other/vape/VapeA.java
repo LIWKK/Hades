@@ -14,9 +14,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
 @CheckInfo(name = "Vape", type = "A")
-public class Vape extends Check implements Listener, PluginMessageListener {
+public class VapeA extends Check implements Listener, PluginMessageListener {
 
-    public Vape() {
+    public VapeA() {
         Bukkit.getServer().getPluginManager().registerEvents(this, HadesPlugin.getInstance());
     }
 

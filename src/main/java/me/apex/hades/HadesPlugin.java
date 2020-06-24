@@ -3,13 +3,11 @@ package me.apex.hades;
 import io.github.retrooper.packetevents.PacketEvents;
 import lombok.Getter;
 import me.apex.hades.command.CommandManager;
-import me.apex.hades.command.impl.HadesCommand;
 import me.apex.hades.listener.BukkitListener;
 import me.apex.hades.listener.NetworkListener;
 import me.apex.hades.util.lunar.BufferUtils;
 import me.apex.hades.util.lunar.implementation.LunarClientImplementation;
 import me.apex.hades.util.reflection.VersionUtil;
-import me.apex.hades.util.text.ChatUtil;
 import net.mineaus.lunar.api.LunarClientAPI;
 import net.mineaus.lunar.api.event.impl.AuthenticateEvent;
 import net.mineaus.lunar.api.user.User;
@@ -52,16 +50,18 @@ public class HadesPlugin extends JavaPlugin {
         //Save Config
         saveDefaultConfig();
 
+        //Register Commands
+        CommandManager.setup(this);
+
+        //Register Config
+        HadesConfig.updateSettings();
+
         //Register Listeners
         Bukkit.getPluginManager().registerEvents(new BukkitListener(), this);
 
         //Register PacketEvents
         PacketEvents.start(this);
         PacketEvents.getEventManager().registerListener(new NetworkListener());
-
-        //Register Commands
-        CommandManager.setup(this);
-        CommandManager.register(new HadesCommand());
 
         //Register Lunar Client API
         lunarClientAPI = new LunarClientImplementation(this);
@@ -89,18 +89,11 @@ public class HadesPlugin extends JavaPlugin {
                 }
             }
         });
-
-        //Register Base Permission
-        basePermission = getConfig().getString("system.base-permission");
     }
 
     @Override
     public void onDisable() {
         PacketEvents.stop();
         executorService.shutdownNow();
-    }
-
-    public static String getPrefix() {
-        return ChatUtil.color(instance.getConfig().getString("lang.prefix"));
     }
 }

@@ -2,6 +2,7 @@ package me.apex.hades.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.apex.hades.HadesConfig;
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckManager;
@@ -35,7 +36,7 @@ public class User {
     //Location
     private Location location, lastLocation, lastOnGroundLocation;
     //Ticks
-    private int tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, lastVelocityId, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks, climbableTick, climbableTicks, serverGroundTick, optifineTick, flyingTick, sprintingTicks = 0;
+    private int flagDelay, tick, digTick, iceTick, iceTicks, slimeTick, slimeTicks, velocityTick, lastVelocityId, underBlockTick, teleportTick, liquidTick, liquidTicks, airTick, airTicks, groundTick, groundTicks, totalBlockUpdates, solidLiquidTicks, climbableTick, climbableTicks, serverGroundTick, optifineTick, flyingTick, sprintingTicks = 0;
     //Deltas
     private double deltaY, lastDeltaY, deltaXZ, lastDeltaXZ, mouseSensitivity;
     private float deltaYaw, lastDeltaYaw, deltaPitch, lastDeltaPitch, deltaAngle;
@@ -106,6 +107,6 @@ public class User {
 
     //Send Message
     public void sendMessage(String message) {
-        player.sendMessage(ChatUtil.color(message.replace("%prefix%", HadesPlugin.getPrefix()).replace("%player%", player.getName())));
+        player.sendMessage(ChatUtil.color(message.replace("%prefix%", HadesConfig.PREFIX).replace("%player%", player.getName())));
     }
 }

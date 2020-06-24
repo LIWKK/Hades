@@ -21,7 +21,7 @@ import me.apex.hades.check.impl.movement.speed.SpeedC;
 import me.apex.hades.check.impl.movement.speed.SpeedD;
 import me.apex.hades.check.impl.movement.sprint.SprintA;
 import me.apex.hades.check.impl.other.invalid.*;
-import me.apex.hades.check.impl.other.vape.Vape;
+import me.apex.hades.check.impl.other.vape.VapeA;
 import me.apex.hades.check.impl.player.fastuse.FastUseA;
 import me.apex.hades.check.impl.player.interactreach.InteractReachA;
 import me.apex.hades.check.impl.player.invmove.InvMoveA;
@@ -33,7 +33,7 @@ import java.util.List;
 
 public class CheckManager {
 
-    private static final Class[] CHECKS = new Class[]{
+    public static final Class[] CHECKS = new Class[]{
             AuraA.class,
             AuraB.class,
             AuraC.class,
@@ -71,7 +71,7 @@ public class CheckManager {
             TimerA.class,
             InteractReachA.class,
             FastUseA.class,
-            Vape.class
+            VapeA.class
     };
 
     public static List<Check> loadChecks() {
