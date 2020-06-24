@@ -1,21 +1,16 @@
-package me.apex.hades.processor.impl;
+package me.apex.hades.processor;
 
 import io.github.retrooper.packetevents.event.impl.PacketReceiveEvent;
 import io.github.retrooper.packetevents.packet.Packet;
 import io.github.retrooper.packetevents.packetwrappers.in.flying.WrappedPacketInFlying;
-import me.apex.hades.processor.Processor;
 import me.apex.hades.user.User;
 import me.apex.hades.util.PacketUtil;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
-public class MovementProcessor extends Processor {
+public class MovementProcessor {
 
-    public MovementProcessor(User user) {
-        super(user);
-    }
-
-    public void process(PacketReceiveEvent e) {
+    public static void process(User user, PacketReceiveEvent e) {
         if (PacketUtil.isPositionPacket(e.getPacketName())) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
             user.setOnGround(packet.isOnGround());
@@ -54,16 +49,14 @@ public class MovementProcessor extends Processor {
             if (user.getPlayer().isFlying()) user.setFlyingTick(user.getTick());
 
             //Update Block Check
-            ((BlockProcessor) user.getBlockProcessor()).process(user);
+            BlockProcessor.process(user);
 
             //Update Optifine
-            ((OptifineProcessor) user.getOptifineProcessor()).process(user);
+            OptifineProcessor.process(user);
 
             user.setDeltaAngle(Math.abs(user.getDeltaYaw()) + Math.abs(user.getDeltaPitch()));
 
             user.setDirection(new Vector(-Math.sin(user.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F, 0, Math.cos(user.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F));
-
-            ((VelocityProcessor) user.getVelocityProcessor()).process();
         } else if (PacketUtil.isRotationPacket(e.getPacketName())) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
             user.setOnGround(packet.isOnGround());
@@ -102,16 +95,14 @@ public class MovementProcessor extends Processor {
             if (user.getPlayer().isFlying()) user.setFlyingTick(user.getTick());
 
             //Update Block Check
-            ((BlockProcessor) user.getBlockProcessor()).process(user);
+            BlockProcessor.process(user);
 
             //Update Optifine
-            ((OptifineProcessor) user.getOptifineProcessor()).process(user);
+            OptifineProcessor.process(user);
 
             user.setDeltaAngle(Math.abs(user.getDeltaYaw()) + Math.abs(user.getDeltaPitch()));
 
             user.setDirection(new Vector(-Math.sin(user.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F, 0, Math.cos(user.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F));
-
-            ((VelocityProcessor) user.getVelocityProcessor()).process();
         } else if (e.getPacketName().equalsIgnoreCase(Packet.Client.FLYING)) {
             WrappedPacketInFlying packet = new WrappedPacketInFlying(e.getPacket());
             user.setOnGround(packet.isOnGround());
@@ -150,16 +141,14 @@ public class MovementProcessor extends Processor {
             if (user.getPlayer().isFlying()) user.setFlyingTick(user.getTick());
 
             //Update Block Check
-            ((BlockProcessor) user.getBlockProcessor()).process(user);
+            BlockProcessor.process(user);
 
             //Update Optifine
-            ((OptifineProcessor) user.getOptifineProcessor()).process(user);
+            OptifineProcessor.process(user);
 
             user.setDeltaAngle(Math.abs(user.getDeltaYaw()) + Math.abs(user.getDeltaPitch()));
 
             user.setDirection(new Vector(-Math.sin(user.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F, 0, Math.cos(user.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F));
-
-            ((VelocityProcessor) user.getVelocityProcessor()).process();
         } else if (PacketUtil.isFlyingPacket(e.getPacketName())) {
             if (user.isSprinting()) {
                 user.setSprintingTicks(user.getSprintingTicks() + 1);

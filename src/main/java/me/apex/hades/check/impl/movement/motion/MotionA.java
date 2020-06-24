@@ -15,7 +15,8 @@ public class MotionA extends Check {
         if (e instanceof FlyingEvent) {
             if (!user.isInLiquid() && elapsed(user.getTick(), user.getFlyingTick()) > 40 && !user.isInWeb() && elapsed(user.getTick(), user.getTeleportTick()) > 20) {
                 double max = 0.7 + PlayerUtil.getPotionEffectLevel(user.getPlayer(), PotionEffectType.JUMP) * 0.1;
-                if (user.getDeltaY() > max && user.getPlayer().getVelocity().getY() < -0.075 && !user.isTakingVelocity()) {
+                if (user.getDeltaY() > max && user.getPlayer().getVelocity().getY() < -0.075
+                        && elapsed(user.getTick(), user.getVelocityTick()) > 20) {
                     flag(user, "accelerating faster than possible on Y axis. d: " + user.getDeltaY());
                 }
             }

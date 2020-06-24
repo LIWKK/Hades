@@ -1,4 +1,4 @@
-package me.apex.hades.processor.impl;
+package me.apex.hades.processor;
 
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.user.User;

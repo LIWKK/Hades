@@ -5,11 +5,6 @@ import lombok.Setter;
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckManager;
-import me.apex.hades.processor.Processor;
-import me.apex.hades.processor.impl.BlockProcessor;
-import me.apex.hades.processor.impl.MovementProcessor;
-import me.apex.hades.processor.impl.OptifineProcessor;
-import me.apex.hades.processor.impl.VelocityProcessor;
 import me.apex.hades.util.PlayerUtil;
 import me.apex.hades.util.reflection.ReflectionUtil;
 import me.apex.hades.util.text.ChatUtil;
@@ -34,10 +29,8 @@ public class User {
 
     //Checks
     private final List<Check> checks;
-    //Processors
-    private final Processor movementProcessor = new MovementProcessor(this), blockProcessor = new BlockProcessor(this), velocityProcessor = new VelocityProcessor(this), optifineProcessor = new OptifineProcessor(this);
     //Booleans
-    private boolean alerts, usingLunarClient, onGround, collidedGround, digging, isSprinting, isSneaking, chunkLoaded, takingVelocity, verifyingVelocity;
+    private boolean alerts, usingLunarClient, onGround, collidedGround, digging, isSprinting, isSneaking, chunkLoaded, verifyingVelocity;
     //Location
     private Location location, lastLocation, lastOnGroundLocation;
     //Ticks

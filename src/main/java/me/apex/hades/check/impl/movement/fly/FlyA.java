@@ -14,7 +14,7 @@ public class FlyA extends Check {
         if (e instanceof FlyingEvent) {
             if (user.getDeltaY() >= 0.0
                     && user.getAirTicks() > 6
-                    && !user.isTakingVelocity()
+                    && elapsed(user.getTick(), user.getVelocityTick()) > 20
                     && user.getPlayer().getVelocity().getY() < -0.075
                     && elapsed(user.getTick(), user.getLiquidTick()) > 20
                     && !user.isInWeb()

@@ -25,7 +25,7 @@ public class FlyB extends Check {
                 }
             }
 
-            if(elapsed(user.getTick(), user.getLiquidTick()) < 20 || user.isTakingVelocity() || elapsed(user.getTick(), user.getFlyingTick()) < 20 || elapsed(user.getTick(), user.getClimbableTick()) < 20 || user.getPlayer().getVelocity().getY() > -0.075) return;
+            if(elapsed(user.getTick(), user.getLiquidTick()) < 20 || elapsed(user.getTick(), user.getVelocityTick()) <= 20 || elapsed(user.getTick(), user.getFlyingTick()) < 20 || elapsed(user.getTick(), user.getClimbableTick()) < 20 || user.getPlayer().getVelocity().getY() > -0.075) return;
 
             if(user.getAirTicks() > 6) {
                 if(Math.abs(user.getDeltaY() - predict) > 1E-12) {

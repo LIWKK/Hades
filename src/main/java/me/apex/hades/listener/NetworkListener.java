@@ -19,7 +19,7 @@ import io.github.retrooper.packetevents.packetwrappers.in.useentity.WrappedPacke
 import io.github.retrooper.packetevents.packetwrappers.out.entityvelocity.WrappedPacketOutEntityVelocity;
 import me.apex.hades.HadesPlugin;
 import me.apex.hades.event.impl.packetevents.*;
-import me.apex.hades.processor.impl.MovementProcessor;
+import me.apex.hades.processor.MovementProcessor;
 import me.apex.hades.user.User;
 import me.apex.hades.user.UserManager;
 import me.apex.hades.util.PacketUtil;
@@ -33,7 +33,7 @@ public class NetworkListener implements PacketListener {
         User user = UserManager.getUser(e.getPlayer());
         if (user != null) {
             //Process Movement
-            ((MovementProcessor) user.getMovementProcessor()).process(e);
+            MovementProcessor.process(user, e);
 
             //Player Vars
             if (e.getPacketName().equalsIgnoreCase(Packet.Client.ENTITY_ACTION)) {
