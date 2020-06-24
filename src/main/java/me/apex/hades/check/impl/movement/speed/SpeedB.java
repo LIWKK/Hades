@@ -12,7 +12,7 @@ public class SpeedB extends Check {
 
     @Override
     public void onHandle(PacketEvent e, User user) {
-        if (e instanceof FlyingEvent && !user.isTakingVelocity()) {
+        if (e instanceof FlyingEvent) {
             double max = MathUtil.getBaseSpeed(user.getPlayer());
 
             if (elapsed(user.getTick(), user.getIceTick()) < 40 || elapsed(user.getTick(), user.getSlimeTick()) < 40)

@@ -52,6 +52,8 @@ public class User {
     //Thread
     private Executor executorService;
     private long joinTime;
+    //Direction
+    private Vector direction;
 
     List<Location>locations = new ArrayList<>();
 

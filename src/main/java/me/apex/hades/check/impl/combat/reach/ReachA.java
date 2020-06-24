@@ -51,7 +51,7 @@ public class ReachA extends Check {
                         avgReach = total / reachs.size();
                     }
 
-                    if (avgReach >= HadesPlugin.getInstance().getConfig().getDouble("Max-Reach") && dist > 2.6) {
+                    if (avgReach >= HadesPlugin.getInstance().getConfig().getDouble("Max-Reach") && dist > 2.9) {
                         if (++preVL > 1) {
                             flag(user, "hitting farther than possbile. Dist: " + avgReach);
                         }
