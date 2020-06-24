@@ -22,7 +22,7 @@ public class Ray {
     // Origin: Player Eye Location
     // Direction: Player-looking direction
     public static Ray from(User user) {
-        return new Ray(user.getPlayer().getEyeLocation().toVector(), user.getLastLocation().getDirection());
+        return new Ray(user.getPlayer().getEyeLocation().toVector(), user.getLocation().getDirection());
     }
 
     // (Used for rotating vectors) Creates a vector in the horizontal plane (y=0) perpendicular to a vector.
@@ -83,6 +83,6 @@ public class Ray {
     // Same as above, but no need to construct object.
     public static Location getPoint(User player, double distance) {
         Vector point = Ray.from(player).getPoint(distance);
-        return new Location(player.getLastLocation().getWorld(), point.getX(), point.getY(), point.getZ());
+        return new Location(player.getLocation().getWorld(), point.getX(), point.getY(), point.getZ());
     }
 }

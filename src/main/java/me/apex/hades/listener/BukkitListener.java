@@ -77,7 +77,7 @@ public class BukkitListener implements Listener {
         if (user != null) {
             TaskUtil.taskAsync(() -> {
                 user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(new InteractEvent(e.getAction(), e.getItem(), e.getClickedBlock(), e.getBlockFace(), e.useItemInHand(), e.useInteractedBlock()), user)));
-            }, HadesPlugin.getInstance());
+            });
         }
     }
 
@@ -87,7 +87,7 @@ public class BukkitListener implements Listener {
         if (user != null) {
             TaskUtil.taskAsync(() -> {
                 user.getExecutorService().execute(() -> user.getChecks().stream().filter(check -> check.enabled).forEach(check -> check.onHandle(new ItemConsumeEvent(e.getItem()), user)));
-            }, HadesPlugin.getInstance());
+            });
         }
     }
 }

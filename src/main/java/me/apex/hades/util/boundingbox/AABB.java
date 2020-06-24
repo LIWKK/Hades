@@ -5,7 +5,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
-// Credits to Tecnio
 
 public class AABB {
 
@@ -32,11 +31,11 @@ public class AABB {
     }
 
     private Vector getMin(User player) {
-        return player.getLastLocation().toVector().add(new Vector(-0.3, 0, -0.3));
+        return player.getLocation().toVector().add(new Vector(-0.3, 0, -0.3));
     }
 
     private Vector getMax(User player) {
-        return player.getLastLocation().toVector().add(new Vector(0.3, 1.8, 0.3));
+        return player.getLocation().toVector().add(new Vector(0.3, 1.8, 0.3));
     }
 
     private Vector getMin(Entity entity) {

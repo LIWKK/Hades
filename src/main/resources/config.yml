@@ -38,7 +38,7 @@ anti-vpn:
 
 #Check Values
 Max-CPS: 20
-Max-Reach: 3.4
+Max-Reach: 3.2
 
 #Check Configuration
 #NOTE: Experimental checks are preset to not punish players
@@ -46,6 +46,8 @@ checks:
   #Will exempt any players with permission 'base-permission'.exempt.checks
   exempt-players: false
   broadcast-punishments: true
+  # If enabled, will disable alert setting saving and auto enable alerts on join!
+  auto-turn-on-alerts: false
   detections:
     aura:
       a:

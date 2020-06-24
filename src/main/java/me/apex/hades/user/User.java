@@ -19,6 +19,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executor;
@@ -36,6 +37,7 @@ public class User {
     private final List<Check> checks;
     //Processors
     private final Processor movementProcessor = new MovementProcessor(this), blockProcessor = new BlockProcessor(this), velocityProcessor = new VelocityProcessor(this), optifineProcessor = new OptifineProcessor(this);
+    Vector direction;
     //Booleans
     private boolean alerts, usingLunarClient, onGround, collidedGround, digging, isSprinting, isSneaking, chunkLoaded, takingVelocity, verifyingVelocity;
     //Location
@@ -59,7 +61,7 @@ public class User {
     private Executor executorService;
     private long joinTime;
 
-    Vector direction;
+    List<Location>locations = new ArrayList<>();
 
     public User(Player player) {
         this.player = player;

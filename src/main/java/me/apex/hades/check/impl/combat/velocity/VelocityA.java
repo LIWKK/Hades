@@ -17,7 +17,8 @@ public class VelocityA extends Check {
                 if(user.getVelocityY() > 0.2
                         && user.getDeltaY() <= user.getVelocityY() * 0.99
                         && elapsed(user.getTick(), user.getUnderBlockTick()) > 20
-                        && elapsed(user.getTick(), user.getLiquidTick()) > 20) {
+                        && elapsed(user.getTick(), user.getLiquidTick()) > 20
+                        && !user.isInWeb()) {
                     flag(user, "didnt take expected velocity, d: " + user.getDeltaY() + ", v: " + (user.getVelocityY() * 0.99));
                 }
             }
