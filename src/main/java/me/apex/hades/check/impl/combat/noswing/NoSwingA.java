@@ -1,4 +1,4 @@
-package me.apex.hades.check.impl.combat.aura;
+package me.apex.hades.check.impl.combat.noswing;
 
 import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
@@ -8,8 +8,8 @@ import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.event.impl.packetevents.SwingEvent;
 import me.apex.hades.user.User;
 
-@CheckInfo(name = "Aura", type = "F")
-public class AuraF extends Check {
+@CheckInfo(name = "NoSwing", type = "A")
+public class NoSwingA extends Check {
 
     private boolean lastWasArm;
 

@@ -1,4 +1,4 @@
-package me.apex.hades.check.impl.combat.aura;
+package me.apex.hades.check.impl.combat.autoblock;
 
 import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
@@ -8,8 +8,8 @@ import me.apex.hades.event.impl.packetevents.PlaceEvent;
 import me.apex.hades.user.User;
 import me.apex.hades.util.PacketUtil;
 
-@CheckInfo(name = "Aura", type = "G")
-public class AuraG extends Check {
+@CheckInfo(name = "AutoBlock", type = "A")
+public class AutoBlockA extends Check {
 
     private int ticks;
 
@@ -17,6 +17,7 @@ public class AuraG extends Check {
     public void onHandle(PacketEvent e, User user) {
         if (e instanceof PlaceEvent) {
             PlaceEvent packet = (PlaceEvent) e;
+
             if (ticks < 2 && PacketUtil.isBlockPacket(packet.getItemStack().getType().toString())) {
                 if (preVL++ > 4)
                     flag(user, "ticks = " + ticks);

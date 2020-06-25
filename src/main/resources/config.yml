@@ -45,212 +45,231 @@ checks:
   flag-format: '&8(&c&l!&r&8) &c%player% &7failed &c%check% %checktype% &8(&c%ping%ms&8)'
   dev-flag-format: '&8(&c&l!&r&8) &c%player% &7failed &c%check% %checktype% &8(&c%ping%ms&8) &7VL:%vl%'
   detections:
+    angle:
+      a:
+        enabled: true
+        punishable: true
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
+      b:
+        enabled: true
+        punishable: true
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     aura:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       b:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       c:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      d:
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
+    autoblock:
+      a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      e:
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
+      b:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      f:
-        enabled: true
-        punishable: true
-        max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
-      g:
-        enabled: true
-        punishable: true
-        max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     autoclicker:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       b:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       c:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       d:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
+    badrotations:
+      a:
+        enabled: true
+        punishable: true
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     criticals:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
+    noswing:
+      a:
+        enabled: true
+        punishable: true
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     reach:
       a:
         enabled: true
         punishable: false
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     velocity:
       a:
         enabled: true
         punishable: false
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     fly:
       a:
         enabled: true
         punishable: true
-        max-violations: 20
-        punish-command: 'ban %player% %prefix%Cheating'
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       b:
         enabled: true
         punishable: true
-        max-violations: 20
-        punish-command: 'ban %player% %prefix%Cheating'
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     motion:
       a:
         enabled: true
         punishable: true
-        max-violations: 20
-        punish-command: 'ban %player% %prefix%Cheating'
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
+      b:
+        enabled: true
+        punishable: true
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     invalid:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       b:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       c:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       d:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       e:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     noslow:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     scaffold:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       b:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     speed:
       a:
         enabled: true
         punishable: true
-        max-violations: 20
-        punish-command: 'ban %player% %prefix%Cheating'
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       b:
         enabled: true
         punishable: true
-        max-violations: 20
-        punish-command: 'ban %player% %prefix%Cheating'
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       c:
         enabled: true
         punishable: true
-        max-violations: 20
-        punish-command: 'ban %player% %prefix%Cheating'
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       d:
         enabled: true
         punishable: true
-        max-violations: 20
-        punish-command: 'ban %player% %prefix%Cheating'
+        max-violations: 10
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     sprint:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     fastladder:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     invmove:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     fastuse:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     nofall:
       a:
         enabled: true
         punishable: true
         max-violations: 5
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     timer:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
       b:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     interactreach:
       a:
         enabled: true
         punishable: true
         max-violations: 10
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'
     vape:
       a:
         enabled: true
         punishable: true
         max-violations: 1
-        punish-command: 'ban %player% %prefix%Cheating'
+        punish-command: 'ban %player% %prefix% Unfair Advantage'

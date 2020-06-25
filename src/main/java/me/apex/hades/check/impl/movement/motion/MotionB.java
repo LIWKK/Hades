@@ -1,4 +1,4 @@
-package me.apex.hades.check.impl.combat.aura;
+package me.apex.hades.check.impl.movement.motion;
 
 import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
@@ -8,8 +8,8 @@ import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
 import org.bukkit.entity.Player;
 
-@CheckInfo(name = "Aura", type = "E")
-public class AuraE extends Check {
+@CheckInfo(name = "Motion", type = "B")
+public class MotionB extends Check {
 
     @Override
     public void init() {

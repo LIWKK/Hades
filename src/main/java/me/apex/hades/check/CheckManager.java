@@ -1,17 +1,26 @@
 package me.apex.hades.check;
 
-import me.apex.hades.check.impl.combat.aura.*;
+import me.apex.hades.check.impl.combat.angle.AngleA;
+import me.apex.hades.check.impl.combat.angle.AngleB;
+import me.apex.hades.check.impl.combat.aura.AuraA;
+import me.apex.hades.check.impl.combat.aura.AuraB;
+import me.apex.hades.check.impl.combat.aura.AuraC;
+import me.apex.hades.check.impl.combat.autoblock.AutoBlockA;
+import me.apex.hades.check.impl.combat.autoblock.AutoBlockB;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerA;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerB;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerC;
 import me.apex.hades.check.impl.combat.autoclicker.AutoClickerD;
+import me.apex.hades.check.impl.combat.badrotations.BadRotationsA;
 import me.apex.hades.check.impl.combat.criticals.CriticalsA;
+import me.apex.hades.check.impl.combat.noswing.NoSwingA;
 import me.apex.hades.check.impl.combat.reach.ReachA;
 import me.apex.hades.check.impl.combat.velocity.VelocityA;
 import me.apex.hades.check.impl.movement.fastladder.FastLadderA;
 import me.apex.hades.check.impl.movement.fly.FlyA;
 import me.apex.hades.check.impl.movement.fly.FlyB;
 import me.apex.hades.check.impl.movement.motion.MotionA;
+import me.apex.hades.check.impl.movement.motion.MotionB;
 import me.apex.hades.check.impl.movement.noslow.NoSlowA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldA;
 import me.apex.hades.check.impl.movement.scaffold.ScaffoldB;
@@ -34,24 +43,26 @@ import java.util.List;
 public class CheckManager {
 
     public static final Class[] CHECKS = new Class[]{
+            AngleA.class,
+            AngleB.class,
             AuraA.class,
             AuraB.class,
             AuraC.class,
-            AuraD.class,
-            AuraE.class,
-            AuraF.class,
-            AuraG.class,
-            AuraH.class,
+            AutoBlockA.class,
+            AutoBlockB.class,
             AutoClickerA.class,
             AutoClickerB.class,
             AutoClickerC.class,
             AutoClickerD.class,
+            BadRotationsA.class,
             CriticalsA.class,
+            NoSwingA.class,
             ReachA.class,
             VelocityA.class,
             FlyA.class,
             FlyB.class,
             MotionA.class,
+            MotionB.class,
             InvalidA.class,
             InvalidB.class,
             InvalidC.class,

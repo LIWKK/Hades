@@ -4,37 +4,33 @@ import io.github.retrooper.packetevents.event.PacketEvent;
 import me.apex.hades.check.Check;
 import me.apex.hades.check.CheckInfo;
 import me.apex.hades.event.impl.packetevents.AttackEvent;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
 import me.apex.hades.user.User;
-import me.apex.hades.util.MathUtil;
-
-import java.util.Deque;
-import java.util.LinkedList;
+import org.bukkit.entity.Entity;
 
 @CheckInfo(name = "Aura", type = "C")
 public class AuraC extends Check {
 
-    private final Deque<Double> diffs = new LinkedList<>();
-    private double average = 100;
+    private int ticks;
+    private Entity lastTarget;
 
     @Override
     public void onHandle(PacketEvent e, User user) {
         if (e instanceof AttackEvent) {
-            double diff = Math.abs(user.getDeltaYaw() - user.getLastDeltaYaw());
-            if (diff > 0.0) diffs.add(diff);
+            Entity target = ((AttackEvent) e).getEntity();
+            Entity lastTarget = this.lastTarget != null ? this.lastTarget : target;
+            this.lastTarget = target;
 
-            if (diffs.size() >= 5) {
-                double deviation = MathUtil.getStandardDeviation(diffs.stream().mapToDouble(d -> d).toArray());
-
-                average = ((average * 19) + deviation) / 20;
-
-                if (average < 5) {
+            if (target != lastTarget) {
+                if (ticks < 2) {
                     if (++preVL > 2) {
-                        flag(user, "low average deviation, a: " + average);
+                        flag(user, "switch aura, t: " + ticks);
                     }
                 } else preVL *= 0.75;
-
-                diffs.clear();
             }
+            ticks = 0;
+        } else if (e instanceof FlyingEvent) {
+            ticks++;
         }
     }
 

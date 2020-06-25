@@ -4,6 +4,7 @@ import me.apex.hades.check.CheckManager;
 import me.apex.hades.command.CommandManager;
 import me.apex.hades.command.impl.AlertCommand;
 import me.apex.hades.util.text.ChatUtil;
+import org.bukkit.Bukkit;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,23 +74,15 @@ public class HadesConfig {
             PUNISH_COMMANDS.clear();
 
             for(Class check : CheckManager.CHECKS) {
-                String rawCheck = check.getSimpleName();
-
-                String checkName = "";
-                String checkType = "";
-
-                char[] chars = rawCheck.toCharArray();
-                for(int i = 0; i < rawCheck.length(); i++) {
-                    if(String.valueOf(chars[i]).equals(String.valueOf(chars[i]).toUpperCase()) && i + 1 == rawCheck.length()) {
-                        checkName = rawCheck.split(String.valueOf(chars[i]))[0];
-                        checkType = String.valueOf(chars[i]);
-                    }
-                }
+                String checkName = check.getSimpleName().substring(0, check.getSimpleName().length() - 1);
+                String checkType = String.valueOf(check.getSimpleName().toCharArray()[check.getSimpleName().length() - 1]);
 
                 boolean enabled = HadesPlugin.getInstance().getConfig().getBoolean("checks.detections." + checkName.toLowerCase() + "." + checkType.toLowerCase() + ".enabled");
                 boolean punishable = HadesPlugin.getInstance().getConfig().getBoolean("checks.detections." + checkName.toLowerCase() + "." + checkType.toLowerCase() + ".punishable");
                 int maxVL = HadesPlugin.getInstance().getConfig().getInt("checks.detections." + checkName.toLowerCase() + "." + checkType.toLowerCase() + ".max-violations");
                 String punishCommand = HadesPlugin.getInstance().getConfig().getString("checks.detections." + checkName.toLowerCase() + "." + checkType.toLowerCase() + ".punish-command");
+
+                Bukkit.getLogger().info("checks.detections." + checkName.toLowerCase() + "." + checkType.toLowerCase() + ".enabled");
 
                 ENABLED_CHECKS.put(check.getSimpleName(), enabled);
                 PUNISHABLE_CHECKS.put(check.getSimpleName(), punishable);

@@ -19,7 +19,7 @@ public class AuraA extends Check {
 
             if (timeDiff < 5) {
                 if (++preVL > 10) {
-                    flag(user, "low flying delay, d: " + timeDiff);
+                    flag(user, "post aura, d: " + timeDiff);
                 }
             } else preVL = 0;
         } else if (e instanceof FlyingEvent) {
