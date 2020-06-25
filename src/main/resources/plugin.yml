@@ -1,4 +1,4 @@
 name: Hades
-version: 1.0
-main: me.apex.hades.Hades
+version: 1.0-PRE-3.76
+main: me.apex.hades.HadesPlugin
 author: undersquire

@@ -1,50 +1,27 @@
 package me.apex.hades.check.impl.combat.autoclicker;
 
-import me.apex.hades.check.api.Check;
-import me.apex.hades.check.api.CheckInfo;
-import me.apex.hades.objects.User;
-import me.apex.hades.utils.MathUtils;
-import me.apex.hades.utils.PacketUtils;
-import me.purplex.packetevents.event.impl.PacketReceiveEvent;
-import me.purplex.packetevents.packet.Packet;
+import io.github.retrooper.packetevents.event.PacketEvent;
+import me.apex.hades.check.Check;
+import me.apex.hades.check.CheckInfo;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.event.impl.packetevents.SwingEvent;
+import me.apex.hades.user.User;
 
 @CheckInfo(name = "AutoClicker", type = "D")
 public class AutoClickerD extends Check {
 
-	public AutoClickerD() { dev = true; }
-	
-    private int ticks, lastTicks;
-    private double lastDelay;
-    boolean digging;
+    private int ticks;
 
     @Override
-    public void onPacket(PacketReceiveEvent e, User user) {
-        if (e.getPacketName().equalsIgnoreCase(Packet.Client.ARM_ANIMATION)) {
-            int ticks = this.ticks;
+    public void onHandle(PacketEvent e, User user) {
+        if (e instanceof SwingEvent) {
+            if (ticks < 1) {
+                if (preVL++ > 2)
+                    flag(user, "ticks = " + ticks);
+            } else preVL = 0;
+
             this.ticks = 0;
-
-            int lastTicks = this.lastTicks;
-            this.lastTicks = ticks;
-
-            double delay = Math.abs(ticks - lastTicks);
-            double lastDelay = this.lastDelay;
-            this.lastDelay = delay;
-
-            if (delay != 0 || lastDelay != 0) {
-                double lcd = MathUtils.lcd((long) delay, (long) lastDelay);
-                double fixedLcd = lcd * Math.PI;
-                double remainder = Math.IEEEremainder(lcd, lastDelay) / Math.PI;
-
-                if (!user.isDigging()) {
-                    if (Double.isNaN(remainder)) {
-                        if (vl++ > 2.5) {
-                            flag(user, "remainder = " + remainder);
-                        }
-                    } else vl -= vl > 0 ? 0.5 : 0;
-                }
-            } else vl *= 0.75;
-
-        } else if (PacketUtils.isFlyingPacket(e.getPacketName())) {
+        } else if (e instanceof FlyingEvent) {
             ticks++;
         }
     }

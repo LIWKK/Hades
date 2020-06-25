@@ -1,35 +1,32 @@
 package me.apex.hades.check.impl.movement.speed;
 
-import org.bukkit.Bukkit;
-
-import me.apex.hades.check.api.Check;
-import me.apex.hades.check.api.CheckInfo;
-import me.apex.hades.objects.User;
-import me.apex.hades.utils.PacketUtils;
-import me.apex.hades.utils.PlayerUtils;
-import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import io.github.retrooper.packetevents.event.PacketEvent;
+import me.apex.hades.check.Check;
+import me.apex.hades.check.CheckInfo;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.user.User;
+import me.apex.hades.util.MathUtil;
 
 @CheckInfo(name = "Speed", type = "B")
 public class SpeedB extends Check {
 
     @Override
-    public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
-            if (user.getTeleportTicks() > 0) return;
+    public void onHandle(PacketEvent e, User user) {
+        if (e instanceof FlyingEvent) {
+            double max = MathUtil.getBaseSpeed(user.getPlayer());
 
-            double dist = user.getDeltaXZ();
-            double lastDist = user.getLastDeltaXZ();
+            if (elapsed(user.getTick(), user.getIceTick()) < 40 || elapsed(user.getTick(), user.getSlimeTick()) < 40)
+                max += 0.34;
+            if (elapsed(user.getTick(), user.getUnderBlockTick()) < 40) max += 0.91;
+            if (elapsed(user.getTick(), user.getVelocityTick()) > 20) max += 0.21;
 
-            double prediction = lastDist * 0.699999988079071D;
-            double diff = Math.abs(dist - prediction);
-            double scaledDist = diff * 100;
-
-            double max = PlayerUtils.getBaseMovementSpeed(user, 9.9D, true);
-
-            if (scaledDist > max && !user.getPlayer().getAllowFlight()) {
-                if (vl++ > 3)
-                    flag(user, "dist = " + scaledDist);
-            } else vl = 0;
+            if (user.getDeltaXZ() > max
+                    && elapsed(user.getTick(), user.getTeleportTick()) > 40
+                    && elapsed(user.getTick(), user.getFlyingTick()) > 40) {
+                if (++preVL > 7) {
+                    flag(user, "breached limit, s: " + user.getDeltaXZ());
+                }
+            } else preVL *= 0.75;
         }
     }
 

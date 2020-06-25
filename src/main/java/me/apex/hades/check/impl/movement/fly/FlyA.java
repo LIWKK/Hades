@@ -1,35 +1,35 @@
 package me.apex.hades.check.impl.movement.fly;
 
-import me.apex.hades.check.api.Check;
-import me.apex.hades.check.api.CheckInfo;
-import me.apex.hades.objects.User;
-import me.apex.hades.utils.PacketUtils;
-import me.apex.hades.utils.PlayerUtils;
-import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import io.github.retrooper.packetevents.event.PacketEvent;
+import me.apex.hades.check.Check;
+import me.apex.hades.check.CheckInfo;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.user.User;
+import me.apex.hades.util.PlayerUtil;
+import me.apex.hades.util.TaskUtil;
 
 @CheckInfo(name = "Fly", type = "A")
 public class FlyA extends Check {
-
-    private double lastGround;
-
     @Override
-    public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
-            if (user.onGround()) {
-                lastGround = user.getLocation().getY();
-            } else {
-                if (user.getTeleportTicks() > 0 || user.getPlayer().getAllowFlight() || PlayerUtils.isClimbableBlock(user.getLocation().getBlock()) || PlayerUtils.isInWeb(user.getPlayer()) || PlayerUtils.isInLiquid(user.getPlayer())) {
-                    vl = 0;
-                    return;
-                }
-
-                double dist = user.getLocation().getY() - lastGround;
-                double velocity = user.getPlayer().getVelocity().getY();
-
-                if (dist >= 1.3 && user.getLocation().getY() >= user.getLastLocation().getY() && velocity < -0.06D && user.getPlayer().getVehicle() == null) {
-                    if (vl++ > 9)
-                        flag(user, "curY = " + user.getLocation().getY() + ", lastGround = " + lastGround);
-                } else vl = 0;
+    public void onHandle(PacketEvent e, User user) {
+        if (e instanceof FlyingEvent) {
+            if (user.getDeltaY() >= 0.0
+                    && user.getAirTicks() > 6
+                    && elapsed(user.getTick(), user.getVelocityTick()) > 20
+                    && user.getPlayer().getVelocity().getY() < -0.075
+                    && elapsed(user.getTick(), user.getLiquidTick()) > 20
+                    && !user.isInWeb()
+                    && elapsed(user.getTick(), user.getClimbableTick()) < 20
+                    && !PlayerUtil.isOnClimbable(user.getPlayer())
+                    && elapsed(user.getTick(), user.getFlyingTick()) > 40
+                    && user.getPlayer().getVehicle() == null
+                    && user.getTick() > 5
+                    && elapsed(user.getTick(), user.getVelocityTick()) > 100) {
+                TaskUtil.task(() -> {
+                    if (!PlayerUtil.isClimbableBlock(user.getLocation().subtract(0,1,0).getBlock())){
+                        flag(user, "y motion higher than 0, m: " + user.getDeltaY() + ", " + user.getPlayer().getLocation().getBlock().getType().toString());
+                    }
+                });
             }
         }
     }

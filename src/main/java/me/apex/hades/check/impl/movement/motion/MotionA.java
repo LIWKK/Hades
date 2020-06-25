@@ -1,25 +1,25 @@
 package me.apex.hades.check.impl.movement.motion;
 
-import me.apex.hades.check.api.Check;
-import me.apex.hades.check.api.CheckInfo;
-import me.apex.hades.objects.User;
-import me.apex.hades.utils.PacketUtils;
-import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import io.github.retrooper.packetevents.event.PacketEvent;
+import me.apex.hades.check.Check;
+import me.apex.hades.check.CheckInfo;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.user.User;
+import me.apex.hades.util.PlayerUtil;
+import org.bukkit.potion.PotionEffectType;
 
 @CheckInfo(name = "Motion", type = "A")
 public class MotionA extends Check {
-
     @Override
-    public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
-            if (user.getTeleportTicks() > 0) return;
-
-            double dist = user.getDeltaY();
-            double lastDist = user.getLastDeltaY();
-
-            if (dist >= 1.0 && lastDist == 0.0D && user.getPlayer().getVelocity().getY() < -0.075D)
-                flag(user, "dist = " + dist + ", lastDist = " + lastDist);
+    public void onHandle(PacketEvent e, User user) {
+        if (e instanceof FlyingEvent) {
+            if (!user.isInLiquid() && elapsed(user.getTick(), user.getFlyingTick()) > 40 && !user.isInWeb() && elapsed(user.getTick(), user.getTeleportTick()) > 20) {
+                double max = 0.7 + PlayerUtil.getPotionEffectLevel(user.getPlayer(), PotionEffectType.JUMP) * 0.1;
+                if (user.getDeltaY() > max && user.getPlayer().getVelocity().getY() < -0.075
+                        && elapsed(user.getTick(), user.getVelocityTick()) > 20) {
+                    flag(user, "accelerating faster than possible on Y axis. d: " + user.getDeltaY());
+                }
+            }
         }
     }
-
 }

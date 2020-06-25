@@ -1,38 +1,26 @@
 package me.apex.hades.check.impl.combat.velocity;
 
-import me.apex.hades.check.api.Check;
-import me.apex.hades.check.api.CheckInfo;
-import me.apex.hades.objects.User;
-import me.apex.hades.utils.MathUtils;
-import me.apex.hades.utils.PacketUtils;
-import me.apex.hades.utils.PlayerUtils;
-import me.purplex.packetevents.event.impl.PacketReceiveEvent;
+import io.github.retrooper.packetevents.event.PacketEvent;
+import me.apex.hades.check.Check;
+import me.apex.hades.check.CheckInfo;
+import me.apex.hades.event.impl.packetevents.FlyingEvent;
+import me.apex.hades.user.User;
 
+//Credits to Jonhan for original check idea!
 @CheckInfo(name = "Velocity", type = "A")
 public class VelocityA extends Check {
 
-    private double lastDiff;
-
     @Override
-    public void onPacket(PacketReceiveEvent e, User user) {
-        if (PacketUtils.isFlyingPacket(e.getPacketName())) {
-            if (user.getVelocityTicks() == 1 && user.getLastVelY() > 0.2) {
-                double diff = MathUtils.sigmoid(user.getDeltaY() - user.getLastVelY()) * 0.4D;
-                double lastDiff = this.lastDiff;
-                this.lastDiff = diff;
-
-                if (PlayerUtils.isClimbableBlock(user.getLocation().getBlock())
-                        || PlayerUtils.isInWeb(user.getPlayer())
-                        || PlayerUtils.isInLiquid(user.getPlayer())
-                        || PlayerUtils.blockNearHead(user.getPlayer())) {
-                    vl = 0;
-                    return;
+    public void onHandle(PacketEvent e, User user) {
+        if(e instanceof FlyingEvent) {
+            if(elapsed(user.getTick(), user.getVelocityTick()) < 1) {
+                if(user.getVelocityY() > 0.2
+                        && user.getDeltaY() <= user.getVelocityY() * 0.99
+                        && elapsed(user.getTick(), user.getUnderBlockTick()) > 20
+                        && elapsed(user.getTick(), user.getLiquidTick()) > 20
+                        && !user.isInWeb()) {
+                    flag(user, "didnt take expected velocity, d: " + user.getDeltaY() + ", v: " + (user.getVelocityY() * 0.99));
                 }
-
-                if (diff == lastDiff || (diff < 0.179D && lastDiff < 0.179D)) {
-                    if (vl++ > 2)
-                        flag(user, "diff = " + diff + ", lastDiff = " + lastDiff);
-                } else vl = 0;
             }
         }
     }
